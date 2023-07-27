@@ -166,13 +166,13 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                 </Link>
                             )}
                         </div>
-                        <button
+                        {/* <button
                             onClick={addToWishlistHandler}
                             type="button"
                             className={`${addActionButton} group-hover:delay-[.3s]`}
                         >
                             <IoHeartOutline />
-                        </button>
+                        </button> */}
                     </div>
                 </div>
                 <div className="product-content text-center">
@@ -342,13 +342,13 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         Add to cart
                                     </button>
                                 </div>
-                                <button
+                                {/* <button
                                     onClick={addToWishlistHandler}
                                     type="button"
                                     className={`${wishlistBtn}`}
                                 >
                                     <IoHeartOutline />
-                                </button>
+                                </button> */}
                             </div>
                             <div className="sku-wrap font-medium">
                                 <span>SKU:</span>
