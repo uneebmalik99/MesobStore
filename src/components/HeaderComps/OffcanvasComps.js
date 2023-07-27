@@ -23,7 +23,7 @@ function OffcanvasComps({ headerItems, offcanvas, showOffcanvas }) {
                         <IoCloseOutline onClick={showOffcanvas} />
                     </button>
                 </div>
-                <div className="offcanvas-setting grid grid-cols-2 pt-[40px]">
+                {/* <div className="offcanvas-setting grid grid-cols-2 pt-[40px]">
                     <div className="language-widget">
                         <h3 className="text-[16px] mb-[15px]">
                             {headerItems[0]?.languageTitle}
@@ -62,7 +62,7 @@ function OffcanvasComps({ headerItems, offcanvas, showOffcanvas }) {
                             ))}
                         </ul>
                     </div>
-                </div>
+                </div> */}
                 <OffcanvasMenu />
                 <div className="offcanvas-contact-info pt-[60px]">
                     <h3 className="text-[16px]">
