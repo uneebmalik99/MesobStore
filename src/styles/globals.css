@@ -302,6 +302,95 @@ label {
     @apply bg-yellow-500;
 }
 
+/* google login button styles */
+
+.google-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    background-image: linear-gradient(45deg,
+            #4285f4,
+            #ea4335,
+            #fbbc05,
+            #34a853,
+            #fa7b17,
+            #5f6368);
+    color: white;
+    transition: all 0.3s;
+    padding: 0 40px;
+    margin-top: 20px;
+}
+
+.google-button:hover {
+    background-image: linear-gradient(45deg,
+            #ea4335,
+            #fbbc05,
+            #4285f4,
+            #5f6368,
+            #34a853,
+            #fa7b17);
+}
+
+/* facebook login button styles */
+
+.facebook-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+    background-image: linear-gradient(45deg,
+            #3b5998,
+            #4c6ef5,
+            #3b5998);
+    color: white;
+    transition: all 0.3s;
+    padding: 0 40px;
+    margin-top: 20px;
+}
+
+.facebook-button:hover {
+    background-image: linear-gradient(45deg,
+            #4c6ef5,
+            #3b5998,
+            #4c6ef5);
+}
+
+/* apple login button styles */
+.apple-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    font-size: 15px;
+    border: none;
+    cursor: pointer;
+background-image: linear-gradient(45deg,
+            #8e8e93,
+            #000000,
+            #8e8e93);
+    color: white;
+    transition: all 0.3s;
+    padding: 0 40px;
+    margin-top: 20px;
+}
+
+.apple-button:hover {
+background-image: linear-gradient(45deg,
+            #000000,
+            #8e8e93,
+            #000000);
+}
+
 /* Tab Menu */
 .tab-menu button {
     @apply leading-[12px] border-r border-r-black mr-[15px] pr-[15px] last:border-r-0 last:mr-0 last:pr-0;
