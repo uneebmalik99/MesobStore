@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 const inputField = `border border-[#cccccc] focus-visible:outline-0 text-[#666666] py-[10px] px-[20px] w-full h-[50px]`;
 const secondaryButton =
-    'flex items-center justify-center bg-secondary text-white leading-[38px] text-[15px] h-[50px] w-full  transition-all hover:bg-[#212529] px-[40px]';
+    'flex items-center justify-center bg-primary text-white leading-[38px] text-[15px] h-[50px] w-full  transition-all hover:bg-[#212529] px-[40px]';
 
 function AuthForm({ authItems }) {
     // Auth Tab
@@ -73,6 +73,25 @@ function AuthForm({ authItems }) {
                         <div className="button-wrap">
                             <button type="submit" className={secondaryButton}>
                                 Login
+                            </button>
+                        </div>
+                        <div className="button-wrap">
+                            <button type="submit" className="google-button">
+                                Login with Google
+                            </button>
+                        </div>
+                        <div className="button-wrap">
+                            <button type="submit" className="facebook-button">
+                                Login with Facebook
+                            </button>
+                        </div>
+                        <div className="button-wrap">
+                            <button
+                                type="submit"
+                                onClick={() => console.log('Login with Apple')}
+                                className="apple-button"
+                            >
+                                Login with Apple
                             </button>
                         </div>
                     </form>
