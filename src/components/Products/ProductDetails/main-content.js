@@ -186,13 +186,13 @@ function MainContent({ product }) {
                                         Add to cart
                                     </button>
                                 </div>
-                                <button
+                                {/* <button
                                     onClick={addToWishlistHandler}
                                     type="button"
                                     className={`${wishlistBtn}`}
                                 >
                                     <IoHeartOutline />
-                                </button>
+                                </button> */}
                             </div>
                             <div className="other-info">
                                 <div className="sku-wrap font-medium">
