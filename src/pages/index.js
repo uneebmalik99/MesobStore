@@ -23,7 +23,7 @@ function HomePage({
         <>
             <TransparentHeader headerItems={headerItems} />
             <HeroOne heroDefaultItems={heroDefaultItems} />
-            <FeaturedProduct featuredProduct={featuredProduct} />
+            {/* <FeaturedProduct featuredProduct={featuredProduct} /> */}
             <BestSellingProduct
                 products={products}
                 productFilter={productFilter}
