@@ -161,7 +161,7 @@ function FooterCompsThree({ footerItems }) {
                         <div className="grid grid-cols-12">
                             <div className="lg:col-span-6 col-span-12 max-md:order-2">
                                 <span className="flex lg:justify-start justify-center items-center pt-[10px]">
-                                    © {new Date().getFullYear()} Helendo.
+                                    © {new Date().getFullYear()} Mesobstore.
                                     <Link href={footerItems[0]?.copyrightLink}>
                                         <a className="font-normal ml-[5px] transition-all hover:text-primary">
                                             All Rights Reserved.

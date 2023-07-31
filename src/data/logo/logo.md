@@ -1,5 +1,5 @@
 ---
 id: 'logo-01'
-darkLogo: '/images/logo/dark-logo.png'
+darkLogo: '/images/logo/mesoblogo.jpeg'
 darkLogoAlt: 'Header Logo'
 ---

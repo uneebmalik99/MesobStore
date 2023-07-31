@@ -75,25 +75,53 @@ function AuthForm({ authItems }) {
                                 Login
                             </button>
                         </div>
-                        <div className="button-wrap">
-                            <button type="submit" className="google-button">
-                                Login with Google
-                            </button>
+
+                        <div className="button-wrap " style={{marginTop:30}}>
+                            <p style={{alignSelf:'center'}}></p>
                         </div>
-                        <div className="button-wrap">
-                            <button type="submit" className="facebook-button">
-                                Login with Facebook
-                            </button>
-                        </div>
-                        <div className="button-wrap">
-                            <button
-                                type="submit"
-                                onClick={() => console.log('Login with Apple')}
-                                className="apple-button"
-                            >
-                                Login with Apple
-                            </button>
-                        </div>
+
+                        <button className="button-wrap"  type="submit"  style={{borderWidth:1, 
+                        borderRadius:5,
+                        marginTop:15,
+                        width:'100%',
+                        backgroundColor:'#536DFE',
+                        alignSelf:'center',
+                         }}>
+                            <div style={{display:'flex',padding:8, flexDirection:'row' ,width:'80%', justifyContent:'space-around'}}>
+                               <img src='/images/user/facebook_icon.png' style={{width:30, height:30}}/>
+                                <p style={{textAlign:"center",color:'white', alignSelf:'center'}}>Login with Facebook</p>
+                                
+                            </div>
+                        </button>
+
+                        <button className="button-wrap"  type="submit"  style={{borderWidth:1, 
+                        borderRadius:5,
+                        marginTop:15,
+                        width:'100%',
+                        alignSelf:'center',
+                         }}>
+                            <div style={{display:'flex',padding:8, flexDirection:'row' ,width:'80%', justifyContent:'space-around'}}>
+                               <img src='/images/user/google_icon.png' style={{width:30, height:30}}/>
+                                <p style={{textAlign:"center", alignSelf:'center'}}>Login with Google</p>
+                                
+                            </div>
+                        </button>
+
+                        <button className="button-wrap"  type="submit"  style={{borderWidth:1, 
+                        borderRadius:5,
+                        marginTop:15,
+                        width:'100%',
+                        alignSelf:'center',
+                         }}>
+                            <div style={{display:'flex',padding:8, flexDirection:'row' ,width:'80%', justifyContent:'space-around'}}>
+                               <img src='/images/user/apple_icon.png' style={{width:30, height:30}}/>
+                                <p style={{textAlign:"center", alignSelf:'center'}}>Login with Apple</p>
+                                
+                            </div>
+                        </button>
+
+                       
+                        
                     </form>
                 </div>
                 <div
@@ -107,13 +135,7 @@ function AuthForm({ authItems }) {
                         <h3 className="title text-[18px] mb-[25px]">
                             Register An Account
                         </h3>
-                        <div className="single-field mb-[30px]">
-                            <input
-                                className={inputField}
-                                type="text"
-                                placeholder="Username"
-                            />
-                        </div>
+                        
                         <div className="single-field mb-[30px]">
                             <input
                                 className={inputField}
@@ -126,6 +148,13 @@ function AuthForm({ authItems }) {
                                 className={inputField}
                                 type="password"
                                 placeholder="Password"
+                            />
+                        </div>
+                        <div className="single-field mt-[30px]">
+                            <input
+                                className={inputField}
+                                type="text"
+                                placeholder="Phone Number with Country code"
                             />
                         </div>
                         <p className="lg:max-w-[495px] mt-[20px] mb-[25px]">

@@ -1,6 +1,6 @@
 ---
 addressTitle: 'Address'
-address: 'Helendo, Chicago, USA 2022'
+address: 'Mesobstore, Chicago, USA 2022'
 contactNumber: 'tel:846677028028'
 contactNumberText: '+846677028028'
 socialTitle: 'Follow Us On Social'
@@ -45,7 +45,7 @@ menuList:
         { id: 02, title: 'Policy', path: '/about' },
         { id: 03, title: 'Map', path: '/contact' },
     ]
-footerLogo: '/images/logo/dark-logo.png'
+footerLogo: '/images/logo/mesoblogo.jpeg'
 footerLogoAlt: 'Footer Logo'
 footerLogoPath: '/'
 copyrightLink: 'https://hasthemes.com/'

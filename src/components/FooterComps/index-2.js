@@ -120,7 +120,7 @@ function FooterCompsTwo({ footerItems }) {
                         <div className="grid grid-cols-12">
                             <div className="md:col-span-6 col-span-12 max-lm:order-2">
                                 <span className="sm:flex md:justify-start justify-center items-center">
-                                    © {new Date().getFullYear()} Helendo.
+                                    © {new Date().getFullYear()} Mesobstore.
                                     <Link href={footerItems[0]?.copyrightLink}>
                                         <a className="font-normal ml-[5px] transition-all hover:text-primary">
                                             All Rights Reserved.

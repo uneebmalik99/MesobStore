@@ -204,7 +204,7 @@ function FooterComps({ footerContainer, footerItems }) {
                 <div className="container">
                     <div className="grid grid-cols-1">
                         <span className="flex justify-center items-center">
-                            © {new Date().getFullYear()} Helendo.
+                            © {new Date().getFullYear()} Mesobstore.
                             <Link href={footerItems[0]?.copyrightLink}>
                                 <a className="font-normal ml-[5px]">
                                     All Rights Reserved.

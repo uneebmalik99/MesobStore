@@ -41,9 +41,9 @@ function OffcanvasMenu() {
                             } font-medium cursor-pointer flex justify-between items-center transition-all hover:text-[#666666]`}
                         >
                             {item.title}
-                            <IoCaretDownOutline className="menu-icon" />
+                            {/* <IoCaretDownOutline className="menu-icon" /> */}
                         </span>
-                        {submenu && (
+                        {/* {submenu && (
                             <ul className="submenu pl-[10px] mt-[15px]">
                                 {submenu?.map((submenuItem) => (
                                     <li
@@ -106,7 +106,7 @@ function OffcanvasMenu() {
                                     </li>
                                 ))}
                             </ul>
-                        )}
+                        )} */}
                     </li>
                 );
             })}

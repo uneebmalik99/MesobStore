@@ -1,6 +1,6 @@
 ---
 id: 'blog-02'
-title: 'Helendo Wool & Cotton Rugs'
+title: 'Mesobstore Wool & Cotton Rugs'
 mediumImage: '374x243.jpg'
 masonry: '366x257.jpg'
 largeImage: '854x491.jpg'

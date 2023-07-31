@@ -17,7 +17,7 @@ singleContactInfo:
             id: 03,
             infoIcon: 'IoMailOpenOutline',
             title: 'Our email',
-            desc: 'office@helendo.com  <br/> Info@helendo.com',
+            desc: 'office@Mesobstore.com  <br/> Info@Mesobstore.com',
         },
         {
             id: 04,
@@ -30,7 +30,7 @@ formTitle: 'Get in touch'
 formDesc: 'Write us a letter !'
 infoTitle: 'Our address'
 infoDesc: 'Duis aute irure dolor in reprehenderit ioluptate velit esse cillum dolore pariatur.'
-contactAddress: '1102 Helen Estates, Guys Store, San Diego, USA. <br/> (693) 650-2389 <br/> office@helendo.com'
+contactAddress: '1102 Helen Estates, Guys Store, San Diego, USA. <br/> (693) 650-2389 <br/> office@Mesobstore.com'
 socialTitle: 'Follow Us On Social'
 socialList:
     [

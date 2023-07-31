@@ -1,11 +1,23 @@
 import Link from 'next/link';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IoArrowForwardOutline } from 'react-icons/io5';
 import { motion } from 'framer-motion';
 import SwiperComps, { Slide } from '../SwiperComps';
+import {API} from 'aws-amplify';
 
 function HeroOne({ heroDefaultItems, settings }) {
+
+    const listBannerQuerie = `
+query MyQuery {
+  listBanners {
+    items {
+      id
+      image
+    }
+  }
+}
+`;
     const [activeIdx, setActiveId] = useState(0);
     const onSlideChange = (SwiperComps) => {
         const { activeIndex } = SwiperComps;
@@ -37,6 +49,27 @@ function HeroOne({ heroDefaultItems, settings }) {
     // Tailwind Related Stuff
     const secondaryButton =
         'inline-flex items-center bg-secondary text-white leading-[38px] text-[15px] h-[38px] px-5';
+
+
+
+        const fetchBannerImages = async () => {
+            try {
+              const res = (await API.graphql(
+                graphqlOperation(listBannerQuerie, {}),
+              ))
+              console.log('kmkkm'+ res);
+              // setBannerImages(makeBanneData(res?.data?.listBanners?.items));
+            } catch (error) {
+              console.log(error, 'fetchBannerImages');
+            }
+          };
+    useEffect(() => {
+        
+           fetchBannerImages()
+            // Promise.all([fetchProducts(), fetchBannerImages()]).then(() => {});
+    }, []);
+
+
 
     return (
         <div className="hero-area">

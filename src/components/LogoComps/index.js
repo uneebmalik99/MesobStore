@@ -2,16 +2,20 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 function LogoComps({ headerItems, headerLogoCName, logoPath }) {
+
+
+    
     return (
         <div className={`${headerLogoCName}`}>
             <Link href={logoPath}>
                 <a className="block">
-                    <img
+                    {/* <img
                         src={headerItems[0]?.headerLogo[0]?.darkLogo}
                         alt={headerItems[0]?.headerLogo[0]?.darkLogoAlt}
                         width={120}
                         height={30}
-                    />
+                    /> */}
+                    <h3 style={{color:'white'}}>Mesob Store</h3>
                 </a>
             </Link>
         </div>

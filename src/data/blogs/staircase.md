@@ -1,6 +1,6 @@
 ---
 id: 'blog-07'
-title: 'Helendo White Coated Staircase Floating'
+title: 'Mesobstore White Coated Staircase Floating'
 mediumImage: '374x243.jpg'
 masonry: '366x376.jpg'
 largeImage: '854x491.jpg'

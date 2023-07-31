@@ -1,8 +1,10 @@
 export const OffcanvasData = [
     {
         id: 1,
-        title: 'Purchases',
+        title: 'Home',
         cName: 'has-children',
+        link: '/',
+        text: 'Home V1 - Default',
         submenu: [
             {
                 id: 'home-01',
@@ -38,7 +40,7 @@ export const OffcanvasData = [
     },
     {
         id: 2,
-        title: 'My Orders',
+        title: 'Products',
         cName: 'has-children',
         submenu: [
             {

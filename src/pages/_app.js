@@ -23,7 +23,7 @@ function MyApp({ Component, pageProps }) {
                 <title>MesobStore</title>
                 <meta
                     name="description"
-                    content="Are you looking for an awesome E-commerce React Template? Helendo is a minimal and modern design React ecommerce template. It has been built using the latest version of React JS and Next JS."
+                    content="Are you looking for an awesome E-commerce React Template? Mesobstore is a minimal and modern design React ecommerce template. It has been built using the latest version of React JS and Next JS."
                 />
                 <link rel="shortcut icon" href="/favicon.png" />
             </Head>

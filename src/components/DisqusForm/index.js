@@ -1,12 +1,12 @@
 import { DiscussionEmbed } from 'disqus-react';
 
 function DisqusForm() {
-    const disqusShortname = 'Helendo';
+    const disqusShortname = 'Mesobstore';
 
     const disqusConfig = {
-        url: 'https://helendo.disqus.com/',
+        url: 'https://Mesobstore.disqus.com/',
         identifier: '123',
-        title: 'helendo-post',
+        title: 'Mesobstore-post',
     };
     return (
         <div className="pt-[65px]">
