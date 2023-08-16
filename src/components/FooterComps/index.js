@@ -9,8 +9,8 @@ import PropTypes from 'prop-types';
 
 function FooterComps({ footerContainer, footerItems }) {
     return (
-        <footer>
-            <div className="footer-top xl:py-[115px] lg:py-[95px] md:py-[75px] py-[45px]">
+        <footer style={{backgroundColor:'#ECF0F1'}}>
+            <div className="footer-top xl:py-[115px] lg:py-[95px] md:py-[75px] py-[45px]" >
                 <div className={footerContainer}>
                     <div className="grid grid-cols-12 md:gap-y-0 gap-y-[30px]">
                         <div className="md:col-span-4 lm:col-span-6 col-span-12">

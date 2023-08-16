@@ -2,9 +2,6 @@ import Link from 'next/link';
 import PropTypes from 'prop-types';
 
 function LogoComps({ headerItems, headerLogoCName, logoPath }) {
-
-
-    
     return (
         <div className={`${headerLogoCName}`}>
             <Link href={logoPath}>
@@ -15,7 +12,7 @@ function LogoComps({ headerItems, headerLogoCName, logoPath }) {
                         width={120}
                         height={30}
                     /> */}
-                    <h3 style={{color:'white'}}>Mesob Store</h3>
+                    <h3 style={{ color: 'white' }}>Mesob Store</h3>
                 </a>
             </Link>
         </div>

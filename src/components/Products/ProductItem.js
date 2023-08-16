@@ -33,16 +33,18 @@ function ProductItem({ product, productFilter, productFilterPath }) {
     const {
         id,
         title,
+        category,
         price,
-        discountPrice,
-        totalPrice,
-        soldOutSticker,
-        bestSellerSticker,
-        offerSticker,
+        cost,
+        country,  
         desc,
+        discountPrice,
+        image,
     } = product;
 
     const productImageSrc = `/images/products/${product?.slug}/${product?.smImage}`;
+
+    console.log("lknkbb"+JSON.stringify(product.id));
 
     const [isOpen, setIsOpen] = useState(false);
 
@@ -57,7 +59,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                 price,
                 quantity: quantityCount,
                 totalPrice,
-                image: `/images/products/${product?.slug}/${product?.xsImage}`,
+                image: `/images/products/${product?.id}/${product?.image}`,
                 slug: `/products/${product?.slug}`,
             })
         );
@@ -88,9 +90,9 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         <>
             <div className="product-item">
                 <div className="product-img relative group after:bg-[rgba(0,0,0,.1)] after:absolute after:top-0 after:left-0 after:h-full after:w-full after:opacity-0 after:transition-all after:pointer-events-none hover:after:opacity-100">
-                    <Link href={`/products/${product?.slug}`}>
+                    <Link href={`/products/productdetail?id=${product.id}`}>
                         <a className="block">
-                            {soldOutSticker && (
+                            {/* {soldOutSticker && (
                                 <span
                                     className={`${
                                         soldOutSticker ? `${soldOut}` : ''
@@ -98,8 +100,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                 >
                                     {soldOutSticker}
                                 </span>
-                            )}
-                            {bestSellerSticker && (
+                            )} */}
+                            {/* {bestSellerSticker && (
                                 <span
                                     className={`${
                                         bestSellerSticker ? `${bestSeller}` : ''
@@ -107,8 +109,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                 >
                                     {bestSellerSticker}
                                 </span>
-                            )}
-                            {offerSticker && (
+                            )} */}
+                            {/* {offerSticker && (
                                 <span
                                     className={`${
                                         offerSticker ? `${productOffer}` : ''
@@ -116,10 +118,10 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                 >
                                     {offerSticker}
                                 </span>
-                            )}
+                            )} */}
                             <img
                                 className="w-full"
-                                src={productImageSrc}
+                                src={image}
                                 alt={product?.altImage}
                                 width={300}
                                 height={300}
@@ -135,11 +137,11 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                             <IoAddSharp />
                         </button>
                         <div
-                            className={`${
-                                soldOutSticker ? `cursor-not-allowed` : ''
-                            }`}
+                            // className={`${
+                            //     soldOutSticker ? `cursor-not-allowed` : ''
+                            // }`}
                         >
-                            {!bestSellerSticker && (
+                            {/* {!bestSellerSticker && (
                                 <button
                                     type="button"
                                     onClick={addToCartHandler}
@@ -151,8 +153,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                 >
                                     <IoBagHandleOutline />
                                 </button>
-                            )}
-                            {bestSellerSticker && (
+                            )} */}
+                            {/* {bestSellerSticker && (
                                 <Link href={`/products/${product?.slug}`}>
                                     <a
                                         className={`${
@@ -164,7 +166,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         <IoPricetagOutline />
                                     </a>
                                 </Link>
-                            )}
+                            )} */}
                         </div>
                         {/* <button
                             onClick={addToWishlistHandler}
@@ -177,7 +179,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                 </div>
                 <div className="product-content text-center">
                     <h3 className="mb-[5px]">
-                        <Link href={`/products/${product?.slug}`}>
+                    <Link href={`/products/Productdetail?id=${product.id}`}>
                             <a className="transition-all hover:text-primary text-[16px]">
                                 {title}
                             </a>
@@ -185,19 +187,26 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                     </h3>
                     {price && !discountPrice && (
                         <span className="product-price text-[18px] leading-[31px] text-[#666666]">
-                            ${price.toFixed(2)}
+                            Price: {price}
                         </span>
                     )}
+
                     {price && discountPrice && (
                         <div className="product-price-wrap flex justify-center mb-[10px]">
                             <span className="product-price text-[18px] leading-[31px] text-[#666666] block">
-                                ${price.toFixed(2)}
+                                {/* ${price.toFixed(2)} */}
                             </span>
                             <span className="product-price text-[18px] leading-[31px] text-[#666666] block relative before:content-['-'] before:mx-[10px]">
-                                ${discountPrice.toFixed(2)}
+                                {/* ${discountPrice.toFixed(2)} */}
                             </span>
                         </div>
                     )}
+                </div>
+
+                <div className="product-price-wrap flex justify-center mb-[10px]">
+                    <span className="product-price text-[18px] leading-[31px] text-[#FF0000]">
+                        Country: {country}
+                    </span>
                 </div>
             </div>
             <QuickView open={isOpen} onClose={() => setIsOpen(false)}>
@@ -206,7 +215,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         <div className="product-img md:h-full">
                             <Link href={`/products/${product?.slug}`}>
                                 <a className="block relative md:h-full">
-                                    {soldOutSticker && (
+                                    {/* {soldOutSticker && (
                                         <span
                                             className={`${
                                                 soldOutSticker
@@ -216,8 +225,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         >
                                             {soldOutSticker}
                                         </span>
-                                    )}
-                                    {bestSellerSticker && (
+                                    )} */}
+                                    {/* {bestSellerSticker && (
                                         <span
                                             className={`${
                                                 bestSellerSticker
@@ -238,7 +247,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         >
                                             {offerSticker}
                                         </span>
-                                    )}
+                                    )} */}
                                     <img
                                         className="w-full md:h-full md:object-cover"
                                         src={`/images/products/${product?.slug}/${product?.mdImage}`}
@@ -253,16 +262,16 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                             <h2 className="text-[24px] mb-[15px]">{title}</h2>
                             {price && !discountPrice && (
                                 <span className="product-price text-[30px] leading-[42px] text-[#999999] block mb-[25px]">
-                                    ${price.toFixed(2)}
+                                    {/* ${price.toFixed(2)} */}
                                 </span>
                             )}
                             {price && discountPrice && (
                                 <div className="product-price-wrap flex mb-[10px]">
                                     <span className="product-price text-[30px] leading-[42px] text-[#999999] block">
-                                        ${price.toFixed(2)}
+                                        {/* ${price.toFixed(2)} */}
                                     </span>
                                     <span className="product-price text-[30px] leading-[42px] text-[#999999] block relative before:content-['-'] before:mx-[10px]">
-                                        ${discountPrice.toFixed(2)}
+                                        {/* ${discountPrice.toFixed(2)} */}
                                     </span>
                                 </div>
                             )}
@@ -324,19 +333,19 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                     </div>
                                 </div>
                                 <div
-                                    className={`${
-                                        soldOutSticker
-                                            ? `cursor-not-allowed`
-                                            : ''
-                                    }`}
+                                    // className={`${
+                                    //     soldOutSticker
+                                    //         ? `cursor-not-allowed`
+                                    //         : ''
+                                    // }`}
                                 >
                                     <button
                                         type="button"
-                                        className={`${addtoCartBtn} ${
-                                            soldOutSticker
-                                                ? `pointer-events-none`
-                                                : ''
-                                        } mr-[15px]`}
+                                        // className={`${addtoCartBtn} ${
+                                        //     soldOutSticker
+                                        //         ? `pointer-events-none`
+                                        //         : ''
+                                        // } mr-[15px]`}
                                         onClick={addToCartHandler}
                                     >
                                         Add to cart

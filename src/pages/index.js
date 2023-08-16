@@ -8,31 +8,235 @@ import OfferColection from '../components/OfferColection';
 import LatestBlog from '../components/HomePage/LatestBlog';
 import NewsletterComps from '../components/NewsletterComps';
 import FooterComps from '../components/FooterComps';
+import { useEffect, useState } from 'react';
+import { API, graphqlOperation } from 'aws-amplify';
+import * as queries from '../graphql/queries.ts';
+import _ from 'lodash';
+import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 function HomePage({
     headerItems,
     heroDefaultItems,
     featuredProduct,
-    products,
     productFilter,
     offerColection,
     blogs,
     footerItems,
+    
 }) {
+    const [products, setProducts] = useState([]);
+    const [MenuList,setMenuList]= useState([]);
+    const [RecommendedProduct,setRecommendedProduct]=useState([])
+   
+    console.log('Products in state are: ', products);
+
+
+    const fetchProducts = async () => {
+        try {
+            const response = await API.graphql(
+                graphqlOperation(queries.listProducts)
+            );
+            const allProducts = response.data.listProducts.items;
+            const allProducts2 = response.data.listProducts.items;
+            console.log('Response Products:1 ', allProducts[7].isRecommended);
+
+            setRecommendedProduct(
+                allProducts2.filter(item => {
+                  const isRecommended = item?.isRecommended || null;
+                  if (isRecommended) {
+                    return item;
+                  }
+                }),
+              );
+            setProducts(
+                allProducts.map((item) => {
+                    console.log('gkenrgkjer'+item.isRecommended)
+                    return _.pick(JSON.parse(item.content), [
+                        'id',
+                        'title',
+                        'image',
+                        'price',
+                        'oldPrice',
+                        'country',
+                        'isRecommended',
+                        
+                    ]);
+                })
+            );
+
+
+
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
+
+    const fetchProducts2 = async () => {
+        try {
+            const response = await API.graphql(
+                graphqlOperation(queries.getMenuItems)
+            );
+            const allMenu = response.data.listMenus.items;
+            console.log('Response Menu1: ', allMenu);
+            setMenuList(
+                allMenu.map((item) => {
+                    console.log(item);
+                    return _.pick(JSON.parse(item.content), [
+                        'id',
+                        'name',
+                        'icon',
+                        'des',
+                    ]);
+                })
+            );
+        } catch (error) {
+            console.error('Error fetching products:', error);
+        }
+    };
+    const makeMenuData = data => {
+        const res = [];
+        while (data.length) {
+          res.push(data.splice(0, 3));
+        }
+        return res;
+      };
+    const getMenuList = async () => {
+        try {
+          const res = await API.graphql(
+            graphqlOperation(queries.getMenuItems)
+          ) ;
+          console.log("menu  i s "+JSON.stringify(res.data.listMenus.items));
+
+
+          const c1 = res.data.listMenus.items;
+
+           setMenuList(c1);
+         console.log("MenuList"+MenuList)
+        } catch (error) {
+          console.log("error at menu "+error?.message);
+        }
+      };
+    useEffect(() => {
+        console.log('UseEffect for fetching products');
+       
+
+         
+        fetchProducts();
+        getMenuList();
+    }, []);
+
+    let data ='msklmvlks';
     return (
         <>
             <TransparentHeader headerItems={headerItems} />
             <HeroOne heroDefaultItems={heroDefaultItems} />
+
+
+
             {/* <FeaturedProduct featuredProduct={featuredProduct} /> */}
-            <BestSellingProduct
+          
+            <div className="categories-list-container" >
+                
+                <h2 className="categories-list-title" style={{marginTop:'5%'}}>
+                Shop Categories 
+                </h2>
+                <div className="categories-list">
+                    {MenuList.map((Menu, index) => (
+                       <Link 
+                       href={`/products/5-columns?id=${Menu.id}&name=${Menu.name}`} 
+                          >
+                        <div  className="categories-item" key={index}>
+                            <img
+                                className="categories-image"
+                                src={Menu.icon}
+                            />
+                    <h3   className="categories-title">{Menu.name}</h3>
+
+                        </div>
+                        </Link>
+                    ))}
+                </div>
+            </div>
+
+
+            {/* <BestSellingProduct
                 products={products}
                 productFilter={productFilter}
                 sectionTitle="Mesob Best Selling"
                 productFilterPath="left-sidebar"
-            />
-            <OfferColection offerColection={offerColection} />
-            <LatestBlog blogs={blogs} sectionTitle="Mesob Store Blog" />
-            <NewsletterComps sectionTitle="Mesob Newsletter" />
+            /> */}
+
+            {/* <div className="product-list-container" >
+                <h1 className="product-list-title">
+                    Our Best Selling Products
+                </h1>
+                <div className="product-list">
+                    {products.map((product, index) => (
+                        <div className="product-item" key={index}>
+                            <h3 className="product-title">{product.title}</h3>
+                            <img
+                                className="product-image"
+                                src={product.image}
+                                alt={product.title}
+                            />
+                            <p className="product-price">
+                                Price: {product.price}
+                            </p>
+                            <p className="product-country">
+                                Country: {product.country}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </div> */}
+            
+            {/* <OfferColection offerColection={offerColection} /> */}
+            <div style={{backgroundColor:'#ECF0F1', paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
+
+            <h2
+                   className="offer-colection-title relative pb-[10px] mb-[20px] after:absolute after:left-0 after:bottom-0 after:bg-primary after:h-[4px] after:w-[70px]"
+                    dangerouslySetInnerHTML={{
+                    __html: offerColection[0].title,
+                    }}
+                    style={{marginLeft:'5%'}}
+                    />
+
+                <div className="product-list-container" >
+                               
+                                <div className="product-list">
+                                    {RecommendedProduct.map((Rproduct, index) => (
+
+                                        Rproduct.isRecommended == true ?
+                                        (<div className="product-item" key={index}>
+                                            <h3 className="product-title">{Rproduct.title}</h3>
+                                            {/* <h3 className="product-title">  {Rproduct.isRecommended}</h3> */}
+                                            <img
+                                                className="product-image"
+                                                src={Rproduct.image}
+                                                alt={Rproduct.title}
+                                            />
+                                            <p className="product-price">
+                                                Price: {Rproduct.price}
+                                            </p>
+                                            <p className="product-country">
+                                                Country: {Rproduct.country}
+                                            </p>
+                                        </div>
+                                        
+                                        )
+                                        :
+                                        null
+                                    ))}
+                                </div>
+                </div> 
+            
+
+            </div>
+
+           
+            {/* <LatestBlog blogs={blogs} sectionTitle="Mesob Store Blog" /> */}
+            <NewsletterComps sectionTitle="Mesob Newsletter"  />
             <FooterComps
                 footerContainer="container"
                 footerItems={footerItems}
@@ -76,6 +280,7 @@ HomePage.propTypes = {
     offerColection: PropTypes.instanceOf(Object).isRequired,
     blogs: PropTypes.instanceOf(Object).isRequired,
     footerItems: PropTypes.instanceOf(Object).isRequired,
+
 };
 
 export default HomePage;

@@ -1,16 +1,21 @@
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ProductItem from './ProductItem';
 import ProductToolBars from './ProductToolBars';
 import ProductActiveFilter from './ProductActiveFilter';
+import { API, graphqlOperation } from 'aws-amplify';
+import * as queries from '../../graphql/queries.ts';
 
 function ProductFiveColumns({
+    data,
     productFiveColumnsContainer,
     products,
     productFilter,
+    productcategoryid,
     productFilterPath,
     gridTabItems,
+
 }) {
     const { filterData } = useSelector((state) => state.filter);
 
@@ -20,7 +25,7 @@ function ProductFiveColumns({
     const [pageNumberLimit, setPageNumberLimit] = useState(9);
     const [maxPageNumberLimit, setMaxPageNumberLimit] = useState(9);
     const [minPageNumberLimit, setMinPageNumberLimit] = useState(0);
-
+    const [product, setproduct] = useState([])
     const handleClick = (event) => {
         setCurrentPage(Number(event.target.id));
     };
@@ -73,6 +78,59 @@ function ProductFiveColumns({
         }
         return null;
     });
+   
+
+    const getProductByMenuId = async () => {
+        console.log('jvjfvdfvdkjjbjbj   '+JSON.stringify(productcategoryid.id))
+
+        try {
+          const res = await API.graphql(
+            graphqlOperation(
+              `
+          query MyQuery {
+            listProducts(limit: 10000,filter: {categories: {contains: "${productcategoryid.id}"}}) {
+              items {
+                title
+                category
+                content
+                country
+                createdAt
+                id
+                updatedAt
+              }
+            }
+          }
+          
+          `,
+              {},
+            ),
+          );
+
+          console.log("dsnfsjkdnfjn"+ JSON.stringify(res.data));
+          setproduct(
+            res.data.listProducts.items?.map(item => {
+              let temp = {
+                ...item,
+                content: JSON.parse(item.content),
+                ...JSON.parse(item.content),
+              };
+              return temp;
+            }),
+          );
+
+          console.log('7777777ffyufyufyufy'+product)
+        } catch (error) {
+          console.log(error);
+        } finally {
+        }
+      };
+
+      console.log("jifinfrnriwnevw"+JSON.stringify(productcategoryid));
+
+      useEffect(() => {
+        console.log("yvhtftyfdtyfytf");
+        getProductByMenuId()
+    }, []);
 
     const handleNextbtn = () => {
         setCurrentPage(currentPage + 1);
@@ -107,128 +165,297 @@ function ProductFiveColumns({
         setTabState(index);
     };
 
-    return (
-        <div className="product border-b border-[#ededed] xl:py-[120px] lg:py-[100px] md:py-[80px] py-[50px]">
-            <div className={productFiveColumnsContainer}>
-                <div className="grid grid-cols-12 lg:gap-x-[25px]">
-                    <div className="col-span-12">
-                        <ProductActiveFilter />
-                        <ProductToolBars
-                            totalProductNumber={filteredProduct.length}
-                            startItemNumber={
-                                (currentPage - 1) * itemPerPage + 1
-                            }
-                            endItemNumber={
-                                filteredProduct.length >
-                                currentPage * itemPerPage
-                                    ? currentPage * itemPerPage
-                                    : filteredProduct.length
-                            }
-                            productTab={productTab}
-                            tabState={tabState}
-                            setTabState={setTabState}
-                            gridTabItems={gridTabItems}
-                        />
-                        <div
-                            className={
-                                tabState === 1
-                                    ? 'grid-content-03 tab-style-common active'
-                                    : 'grid-content-03 tab-style-common'
-                            }
-                        >
-                            <div className="grid lg:grid-cols-3 lm:grid-cols-2 grid-cols-1 lm:gap-x-[25px] gap-y-[40px] ">
-                                {currentItems &&
-                                    currentItems.map((product) => (
-                                        <ProductItem
-                                            product={product}
-                                            productFilter={productFilter}
-                                            productFilterPath={
-                                                productFilterPath
-                                            }
-                                            key={product.id}
-                                        />
-                                    ))}
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                tabState === 2
-                                    ? 'grid-content-04 tab-style-common active'
-                                    : 'grid-content-04 tab-style-common'
-                            }
-                        >
-                            <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
-                                {currentItems &&
-                                    currentItems.map((product) => (
-                                        <ProductItem
-                                            product={product}
-                                            productFilter={productFilter}
-                                            productFilterPath={
-                                                productFilterPath
-                                            }
-                                            key={product.id}
-                                        />
-                                    ))}
-                            </div>
-                        </div>
-                        <div
-                            className={
-                                tabState === 3
-                                    ? 'grid-content-05 tab-style-common active'
-                                    : 'grid-content-05 tab-style-common'
-                            }
-                        >
-                            <div className="grid lg:grid-cols-5 md:grid-cols-4 lm:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
-                                {currentItems &&
-                                    currentItems.map((product) => (
-                                        <ProductItem
-                                            product={product}
-                                            productFilter={productFilter}
-                                            productFilterPath={
-                                                productFilterPath
-                                            }
-                                            key={product.id}
-                                        />
-                                    ))}
-                            </div>
-                        </div>
-                        <ul className="pagination flex justify-center pt-[40px]">
-                            <li className="px-[5px]">
-                                <button
-                                    className={`${
-                                        currentPage === pages[0] ? 'hidden' : ''
-                                    } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
-                                    type="button"
-                                    onClick={handlePrevbtn}
-                                    disabled={currentPage === pages[0]}
-                                >
-                                    Prev
-                                </button>
-                            </li>
-                            {pageDecrementBtn}
-                            {renderPageNumbers}
-                            {pageIncrementBtn}
-                            <li className="px-[5px]">
-                                <button
-                                    className={`${
-                                        currentPage === pages[pages.length - 1]
-                                            ? 'hidden'
-                                            : ''
-                                    } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
-                                    type="button"
-                                    onClick={handleNextbtn}
-                                    disabled={
-                                        currentPage === pages[pages.length - 1]
+    return (<div className="product border-b border-[#ededed] xl:py-[120px] lg:py-[100px] md:py-[80px] py-[50px]">
+    <div className={productFiveColumnsContainer}>
+        <div className="grid grid-cols-12 lg:gap-x-[25px]">
+            <div className="col-span-12">
+
+
+                {/* <ProductActiveFilter /> */}
+                {/* <ProductToolBars
+                    totalProductNumber={filteredProduct.length}
+                    startItemNumber={
+                        (currentPage - 1) * itemPerPage + 1
+                    }
+                    endItemNumber={
+                        filteredProduct.length >
+                        currentPage * itemPerPage
+                            ? currentPage * itemPerPage
+                            : filteredProduct.length
+                    }
+                    productTab={productTab}
+                    tabState={tabState}
+                    setTabState={setTabState}
+                    gridTabItems={gridTabItems}
+                /> */}
+                {/* <div
+                    className={
+                        tabState === 1
+                            ? 'grid-content-03 tab-style-common active'
+                            : 'grid-content-03 tab-style-common'
+                    }
+                >
+                    <div className="grid lg:grid-cols-3 lm:grid-cols-2 grid-cols-1 lm:gap-x-[25px] gap-y-[40px] ">
+                        {currentItems &&
+                            currentItems.map((product) => (
+                                <ProductItem
+                                    product={product}
+                                    productFilter={productFilter}
+                                    productFilterPath={
+                                        productFilterPath
                                     }
-                                >
-                                    Next
-                                </button>
-                            </li>
-                        </ul>
+                                    key={product.id}
+                                />
+                            ))}
                     </div>
+                </div> */}
+                {/* <div
+                    className={
+                        tabState === 2
+                            ? 'grid-content-04 tab-style-common active'
+                            : 'grid-content-04 tab-style-common'
+                    }
+                >
+                    <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
+                        {currentItems &&
+                            currentItems.map((product) => (
+                                <ProductItem
+                                    product={product}
+                                    productFilter={productFilter}
+                                    productFilterPath={
+                                        productFilterPath
+                                    }
+                                    key={product.id}
+                                />
+                            ))}
+                    </div>
+                </div> */}
+
+                {/* <div
+                    className={
+                        tabState === 3
+                            ? 'grid-content-05 tab-style-common active'
+                            : 'grid-content-05 tab-style-common'
+                    }
+                >
+                    <div className="grid lg:grid-cols-5 md:grid-cols-4 lm:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
+                        {currentItems &&
+                            currentItems.map((product) => (
+                                <ProductItem
+                                    product={product}
+                                    productFilter={productFilter}
+                                    productFilterPath={
+                                        productFilterPath
+                                    }
+                                    key={product.id}
+                                />
+                            ))}
+                    </div>
+                </div> */}
+                {/* <ul className="pagination flex justify-center pt-[40px]">
+                    <li className="px-[5px]">
+                        <button
+                            className={`${
+                                currentPage === pages[0] ? 'hidden' : ''
+                            } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
+                            type="button"
+                            onClick={handlePrevbtn}
+                            disabled={currentPage === pages[0]}
+                        >
+                            Prev
+                        </button>
+                    </li>
+                    {pageDecrementBtn}
+                    {renderPageNumbers}
+                    {pageIncrementBtn}
+                    <li className="px-[5px]">
+                        <button
+                            className={`${
+                                currentPage === pages[pages.length - 1]
+                                    ? 'hidden'
+                                    : ''
+                            } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
+                            type="button"
+                            onClick={handleNextbtn}
+                            disabled={
+                                currentPage === pages[pages.length - 1]
+                            }
+                        >
+                            Next
+                        </button>
+                    </li>
+                </ul> */}
+
+<div className="product-list-container"  >
+                <h1>{productcategoryid.name}</h1>
+                <p style={{color:'grey', marginTop:5}}>{productcategoryid.id == '1' ? "We deliver to Europe, Australia, and North America.":productcategoryid.id == '5'?" This is groceris for Eritrea. Delivery will take upto three business days.":''}</p>
+                <div className="product-list">
+                    {product.map((product, index) => (
+                            <ProductItem
+                            product={product}
+                            productFilter={productFilter}
+                            productFilterPath={
+                                productFilterPath
+                            }
+                            key={product.id}
+                            />
+                    ))}
                 </div>
             </div>
+
+                 {/* <div className="product-list-container"  >
+                <h1>{productcategoryid.name}</h1>
+                <p style={{color:'grey', marginTop:5}}>{productcategoryid.id == '1' ? "We deliver to Europe, Australia, and North America.":productcategoryid.id == '5'?" This is groceris for Eritrea. Delivery will take upto three business days.":''}</p>
+                <div className="product-list">
+                    {product.map((product, index) => (
+
+
+
+                        <div className="product-item" key={index}>
+                            <h3 className="product-title">{product.title}</h3>
+                            <img
+                                className="product-image"
+                                src={product.image}
+                                alt={product.title}
+                            />
+                            <p className="product-price">
+                                 {product.price}
+                            </p>
+                            <p className="product-country">
+                             {product.country}
+                            </p>
+                        </div>
+                    ))}
+                </div>
+            </div> */}
+
+
+            </div>
         </div>
+    </div>
+</div>
+
+        // <div className="product border-b border-[#ededed] xl:py-[120px] lg:py-[100px] md:py-[80px] py-[50px]">
+        //     <div className={productFiveColumnsContainer}>
+        //         <div className="grid grid-cols-12 lg:gap-x-[25px]">
+        //             <div className="col-span-12">
+        //                 <ProductActiveFilter />
+        //                 <ProductToolBars
+        //                     totalProductNumber={filteredProduct.length}
+        //                     startItemNumber={
+        //                         (currentPage - 1) * itemPerPage + 1
+        //                     }
+        //                     endItemNumber={
+        //                         filteredProduct.length >
+        //                         currentPage * itemPerPage
+        //                             ? currentPage * itemPerPage
+        //                             : filteredProduct.length
+        //                     }
+        //                     productTab={productTab}
+        //                     tabState={tabState}
+        //                     setTabState={setTabState}
+        //                     gridTabItems={gridTabItems}
+        //                 />
+        //                 <div
+        //                     className={
+        //                         tabState === 1
+        //                             ? 'grid-content-03 tab-style-common active'
+        //                             : 'grid-content-03 tab-style-common'
+        //                     }
+        //                 >
+        //                     <div className="grid lg:grid-cols-3 lm:grid-cols-2 grid-cols-1 lm:gap-x-[25px] gap-y-[40px] ">
+        //                         {currentItems &&
+        //                             currentItems.map((product) => (
+        //                                 <ProductItem
+        //                                     product={product}
+        //                                     productFilter={productFilter}
+        //                                     productFilterPath={
+        //                                         productFilterPath
+        //                                     }
+        //                                     key={product.id}
+        //                                 />
+        //                             ))}
+        //                     </div>
+        //                 </div>
+        //                 <div
+        //                     className={
+        //                         tabState === 2
+        //                             ? 'grid-content-04 tab-style-common active'
+        //                             : 'grid-content-04 tab-style-common'
+        //                     }
+        //                 >
+        //                     <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
+        //                         {currentItems &&
+        //                             currentItems.map((product) => (
+        //                                 <ProductItem
+        //                                     product={product}
+        //                                     productFilter={productFilter}
+        //                                     productFilterPath={
+        //                                         productFilterPath
+        //                                     }
+        //                                     key={product.id}
+        //                                 />
+        //                             ))}
+        //                     </div>
+        //                 </div>
+        //                 <div
+        //                     className={
+        //                         tabState === 3
+        //                             ? 'grid-content-05 tab-style-common active'
+        //                             : 'grid-content-05 tab-style-common'
+        //                     }
+        //                 >
+        //                     <div className="grid lg:grid-cols-5 md:grid-cols-4 lm:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
+        //                         {currentItems &&
+        //                             currentItems.map((product) => (
+        //                                 <ProductItem
+        //                                     product={product}
+        //                                     productFilter={productFilter}
+        //                                     productFilterPath={
+        //                                         productFilterPath
+        //                                     }
+        //                                     key={product.id}
+        //                                 />
+        //                             ))}
+        //                     </div>
+        //                 </div>
+        //                 <ul className="pagination flex justify-center pt-[40px]">
+        //                     <li className="px-[5px]">
+        //                         <button
+        //                             className={`${
+        //                                 currentPage === pages[0] ? 'hidden' : ''
+        //                             } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
+        //                             type="button"
+        //                             onClick={handlePrevbtn}
+        //                             disabled={currentPage === pages[0]}
+        //                         >
+        //                             Prev
+        //                         </button>
+        //                     </li>
+        //                     {pageDecrementBtn}
+        //                     {renderPageNumbers}
+        //                     {pageIncrementBtn}
+        //                     <li className="px-[5px]">
+        //                         <button
+        //                             className={`${
+        //                                 currentPage === pages[pages.length - 1]
+        //                                     ? 'hidden'
+        //                                     : ''
+        //                             } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
+        //                             type="button"
+        //                             onClick={handleNextbtn}
+        //                             disabled={
+        //                                 currentPage === pages[pages.length - 1]
+        //                             }
+        //                         >
+        //                             Next
+        //                         </button>
+        //                     </li>
+        //                 </ul>
+        //             </div>
+        //         </div>
+        //     </div>
+        // </div>
     );
 }
 
