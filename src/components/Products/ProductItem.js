@@ -14,6 +14,7 @@ import QuickView from '../QuickView';
 import { cartActions } from '../../store/cart/cart-slice';
 import { filterActions } from '../../store/product-filter/filter-slice';
 import { wishlistActions } from '../../store/wishlist/wishlist-slice';
+import { Alert } from '@aws-amplify/ui-react';
 
 // Tailwind Related Stuff
 const addAction =
@@ -33,22 +34,26 @@ function ProductItem({ product, productFilter, productFilterPath }) {
     const {
         id,
         title,
-        category,
         price,
-        cost,
-        country,  
-        desc,
         discountPrice,
         image,
+        category,
+        totalPrice,
+        soldOutSticker,
+        bestSellerSticker,
+        offerSticker,
+        desc,
     } = product;
 
-    const productImageSrc = `/images/products/${product?.slug}/${product?.smImage}`;
+    console.log("product"+JSON.stringify(product));
 
-    console.log("lknkbb"+JSON.stringify(product.id));
+    const productImageSrc = `/images/products/${product?.slug}/${product?.smImage}`;
 
     const [isOpen, setIsOpen] = useState(false);
 
     const [quantityCount, setQuantityCount] = useState(1);
+
+
 
     const dispatch = useDispatch();
     const addToCartHandler = () => {
@@ -59,7 +64,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                 price,
                 quantity: quantityCount,
                 totalPrice,
-                image: `/images/products/${product?.id}/${product?.image}`,
+                image: product.image,
                 slug: `/products/${product?.slug}`,
             })
         );
@@ -90,8 +95,30 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         <>
             <div className="product-item">
                 <div className="product-img relative group after:bg-[rgba(0,0,0,.1)] after:absolute after:top-0 after:left-0 after:h-full after:w-full after:opacity-0 after:transition-all after:pointer-events-none hover:after:opacity-100">
-                    <Link href={`/products/productdetail?id=${product.id}`}>
-                        <a className="block">
+                {/* <Link href={`/products/slug?data=${title}`}> */}
+
+                <Link
+                 href={{
+                    pathname: "/products/slug",
+                    query:  {
+                        id: product.id,
+                        title: product.title,
+                        image: product.image,
+                        desc:product.desc,
+                        price:product.price,
+                        category:product.category,
+                   
+                    } 
+                  }}
+                
+        //         href={{
+        //     pathname: "/products/slug",
+        //     query: title, // the data
+        //   }}
+          >
+
+                
+                        <a className="block" style={{borderRadius:10}}>
                             {/* {soldOutSticker && (
                                 <span
                                     className={`${
@@ -100,8 +127,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                 >
                                     {soldOutSticker}
                                 </span>
-                            )} */}
-                            {/* {bestSellerSticker && (
+                            )}
+                            {bestSellerSticker && (
                                 <span
                                     className={`${
                                         bestSellerSticker ? `${bestSeller}` : ''
@@ -109,8 +136,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                 >
                                     {bestSellerSticker}
                                 </span>
-                            )} */}
-                            {/* {offerSticker && (
+                            )}
+                            {offerSticker && (
                                 <span
                                     className={`${
                                         offerSticker ? `${productOffer}` : ''
@@ -121,7 +148,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                             )} */}
                             <img
                                 className="w-full"
-                                src={image}
+                                src={product.image}
+                                style={{borderRadius:10}}
                                 alt={product?.altImage}
                                 width={300}
                                 height={300}
@@ -136,12 +164,12 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         >
                             <IoAddSharp />
                         </button>
-                        <div
-                            // className={`${
-                            //     soldOutSticker ? `cursor-not-allowed` : ''
-                            // }`}
+                        {/* <div
+                            className={`${
+                                soldOutSticker ? `cursor-not-allowed` : ''
+                            }`}
                         >
-                            {/* {!bestSellerSticker && (
+                            {!bestSellerSticker && (
                                 <button
                                     type="button"
                                     onClick={addToCartHandler}
@@ -153,8 +181,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                 >
                                     <IoBagHandleOutline />
                                 </button>
-                            )} */}
-                            {/* {bestSellerSticker && (
+                            )}
+                            {bestSellerSticker && (
                                 <Link href={`/products/${product?.slug}`}>
                                     <a
                                         className={`${
@@ -166,8 +194,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         <IoPricetagOutline />
                                     </a>
                                 </Link>
-                            )} */}
-                        </div>
+                            )}
+                        </div> */}
                         {/* <button
                             onClick={addToWishlistHandler}
                             type="button"
@@ -177,36 +205,64 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         </button> */}
                     </div>
                 </div>
-                <div className="product-content text-center">
+                <div className="product-content text-center" >
                     <h3 className="mb-[5px]">
-                    <Link href={`/products/Productdetail?id=${product.id}`}>
+                    <Link
+                    href={{
+                        pathname: "/products/slug",
+                        query:  {
+                            id: product.id,
+                            title: product.title,
+                            image: product.image,
+                            desc:product.desc,
+                            price:product.price,
+                            category:product.category,
+                       
+                        } 
+                      }}
+                    // href={`/products/slug?data=${product}`}
+                    
+                    >
                             <a className="transition-all hover:text-primary text-[16px]">
                                 {title}
                             </a>
                         </Link>
                     </h3>
-                    {price && !discountPrice && (
+
+                     {price  && (
+                        <h3>
+
+                  
                         <span className="product-price text-[18px] leading-[31px] text-[#666666]">
-                            Price: {price}
+                            {price}
                         </span>
+                        </h3>
                     )}
 
+                     {product.category  && (
+                        <h7 >
+
+                
+                        <span className="text-[18px] leading-[31px] text-[#7B7D7D]">
+                            {product.category}
+                        </span>
+                        </h7>
+                    )}
+                    {/* {price && !discountPrice && (
+                        <span className="product-price text-[18px] leading-[31px] text-[#666666]">
+                            ${price.toFixed(2)}
+                        </span>
+                    )}
                     {price && discountPrice && (
                         <div className="product-price-wrap flex justify-center mb-[10px]">
                             <span className="product-price text-[18px] leading-[31px] text-[#666666] block">
-                                {/* ${price.toFixed(2)} */}
+                                ${price.toFixed(2)}
                             </span>
                             <span className="product-price text-[18px] leading-[31px] text-[#666666] block relative before:content-['-'] before:mx-[10px]">
-                                {/* ${discountPrice.toFixed(2)} */}
+                                ${discountPrice.toFixed(2)}
                             </span>
                         </div>
-                    )}
-                </div>
-
-                <div className="product-price-wrap flex justify-center mb-[10px]">
-                    <span className="product-price text-[18px] leading-[31px] text-[#FF0000]">
-                        Country: {country}
-                    </span>
+                    )} */}
                 </div>
             </div>
             <QuickView open={isOpen} onClose={() => setIsOpen(false)}>
@@ -215,7 +271,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         <div className="product-img md:h-full">
                             <Link href={`/products/${product?.slug}`}>
                                 <a className="block relative md:h-full">
-                                    {/* {soldOutSticker && (
+                                    {soldOutSticker && (
                                         <span
                                             className={`${
                                                 soldOutSticker
@@ -225,8 +281,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         >
                                             {soldOutSticker}
                                         </span>
-                                    )} */}
-                                    {/* {bestSellerSticker && (
+                                    )}
+                                    {bestSellerSticker && (
                                         <span
                                             className={`${
                                                 bestSellerSticker
@@ -247,11 +303,12 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         >
                                             {offerSticker}
                                         </span>
-                                    )} */}
+                                    )}
                                     <img
                                         className="w-full md:h-full md:object-cover"
-                                        src={`/images/products/${product?.slug}/${product?.mdImage}`}
-                                        alt={product?.altImage}
+                                        // src={`/images/products/${product?.slug}/${product?.mdImage}`}
+                                        src={product.image}
+                                        alt={product?.image}
                                         width={585}
                                         height={585}
                                     />
@@ -260,27 +317,34 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         </div>
                         <div className="product-content py-[40px] px-[30px]">
                             <h2 className="text-[24px] mb-[15px]">{title}</h2>
-                            {price && !discountPrice && (
+                            {product.price  && (
                                 <span className="product-price text-[30px] leading-[42px] text-[#999999] block mb-[25px]">
-                                    {/* ${price.toFixed(2)} */}
+                                    {product.price}
+                                </span>
+                            )}
+                            {/* {price && !discountPrice && (
+                                <span className="product-price text-[30px] leading-[42px] text-[#999999] block mb-[25px]">
+                                    ${price.toFixed(2)}
                                 </span>
                             )}
                             {price && discountPrice && (
                                 <div className="product-price-wrap flex mb-[10px]">
                                     <span className="product-price text-[30px] leading-[42px] text-[#999999] block">
-                                        {/* ${price.toFixed(2)} */}
+                                        ${price.toFixed(2)}
                                     </span>
                                     <span className="product-price text-[30px] leading-[42px] text-[#999999] block relative before:content-['-'] before:mx-[10px]">
-                                        {/* ${discountPrice.toFixed(2)} */}
+                                        ${discountPrice.toFixed(2)}
                                     </span>
                                 </div>
-                            )}
+                            )} */}
                             <h3 className="stock font-semibold text-[14px] mb-[20px]">
                                 Available:
                                 <span className="text-[#3bc604] ml-[5px]">
-                                    {product?.availability}
+                                    {/* {product?.availability} */}
+                                    Yes
                                 </span>
                             </h3>
+                        x
                             <p>{desc}</p>
                             <div className="group-btn flex max-xs:flex-wrap py-[30px]">
                                 <div
@@ -333,19 +397,19 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                     </div>
                                 </div>
                                 <div
-                                    // className={`${
-                                    //     soldOutSticker
-                                    //         ? `cursor-not-allowed`
-                                    //         : ''
-                                    // }`}
+                                    className={`${
+                                        soldOutSticker
+                                            ? `cursor-not-allowed`
+                                            : ''
+                                    }`}
                                 >
                                     <button
                                         type="button"
-                                        // className={`${addtoCartBtn} ${
-                                        //     soldOutSticker
-                                        //         ? `pointer-events-none`
-                                        //         : ''
-                                        // } mr-[15px]`}
+                                        className={`${addtoCartBtn} ${
+                                            soldOutSticker
+                                                ? `pointer-events-none`
+                                                : ''
+                                        } mr-[15px]`}
                                         onClick={addToCartHandler}
                                     >
                                         Add to cart
@@ -365,7 +429,26 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                     {product?.sku}
                                 </span>
                             </div>
-                            <div className="category-wrap flex max-xs:flex-wrap">
+                            <div className="sku-wrap font-medium">
+                                <span>Country:</span>
+                                <span className="text-[#666666] ml-[5px]">
+                                    {product?.sku}
+                                </span>
+                            </div>
+
+                            <div className="sku-wrap font-medium">
+                                <span>Category:</span>
+                                <span className="text-[#666666] ml-[5px]">
+                                    {product?.category}
+                                </span>
+                            </div>
+                            <div className="sku-wrap font-medium">
+                                <span>Description:</span>
+                                <span className="text-[#666666] ml-[5px]">
+                                    {product?.desc}
+                                </span>
+                            </div>
+                            {/* <div className="category-wrap flex max-xs:flex-wrap">
                                 <span className="text-black font-medium">
                                     Categories:
                                 </span>
@@ -393,8 +476,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         </Link>
                                     )
                                 )}
-                            </div>
-                            <div className="tag-wrap flex max-xs:flex-wrap">
+                            </div> */}
+                            {/* <div className="tag-wrap flex max-xs:flex-wrap">
                                 <span className="text-black font-medium">
                                     Tags:
                                 </span>
@@ -424,12 +507,12 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         </Link>
                                     )
                                 )}
-                            </div>
-                            <div className="social-wrap flex pt-[65px]">
+                            </div> */}
+                            {/* <div className="social-wrap flex pt-[65px]">
                                 <span className="text-black font-medium">
                                     Share this items :
                                 </span>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div>
@@ -440,6 +523,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
 
 ProductItem.propTypes = {
     product: PropTypes.instanceOf(Object).isRequired,
+    headerItems: PropTypes.instanceOf(Object).isRequired,
     productFilter: PropTypes.instanceOf(Object).isRequired,
     productFilterPath: PropTypes.string,
 };

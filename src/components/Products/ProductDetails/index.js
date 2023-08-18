@@ -2,14 +2,16 @@ import PropTypes from 'prop-types';
 import MainContent from './main-content';
 import ProductDetailTab from './ProductDetailTab';
 
-function ProductDetails({ product, productDetailTabItems }) {
+function ProductDetails({ product1, productDetailTabItems }) {
+
+    console.log("vmkmvlmvs"+JSON.stringify(product1));
     return (
         <main>
-            <MainContent product={product} />
-            <ProductDetailTab
+            <MainContent product={product1} />
+            {/* <ProductDetailTab
                 product={product}
                 productDetailTabItems={productDetailTabItems}
-            />
+            /> */}
         </main>
     );
 }

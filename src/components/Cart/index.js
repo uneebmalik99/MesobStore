@@ -58,7 +58,7 @@ function Cart({ minicart, showMiniCart }) {
                                 <>
                                     <div className="minicart-subtotal flex justify-between text-[24px] font-medium pt-[40px]">
                                         <span>Subtotal:</span>
-                                        <span>${SubTotal.toFixed(2)}</span>
+                                        <span>{SubTotal}</span>
                                     </div>
                                     <ul className="minicart-group-btn pt-[40px]">
                                         <li className="mb-[15px]">
