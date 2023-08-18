@@ -4,14 +4,32 @@ import Breadcrumb from '../../components/Breadcrumb';
 import ProductFiveColumns from '../../components/Products/ProductFiveColumns';
 import FooterComps from '../../components/FooterComps';
 import { getAllItems } from '../../lib/ProductUtil';
+import { useEffect } from 'react';
+import { useRouter } from "next/router";
 
 function ProductFiveColumnsPage({
+    
     headerItems,
     products,
     productFilter,
     gridTabItems,
     footerItems,
-}) {
+    
+    
+})
+
+
+
+
+{
+
+    const router = useRouter();
+    const data = router.query || 'default value';
+
+  console.log("jdskdsbvks"+JSON.stringify(data));
+
+
+
     return (
         <>
             <HeaderOne headerItems={headerItems} headerContainer="container" />
@@ -25,9 +43,11 @@ function ProductFiveColumnsPage({
             <ProductFiveColumns
                 productFiveColumnsContainer="container-fluid xl:px-[100px] px-[15px]"
                 products={products}
+                productcategoryid={data}
                 productFilter={productFilter}
                 productFilterPath="5-columns"
                 gridTabItems={gridTabItems}
+
             />
             <FooterComps
                 footerContainer="container"
@@ -43,6 +63,7 @@ export function getStaticProps() {
     const productFilter = getAllItems('product-filter');
     const gridTabItems = getAllItems('grid-tab-2');
     const footerItems = getAllItems('footer');
+    
 
     return {
         props: {
@@ -61,6 +82,7 @@ ProductFiveColumnsPage.propTypes = {
     productFilter: PropTypes.instanceOf(Object).isRequired,
     gridTabItems: PropTypes.instanceOf(Object).isRequired,
     footerItems: PropTypes.instanceOf(Object).isRequired,
+
 };
 
 export default ProductFiveColumnsPage;

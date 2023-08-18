@@ -1,0 +1,59 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-abrehet-dev-144722-authRole",
+      "UnauthRoleArn": "arn:aws:iam::807954077262:role/amplify-abrehet-dev-144722-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::807954077262:role/amplify-abrehet-dev-144722-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-abrehet-dev-144722-deployment",
+      "UnauthRoleName": "amplify-abrehet-dev-144722-unauthRole",
+      "StackName": "amplify-abrehet-dev-144722",
+      "StackId": "arn:aws:cloudformation:us-east-1:807954077262:stack/amplify-abrehet-dev-144722/ed78fd80-9bc7-11ed-8511-0af2f9a345ff",
+      "AmplifyAppId": "d3oblzrbpswsk2"
+    }
+  },
+  "auth": {
+    "abrehetca91482b": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "output": {
+        "UserPoolId": "us-east-1_oyDOhnVf6",
+        "AppClientIDWeb": "1noi46dbud0satg6boijf7o0tn",
+        "AppClientID": "21gi6h4ilaqhvhvc3q9eh8beei",
+        "HostedUIDomain": "abrehet014c7ce4-014c7ce4-dev",
+        "IdentityPoolId": "us-east-1:71e0f82b-2ea7-4ea3-8be3-d21b35e7fa4b",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-1:807954077262:userpool/us-east-1_oyDOhnVf6",
+        "IdentityPoolName": "abrehetca91482b_identitypool_ca91482b__dev",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\"],\"LogoutURLs\":[\"abrehet://\"]}",
+        "UserPoolName": "abrehetca91482b_userpool_ca91482b"
+      },
+      "lastPushTimeStamp": "2023-08-10T09:07:35.190Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-abrehet-dev-144722-deployment/amplify-cfn-templates/auth/abrehetca91482b-cloudformation-template.json",
+        "logicalId": "authabrehetca91482b"
+      }
+    }
+  }
+}

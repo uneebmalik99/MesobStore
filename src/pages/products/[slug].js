@@ -1,9 +1,11 @@
 import PropTypes from 'prop-types';
-import { getAllItems, getItemData, getItemsFiles } from '../../lib/ProductUtil';
+// import { getAllItems, getItemData, getItemsFiles } from '../../lib/ProductUtil';
 import HeaderOne from '../../components/HeaderComps';
 import Breadcrumb from '../../components/Breadcrumb/index-2';
 import ProductDetails from '../../components/Products/ProductDetails';
 import FooterComps from '../../components/FooterComps';
+import { useRouter } from "next/router";
+import { useEffect } from 'react';
 
 function ProductDetailPage({
     product,
@@ -11,59 +13,72 @@ function ProductDetailPage({
     productDetailTabItems,
     footerItems,
 }) {
+    const router = useRouter();
+    const products ={
+                id : router.query.id ,
+                title : router.query.title,
+                price : router.query.price ,
+                image : router.query.image,
+                category : router.query.category ,
+                desc : router.query.desc,
+            }
+    
+
     return (
         <>
-            <HeaderOne headerItems={headerItems} headerContainer="container" />
-            <Breadcrumb
+            {/* <HeaderOne headerItems={headerItems} headerContainer="container" /> */}
+            {/* <Breadcrumb
                 breadcrumbContainer="container"
-                product={product}
+                product={products}
                 item="Home"
-                itemPath="/"
-            />
+                itemPath="/Info"
+            /> */}
             <ProductDetails
-                product={product}
+                product1={products}
                 productDetailTabItems={productDetailTabItems}
                 productFilterPath="carousel"
             />
-            <FooterComps
+            {/* <FooterComps
                 footerContainer="container"
                 footerItems={footerItems}
-            />
+            /> */}
         </>
     );
 }
 
-export function getStaticProps(context) {
-    const { params } = context;
-    const { slug } = params;
 
-    const headerItems = getAllItems('header');
-    const product = getItemData(slug, 'products');
-    const productDetailTabItems = getAllItems('product-detail-tab');
-    const footerItems = getAllItems('footer');
+// export function getStaticProps() {
+    
 
-    return {
-        props: {
-            headerItems,
-            product,
-            productDetailTabItems,
-            footerItems,
-        },
-    };
-}
 
-export function getStaticPaths() {
-    const productFilenames = getItemsFiles('products');
+//     const headerItems = getAllItems('header');
+//     // const product = getItemData(slug, 'products');
+//     // const productDetailTabItems = getAllItems('product-detail-tab');
+//     const footerItems = getAllItems('footer');
+//     console.log("footer  "+footerItems);
 
-    const slugs = productFilenames.map((fileName) =>
-        fileName.replace(/\.md$/, '')
-    );
+//     return {
+//         props: {
+//             headerItems,
+//             products,
+//             // productDetailTabItems,
+//             footerItems,
+//         },
+//     };
+// }
 
-    return {
-        paths: slugs.map((slug) => ({ params: { slug } })),
-        fallback: false,
-    };
-}
+// export function getStaticPaths() {
+//     const productFilenames = getItemsFiles('products');
+
+//     const slugs = productFilenames.map((fileName) =>
+//         fileName.replace(/\.md$/, '')
+//     );
+
+//     return {
+//         // paths: slugs.map((slug) => ({ params: { slug } })),
+//         fallback: false,
+//     };
+// }
 
 ProductDetailPage.propTypes = {
     headerItems: PropTypes.instanceOf(Object).isRequired,

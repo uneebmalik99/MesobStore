@@ -63,23 +63,24 @@ function OfferColection({ offerColection }) {
                                             __html: offerColection[0].title,
                                         }}
                                     />
-                                    <p className="mb-[50px]">
+                                    <div>ndcdc</div>
+                                    {/* <p className="mb-[50px]">
                                         {offerColection[0].desc}
-                                    </p>
-                                    <CountDown
+                                    </p> */}
+                                    {/* <CountDown
                                         timerDays={timerDays}
                                         timerHours={timerHours}
                                         timerMinutes={timerMinutes}
                                         timerSeconds={timerSeconds}
-                                    />
-                                    <div className="mt-[60px]">
+                                    /> */}
+                                    {/* <div className="mt-[60px]">
                                         <Link href="/">
                                             <a className={secondaryButton}>
                                                 Shop Now
                                                 <IoArrowForwardOutline className="text-white ml-[5px]" />
                                             </a>
                                         </Link>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         </div>

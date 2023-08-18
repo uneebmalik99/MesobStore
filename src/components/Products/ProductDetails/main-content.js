@@ -19,11 +19,9 @@ function MainContent({ product }) {
         id,
         title,
         price,
-        discountPrice,
-        totalPrice,
-        soldOutSticker,
-        bestSellerSticker,
-        offerSticker,
+        image, 
+        desc,
+        category,
     } = product;
     const [quantityCount, setQuantityCount] = useState(1);
 
@@ -36,7 +34,7 @@ function MainContent({ product }) {
                 price,
                 quantity: quantityCount,
                 totalPrice,
-                image: `/images/products/${product?.slug}/${product?.xsImage}`,
+                image: product.image,
                 slug: `/products/${product?.slug}`,
             })
         );
@@ -61,7 +59,7 @@ function MainContent({ product }) {
                 <div className="grid grid-cols-12 lg:gap-x-[25px] max-md:gap-y-[25px]">
                     <div className="lg:col-span-6 col-span-12">
                         <div className="product-detail-img relative">
-                            {soldOutSticker && (
+                            {/* {soldOutSticker && (
                                 <span
                                     className={`${
                                         soldOutSticker ? `${soldOut}` : ''
@@ -87,10 +85,12 @@ function MainContent({ product }) {
                                 >
                                     {offerSticker}
                                 </span>
-                            )}
+                            )} */}
                             <img
                                 className="w-full"
-                                src={`/images/products/${product?.slug}/${product?.mdImage}`}
+                                src={product.image}
+                                style={{borderRadius:10}}
+                                // src={`/images/products/${product?.slug}/${product?.mdImage}`}
                                 alt={product?.altImage}
                                 width={585}
                                 height={585}
@@ -99,22 +99,22 @@ function MainContent({ product }) {
                     </div>
                     <div className="lg:col-span-6 col-span-12">
                         <div className="product-detail-content">
-                            <h3 className="mb-[10px]">{product?.title}</h3>
-                            {price && !discountPrice && (
+                            <h3 className="mb-[10px]">{title}</h3>
+                            {price && (
                                 <span className="product-price text-[30px] leading-[42px] text-[#999999] mb-[25px]">
-                                    ${price.toFixed(2)}
+                                    {price}
                                 </span>
                             )}
-                            {price && discountPrice && (
+                            {/* {price && discountPrice && (
                                 <div className="product-price-wrap flex mb-[10px]">
                                     <span className="product-price text-[30px] leading-[42px] text-[#999999] block">
-                                        ${price.toFixed(2)}
+                                        ${price}
                                     </span>
                                     <span className="product-price text-[30px] leading-[42px] text-[#999999] block relative before:content-['-'] before:mx-[10px]">
-                                        ${discountPrice.toFixed(2)}
+                                        ${discountPrice}
                                     </span>
                                 </div>
-                            )}
+                            )} */}
 
                             <p className="text-[14px] leading-[24px] lg:max-w-[450px]">
                                 {product?.desc}
@@ -168,19 +168,17 @@ function MainContent({ product }) {
                                     </div>
                                 </div>
                                 <div
-                                    className={`${
-                                        soldOutSticker
-                                            ? `cursor-not-allowed`
-                                            : ''
-                                    }`}
+                                    // className={`${
+                                    //     soldOutSticker
+                                    //         ? `cursor-not-allowed`
+                                    //         : ''
+                                    // }`}
                                 >
                                     <button
                                         type="button"
-                                        className={`${addtoCartBtn} ${
-                                            soldOutSticker
-                                                ? `pointer-events-none`
-                                                : ''
-                                        } mr-[15px]`}
+                                        className={`${addtoCartBtn}
+                                       
+                                         mr-[15px]`}
                                         onClick={addToCartHandler}
                                     >
                                         Add to cart
@@ -196,28 +194,34 @@ function MainContent({ product }) {
                             </div>
                             <div className="other-info">
                                 <div className="sku-wrap font-medium">
-                                    <span>SKU:</span>
+                                    <span>SKU: </span>
                                     <span className="text-[#666666] ml-[5px]">
                                         {product?.sku}
                                     </span>
                                 </div>
                                 <div className="category-wrap font-medium">
-                                    <span>Categories:</span>
+                                    <span>Category: </span>
                                     <span className="text-[#666666] ml-[5px]">
-                                        {product?.category}
+                                        {category}
                                     </span>
                                 </div>
-                                <div className="category-wrap font-medium">
+                                <div className="sku-wrap font-medium">
+                                    <span>Description: </span>
+                                    <span className="text-[#666666] ml-[5px]">
+                                        {product?.desc}
+                                    </span>
+                                </div>
+                                {/* <div className="category-wrap font-medium">
                                     <span>Tags:</span>
                                     <span className="text-[#666666] ml-[5px]">
                                         {product?.tag}
                                     </span>
-                                </div>
-                                <div className="social-wrap flex pt-[65px]">
+                                </div> */}
+                                {/* <div className="social-wrap flex pt-[65px]">
                                     <span className="text-black font-medium">
                                         Share this items :
                                     </span>
-                                </div>
+                                </div> */}
                             </div>
                         </div>
                     </div>
