@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import { Authenticator, Button } from '@aws-amplify/ui-react';
+import { Alert, Authenticator, Button } from '@aws-amplify/ui-react';
 // import Amplify from '@aws-amplify/core';
 import store from '../store/index';
 
@@ -16,6 +16,7 @@ import '@aws-amplify/ui-react/styles.css';
 import awsExports from '../aws-exports';
 import { Amplify } from 'aws-amplify';
 import { Auth } from '@aws-amplify/auth';
+import { useEffect } from 'react';
 
 const persistor = persistStore(store);
 Amplify.configure(awsExports);
@@ -25,7 +26,28 @@ function MyApp({ Component, pageProps }) {
     console.log(
         'Current Authenticated User: ',
         Auth.currentAuthenticatedUser()
+        
+
     );
+    let gg= Auth.currentAuthenticatedUser();
+    
+
+    useEffect(() => {
+        currentSession()
+    }, []);
+async function currentSession() {
+  try {
+    const data = await Auth.currentSession();
+    console.log("dddd "+data);
+    
+  } catch(err) {
+
+    console.log("dderrordd "+err);
+  }
+};
+
+    console.log("Auth  user is "+gg);
+    console.log("Auth  user is data"+gg);
 
     const handleSignIn = (state) => {
         if (state === 'signedin') {

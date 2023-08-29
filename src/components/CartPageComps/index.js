@@ -99,7 +99,7 @@ function CartPageComps({ cartPageItems }) {
                                                     </h2>
                                                 </td>
                                                 <td className="py-4">
-                                                    ${item.price.toFixed(2)}
+                                                    ${item.price}
                                                 </td>
                                                 <td className="py-4">
                                                     <div
@@ -197,7 +197,7 @@ function CartPageComps({ cartPageItems }) {
                                                 </td>
                                                 <td className="py-4">
                                                     $
-                                                    {item.totalPrice.toFixed(2)}
+                                                    {item.totalPrice}
                                                 </td>
                                                 <td className="py-4 text-right">
                                                     <button
