@@ -121,18 +121,18 @@ export const OffcanvasData = [
                 text: 'Blog Default',
                 cName: '',
             },
-            // {
-            //     id: 'blog-list',
-            //     link: '/blogs/list',
-            //     text: 'Blog List',
-            //     cName: '',
-            // },
-            // {
-            //     id: 'blog-masonry',
-            //     link: '/blogs/masonry',
-            //     text: 'Blog Masonry',
-            //     cName: '',
-            // },
+            {
+                id: '',
+                link: '/blogs/list',
+                text: 'Blog List',
+                cName: '',
+            },
+            {
+                id: 'Sign_out',
+                link: '/signout',
+                text: 'Sign Out',
+                cName: '',
+            },
             // {
             //     id: 'blog-sidebar',
             //     link: '/blogs/sidebar',
@@ -190,15 +190,6 @@ export const OffcanvasData = [
         id: 7,
         title: 'Delete Account',
         cName: 'has-children',
-        submenu: [
-            {
-                id: 'blog-default',
-                link: '/blogs/default',
-                text: 'Blog Default',
-                cName: '',
-            },
-          
-        ],
     },
     {
         id: 8,

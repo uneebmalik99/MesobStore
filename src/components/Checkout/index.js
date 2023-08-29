@@ -39,7 +39,7 @@ function Checkout({ checkoutItems }) {
             {cartItems.length <= 0 ||
                 (initialValue === 0 && (
                     <>
-                        <div className="customer-info">
+                        {/* <div className="customer-info">
                             <div className="container">
                                 <div className="grid grid-cols-12 lg:gap-x-[25px] max-md:gap-y-[30px]">
                                     <div className="xl:col-span-7 lg:col-span-6 col-span-12">
@@ -172,14 +172,14 @@ function Checkout({ checkoutItems }) {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="checkout-wrap pt-[25px]">
                             <div className="container">
                                 <div className="grid grid-cols-12 lg:gap-x-[25px] max-md:gap-y-[50px]">
                                     <div className="lg:col-span-7 col-span-12">
                                         <div className="billing">
                                             <h2 className="title text-[18px] mb-[20px]">
-                                                Billing Details
+                                               Receiver Details
                                             </h2>
                                             <form className="billing-form">
                                                 <div className="group-field flex mb-[20px]">
@@ -190,7 +190,7 @@ function Checkout({ checkoutItems }) {
                                                             htmlFor="billing-firstname"
                                                             className="mb-[5px]"
                                                         >
-                                                            First name *
+                                                            Receiver Full Name
                                                         </label>
                                                         <input
                                                             className={`${inputField}`}
@@ -205,7 +205,7 @@ function Checkout({ checkoutItems }) {
                                                             htmlFor="billing-lastname"
                                                             className="mb-[5px]"
                                                         >
-                                                            Last name *
+                                                            Phone Number
                                                         </label>
                                                         <input
                                                             className={`${inputField}`}
@@ -221,8 +221,7 @@ function Checkout({ checkoutItems }) {
                                                         htmlFor="billing-companyname"
                                                         className="mb-[5px]"
                                                     >
-                                                        Company name (optional)
-                                                        *
+                                                       Street Address
                                                     </label>
                                                     <input
                                                         className={`${inputField}`}
@@ -230,6 +229,7 @@ function Checkout({ checkoutItems }) {
                                                         id="billing-companyname"
                                                     />
                                                 </div>
+
                                                 <div
                                                     className={`${singleField} mb-[20px]`}
                                                 >
@@ -237,7 +237,39 @@ function Checkout({ checkoutItems }) {
                                                         htmlFor="billing-companyname"
                                                         className="mb-[5px]"
                                                     >
-                                                        Country *
+                                                     State/Province/Zoba
+                                                    </label>
+                                                    <input
+                                                        className={`${inputField}`}
+                                                        type="text"
+                                                        id="billing-companyname"
+                                                    />
+                                                </div>
+
+                                                <div className="group-field flex mb-[20px]">
+                                                    <div
+                                                        className={`${singleField} mr-[25px]`}
+                                                    >
+                                                        <label
+                                                            htmlFor="billing-firstname"
+                                                            className="mb-[5px]"
+                                                        >
+                                                            City
+                                                        </label>
+                                                        <input
+                                                            className={`${inputField}`}
+                                                            type="text"
+                                                            id="billing-firstname"
+                                                        />
+                                                    </div>
+                                                    <div
+                                                    className={`${singleField} mb-[20px]`}
+                                                >
+                                                    <label
+                                                        htmlFor="billing-companyname"
+                                                        className="mb-[5px]"
+                                                    >
+                                                        Country
                                                     </label>
                                                     <select
                                                         className={`${inputField}`}
@@ -253,130 +285,161 @@ function Checkout({ checkoutItems }) {
                                                         </option>
                                                     </select>
                                                 </div>
-                                                <div
-                                                    className={`${singleField} mb-[20px]`}
-                                                >
-                                                    <label>
-                                                        Street address *
-                                                        <input
-                                                            className={`${inputField} mt-[5px] mb-[20px]`}
-                                                            type="text"
-                                                            placeholder="House number and street name"
-                                                        />
+                                                </div>
+
+
+
+
+
+
+
+
+
+                                               
+
+                                            </form>
+                                        </div>
+
+
+                                        <div className="billing">
+                                            <h2 className="title text-[18px] mb-[20px]">
+                                              Sender Detail's
+                                            </h2>
+                                            <form className="billing-form" style={{padding:10, borderRadius:10,borderWidth:0.4}}>
+                                                <div className="group-field flex mb-[20px]">
+                                                    <div
+                                                        className={`${singleField} mr-[25px]`}
+                                                    >
+                                                        <label
+                                                            htmlFor="billing-firstname"
+                                                            className="mb-[5px]"
+                                                        >
+                                                            Full Name
+                                                        </label>
                                                         <input
                                                             className={`${inputField}`}
                                                             type="text"
-                                                            placeholder="Apartment, suite, unit etc. (optional)"
+                                                            id="billing-firstname"
                                                         />
-                                                    </label>
-                                                </div>
-                                                <div
-                                                    className={`${singleField} mb-[20px]`}
-                                                >
-                                                    <label
-                                                        htmlFor="billing-city"
-                                                        className="mb-[5px]"
-                                                    >
-                                                        Town / City *
-                                                    </label>
-                                                    <input
-                                                        className={`${inputField}`}
-                                                        type="text"
-                                                        id="billing-city"
-                                                    />
-                                                </div>
-                                                <div
-                                                    className={`${singleField} mb-[20px]`}
-                                                >
-                                                    <label
-                                                        htmlFor="billing-district"
-                                                        className="mb-[5px]"
-                                                    >
-                                                        District *
-                                                    </label>
-                                                    <select
-                                                        className={`${inputField}`}
-                                                    >
-                                                        <option>Sydney</option>
-                                                        <option>
-                                                            Brisbane
-                                                        </option>
-                                                        <option>
-                                                            Adelaide
-                                                        </option>
-                                                        <option>Hobart</option>
-                                                        <option>
-                                                            Melbourne
-                                                        </option>
-                                                    </select>
-                                                </div>
-                                                <div
-                                                    className={`${singleField} mb-[20px]`}
-                                                >
-                                                    <label
-                                                        htmlFor="billing-postcode"
-                                                        className="mb-[5px]"
-                                                    >
-                                                        Postcode / ZIP
-                                                        (optional) *
-                                                    </label>
-                                                    <input
-                                                        className={`${inputField}`}
-                                                        type="text"
-                                                        id="billing-postcode"
-                                                    />
-                                                </div>
-                                                <div
-                                                    className={`${singleField} mb-[20px]`}
-                                                >
-                                                    <label
-                                                        htmlFor="billing-phone"
-                                                        className="mb-[5px]"
-                                                    >
-                                                        Phone *
-                                                    </label>
-                                                    <input
-                                                        className={`${inputField}`}
-                                                        type="text"
-                                                        id="billing-phone"
-                                                    />
-                                                </div>
-                                                <div
-                                                    className={`${singleField} mb-[20px]`}
-                                                >
-                                                    <label
-                                                        htmlFor="billing-email"
-                                                        className="mb-[5px]"
-                                                    >
-                                                        Email Address *
-                                                    </label>
-                                                    <input
-                                                        className={`${inputField}`}
-                                                        type="email"
-                                                        id="billing-email"
-                                                    />
-                                                </div>
-                                                <div className="additional-info">
-                                                    <h3 className="text-[18px] mb-[15px]">
-                                                        Additional information
-                                                    </h3>
+                                                    </div>
                                                     <div
-                                                        className={`${singleField} lg:mb-[20px]`}
+                                                        className={`${singleField}`}
                                                     >
                                                         <label
-                                                            htmlFor="billing-notes"
+                                                            htmlFor="billing-lastname"
                                                             className="mb-[5px]"
                                                         >
-                                                            Order notes
-                                                            (optional)
+                                                           Email
                                                         </label>
-                                                        <textarea
-                                                            className={`${textareaField}`}
+                                                        <input
+                                                            className={`${inputField}`}
                                                             type="text"
-                                                            id="billing-notes"
+                                                            id="billing-lastname"
                                                         />
                                                     </div>
                                                 </div>
+                                                <div
+                                                    className={`${singleField} mb-[20px]`}
+                                                >
+                                                    <label
+                                                        htmlFor="billing-companyname"
+                                                        className="mb-[5px]"
+                                                    >
+                                                      Full Address
+                                                    </label>
+                                                    <input
+                                                        className={`${inputField}`}
+                                                        type="text"
+                                                        id="billing-companyname"
+                                                    />
+                                                </div>
+
+
+                                                <div className="group-field flex mb-[20px]">
+                                                    <div
+                                                        className={`${singleField} mr-[25px]`}
+                                                    >
+                                                        <label
+                                                            htmlFor="billing-firstname"
+                                                            className="mb-[5px]"
+                                                        >
+                                                            Phone
+                                                        </label>
+                                                        <input
+                                                            className={`${inputField}`}
+                                                            type="text"
+                                                            id="billing-firstname"
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        className={`${singleField}`}
+                                                    >
+                                                        <label
+                                                            htmlFor="billing-lastname"
+                                                            className="mb-[5px]"
+                                                        >
+                                                         City
+                                                        </label>
+                                                        <input
+                                                            className={`${inputField}`}
+                                                            type="text"
+                                                            id="billing-lastname"
+                                                        />
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div className="group-field flex mb-[20px]">
+                                                    <div
+                                                        className={`${singleField} mr-[25px]`}
+                                                    >
+                                                        <label
+                                                            htmlFor="billing-firstname"
+                                                            className="mb-[5px]"
+                                                        >
+                                                          State
+                                                        </label>
+                                                        <input
+                                                            className={`${inputField}`}
+                                                            type="text"
+                                                            id="billing-firstname"
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        className={`${singleField}`}
+                                                    >
+                                                        <label
+                                                            htmlFor="billing-lastname"
+                                                            className="mb-[5px]"
+                                                        >
+                                                        Zip code
+                                                        </label>
+                                                        <input
+                                                            className={`${inputField}`}
+                                                            type="text"
+                                                            id="billing-lastname"
+                                                        />
+                                                    </div>
+                                                </div>
+
+                                                <div
+                                                    className={`${singleField} mb-[20px]`}
+                                                >
+                                                    <label
+                                                        htmlFor="billing-companyname"
+                                                        className="mb-[5px]"
+                                                    >
+                                                     State
+                                                    </label>
+                                                    <input
+                                                        className={`${inputField}`}
+                                                        type="text"
+                                                        id="billing-companyname"
+                                                    />
+                                                </div>
+
+                                              
                                             </form>
                                         </div>
                                     </div>
@@ -426,9 +489,7 @@ function Checkout({ checkoutItems }) {
                                                                     </th>
                                                                     <td className="py-[15px] text-right">
                                                                         $
-                                                                        {item.price.toFixed(
-                                                                            2
-                                                                        )}
+                                                                        {item.price}
                                                                     </td>
                                                                 </tr>
                                                             )
@@ -520,7 +581,12 @@ function Checkout({ checkoutItems }) {
                                     </div>
                                 </div>
                             </div>
+
                         </div>
+
+
+
+                        
                     </>
                 ))}
         </div>
