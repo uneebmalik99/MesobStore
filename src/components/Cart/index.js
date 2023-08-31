@@ -3,17 +3,62 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import CartItem from './CartItem';
+import { useEffect, useState } from 'react';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
 
 const minicartGroupBtn = `flex items-center justify-center border border-[#222222]  w-full h-[50px]`;
 function Cart({ minicart, showMiniCart }) {
+    const [userauth ,setuserauth ] = useState(false)
     const cartItems = useSelector((state) => state.cart.items);
 
     const initialValue = 0;
+
+    // alert("vdvds"+JSON.stringify(cartItems))
+
+    // const totalfunc = () => {
+    //     for(let i = 0; i<=cartItems.length ; i++ ){
+    //         let p  = cartItems[i].id; // Remove the dollar sign
+
+     
+ 
+
+    //        let value = p*cartItems.quantity
+    //        initialValue = initialValue+value
+
+    //     }
+    //     alert(initialValue)
+
+    // }
     const SubTotal = cartItems.reduce(
         (accumulator, current) =>
             accumulator + current.price * current.quantity,
         initialValue
     );
+
+    async function currentSession() {
+
+    try {
+        const data = await Auth.currentSession();
+        console.log("dddd "+data);
+        if(data){
+            setuserauth(true)
+            console.log("data user  "+JSON.stringify(data));
+        }
+        
+    } catch(err) {
+        setuserauth(false)
+
+        console.log("data "+err);
+    }
+    };
+
+    useEffect(() => {
+        currentSession()
+        
+    //  totalfunc()
+    }, []);
+
+
 
     return (
         <div
@@ -71,13 +116,29 @@ function Cart({ minicart, showMiniCart }) {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href="/checkout">
-                                                <a
-                                                    className={`${minicartGroupBtn} bg-[#222222] text-white`}
-                                                >
-                                                    Checkout
-                                                </a>
-                                            </Link>
+                                            {
+
+                                            }
+
+                                            {userauth == true?
+                                                  <Link href="/checkout">
+                                                  <a
+                                                      className={`${minicartGroupBtn} bg-[#222222] text-white`}
+                                                  >
+                                                      Checkout
+                                                  </a>
+                                              </Link>
+                                              :
+                                              <Link href="/auth">
+                                              <a
+                                                  className={`${minicartGroupBtn} bg-[#222222] text-white`}
+                                              >
+                                                  Checkout
+                                              </a>
+                                          </Link>
+
+                                            }
+                                          
                                         </li>
                                     </ul>
                                 </>

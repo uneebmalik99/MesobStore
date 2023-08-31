@@ -5,6 +5,8 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { cartActions } from '../../store/cart/cart-slice';
 
 function CartItem({ item }) {
+
+ 
     const dispatch = useDispatch();
 
     const { image, slug, title, quantity, price } = item;

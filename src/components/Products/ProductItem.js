@@ -57,13 +57,17 @@ function ProductItem({ product, productFilter, productFilterPath }) {
 
     const dispatch = useDispatch();
     const addToCartHandler = () => {
+        let tprice = price.replace('$', ''); // This removes the dollar sign
+
+        console.log("totalPrice: " + tprice*quantityCount);
+
         dispatch(
             cartActions.addItemToCart({
                 id,
                 title,
                 price,
                 quantity: quantityCount,
-                totalPrice,
+                totalPrice:tprice*quantityCount,
                 image: product.image,
                 slug: `/products/${product?.slug}`,
             })
@@ -423,16 +427,11 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                     <IoHeartOutline />
                                 </button> */}
                             </div>
-                            <div className="sku-wrap font-medium">
-                                <span>SKU:</span>
-                                <span className="text-[#666666] ml-[5px]">
-                                    {product?.sku}
-                                </span>
-                            </div>
+                         
                             <div className="sku-wrap font-medium">
                                 <span>Country:</span>
                                 <span className="text-[#666666] ml-[5px]">
-                                    {product?.sku}
+                                    {product?.Country}
                                 </span>
                             </div>
 

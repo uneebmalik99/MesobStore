@@ -27,13 +27,16 @@ function MainContent({ product }) {
 
     const dispatch = useDispatch();
     const addToCartHandler = () => {
+       let tprice = price.replace('$', ''); // This removes the dollar sign
+
+console.log("totalPrice: " + tprice*quantityCount);
         dispatch(
             cartActions.addItemToCart({
                 id,
                 title,
                 price,
                 quantity: quantityCount,
-                totalPrice,
+                totalPrice: tprice*quantityCount,
                 image: product.image,
                 slug: `/products/${product?.slug}`,
             })
@@ -193,12 +196,7 @@ function MainContent({ product }) {
                                 </button> */}
                             </div>
                             <div className="other-info">
-                                <div className="sku-wrap font-medium">
-                                    <span>SKU: </span>
-                                    <span className="text-[#666666] ml-[5px]">
-                                        {product?.sku}
-                                    </span>
-                                </div>
+                                
                                 <div className="category-wrap font-medium">
                                     <span>Category: </span>
                                     <span className="text-[#666666] ml-[5px]">
