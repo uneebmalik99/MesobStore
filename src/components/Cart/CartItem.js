@@ -19,19 +19,28 @@ function CartItem({ item }) {
     return (
         <li className="item flex items-start justify-between border-b border-[#dddddd] pb-[25px] mb-[20px] last:mb-0 last:pb-0 last:border-b-0">
             <div className="item-img">
-                <Link href={slug}>
+                {/* <Link href={slug}>
                     <a className="product-img">
                         <img src={image} alt={title} />
                     </a>
-                </Link>
+                </Link> */}
             </div>
-            <div className="item-content w-[calc(100%-88px)] pl-[20px]">
+            {/* <div className="item-content w-[calc(100%-88px)] pl-[20px]">
                 <h3 className="leading-[21px]">
                     <Link href={slug}>
                         <a className="text-[15px] transition-all hover:text-primary">
-                            {title}
+                            {country}
                         </a>
                     </Link>
+                </h3>
+                </div> */}
+            <div className="item-content w-[calc(100%-88px)] pl-[20px]">
+                <h3 className="leading-[21px]">
+                    {/* <Link href={slug}>
+                        <a className="text-[15px] transition-all hover:text-primary">
+                            {title}
+                        </a>
+                    </Link> */}
                 </h3>
                 <div className="font-medium text-[15px] leading-[26px]">
                     Qty : <span className="text-[#666666]">{quantity}</span>

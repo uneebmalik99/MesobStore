@@ -21,18 +21,26 @@ const cartSlice = createSlice({
             state.totalQuantity += itemQuantity;
             state.changed = true;
             if (!existingItem) {
+                console.log("price at slice"+ newItem.price);
+                let p = newItem.price;
+                p= p.replace('$','')
+
                 state.items.push({
                     id: newItem.id,
-                    price: newItem.price,
+                    price: p,
                     quantity: itemQuantity,
-                    totalPrice: newItem.price,
+                    totalPrice: p*itemQuantity,
                     name: newItem.title,
                     image: newItem.image,
-                    slug: newItem.slug,
+                    country:newItem.country
                 });
             } else {
+               console.log("price at slice"+ newItem.price);
+               let p = newItem.price;
+               p= p.replace('$','')
+            //    console.log('pfirstvs'+ p );
                 existingItem.quantity++;
-                existingItem.totalPrice += newItem.price;
+                existingItem.totalPrice += p;
             }
         },
         increaseItemFromCart(state, action) {

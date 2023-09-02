@@ -11,29 +11,27 @@ function Cart({ minicart, showMiniCart }) {
     const [userauth ,setuserauth ] = useState(false)
     const cartItems = useSelector((state) => state.cart.items);
 
-    const initialValue = 0;
-
-    // alert("vdvds"+JSON.stringify(cartItems))
-
+    let initialValue = 0;
+    console.log("vdvds"+JSON.stringify(cartItems));
+    console.log('jbfjd'+cartItems.length)
     // const totalfunc = () => {
-    //     for(let i = 0; i<=cartItems.length ; i++ ){
-    //         let p  = cartItems[i].id; // Remove the dollar sign
+    //     for(let i = 0; i<cartItems.length ; i++ ){
+    //         let pt  = cartItems; // Remove the dollar sign
+    //         console.log("kdfnnf"+i);
+    //         initialValue = initialValue+cartItems[i].totalPrice
 
-     
- 
-
-    //        let value = p*cartItems.quantity
-    //        initialValue = initialValue+value
 
     //     }
-    //     alert(initialValue)
-
+    //     setSubTotal(initialValue)
+    //     // alert(initialValue)
     // }
     const SubTotal = cartItems.reduce(
         (accumulator, current) =>
-            accumulator + current.price * current.quantity,
+            accumulator +  current.price * current.quantity,
         initialValue
     );
+
+    
 
     async function currentSession() {
 
@@ -103,7 +101,7 @@ function Cart({ minicart, showMiniCart }) {
                                 <>
                                     <div className="minicart-subtotal flex justify-between text-[24px] font-medium pt-[40px]">
                                         <span>Subtotal:</span>
-                                        <span>{SubTotal}</span>
+                                        <span>${SubTotal}</span>
                                     </div>
                                     <ul className="minicart-group-btn pt-[40px]">
                                         <li className="mb-[15px]">
@@ -116,25 +114,23 @@ function Cart({ minicart, showMiniCart }) {
                                             </Link>
                                         </li>
                                         <li>
-                                            {
-
-                                            }
+                                            
 
                                             {userauth == true?
                                                   <Link href="/checkout">
-                                                  <a
+                                                  <div
                                                       className={`${minicartGroupBtn} bg-[#222222] text-white`}
                                                   >
                                                       Checkout
-                                                  </a>
+                                                  </div>
                                               </Link>
                                               :
                                               <Link href="/auth">
-                                              <a
+                                              <div
                                                   className={`${minicartGroupBtn} bg-[#222222] text-white`}
                                               >
                                                   Checkout
-                                              </a>
+                                              </div>
                                           </Link>
 
                                             }

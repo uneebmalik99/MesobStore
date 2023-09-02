@@ -31,13 +31,13 @@ function HeaderRight({ headerItems }) {
     return (
         <>
             <div className="flex justify-end">
-                <div className="user-item md:mr-[35px] sm:mr-[25px] mr-[15px]">
+                {/* <div className="user-item md:mr-[35px] sm:mr-[25px] mr-[15px]">
                     <Link href="/auth">
                         <a className="text-2xl hover:text-primary transition-all">
                             <IoPersonOutline />
                         </a>
                     </Link>
-                </div>
+                </div> */}
                 {/* <div className="wishlist-item md:mr-[35px] sm:mr-[25px] mr-[15px]">
                     <Link href="/wishlist">
                         <a className="block text-2xl relative group hover:text-primary transition-all">

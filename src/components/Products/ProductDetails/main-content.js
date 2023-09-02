@@ -28,6 +28,7 @@ function MainContent({ product }) {
     const dispatch = useDispatch();
     const addToCartHandler = () => {
        let tprice = price.replace('$', ''); // This removes the dollar sign
+       let  totalprice =tprice*quantityCount;
 
 console.log("totalPrice: " + tprice*quantityCount);
         dispatch(
@@ -36,7 +37,7 @@ console.log("totalPrice: " + tprice*quantityCount);
                 title,
                 price,
                 quantity: quantityCount,
-                totalPrice: tprice*quantityCount,
+                totalPrice: totalprice,
                 image: product.image,
                 slug: `/products/${product?.slug}`,
             })

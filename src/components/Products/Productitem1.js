@@ -56,6 +56,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         let tprice = price.replace('$', ''); // This removes the dollar sign
 
         console.log("totalPrice: " + tprice*quantityCount);
+        let  totalprice =tprice*quantityCount;
 
         dispatch(
             cartActions.addItemToCart({
@@ -63,7 +64,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                 title,
                 price,
                 quantity: quantityCount,
-                totalPrice: tprice*quantityCount,
+                totalPrice: totalprice,
                 image: `/images/products/${product?.id}/${product?.image}`,
                 slug: `/products/${product?.slug}`,
             })

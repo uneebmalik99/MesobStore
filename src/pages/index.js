@@ -10,7 +10,7 @@ import NewsletterComps from '../components/NewsletterComps';
 import FooterComps from '../components/FooterComps';
 import { useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../graphql/queries.ts';
+import * as queries from '../graphql/queries.js';
 import _ from 'lodash';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
