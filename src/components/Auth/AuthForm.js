@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 // import { Auth } from 'aws-amplify';
 import { Authenticator, Button } from '@aws-amplify/ui-react';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
-import * as queries from '../../../graphql/queries.js';
+import * as queries from '../../graphql/queries';
 import _ from 'lodash';
 import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth';
 

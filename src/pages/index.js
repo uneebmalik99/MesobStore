@@ -10,11 +10,23 @@ import NewsletterComps from '../components/NewsletterComps';
 import FooterComps from '../components/FooterComps';
 import { useEffect, useState } from 'react';
 import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../graphql/queries.js';
+import * as queries from '../graphql/queries';
 import _ from 'lodash';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 
+const getMenuItems = `
+query MyQuery {
+    listMenus {
+      items {
+        icon
+        id
+        name
+        des
+      }
+    }
+  }
+  `;
 function HomePage({
     headerItems,
     heroDefaultItems,
@@ -72,39 +84,11 @@ function HomePage({
         }
     };
 
-    const fetchProducts2 = async () => {
-        try {
-            const response = await API.graphql(
-                graphqlOperation(queries.getMenuItems)
-            );
-            const allMenu = response.data.listMenus.items;
-            console.log('Response Menu1: ', allMenu);
-            setMenuList(
-                allMenu.map((item) => {
-                    console.log(item);
-                    return _.pick(JSON.parse(item.content), [
-                        'id',
-                        'name',
-                        'icon',
-                        'des',
-                    ]);
-                })
-            );
-        } catch (error) {
-            console.error('Error fetching products:', error);
-        }
-    };
-    const makeMenuData = data => {
-        const res = [];
-        while (data.length) {
-          res.push(data.splice(0, 3));
-        }
-        return res;
-      };
+    
     const getMenuList = async () => {
         try {
           const res = await API.graphql(
-            graphqlOperation(queries.getMenuItems)
+            graphqlOperation(getMenuItems)
           ) ;
           console.log("menu  i s "+JSON.stringify(res.data.listMenus.items));
 

@@ -1,4 +1,4 @@
-import PropTypes from 'prop-types';
+import PropTypes, { element } from 'prop-types';
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
@@ -6,6 +6,16 @@ import { IoCheckmarkCircle } from 'react-icons/io5';
 import EmptyCheckout from './EmptyCheckout';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 import {createOrder} from '../../graphql/mutations';
+import { CHECKOUT_API_URL} from '../../api_service';
+import { loadStripe } from '@stripe/stripe-js';
+import {
+  PaymentElement,
+  Elements,
+  useStripe,
+  useElements,
+  CardElement,
+  CartElement,
+} from '@stripe/react-stripe-js';
 
 const singleField = `flex flex-col w-full`;
 const inputField = `border border-[#e8e8e8] focus-visible:outline-0 placeholder:text-[#7b7975] py-[10px] px-[20px] w-full h-[50px]`;
@@ -15,8 +25,85 @@ const secondaryButton =
 
 const isInitial = true;
 let productDetails;
+let stripePromise = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
 
+
+const options = {
+  mode: 'payment',
+  amount: 1099,
+  currency: 'usd',
+  // Fully customizable with appearance API.
+  appearance: {
+    /*...*/
+  },
+};
+
+
+const CheckoutForm = () => {
+    const stripe = useStripe();
+    const elements = useElements();
+  
+    const [errorMessage, setErrorMessage] = useState(null);
+  
+    const handleSubmit = async (event) => {
+      event.preventDefault();
+  
+      if (elements == null) {
+        return;
+      }
+  
+      // Trigger form validation and wallet collection
+      const {error: submitError} = await elements.submit();
+      if (submitError) {
+        // Show error to your customer
+        setErrorMessage(submitError.message);
+        return;
+      }
+  
+      // Create the PaymentIntent and obtain clientSecret from your server endpoint
+      const res = await fetch('/create-intent', {
+        method: 'POST',
+      });
+  
+      const {client_secret: clientSecret} = await res.json();
+  
+      const {error} = await stripe.confirmPayment({
+        //`Elements` instance that was used to create the Payment Element
+        elements,
+        clientSecret,
+        confirmParams: {
+          return_url: 'https://example.com/order/123/complete',
+        },
+      });
+  
+      if (error) {
+        // This point will only be reached if there is an immediate error when
+        // confirming the payment. Show error to your customer (for example, payment
+        // details incomplete)
+        setErrorMessage(error.message);
+      } else {
+        // Your customer will be redirected to your `return_url`. For some payment
+        // methods like iDEAL, your customer will be redirected to an intermediate
+        // site first to authorize the payment, then redirected to the `return_url`.
+      }
+    };
+  
+    return (
+      <form onSubmit={handleSubmit}>
+        <PaymentElement />
+       
+        {/* Show error message to your customers */}
+        {errorMessage && <div>{errorMessage}</div>}
+      </form>
+    );
+  };
+  
 function Checkout({ checkoutItems }) {
+
+
+    const clientSecret = 'sk_test_51KZzWbAhBlpHU9kBq6SoffiI9NZAAaKW8xzhEaEGxKsfCjZRWhCbz1o8ac4oirHjk21aZ5KLp0fhlmuZK9XCohUv00JersS4js';
+
+
     const [returningCustomer, setReturningCustomer] = useState(false);
     const openReturningCustomer = () => {
         setReturningCustomer(!returningCustomer);
@@ -59,8 +146,6 @@ function Checkout({ checkoutItems }) {
           };
 
    
-        const d = [{country:"Eritrea",image:"https://appimagesabrehet.s3.amazonaws.com/orange.png",images:"https://appimagesabrehet.s3.amazonaws.com/orange.png",cost:"$2.34",description:"Serrano/ ጉዕ per kilo we deliver to Asmara, Mendefera, Keren, Massawa, Barentu, Dekemhare, Teseney, Adi Quala, Akurdet, Adikeigh, Senafe, and Segheneyti.",title:"Orangez ኣራንሺ",content:{country:"Eritrea",image:"https://appimagesabrehet.s3.amazonaws.com/orange.png",images:"https://appimagesabrehet.s3.amazonaws.com/orange.png",cost:"$2.34",price:"$3.99",description:"Serrano/ ጉዕ per kilo we deliver to Asmara, Mendefera, Keren, Massawa, Barentu, Dekemhare, Teseney, Adi Quala, Akurdet, Adikeigh, Senafe, and Segheneyti.",title:"Orange/ ኣራንሺ"},createdAt:"2022-05-30T20:14:23.315Z",price:"$3.99",qty:1,id:"Eri7.33",category:"GroceriesEritrea",updatedAt:"2022-05-30T20:14:23.315Z"}]
-            const y= {email:"byguuguy",phone:"ygjctyugvc",address:"Vgcfgjvch",name:"Vvvbby",pincode:"Grudge",state:"ftycfuygvh",city:"Ytugvt",userid:"68356b65-998a-4a29-aa1e-5b6ec4319537"}
         const order = {
           userID: '123',
           phone: Receiver_phone,
@@ -87,6 +172,8 @@ function Checkout({ checkoutItems }) {
           console.log('Build Order Response: ', res);
         //   orderDetails = res;
 
+        getStripeIntent(order.userID)
+
 
         //   senderDetails = JSON.parse(res?.data?.createOrder.senderAddress);
     
@@ -107,51 +194,6 @@ function Checkout({ checkoutItems }) {
     
         }
       };
-    
-      const getStripeIntent = async () => {
-
-
-       
-
-    
-            const total = cartItems.reduce((total, item) => {
-
-                alert(JSON.stringify(item))
-              let price = item?.price?.replace(/[\s,]/g, "")?.slice(1);
-              price = Number(price) * item.qty;
-              let newTotal = total + price;
-              console.log("price: ", price);
-              console.log("newTotal ", newTotal);
-              return newTotal;
-            }, 0);
-        
-        
-            console.log("Valueeeee: ", Math.round(Number(total) * 100))
-        
-            // const region = await AsyncStorage.getItem('SERVER');
-            const payload = {
-              event: {
-                name: Receiver_name,
-                address: Receiver_address,
-                postal_code:  '160019',
-                city: Receiver_city,
-                state: Receiver_state,
-                country: Receiver_country,
-                userid:'68356b65-998a-4a29-aa1e-5b6ec4319537',
-                product: {
-                  amount: Math.round(Number(total) * 100),
-                  des: 'some description',
-                },
-              },
-            };
-        
-            const body = JSON.stringify(payload);
-        
-            console.log('payload is = '+ JSON.stringify(payload))
-        
-            
-            
-        };
  
     const [coupon, setCoupon] = useState(false);
     const openCoupon = () => {
@@ -167,146 +209,63 @@ function Checkout({ checkoutItems }) {
         initialValue
     );
 
+    const getStripeIntent = async (userid) => {
+        // const region = await AsyncStorage.getItem('SERVER');
+        const payload = {
+            region:"global",
+          event: {
+            name: Receiver_name,
+            address: Receiver_address,
+            postal_code:  '160019',
+            city: Receiver_city,
+            state: Receiver_state,
+            country: Receiver_country,
+            userid:userid,
+            product: {
+                amount: Math.round(Number(SubTotal) * 100),
+                des: 'some React js 2',
+            },
+          },
+        };
+        console.log('payload is = '+ JSON.stringify(payload))
+
+        const body = JSON.stringify(payload);
+
+        fetch(CHECKOUT_API_URL, {
+            method: 'POST',
+            headers: {  'Content-Type': 'application/json'
+            },
+            body: body,  
+            })
+            .then(res => res.json())
+            .then(res => {
+                console.log("res  : "+res);
+
+              const data = JSON.parse(res.data);
+
+              console.log("hvhvhvhj"+JSON.stringify(data));
+                    stripe.loadStripe=data.publishableKey
+              // setStripeData(data);
+            //   stripKeyDispatch({
+            //     type: 'UPDATE_STRIPE_KEY',
+            //     payload: data?.publishableKey,
+            //   });
+            //   initializePaymentSheet(data);
+            })
+            .catch(error => {
+               console.log("err : "+error);
+              })
+        
+    };
+
+
     return (
         <div className="checkout border-b border-[#ededed] lg:py-[90px] md:py-[80px] py-[50px]">
             {cartItems.length <= 0 && <EmptyCheckout />}
             {cartItems.length <= 0 ||
                 (initialValue === 0 && (
                     <>
-                        {/* <div className="customer-info">
-                            <div className="container">
-                                <div className="grid grid-cols-12 lg:gap-x-[25px] max-md:gap-y-[30px]">
-                                    <div className="xl:col-span-7 lg:col-span-6 col-span-12">
-                                        <div className="customer-zone flex items-center bg-[#f4f5f7] p-[14px_30px_14px]">
-                                            <div className="icon text-green-500 mr-[10px]">
-                                                <IoCheckmarkCircle />
-                                            </div>
-                                            <h2 className="title text-[16px] leading-[28px] max-sm:whitespace-nowrap max-sm:text-ellipsis overflow-hidden">
-                                                {
-                                                    checkoutItems[0]
-                                                        ?.customerzoneTitle
-                                                }
-                                                <button
-                                                    type="button"
-                                                    className="ml-[5px] transition-all hover:text-primary"
-                                                    onClick={
-                                                        openReturningCustomer
-                                                    }
-                                                >
-                                                    {
-                                                        checkoutItems[0]
-                                                            ?.customerzoneBtnText
-                                                    }
-                                                </button>
-                                            </h2>
-                                        </div>
-                                        {returningCustomer && (
-                                            <div className="returning-form-wrap border border-[#dddddd] p-[30px] mt-[30px]">
-                                                <p className="text-[#777777] text-[16px] font-normal mb-[20px]">
-                                                    {
-                                                        checkoutItems[0]
-                                                            ?.customerzoneDesc
-                                                    }
-                                                </p>
-                                                <form className="returning-form">
-                                                    <div
-                                                        className={`${singleField}  mb-[20px]`}
-                                                    >
-                                                        <label
-                                                            htmlFor="returning-email"
-                                                            className="mb-[5px]"
-                                                        >
-                                                            Username or email *
-                                                        </label>
-                                                        <input
-                                                            className={`${inputField}`}
-                                                            type="email"
-                                                            id="returning-email"
-                                                        />
-                                                    </div>
-                                                    <div
-                                                        className={`${singleField}  mb-[20px]`}
-                                                    >
-                                                        <label
-                                                            htmlFor="returning-password"
-                                                            className="mb-[5px]"
-                                                        >
-                                                            Password *
-                                                        </label>
-                                                        <input
-                                                            className={`${inputField}`}
-                                                            type="password"
-                                                            id="returning-password"
-                                                            placeholder="Password"
-                                                        />
-                                                    </div>
-                                                    <button
-                                                        type="submit"
-                                                        className={`${secondaryButton}`}
-                                                    >
-                                                        Login
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className="xl:col-span-5 lg:col-span-6 col-span-12">
-                                        <div className="coupon-zone flex items-center bg-[#f4f5f7] p-[14px_30px_14px]">
-                                            <div className="icon text-green-500 mr-[10px]">
-                                                <IoCheckmarkCircle />
-                                            </div>
-                                            <h2 className="title text-[16px] leading-[28px] max-sm:whitespace-nowrap max-sm:text-ellipsis overflow-hidden">
-                                                {
-                                                    checkoutItems[0]
-                                                        ?.couponZoneTitle
-                                                }
-
-                                                <button
-                                                    type="button"
-                                                    className="ml-[5px] transition-all hover:text-primary"
-                                                    onClick={openCoupon}
-                                                >
-                                                    {
-                                                        checkoutItems[0]
-                                                            ?.couponZoneBtnText
-                                                    }
-                                                </button>
-                                            </h2>
-                                        </div>
-                                        {coupon && (
-                                            <div className="returning-form-wrap border border-[#dddddd] p-[30px] mt-[30px]">
-                                                <p className="text-[#777777] text-[16px] font-normal mb-[20px]">
-                                                    {
-                                                        checkoutItems[0]
-                                                            ?.returningFormDesc
-                                                    }
-                                                </p>
-                                                <form className="returning-form">
-                                                    <div
-                                                        className={`${singleField}  mb-[20px]`}
-                                                    >
-                                                        <input
-                                                            className={`${inputField}`}
-                                                            type="text"
-                                                            placeholder="Coupon code"
-                                                        />
-                                                    </div>
-                                                    <button
-                                                        type="submit"
-                                                        className={`${secondaryButton} transition-all hover:bg-primary hover:text-white`}
-                                                    >
-                                                        {
-                                                            checkoutItems[0]
-                                                                ?.returningBtnText
-                                                        }
-                                                    </button>
-                                                </form>
-                                            </div>
-                                        )}
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
+                       
                         <div className="checkout-wrap pt-[25px]">
                             <div className="container">
                                 <div className="grid grid-cols-12 lg:gap-x-[25px] max-md:gap-y-[50px]">
@@ -657,6 +616,20 @@ function Checkout({ checkoutItems }) {
                                                     </tbody>
                                                 </table>
                                                 <div className="check pt-[30px] border-t border-[#cdcdcd]">
+
+
+                                                <Elements stripe={stripePromise} options={options}>
+                                                    <CheckoutForm />
+                                                </Elements>
+
+                                                <form onSubmit={()=> {handlesubmit}}>
+                                               {/* <Elements stripe={stripePromise} options={{clientSecret}}>
+
+                                               </Elements> */}
+                                             <button style={{backgroundColor:'#0047AB',width:'100%', marginTop:15, borderRadius:7, color:'white', padding:10}} >
+                                                    Place Order
+                                                    </button>
+                                                </form>
                                                     {/* <div className="payment-info pb-[20px]">
                                                         <h2 className="text-[18px] mb-[10px]">
                                                             {
