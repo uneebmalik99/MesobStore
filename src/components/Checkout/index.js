@@ -13,7 +13,6 @@ import {
   Elements,
   useStripe,
   useElements,
-  CardElement,
   CartElement,
 } from '@stripe/react-stripe-js';
 
@@ -100,7 +99,9 @@ const CheckoutForm = () => {
   
 function Checkout({ checkoutItems }) {
 
-
+  // stripe items
+  const stripe = useStripe();
+  const elements = useElements();
     const clientSecret = 'sk_test_51KZzWbAhBlpHU9kBq6SoffiI9NZAAaKW8xzhEaEGxKsfCjZRWhCbz1o8ac4oirHjk21aZ5KLp0fhlmuZK9XCohUv00JersS4js';
 
 
