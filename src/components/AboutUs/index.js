@@ -2,23 +2,62 @@ import PropTypes from 'prop-types';
 import * as IoIcon from 'react-icons/io5';
 import ProgressBar from '../ProgressBar';
 import VideoModal from '../VideoModal';
+import { useState } from 'react';
 
 function AboutUs({ aboutItems }) {
+    const [eng, seteng]=useState(true)
     return (
         <div className="about border-b border-[#ededed] lg:py-[90px] md:py-[80px] py-[50px]">
             <div className="video-banner">
                 <div className="container">
-                    <div className="blog-img relative flex overflow-hidden after:transition-all after:duration-500 after:bg-[rgba(0,0,0,.4)] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:opacity-0 hover:after:opacity-100 group">
-                        <img
-                            className="object-cover object-center w-full transition-all duration-500 group-hover:scale-[1.05]"
-                            src={aboutItems[0]?.videoBanner}
-                            alt={aboutItems[0]?.videoBannerAlt}
-                            width={1170}
-                            height={680}
-                        />
-                        <VideoModal />
+
+                    <div style={{display:'flex',flexDirection:'row',width:'100%',borderTopWidth:0.5,borderColor:'grey',borderRadius:20, justifyContent:"space-around", alignItems:'center', alignSelf:'center'}}>
+
+                    <button  onClick={()=> {seteng(true)}}>English</button>
+                    <div  >|</div>
+                    <button onClick={()=> {seteng(false)}}>Eitrea</button>
+
                     </div>
+                
+                {eng == true ?
+
+             
+                    <div  className="blog-img relative flex overflow-hidden after:transition-all after:duration-500 after:bg-[rgba(0,0,0,.4)] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:opacity-0 hover:after:opacity-100 group">
+                    <iframe
+                                    className="rounded-[20px] z-10"
+                                    loading="lazy"
+                                    width="100%"
+                                    height="500"
+                                    src="/video/Mesob-english.mp4"
+                                    title="YouTube video player"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                        {/* <VideoModal /> */}
+                    </div>
+
+                    :
+
+                    <div className="blog-img relative flex overflow-hidden after:transition-all after:duration-500 after:bg-[rgba(0,0,0,.4)] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:opacity-0 hover:after:opacity-100 group">
+                    <iframe
+                                    className="rounded-[20px] z-10"
+                                    loading="lazy"
+                                    width="100%"
+                                    height="500"
+                                    src="/video/Mesob-Eitrea.mp4"
+                                    title="YouTube video player"
+                                    frameBorder="0"
+                                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                    allowFullScreen
+                                />
+                        {/* <VideoModal /> */}
+                    </div>
+
+                }
+
                 </div>
+
             </div>
             <div className="support-info">
                 <div className="container">

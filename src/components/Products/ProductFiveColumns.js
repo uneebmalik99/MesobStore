@@ -5,7 +5,7 @@ import ProductItem from './ProductItem';
 import ProductToolBars from './ProductToolBars';
 import ProductActiveFilter from './ProductActiveFilter';
 import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries.ts';
+import * as queries from '../../graphql/queries';
 
 function ProductFiveColumns({
     data,

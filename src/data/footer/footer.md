@@ -1,18 +1,17 @@
 ---
 addressTitle: 'Address'
-address: 'Mesobstore, Chicago, USA 2022'
-contactNumber: 'tel:846677028028'
-contactNumberText: '+846677028028'
+address: 'We are located at Columbus Ohio 43213'
+contactNumber: 'tel:(614) 580-7521'
+contactNumberText: ' (614) 580-7521'
 socialTitle: 'Follow Us On Social'
 socialList:
     [
         {
             id: 01,
-            socialIcon: 'FaFacebookF',
-            path: 'https://www.facebook.com/',
+            socialIcon: 'FaFacebookF', path: 'https://www.facebook.com/mesobinternational',
         },
-        { id: 02, socialIcon: 'FaTwitter', path: 'https://twitter.com/' },
-        { id: 03, socialIcon: 'FaTumblr', path: 'https://www.tumblr.com/' },
+        { id: 02, socialIcon: 'FaTwitter', path: 'https://www.instagram.com/mesob_international/' },
+        { id: 03, socialIcon: 'FaTumblr', path: 'https://www.tiktok.com/@mesob_store?lang=en' },
     ]
 infoTitle: 'Help & Information'
 infoList:
@@ -43,7 +42,6 @@ menuList:
     [
         { id: 01, title: 'Term & Condition', path: '/about' },
         { id: 02, title: 'Policy', path: '/about' },
-        { id: 03, title: 'Map', path: '/contact' },
     ]
 footerLogo: '/images/logo/mesoblogo.jpeg'
 footerLogoAlt: 'Footer Logo'

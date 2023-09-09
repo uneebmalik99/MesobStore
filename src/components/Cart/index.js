@@ -3,17 +3,60 @@ import { IoCloseOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
 import CartItem from './CartItem';
+import { useEffect, useState } from 'react';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
 
 const minicartGroupBtn = `flex items-center justify-center border border-[#222222]  w-full h-[50px]`;
 function Cart({ minicart, showMiniCart }) {
+    const [userauth ,setuserauth ] = useState(false)
     const cartItems = useSelector((state) => state.cart.items);
 
-    const initialValue = 0;
+    let initialValue = 0;
+    console.log("vdvds"+JSON.stringify(cartItems));
+    console.log('jbfjd'+cartItems.length)
+    // const totalfunc = () => {
+    //     for(let i = 0; i<cartItems.length ; i++ ){
+    //         let pt  = cartItems; // Remove the dollar sign
+    //         console.log("kdfnnf"+i);
+    //         initialValue = initialValue+cartItems[i].totalPrice
+
+
+    //     }
+    //     setSubTotal(initialValue)
+    //     // alert(initialValue)
+    // }
     const SubTotal = cartItems.reduce(
         (accumulator, current) =>
-            accumulator + current.price * current.quantity,
+            accumulator +  current.price * current.quantity,
         initialValue
     );
+
+    
+
+    async function currentSession() {
+
+    try {
+        const data = await Auth.currentSession();
+        console.log("dddd "+data);
+        if(data){
+            setuserauth(true)
+            console.log("data user  "+JSON.stringify(data));
+        }
+        
+    } catch(err) {
+        setuserauth(false)
+
+        console.log("data "+err);
+    }
+    };
+
+    useEffect(() => {
+        currentSession()
+        
+    //  totalfunc()
+    }, []);
+
+
 
     return (
         <div
@@ -58,7 +101,7 @@ function Cart({ minicart, showMiniCart }) {
                                 <>
                                     <div className="minicart-subtotal flex justify-between text-[24px] font-medium pt-[40px]">
                                         <span>Subtotal:</span>
-                                        <span>{SubTotal}</span>
+                                        <span>${SubTotal}</span>
                                     </div>
                                     <ul className="minicart-group-btn pt-[40px]">
                                         <li className="mb-[15px]">
@@ -71,13 +114,27 @@ function Cart({ minicart, showMiniCart }) {
                                             </Link>
                                         </li>
                                         <li>
-                                            <Link href="/checkout">
-                                                <a
-                                                    className={`${minicartGroupBtn} bg-[#222222] text-white`}
-                                                >
-                                                    Checkout
-                                                </a>
-                                            </Link>
+                                            
+
+                                            {userauth == true?
+                                                  <Link href="/checkout">
+                                                  <div
+                                                      className={`${minicartGroupBtn} bg-[#222222] text-white`}
+                                                  >
+                                                      Checkout
+                                                  </div>
+                                              </Link>
+                                              :
+                                              <Link href="/auth">
+                                              <div
+                                                  className={`${minicartGroupBtn} bg-[#222222] text-white`}
+                                              >
+                                                  Checkout
+                                              </div>
+                                          </Link>
+
+                                            }
+                                          
                                         </li>
                                     </ul>
                                 </>

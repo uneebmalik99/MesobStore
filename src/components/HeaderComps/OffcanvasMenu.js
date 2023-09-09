@@ -5,11 +5,13 @@ import { OffcanvasData } from './OffcanvasMenuData';
 
 import { Auth } from '@aws-amplify/auth';
 import { useEffect } from 'react';
+import Paymentprops from '../Payment/Paymentprops';
 
 function OffcanvasMenu() {
 
     const [userauth, setuserauth] = useState('0')
     const [submenuOpenId, setSubmenuOpenId] = useState({});
+    const [Model, setModel] = useState(false);
 
     const showSubmenuClickHandler = (id) =>
         setSubmenuOpenId((prevData) => ({
@@ -17,6 +19,23 @@ function OffcanvasMenu() {
         }));
 
     const [levelTwoOpenId, setLevelTwoOpenId] = useState({});
+
+
+
+    // async function deleteUser() {
+    //     try {
+    //       const user = await Auth.currentAuthenticatedUser();
+    //       const result = await user.deleteUser();
+    //       navigation.navigate('Sigin');
+    //       window.location.href = '/'
+    //       onLogOutPress();
+    //       console.log(result);
+    //       Alert.alert('Account deleted Successfully!');
+    //     } catch (error) {
+    //       console.log('Error deleting user', error);
+    //     }
+    //   }
+
 
     const showLevelTwoClickHandler = (id) =>
         setLevelTwoOpenId((prevData) => ({
@@ -52,18 +71,26 @@ function OffcanvasMenu() {
         useEffect(() => {
             currentSession()
         }, []);
+
+
+        function dialogbox() {
+
+            setModel(true)  ; 
+            
+        }
+    
         if(userauth == "1"){
             return (
                 <ul className="offcanvas-menu-items pt-[40px]">
-                 <li>
-                 <Link href=''>
+                 <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
+                 <Link href='/'>
                                             <a className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 Home
                                             </a>
                                         </Link>
                     </li>
 
-                    <li>
+                    <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
                  <Link href=''>
                                             <a className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 Purchases
@@ -71,15 +98,15 @@ function OffcanvasMenu() {
                                         </Link>
                     </li>
 
-                    <li>
-                 <Link href=''>
+                    <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
+                 <Link href='/orders'>
                                             <a className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 My Orders
                                             </a>
                                         </Link>
                     </li>
 
-                    <li>
+                    <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}> 
                  <Link href=''>
                                             <a className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 Setting Account
@@ -87,7 +114,7 @@ function OffcanvasMenu() {
                                         </Link>
                     </li>
 
-                    <li>
+                    <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#ECF0F1'}}>
                  <Link href='/contact'>
                                             <a className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 Contact us
@@ -95,38 +122,51 @@ function OffcanvasMenu() {
                                         </Link>
                     </li>
 
-                    <li>
+                    <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
                  <Link href='/about'>
                                             <a className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 About Mesob Store
                                             </a>
                                         </Link>
                     </li>
-                    <li>
-                    <button > Delete Account </button>
-{/* 
-                                            <a className="flex justify-between items-center transition-all hover:text-[#666666]">
-                                                Delete Account 
-                                            </a> */}
+                    <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
+                  
+
+                             <a  onClick={()=>{}}  className="flex justify-between items-center transition-all hover:text-[#666666]">
+                                            Delete Account
+                                            </a>
                                       
                     </li>
 
 
                    
-                    <li>
+                    <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
                  <Link href=''>
-                                            <a className="flex justify-between items-center transition-all hover:text-[#666666]">
+
+
+                                            <a 
+                                            
+                                            onClick={dialogbox}
+
+                                            className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 Change Payment Zone 
                                             </a>
                                         </Link>
+
+                                        {Model ? (
+
+                                    
+
+                            <Paymentprops   setModel ={setModel}/>
+                                ) : null}
                                         
                     </li>
-                    <li>
-                    <button  onClick={()=> {signout()}}> Signout </button>
-{/* 
-                                            <a className="flex justify-between items-center transition-all hover:text-[#666666]">
-                                                Delete Account 
-                                            </a> */}
+                    <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
+    
+
+                                            <a   onClick={()=> {signout()}}  className="flex justify-between items-center transition-all hover:text-[#666666]">
+                                            Signout
+                                            </a>
                                       
                     </li>
 

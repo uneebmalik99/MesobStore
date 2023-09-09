@@ -52,20 +52,20 @@ function WishlistPageComps({ wishlistPageItems }) {
                                         <tbody key={item.id}>
                                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                 <td className="py-[30px] pr-[25px] flex items-center font-medium text-gray-900 dark:text-white whitespace-nowrap">
-                                                    <Link href={item.slug}>
+                                                    {/* <Link href={item.slug}> */}
                                                         <a className="product-img w-[100px]">
                                                             <img
                                                                 src={item.image}
                                                                 alt={item.name}
                                                             />
                                                         </a>
-                                                    </Link>
+                                                    {/* </Link> */}
                                                     <h2 className="product-name">
-                                                        <Link href={item.slug}>
+                                                        {/* <Link href={item.slug}> */}
                                                             <a className="text-[14px] transition-all hover:text-primary">
                                                                 {item.name}
                                                             </a>
-                                                        </Link>
+                                                        {/* </Link> */}
                                                     </h2>
                                                 </td>
                                                 <td className="py-[30px]">

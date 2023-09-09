@@ -146,9 +146,9 @@ function ContactUs({ contactItems }) {
                     </div>
                 </div>
             </div>
-            <div className="google-map">
+            {/* <div className="google-map">
                 <GoogleMap />
-            </div>
+            </div> */}
         </>
     );
 }

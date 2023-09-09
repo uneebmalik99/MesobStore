@@ -17,6 +17,8 @@ import awsExports from '../aws-exports';
 import { Amplify } from 'aws-amplify';
 import { Auth } from '@aws-amplify/auth';
 import { useEffect } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const persistor = persistStore(store);
 Amplify.configure(awsExports);
@@ -83,6 +85,8 @@ async function currentSession() {
                 </PersistGate>
             </Provider>
             <ScrollToTop />
+
+            <ToastContainer />
 
             {/* <Button
                 onClick={() => {

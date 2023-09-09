@@ -15,7 +15,8 @@ import { cartActions } from '../../store/cart/cart-slice';
 import { filterActions } from '../../store/product-filter/filter-slice';
 import { wishlistActions } from '../../store/wishlist/wishlist-slice';
 import { Alert } from '@aws-amplify/ui-react';
-
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Tailwind Related Stuff
 const addAction =
     'flex justify-center absolute w-full top-1/2 left-auto transform -translate-y-1/2 z-[1]';
@@ -57,17 +58,25 @@ function ProductItem({ product, productFilter, productFilterPath }) {
 
     const dispatch = useDispatch();
     const addToCartHandler = () => {
+        let tprice = price.replace('$', ''); // This removes the dollar sign
+
+        console.log("totalPrice: " + tprice*quantityCount);
+        console.log("totalPricetotalPrice"+totalPrice);
+       let  totalprice =tprice*quantityCount;
+
         dispatch(
             cartActions.addItemToCart({
                 id,
                 title,
                 price,
                 quantity: quantityCount,
-                totalPrice,
+                totalPrice:totalprice,
                 image: product.image,
-                slug: `/products/${product?.slug}`,
+            
             })
         );
+        toast.success('Added to Cart', {autoClose:2000})
+
     };
 
     const filterChangeHandler = (isAdd, data) => {
@@ -94,6 +103,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
     return (
         <>
             <div className="product-item">
+
+
                 <div className="product-img relative group after:bg-[rgba(0,0,0,.1)] after:absolute after:top-0 after:left-0 after:h-full after:w-full after:opacity-0 after:transition-all after:pointer-events-none hover:after:opacity-100">
                 {/* <Link href={`/products/slug?data=${title}`}> */}
 
@@ -423,16 +434,11 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                     <IoHeartOutline />
                                 </button> */}
                             </div>
-                            <div className="sku-wrap font-medium">
-                                <span>SKU:</span>
-                                <span className="text-[#666666] ml-[5px]">
-                                    {product?.sku}
-                                </span>
-                            </div>
+                         
                             <div className="sku-wrap font-medium">
                                 <span>Country:</span>
                                 <span className="text-[#666666] ml-[5px]">
-                                    {product?.sku}
+                                    {product?.Country}
                                 </span>
                             </div>
 
