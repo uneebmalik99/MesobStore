@@ -3,7 +3,6 @@ import React, { useEffect, useState ,forwardRef, useImperativeHandle, useRef } f
 
 import {PaymentElement, useStripe, useElements} from "@stripe/react-stripe-js";
 import { CHECKOUT_API_URL} from '../../api_service';
-import Loader from '../../utils/loader';
 import { cartActions } from "../../store/cart/cart-slice";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -19,8 +18,9 @@ const [message, setMessage] = useState (null);
 const [isLoading, setIsLoading] = useState(true);
 const [client_secret, setclient_secret] =useState('')
 
-function childFunction(data) {
+  async function childFunction(data) {
     console.log("Child function called with data:", data);
+    await clearAllItemHandler();
     // dispatch(cartActions.clearAllFromCart());
     handleSubmit(data)
     // Your code here
@@ -126,7 +126,7 @@ const handleSubmit = async (data) => {
 return (
     <form onSubmit={childFunction}>
     <PaymentElement />
-    {/* Show error message to your customers */}
+  <div>{message}</div>
     {errorMessage && <div>{errorMessage}</div>}
   </form>
 )

@@ -30,6 +30,8 @@ function VideoModal() {
                             <div className="flex relative">
                                 {videoLoading && (
                                     <div className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-[40px] text-primary animate-spin">
+                                       
+                    
                                         <BiLoaderAlt />
                                     </div>
                                 )}
@@ -39,7 +41,7 @@ function VideoModal() {
                                     loading="lazy"
                                     width="800"
                                     height="500"
-                                    src="https://www.youtube.com/embed/fkoEj95puX0"
+                                    src="/video/Mesob-english.mp4"
                                     title="YouTube video player"
                                     frameBorder="0"
                                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

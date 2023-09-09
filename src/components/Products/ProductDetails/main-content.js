@@ -4,7 +4,8 @@ import { IoAddSharp, IoHeartOutline, IoRemoveSharp } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../../store/cart/cart-slice';
 import { wishlistActions } from '../../../store/wishlist/wishlist-slice';
-
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 // Tailwind Related Stuff
 const soldOut = `bg-black text-white block leading-[28px] absolute top-[15px] right-[15px] px-[15px] z-[1]`;
 const bestSeller = `bg-[#f14705] text-[14px] text-white block rounded-full absolute top-[15px] left-[15px] w-[45px] h-[45px] leading-[45px] text-center z-[1]`;
@@ -25,6 +26,11 @@ function MainContent({ product }) {
     } = product;
     const [quantityCount, setQuantityCount] = useState(1);
 
+
+
+
+    
+
     const dispatch = useDispatch();
     const addToCartHandler = () => {
        let tprice = price.replace('$', ''); // This removes the dollar sign
@@ -42,6 +48,11 @@ console.log("totalPrice: " + tprice*quantityCount);
                 slug: `/products/${product?.slug}`,
             })
         );
+        toast.success('Added to Cart', {autoClose:2000})
+
+     
+
+
     };
 
     const addToWishlistHandler = () => {
@@ -59,6 +70,8 @@ console.log("totalPrice: " + tprice*quantityCount);
 
     return (
         <div className="product-detail border-b border-[#ededed] md:py-[90px] py-[50px]">
+              
+
             <div className="container">
                 <div className="grid grid-cols-12 lg:gap-x-[25px] max-md:gap-y-[25px]">
                     <div className="lg:col-span-6 col-span-12">

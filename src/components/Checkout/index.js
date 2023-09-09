@@ -6,7 +6,7 @@ import { IoCheckmarkCircle } from 'react-icons/io5';
 import EmptyCheckout from './EmptyCheckout';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 import {createOrder} from '../../graphql/mutations';
-import { CHECKOUT_API_URL} from '../../api_service';
+import { CHECKOUT_API_URL} from'../../api_service';
 import { loadStripe } from '@stripe/stripe-js';
 
 import {
@@ -92,6 +92,7 @@ const childRef = useRef();
 
 
     const onCheckout = () => {
+        
         buildOrderObject();
         // getStripeIntent();
       }
@@ -218,6 +219,9 @@ const childRef = useRef();
     };
 
     return (
+<>
+
+
         <div className="checkout border-b border-[#ededed] lg:py-[90px] md:py-[80px] py-[50px]">
             {cartItems.length <= 0 && <EmptyCheckout />}
             {cartItems.length <= 0 ||
@@ -452,7 +456,47 @@ const childRef = useRef();
 
 
 
+                                                
                                                 <div className="group-field flex mb-[20px]">
+                                                    <div
+                                                        className={`${singleField} mr-[25px]`}
+                                                    >
+                                                        <label
+                                                            htmlFor="billing-firstname"
+                                                            className="mb-[5px]"
+                                                        >
+                                                            State
+                                                        </label>
+                                                        <input
+                                                        className={`${inputField}`}
+                                                        type="text"
+                                                        id="billing-companyname"
+                                                        value={sender_state}
+                                                        onChange={(event)=>{ setsender_state(event.target.value)}}
+                                                        />
+                                                    </div>
+                                                    <div
+                                                        className={`${singleField}`}
+                                                    >
+                                                        <label
+                                                            htmlFor="billing-lastname"
+                                                            className="mb-[5px]"
+                                                        >
+                                                           Zip code
+                                                        </label>
+                                                        <input
+                                                            className={`${inputField}`}
+                                                            type="text"
+                                                            id="billing-lastname"
+                                                            value={sender_zip}
+                                                            onChange={(event)=>{setsender_zip(event.target.value)}}
+                                                            />
+                                                    </div>
+                                                </div>
+
+
+
+                                                {/* <div className="group-field flex mb-[20px]">
                                                 <div
                                                     className={`${singleField} mb-[20px]`}
                                                 >
@@ -487,7 +531,7 @@ const childRef = useRef();
                                                             onChange={(event)=>{setsender_zip(event.target.value)}}
                                                             />
                                                     </div>
-                                                </div>
+                                                </div> */}
 
                                                
 
@@ -577,19 +621,19 @@ const childRef = useRef();
 
                                                 <Elements stripe={stripePromise} options={options}>
 
-
-                                             
+                                                                                          
                                                         <CheckoutForm 
 
                                                         ref={childRef} 
-                                                        // client_secret={client_secret}
-                                                        // childFunctionCalled={childFunctionCalled} 
+                                                      
                                                         />
 
                                              
                                                     </Elements>
 
                                                 <form onSubmit={()=> {handlesubmit}}>
+
+
                                               
                                              {/* <button style={{backgroundColor:'#0047AB',width:'100%', marginTop:15, borderRadius:7, color:'white', padding:10}} >
                                                     Place Order
@@ -636,9 +680,10 @@ const childRef = useRef();
                                                     </a>
                                                 </Link>
                                             </p>
-                                            <div className="payment-btn-wrap pt-[35px]">
+                                            <div className="payment-btn-wrap pt-[35px]">                                               
+                                {/* <button onClick={()=> {onCheckout()}}>Place order TEst</button> */}
                                                 <button 
-                                                    onClick={()=> { onCheckout() }}
+                                                    onClick={()=> { onCheckout()}}
                                                     //  onClick={() => {callChildFunction('vnslvss')}}
                                                     className="bg-[#222222] text-white w-full px-[42px] h-[46px] leading-[44px]"
                                                     type="submit"
@@ -648,20 +693,9 @@ const childRef = useRef();
                                                             ?.orderBtnText
                                                     }
                                                 </button>
-                                              
-                                                <button   onClick={onCheckout}>Test Me</button>
 
-                                                <button 
-                                                    onClick={()=> { callChildFunction}}
-                                                    //  onClick={() => {callChildFunction('vnslvss')}}
-                                                    className="bg-[#222222] text-white w-full px-[42px] h-[46px] leading-[44px]"
-                                                    type="submit"
-                                                >
-                                                    {
-                                                        checkoutItems[0]
-                                                            ?.orderBtnText
-                                                    }
-                                                </button>
+
+
 
                                             </div>
                                         </div>
@@ -672,6 +706,7 @@ const childRef = useRef();
                     </>
                 ))}
         </div>
+        </>
     );
 }
 
