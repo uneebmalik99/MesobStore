@@ -5,11 +5,13 @@ import { OffcanvasData } from './OffcanvasMenuData';
 
 import { Auth } from '@aws-amplify/auth';
 import { useEffect } from 'react';
+import Paymentprops from '../Payment/Paymentprops';
 
 function OffcanvasMenu() {
 
     const [userauth, setuserauth] = useState('0')
     const [submenuOpenId, setSubmenuOpenId] = useState({});
+    const [Model, setModel] = useState(false);
 
     const showSubmenuClickHandler = (id) =>
         setSubmenuOpenId((prevData) => ({
@@ -52,6 +54,14 @@ function OffcanvasMenu() {
         useEffect(() => {
             currentSession()
         }, []);
+
+
+        function dialogbox() {
+
+            setModel(true)  ; 
+            
+        }
+    
         if(userauth == "1"){
             return (
                 <ul className="offcanvas-menu-items pt-[40px]">
@@ -115,10 +125,23 @@ function OffcanvasMenu() {
                    
                     <li>
                  <Link href=''>
-                                            <a className="flex justify-between items-center transition-all hover:text-[#666666]">
+
+
+                                            <a 
+                                            
+                                            onClick={dialogbox}
+
+                                            className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 Change Payment Zone 
                                             </a>
                                         </Link>
+
+                                        {Model ? (
+
+                                    
+
+                            <Paymentprops   setModel ={setModel}/>
+                                ) : null}
                                         
                     </li>
                     <li>

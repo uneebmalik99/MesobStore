@@ -280,7 +280,7 @@ console.log(JSON.stringify(heroDefaultItems))
                                 }}
                                     
                             >
-                                <div className="container" >
+                                <div className="container"  >
                                     <div className="hero-content" style={{position:"absolute", marginTop:'15%'}}>
                                         <motion.span
                                             className="text-primary font-medium block mb-[5px]"
@@ -352,40 +352,7 @@ console.log(JSON.stringify(heroDefaultItems))
                                                 },
                                             }}
                                         />
-                                        <motion.p
-                                            dangerouslySetInnerHTML={{
-                                                __html: "njkfnjknfkv",
-                                            }}
-                                            initial="hidden"
-                                            animate={
-                                                idx === activeIdx
-                                                    ? 'visible'
-                                                    : 'exit'
-                                            }
-                                            exit="exit"
-                                            variants={{
-                                                hidden: {
-                                                    y: '100%',
-                                                    opacity: 0,
-                                                },
-                                                visible: {
-                                                    y: '0',
-                                                    opacity: 1,
-                                                    transition: {
-                                                        duration: 1,
-                                                        delay: 0.9,
-                                                    },
-                                                },
-                                                exit: {
-                                                    y: '100%',
-                                                    opacity: 0,
-                                                    transition: {
-                                                        duration: 1,
-                                                        delay: 0.9,
-                                                    },
-                                                },
-                                            }}
-                                        />
+                                        
                                         <motion.div
                                             className="mt-[30px]"
                                             initial="hidden"

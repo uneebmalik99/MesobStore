@@ -1,5 +1,5 @@
 import PropTypes, { element } from 'prop-types';
-import { useEffect, useState } from 'react';
+import { useEffect, useState,useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import Link from 'next/link';
 import { IoCheckmarkCircle } from 'react-icons/io5';
@@ -8,6 +8,7 @@ import { API, graphqlOperation, Auth } from 'aws-amplify';
 import {createOrder} from '../../graphql/mutations';
 import { CHECKOUT_API_URL} from '../../api_service';
 import { loadStripe } from '@stripe/stripe-js';
+
 import {
   PaymentElement,
   Elements,
@@ -15,6 +16,7 @@ import {
   useElements,
   CartElement,
 } from '@stripe/react-stripe-js';
+import CheckoutForm from '../Payment/checkoutpayment';
 
 const singleField = `flex flex-col w-full`;
 const inputField = `border border-[#e8e8e8] focus-visible:outline-0 placeholder:text-[#7b7975] py-[10px] px-[20px] w-full h-[50px]`;
@@ -24,87 +26,49 @@ const secondaryButton =
 
 const isInitial = true;
 let productDetails;
-let stripePromise = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+  
+function Checkout({ checkoutItems }) {
+
+const stripePromise = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+const [childFunctionCalled, setChildFunctionCalled] = useState(false);
 
 
 const options = {
   mode: 'payment',
   amount: 1099,
   currency: 'usd',
-  // Fully customizable with appearance API.
   appearance: {
     /*...*/
   },
 };
+const [message, setMessage] = useState('');
+
+const [dataToChild, setDataToChild] = useState('');
+  
+const childRef = useRef();
+
+  // Function to call the child component's function
+//   function callChildFunction() {
+//     if (childRef.current) {
+//       childRef.current.childFunction();
+//     }
+//   }
 
 
-const CheckoutForm = () => {
-    const stripe = useStripe();
-    const elements = useElements();
-  
-    const [errorMessage, setErrorMessage] = useState(null);
-  
-    const handleSubmit = async (event) => {
-      event.preventDefault();
-  
-      if (elements == null) {
-        return;
-      }
-  
-      // Trigger form validation and wallet collection
-      const {error: submitError} = await elements.submit();
-      if (submitError) {
-        // Show error to your customer
-        setErrorMessage(submitError.message);
-        return;
-      }
-  
-      // Create the PaymentIntent and obtain clientSecret from your server endpoint
-      const res = await fetch('/create-intent', {
-        method: 'POST',
-      });
-  
-      const {client_secret: clientSecret} = await res.json();
-  
-      const {error} = await stripe.confirmPayment({
-        //`Elements` instance that was used to create the Payment Element
-        elements,
-        clientSecret,
-        confirmParams: {
-          return_url: 'https://example.com/order/123/complete',
-        },
-      });
-  
-      if (error) {
-        // This point will only be reached if there is an immediate error when
-        // confirming the payment. Show error to your customer (for example, payment
-        // details incomplete)
-        setErrorMessage(error.message);
-      } else {
-        // Your customer will be redirected to your `return_url`. For some payment
-        // methods like iDEAL, your customer will be redirected to an intermediate
-        // site first to authorize the payment, then redirected to the `return_url`.
-      }
-    };
-  
-    return (
-      <form onSubmit={handleSubmit}>
-        <PaymentElement />
-       
-        {/* Show error message to your customers */}
-        {errorMessage && <div>{errorMessage}</div>}
-      </form>
-    );
-  };
-  
-function Checkout({ checkoutItems }) {
+  function callChildFunctionWithData(data) {
+    if (childRef.current) {
+    //   const dataToSend = "Hello from Parent!";
+      childRef.current.childFunction(data);
+    }
+  }
 
-  // stripe items
-  const stripe = useStripe();
-  const elements = useElements();
-    const clientSecret = 'sk_test_51KZzWbAhBlpHU9kBq6SoffiI9NZAAaKW8xzhEaEGxKsfCjZRWhCbz1o8ac4oirHjk21aZ5KLp0fhlmuZK9XCohUv00JersS4js';
+//   const handleButtonClick = () => {
+//     console.log('Button in parent component clicked.');
+//     childFunction();
+//     // Call any other logic or function you need here
+//   }
 
-
+    const [client_secret ,setclient_secret] = useState('')
     const [returningCustomer, setReturningCustomer] = useState(false);
     const openReturningCustomer = () => {
         setReturningCustomer(!returningCustomer);
@@ -128,7 +92,6 @@ function Checkout({ checkoutItems }) {
 
 
     const onCheckout = () => {
-      
         buildOrderObject();
         // getStripeIntent();
       }
@@ -173,27 +136,18 @@ function Checkout({ checkoutItems }) {
           console.log('Build Order Response: ', res);
         //   orderDetails = res;
 
-        getStripeIntent(order.userID)
+      getStripeIntent(order.userID)
 
 
-        //   senderDetails = JSON.parse(res?.data?.createOrder.senderAddress);
-    
-          // setorderDetails(res);
-          // setSenderDetails(JSON.parse(res?.data?.createOrder.senderAddress));
-    
-        //   dispatch(
-        //     handleOrdersComplete({
-        //       orderData: cartItems,
-        //     }),
-        //   );
-    
-        //   console.log('Order Detials in cartItemData: ', cartItems);
-        //   productDetails = cartItems;
+
         } catch (error) {
 
             alert(error)
     
         }
+
+
+     
       };
  
     const [coupon, setCoupon] = useState(false);
@@ -211,9 +165,11 @@ function Checkout({ checkoutItems }) {
     );
 
     const getStripeIntent = async (userid) => {
-        // const region = await AsyncStorage.getItem('SERVER');
+
+        
+        const region = await localStorage.getItem('regoin');
         const payload = {
-            region:"global",
+            region:region,
           event: {
             name: Receiver_name,
             address: Receiver_address,
@@ -224,7 +180,7 @@ function Checkout({ checkoutItems }) {
             userid:userid,
             product: {
                 amount: Math.round(Number(SubTotal) * 100),
-                des: 'some React js 2',
+                des: 'one',
             },
           },
         };
@@ -241,24 +197,25 @@ function Checkout({ checkoutItems }) {
             .then(res => res.json())
             .then(res => {
                 console.log("res  : "+res);
+                const data = JSON.parse(res.data);
+                console.log("hgfyc"+JSON.stringify(data));  
+            setclient_secret(data.client_secret)
+            // stripe=loadStripe(data?.publishableKey)
+            // alert('hgjys')
 
-              const data = JSON.parse(res.data);
 
-              console.log("hvhvhvhj"+JSON.stringify(data));
-                    stripe.loadStripe=data.publishableKey
-              // setStripeData(data);
-            //   stripKeyDispatch({
-            //     type: 'UPDATE_STRIPE_KEY',
-            //     payload: data?.publishableKey,
-            //   });
-            //   initializePaymentSheet(data);
+            callChildFunctionWithData(data)
+
+     
+            // callChildFunction(data.data.client_secret)
             })
             .catch(error => {
                console.log("err : "+error);
               })
+
+    
         
     };
-
 
     return (
         <div className="checkout border-b border-[#ededed] lg:py-[90px] md:py-[80px] py-[50px]">
@@ -618,18 +575,25 @@ function Checkout({ checkoutItems }) {
                                                 </table>
                                                 <div className="check pt-[30px] border-t border-[#cdcdcd]">
 
-
                                                 <Elements stripe={stripePromise} options={options}>
-                                                    <CheckoutForm />
-                                                </Elements>
+
+
+                                             
+                                                        <CheckoutForm 
+
+                                                        ref={childRef} 
+                                                        // client_secret={client_secret}
+                                                        // childFunctionCalled={childFunctionCalled} 
+                                                        />
+
+                                             
+                                                    </Elements>
 
                                                 <form onSubmit={()=> {handlesubmit}}>
-                                               {/* <Elements stripe={stripePromise} options={{clientSecret}}>
-
-                                               </Elements> */}
-                                             <button style={{backgroundColor:'#0047AB',width:'100%', marginTop:15, borderRadius:7, color:'white', padding:10}} >
+                                              
+                                             {/* <button style={{backgroundColor:'#0047AB',width:'100%', marginTop:15, borderRadius:7, color:'white', padding:10}} >
                                                     Place Order
-                                                    </button>
+                                                    </button> */}
                                                 </form>
                                                     {/* <div className="payment-info pb-[20px]">
                                                         <h2 className="text-[18px] mb-[10px]">
@@ -675,6 +639,7 @@ function Checkout({ checkoutItems }) {
                                             <div className="payment-btn-wrap pt-[35px]">
                                                 <button 
                                                     onClick={()=> { onCheckout() }}
+                                                    //  onClick={() => {callChildFunction('vnslvss')}}
                                                     className="bg-[#222222] text-white w-full px-[42px] h-[46px] leading-[44px]"
                                                     type="submit"
                                                 >
@@ -683,6 +648,21 @@ function Checkout({ checkoutItems }) {
                                                             ?.orderBtnText
                                                     }
                                                 </button>
+                                              
+                                                <button   onClick={onCheckout}>Test Me</button>
+
+                                                <button 
+                                                    onClick={()=> { callChildFunction}}
+                                                    //  onClick={() => {callChildFunction('vnslvss')}}
+                                                    className="bg-[#222222] text-white w-full px-[42px] h-[46px] leading-[44px]"
+                                                    type="submit"
+                                                >
+                                                    {
+                                                        checkoutItems[0]
+                                                            ?.orderBtnText
+                                                    }
+                                                </button>
+
                                             </div>
                                         </div>
                                     </div>
