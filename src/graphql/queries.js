@@ -28,6 +28,7 @@ export const listProducts = /* GraphQL */ `
         category
         content
         country
+        isRecommended
         createdAt
         updatedAt
         __typename
