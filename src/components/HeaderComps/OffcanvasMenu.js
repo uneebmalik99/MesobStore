@@ -6,6 +6,8 @@ import { OffcanvasData } from './OffcanvasMenuData';
 import { Auth } from '@aws-amplify/auth';
 import { useEffect } from 'react';
 import Paymentprops from '../Payment/Paymentprops';
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function OffcanvasMenu() {
 
@@ -21,20 +23,39 @@ function OffcanvasMenu() {
     const [levelTwoOpenId, setLevelTwoOpenId] = useState({});
 
 
+    const delalert = () => {
+     
+            const result = window.confirm('Do you want to delete Your Account?');
+        
+            if (result) {
+              // User clicked "OK"
+              deleteUser()
+                
+            } else {
+              // User clicked "Cancel" or closed the dialog
+          
+            }
+       
+    }
+    const onLogOutPress = () => {
+        Auth.signOut().then(() => {
+        });
+      };
+    async function deleteUser() {
+        try {
+          const user = await Auth.currentAuthenticatedUser();
+          console.log("user "+user);
+          const result = await user.deleteUser();
+          console.log("user  del"+result);
+          await onLogOutPress();
+          console.log(result);
+        
+          toast.success('Account deleted Successfully!', {autoClose:2000})
 
-    // async function deleteUser() {
-    //     try {
-    //       const user = await Auth.currentAuthenticatedUser();
-    //       const result = await user.deleteUser();
-    //       navigation.navigate('Sigin');
-    //       window.location.href = '/'
-    //       onLogOutPress();
-    //       console.log(result);
-    //       Alert.alert('Account deleted Successfully!');
-    //     } catch (error) {
-    //       console.log('Error deleting user', error);
-    //     }
-    //   }
+        } catch (error) {
+          console.log('Error deleting user', error);
+        }
+      }
 
 
     const showLevelTwoClickHandler = (id) =>
@@ -81,6 +102,14 @@ function OffcanvasMenu() {
     
         if(userauth == "1"){
             return (
+<>
+
+           {/* <div >
+
+
+
+            </div> */}
+
                 <ul className="offcanvas-menu-items pt-[40px]">
                  <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
                  <Link href='/'>
@@ -92,7 +121,8 @@ function OffcanvasMenu() {
 
                     <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
                  <Link href=''>
-                                            <a className="flex justify-between items-center transition-all hover:text-[#666666]">
+                                            <a onClick={()=> {          toast.success('Coming Soon', {autoClose:1000})
+}} className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 Purchases
                                             </a>
                                         </Link>
@@ -108,7 +138,7 @@ function OffcanvasMenu() {
 
                     <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}> 
                  <Link href=''>
-                                            <a className="flex justify-between items-center transition-all hover:text-[#666666]">
+                                            <a onClick={()=> {   toast.success('Coming Soon', {autoClose:1000})}} className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 Setting Account
                                             </a>
                                         </Link>
@@ -131,10 +161,12 @@ function OffcanvasMenu() {
                     </li>
                     <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
                   
-
-                             <a  onClick={()=>{}}  className="flex justify-between items-center transition-all hover:text-[#666666]">
+                    <Link href=''>
+                             <a  onClick={()=>{delalert()}}  className="flex justify-between items-center transition-all hover:text-[#666666]">
                                             Delete Account
                                             </a>
+
+                                            </Link>
                                       
                     </li>
 
@@ -162,15 +194,18 @@ function OffcanvasMenu() {
                                         
                     </li>
                     <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
-    
-
+                                <Link  href=''>
+                                
+                             
                                             <a   onClick={()=> {signout()}}  className="flex justify-between items-center transition-all hover:text-[#666666]">
                                             Signout
                                             </a>
-                                      
+                                            </Link>
+
                     </li>
 
                 </ul>
+                </>
             );
         }else{
 

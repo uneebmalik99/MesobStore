@@ -2,11 +2,12 @@ import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
 // import { Auth } from 'aws-amplify';
-import { Authenticator, Button } from '@aws-amplify/ui-react';
+import { withAuthenticator, Authenticator, Button } from '@aws-amplify/ui-react';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import _ from 'lodash';
 import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth';
+
 
 const inputField = `border border-[#cccccc] focus-visible:outline-0 text-[#666666] py-[10px] px-[20px] w-full h-[50px]`;
 const secondaryButton =
@@ -24,6 +25,59 @@ function AuthForm({ authItems }) {
     const [products, setProducts] = useState([]);
 
     console.log('Products in state are: ', products);
+
+
+    // async function urlOpener(url, redirectUrl) {
+    //     try {
+    //       await InAppBrowser.isAvailable();
+    //       console.log('URL2', url, redirectUrl);
+      
+    //       console.log('InAppBrowser.openAuth', InAppBrowser.openAuth);
+      
+    //       const {type, url: newUrl} = await InAppBrowser.openAuth(url, redirectUrl, {
+    //         dismissButtonStyle: 'cancel',
+    //         preferredBarTintColor: '#453AA4',
+    //         preferredControlTintColor: 'white',
+    //         readerMode: false,
+    //         animated: true,
+    //         modalPresentationStyle: 'fullScreen',
+    //         modalTransitionStyle: 'coverVertical',
+    //         modalEnabled: true,
+    //         enableBarCollapsing: false,
+    //         // Android Properties
+    //         showTitle: true,
+    //         toolbarColor: '#6200EE',
+    //         secondaryToolbarColor: 'black',
+    //         navigationBarColor: 'black',
+    //         navigationBarDividerColor: 'white',
+    //         enableUrlBarHiding: true,
+    //         enableDefaultShare: true,
+    //         forceCloseOnRedirection: false,
+    //       });
+    //       console.log('URL3', type, url);
+      
+    //       console.log('type==', type);
+    //       if (type === 'success') {
+    //         Linking.openURL(newUrl);
+    //         // Alert.alert(type)
+    //       }
+    //       if(type == 'cancel'){
+    //         setFbLoading(false);
+    //     setAppleLoading(false);
+    //     setGoogleLoading(false);
+    //       }
+    //     } catch (error) {
+    //       console.log('error==', error);
+    //     }
+    //   }
+      
+    //   Amplify.configure({
+    //     ...awsConfig,
+    //     oauth: {
+    //       ...awsConfig.oauth,
+    //       urlOpener,
+    //     },
+    //   });
 
     useEffect(() => {
         console.log('UseEffect for fetching products');
@@ -82,7 +136,7 @@ function AuthForm({ authItems }) {
     return (
         <div className="border-b border-[#ededed] xl:py-[155px] lg:py-[100px] md:py-[80px] py-[50px]">
             <div className="container md:max-w-lg">
-                <ul className="auth-menu flex justify-center pb-[50px]">
+                {/* <ul className="auth-menu flex justify-center pb-[50px]">
                     {authItems[0]?.authTabMenu?.map((singleTabMenu) => (
                         <li
                             key={singleTabMenu.id}
@@ -160,7 +214,7 @@ function AuthForm({ authItems }) {
                             <p style={{ alignSelf: 'center' }} />
                         </div>
 
-                        {/* <button
+                        <button
                             className="button-wrap"
                             type="submit"
                             style={{
@@ -195,13 +249,13 @@ function AuthForm({ authItems }) {
                                     Login with Facebook
                                 </p>
                             </div>
-                        </button> */}
+                        </button>
                         <button onClick={()=> {
                             Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google});
                         }}>
                             jfvv
                         </button>
-                        {/* <button
+                        <button
                             className="button-wrap"
                             onClick={()=> {
                                 console.log('hjgjgjugugu')
@@ -273,9 +327,9 @@ function AuthForm({ authItems }) {
                                     Login with Apple
                                 </p>
                             </div>
-                        </button> */}
+                        </button>
                     </form>
-                </div>
+                </div> */}
 
                 <Authenticator>
             {({ signOut, user }) => (
@@ -359,3 +413,6 @@ AuthForm.propTypes = {
 };
 
 export default AuthForm;
+// export default withAuthenticator(AuthForm, {
+//     socialProviders: ['apple','google']
+//   })

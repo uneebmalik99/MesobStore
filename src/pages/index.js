@@ -27,6 +27,8 @@ query MyQuery {
     }
   }
   `;
+
+  
 function HomePage({
     headerItems,
     heroDefaultItems,
@@ -51,6 +53,21 @@ function HomePage({
             );
             const allProducts = response.data.listProducts.items;
             const allProducts2 = response.data.listProducts.items;
+            console.log("djsvjdnsvj"+allProducts2);
+
+            let receomedproducts= [];
+
+            for(let i = 0; i< response.data.listProducts.items.length; i++){
+
+                console.log('fjdnjk'+JSON.stringify(response.data.listProducts.items[i]));
+                
+                if(response.data.listProducts.items[i].isRecommended == true){
+                    receomedproducts.push(response.data.listProducts.items)
+                }
+            }
+
+            console.log('Rrcommend Products ', receomedproducts);
+
             console.log('Response Products:1 ', allProducts[7].isRecommended);
 
             setRecommendedProduct(
@@ -189,15 +206,29 @@ function HomePage({
                 <div className="product-list-container" >
                                
                                 <div className="product-list">
-                                    {RecommendedProduct.map((Rproduct, index) => (
+                                    {RecommendedProduct.map((Rproduct, index) => {
 
-                                        Rproduct.isRecommended == true ?
-                                        (<div className="product-item" key={index}>
+
+                                        let img = '';
+
+                                        if (Rproduct.isRecommended === true) {
+                                            // Parse the JSON content to access the image property
+                                            const contentObj = JSON.parse(Rproduct.content);
+
+                                            // Set img to the image URL from the parsed content
+                                            img = contentObj.image;
+                                        }
+                                   
+
+                                        if (Rproduct.isRecommended === true) {
+                                       return (<div className="product-item" key={index}>
                                             <h3 className="product-title">{Rproduct.title}</h3>
                                             {/* <h3 className="product-title">  {Rproduct.isRecommended}</h3> */}
+
+                                          
                                             <img
                                                 className="product-image"
-                                                src={Rproduct.image}
+                                                src={img}
                                                 alt={Rproduct.title}
                                             />
                                             <p className="product-price">
@@ -209,9 +240,14 @@ function HomePage({
                                         </div>
                                         
                                         )
-                                        :
-                                        null
-                                    ))}
+                                        
+                                        
+                                        ;
+                                    } else {
+                                      // Render nothing for non-recommended products
+                                      return null;
+                                    }
+                                  })}
                                 </div>
                 </div> 
             
