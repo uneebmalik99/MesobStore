@@ -91,6 +91,7 @@ const [Order,setOrder] =useState([])
     }
     console.log("kfsldn  -"+total1.toFixed(2));
     return(
+        <>
         <div style={{ paddingInline:'5%',paddingBottom:'3%', paddingTop:'3%', borderBottomWidth:0.5, borderColor:'grey'}}>
 
      
@@ -125,9 +126,7 @@ const [Order,setOrder] =useState([])
                     </Link>
                 </h3>
             
-                <div className="font-medium text-[15px] leading-[26px]">
-                    id : <span className="text-[#666666]">{order.id}</span>
-                </div>
+                
                 <div className="font-medium text-[15px] leading-[26px]">
                     status : <span className="text-[#666666]">{order.Status}</span>
                 </div>
@@ -141,13 +140,20 @@ const [Order,setOrder] =useState([])
 
             <div >
             <button>v</button>
+
+         
             </div>
            
             
         </li>
 
         </div>
+          
+            <div style={{backgroundColor:'red'}}>dfmfdfd</div>
+          
+</>
 )
+
                 })};
             <FooterComps
                 footerContainer="container"

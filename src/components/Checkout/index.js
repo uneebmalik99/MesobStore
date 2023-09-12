@@ -17,7 +17,8 @@ import {
   CartElement,
 } from '@stripe/react-stripe-js';
 import CheckoutForm from '../Payment/checkoutpayment';
-
+import {toast} from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 const singleField = `flex flex-col w-full`;
 const inputField = `border border-[#e8e8e8] focus-visible:outline-0 placeholder:text-[#7b7975] py-[10px] px-[20px] w-full h-[50px]`;
 const textareaField = `border border-[#e8e8e8] focus-visible:outline-0 placeholder:text-[#7b7975] py-[10px] px-[20px] w-full min-h-[120px]`;
@@ -92,12 +93,72 @@ const childRef = useRef();
 
 
     const onCheckout = () => {
+
+
+        if(Receiver_name == '' || null ){
+            toast.error('Please Enter Receiver Name', {autoClose:2000})
+
+        }
+        else if(Receiver_phone == '' || null){
+            toast.error('Please Enter Receiver Phone', {autoClose:2000})
+
+        }
+        else if(Receiver_address == '' || null){
+            toast.error('Please Enter Receiver Address', {autoClose:2000})
+
+        }
+        else if(Receiver_city == '' || null){
+            toast.error('Please Enter Receiver City', {autoClose:2000})
+
+        }
+        else if(Receiver_state == '' || null){
+            toast.error('Please Enter Receiver State', {autoClose:2000})
+
+        }
+        else if(Receiver_country == '' || null){
+            toast.error('Please Enter Receiver Country', {autoClose:2000})
+
+        }
+        else if(sender_name == '' || null){
+            toast.error('Please Enter Sender Name', {autoClose:2000})
+
+        }
+        else if(sender_email == '' || null){
+            toast.error('Please Enter Sender Email', {autoClose:2000})
+
+        }
+        else if(sender_address == '' || null){
+            toast.error('Please Enter Sender Address', {autoClose:2000})
+
+        }
+        else if(sender_phone == '' || null){
+            toast.error('Please Enter Sender Phone', {autoClose:2000})
+
+        }
+        else if(sender_city == '' || null){
+            toast.error('Please Enter Sender City', {autoClose:2000})
+
+        }
+        else if(sender_state == '' || null){
+            toast.error('Please Enter Sender State', {autoClose:2000})
+
+        }
+        else if(sender_zip == '' || null){
+            toast.error('Please Enter Sender Zip', {autoClose:2000})
+
+        }
+        else{
+            buildOrderObject();
+        }
         
-        buildOrderObject();
+       
         // getStripeIntent();
+
+
       }
 
       const buildOrderObject = async () => {
+       
 
         const obj = {
             email: sender_email,
