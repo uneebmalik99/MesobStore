@@ -7,6 +7,7 @@ import { getAllItems } from '../lib/ItemsUtil';
 import React, {useState,useEffect} from 'react';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 import Link from 'next/link';
+import Collapsible from 'react-collapsible';
 
 function orders({ headerItems, products, cartPageItems, footerItems }) {
 
