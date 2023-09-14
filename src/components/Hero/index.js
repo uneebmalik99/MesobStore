@@ -281,12 +281,12 @@ console.log(JSON.stringify(heroDefaultItems))
                                     
                             >
                                 <div className="container"  >
-                                    <div className="hero-content" style={{position:"absolute",  marginTop:'15%', padding:'3%',borderRadius:10, backgroundColor: 'rgba(211, 211, 211 ,0.5)' }}>
+                                    <div className="hero-content" style={{position:"absolute",  marginTop:'15%', padding:'3%',borderRadius:10, backgroundColor: 'rgba(211, 211, 211 ,0.2)' }}>
                                        
                                         <motion.h2
                                             className="text-primary  relative md:text-[60px] text-[34px] leading-[1.1] pb-[15px] mb-[30px] after:bg-primary after:absolute after:min-h-[4px] after:min-w-[70px] after:max-h-[4px] after:max-w-[70px] after:bottom-0 after:left-0"
                                             dangerouslySetInnerHTML={{
-                                                __html: "Welcome to Mesob Store",
+                                                __html: "Welcome to  <br/>  &nbsp &nbsp  &nbsp   Mesob Store",
                                             }}
                                             initial="hidden"
                                             animate={
@@ -310,6 +310,7 @@ console.log(JSON.stringify(heroDefaultItems))
                                                 },
                                                 exit: {
                                                     y: '100%',
+                                         
                                                     opacity: 0,
                                                     transition: {
                                                         duration: 1,
