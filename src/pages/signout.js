@@ -4,7 +4,6 @@ import Breadcrumb from '../components/Breadcrumb';
 import AuthForm from '../components/Auth/AuthForm';
 import FooterComps from '../components/FooterComps';
 import { getAllItems } from '../lib/ItemsUtil';
-import { useEffect } from 'react';
 
 function Signout({ headerItems, authItems, footerItems }) {
 

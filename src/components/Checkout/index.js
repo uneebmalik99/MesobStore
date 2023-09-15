@@ -7,7 +7,8 @@ import EmptyCheckout from './EmptyCheckout';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 import {createOrder} from '../../graphql/mutations';
 import { CHECKOUT_API_URL} from'../../api_service';
-import { loadStripe } from '@stripe/stripe-js';
+// import  from '@stripe/stripe-js';
+import { loadStripe } from '@stripe/react-stripe-js'
 
 import {
   PaymentElement,

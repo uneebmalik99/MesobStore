@@ -1,32 +1,26 @@
+import { useEffect } from 'react';
+import { useRouter } from "next/router";
 import PropTypes from 'prop-types';
 import HeaderOne from '../../components/HeaderComps';
 import Breadcrumb from '../../components/Breadcrumb';
 import ProductFiveColumns from '../../components/Products/ProductFiveColumns';
 import FooterComps from '../../components/FooterComps';
 import { getAllItems } from '../../lib/ProductUtil';
-import { useEffect } from 'react';
-import { useRouter } from "next/router";
 
-function ProductFiveColumnsPage({
-    
+
+function ProductFiveColumnsPage({ 
     headerItems,
     products,
     productFilter,
     gridTabItems,
     footerItems,
-    
-    
 })
-
-
-
 
 {
 
     const router = useRouter();
     const data = router.query || 'default value';
 
-  console.log("jdskdsbvks"+JSON.stringify(data));
 
 
 

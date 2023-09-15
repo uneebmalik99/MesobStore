@@ -1,23 +1,18 @@
+import { useEffect } from 'react';
+import '@aws-amplify/ui-react/styles.css';
+import { Amplify } from 'aws-amplify';
+import { Auth } from '@aws-amplify/auth';
 import Head from 'next/head';
 import PropTypes from 'prop-types';
-
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
-import { Alert, Authenticator, Button } from '@aws-amplify/ui-react';
-// import Amplify from '@aws-amplify/core';
-import store from '../store/index';
-
-import Layout from '../components/Layout';
 import '../styles/globals.css';
-import { ScrollToTop } from '../components/ScrollComps';
-
-import '@aws-amplify/ui-react/styles.css';
-import awsExports from '../aws-exports';
-import { Amplify } from 'aws-amplify';
-import { Auth } from '@aws-amplify/auth';
-import { useEffect } from 'react';
 import { ToastContainer, toast } from 'react-toastify';
+import { ScrollToTop } from '../components/ScrollComps';
+import Layout from '../components/Layout';
+import store from '../store/index';
+import awsExports from '../aws-exports';
 import 'react-toastify/dist/ReactToastify.css';
 
 const persistor = persistStore(store);
@@ -31,7 +26,6 @@ function MyApp({ Component, pageProps }) {
         
 
     );
-    let gg= Auth.currentAuthenticatedUser();
     
 
     useEffect(() => {
@@ -40,16 +34,12 @@ function MyApp({ Component, pageProps }) {
 async function currentSession() {
   try {
     const data = await Auth.currentSession();
-    console.log("dddd "+data);
     
   } catch(err) {
 
-    console.log("dderrordd "+err);
   }
 };
 
-    console.log("Auth  user is "+gg);
-    console.log("Auth  user is data"+gg);
 
     const handleSignIn = (state) => {
         if (state === 'signedin') {
