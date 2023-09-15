@@ -1,4 +1,9 @@
+import Link from 'next/link';
+
 import PropTypes from 'prop-types';
+import _ from 'lodash';
+import { API, graphqlOperation } from 'aws-amplify';
+
 import { getAllItems, getFeaturedItems } from '../lib/ItemsUtil';
 import TransparentHeader from '../components/HeaderComps/TransparentHeader';
 import HeroOne from '../components/Hero';
@@ -9,11 +14,7 @@ import LatestBlog from '../components/HomePage/LatestBlog';
 import NewsletterComps from '../components/NewsletterComps';
 import FooterComps from '../components/FooterComps';
 import { useEffect, useState } from 'react';
-import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../graphql/queries';
-import _ from 'lodash';
-import { motion } from 'framer-motion';
-import Link from 'next/link';
 
 const getMenuItems = `
 query MyQuery {

@@ -21,10 +21,8 @@ const cartSlice = createSlice({
             state.totalQuantity += itemQuantity;
             state.changed = true;
             if (!existingItem) {
-                console.log("price at slice"+ newItem.price);
                 let p = newItem.price;
-                p= p.replace('$','')
-
+                p= p.replace('$','');
                 state.items.push({
                     id: newItem.id,
                     price: p,
@@ -35,9 +33,8 @@ const cartSlice = createSlice({
                     country:newItem.country
                 });
             } else {
-               console.log("price at slice"+ newItem.price);
                let p = newItem.price;
-               p= p.replace('$','')
+               p= p.replace('$','');
             //    console.log('pfirstvs'+ p );
                 existingItem.quantity++;
                 existingItem.totalPrice += p;
@@ -45,7 +42,8 @@ const cartSlice = createSlice({
         },
         increaseItemFromCart(state, action) {
             const id = action.payload;
-            const existingItem = state.items.find((item) => item.id === id);
+            // const existingItem = state.items.find((item) => item.id === id);
+            existingItem.totalPrice -= `${existingItem.price}`;
             state.totalQuantity--;
             state.changed = true;
             if (existingItem.quantity === 1) {

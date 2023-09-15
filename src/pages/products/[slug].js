@@ -1,11 +1,11 @@
+import { useRouter } from "next/router";
 import PropTypes from 'prop-types';
 // import { getAllItems, getItemData, getItemsFiles } from '../../lib/ProductUtil';
 import HeaderOne from '../../components/HeaderComps';
 import Breadcrumb from '../../components/Breadcrumb/index-2';
 import ProductDetails from '../../components/Products/ProductDetails';
 import FooterComps from '../../components/FooterComps';
-import { useRouter } from "next/router";
-import { useEffect } from 'react';
+
 
 function ProductDetailPage({
     product,

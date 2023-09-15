@@ -1,17 +1,17 @@
+import React, {useState,useEffect} from 'react';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
+import Link from 'next/link';
 import PropTypes from 'prop-types';
 import HeaderOne from '../components/HeaderComps';
 import Breadcrumb from '../components/Breadcrumb';
 import CartPageComps from '../components/CartPageComps';
 import FooterComps from '../components/FooterComps';
 import { getAllItems } from '../lib/ItemsUtil';
-import React, {useState,useEffect} from 'react';
-import { API, graphqlOperation, Auth } from 'aws-amplify';
-import Link from 'next/link';
-import Collapsible from 'react-collapsible';
+
 
 function orders({ headerItems, products, cartPageItems, footerItems }) {
 
-const [Order,setOrder] =useState([])
+    const [order,setOrderData] = useState([])
     const getMyOrders = async () => {
         const user = await Auth.currentAuthenticatedUser();
   if(user?.attributes?.sub){
@@ -21,8 +21,7 @@ const [Order,setOrder] =useState([])
       try {
         const res = (await API.graphql(
           graphqlOperation(
-            `
-            query MyQuery {
+            `query MyQuery {
             listOrders(limit: 1000, filter: {userID: {eq: "${userSUb}"}}) {
               items {
                 userID
@@ -47,7 +46,7 @@ const [Order,setOrder] =useState([])
         )) ;
         console.log(JSON.stringify(res?.data?.listOrders?.items), 'res');
         const resData = res?.data?.listOrders?.items;
-        setOrder(resData);
+        setOrderData(resData);
         console.log(
           'sort',
           resData.sort((a, b) => {
@@ -81,7 +80,7 @@ const [Order,setOrder] =useState([])
             />
 
 
-{Order.map((order, index) => {
+{order.map((order, index) => {
     let total1 = 0;
     const products = JSON.parse(order.Products);
     console.log("nvjdnvds"+JSON.stringify(products));
