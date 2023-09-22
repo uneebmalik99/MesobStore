@@ -119,15 +119,15 @@
     "hostedUIProviderMeta": {
       "Type": "String"
     },
-    "oAuthMetadata": {
-      "Type": "String"
-    },
     "authProviders": {
       "Type": "CommaDelimitedList"
     },
+    "oAuthMetadata": {
+      "Type": "String"
+    },
     "hostedUIProviderCreds": {
       "Type": "String",
-      "Default": "[]"
+      "NoEcho": true
     }
   },
   "Conditions": {

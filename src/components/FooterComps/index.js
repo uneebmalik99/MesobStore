@@ -13,7 +13,7 @@ function FooterComps({ footerContainer, footerItems }) {
             <div className="footer-top xl:py-[115px] lg:py-[95px] md:py-[75px] py-[45px]" >
                 <div className={footerContainer}>
                     <div className="grid grid-cols-12 md:gap-y-0 gap-y-[30px]">
-                        <div className="md:col-span-4 lm:col-span-6 col-span-12">
+                        <div className="md:col-span-6 lm:col-span-6 col-span-12">
                             <div className="footer-widget">
                                 <h2 className="text-[18px] mb-[15px]">
                                     {footerItems[0]?.addressTitle}
@@ -58,7 +58,7 @@ function FooterComps({ footerContainer, footerItems }) {
                                 </ul>
                             </div>
                         </div>
-                        <div className="md:col-span-3 lm:col-span-6 col-span-12">
+                        <div className="md:col-span-4 lm:col-span-6 col-span-12">
                             <div className="footer-widget">
                                 <h2 className="text-[18px] mb-[15px]">
                                     {footerItems[0]?.infoTitle}
@@ -100,7 +100,7 @@ function FooterComps({ footerContainer, footerItems }) {
                                 </ul>
                             </div>
                         </div>
-                        <div className="md:col-span-3 lm:col-span-6 col-span-12">
+                        {/* <div className="md:col-span-3 lm:col-span-6 col-span-12">
                             <div className="footer-widget">
                                 <h2 className="text-[18px] mb-[15px]">
                                     {footerItems[0]?.newsletterTitle}
@@ -136,7 +136,7 @@ function FooterComps({ footerContainer, footerItems }) {
                                     ))}
                                 </ul>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
@@ -166,8 +166,8 @@ function FooterComps({ footerContainer, footerItems }) {
                                         <img
                                             src={footerItems[0]?.footerLogo}
                                             alt={footerItems[0]?.footerLogoAlt}
-                                            width={120}
-                                            height={30}
+                                            width={90}
+                                            height={18}
                                         />
                                     </a>
                                 </Link>

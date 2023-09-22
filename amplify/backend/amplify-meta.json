@@ -49,7 +49,7 @@
         "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\"],\"LogoutURLs\":[\"abrehet://\"]}",
         "UserPoolName": "abrehetca91482b_userpool_ca91482b"
       },
-      "lastPushTimeStamp": "2023-09-10T13:24:18.772Z",
+      "lastPushTimeStamp": "2023-09-22T05:59:35.946Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-abrehet-dev-144722-deployment/amplify-cfn-templates/auth/abrehetca91482b-cloudformation-template.json",
         "logicalId": "authabrehetca91482b"

@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 import { API , graphqlOperation} from 'aws-amplify';
 import SwiperComps, { Slide } from '../SwiperComps';
 
-function HeroOne({ heroDefaultItems, settings }) {
+function HeroOne({ func,heroDefaultItems, settings }) {
     const listBannerQuerie = `
 query MyQuery {
   listBanners {
@@ -353,8 +353,11 @@ console.log(JSON.stringify(heroDefaultItems))
                                                 },
                                             }}
                                         >
-                                            <Link href="/products/left-sidebar">
-                                                <a className={secondaryButton}>
+                                            <Link href="">
+                                                <a  onClick={()=> {
+                                        func();
+                                        }
+                                        }  className={secondaryButton}>
                                                     Shop Now
                                                     <IoArrowForwardOutline className="text-white ml-[5px]" />
                                                 </a>

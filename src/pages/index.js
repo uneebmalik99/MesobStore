@@ -13,7 +13,7 @@ import OfferColection from '../components/OfferColection';
 import LatestBlog from '../components/HomePage/LatestBlog';
 import NewsletterComps from '../components/NewsletterComps';
 import FooterComps from '../components/FooterComps';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import * as queries from '../graphql/queries';
 
 const getMenuItems = `
@@ -43,9 +43,15 @@ function HomePage({
     const [products, setProducts] = useState([]);
     const [MenuList,setMenuList]= useState([]);
     const [RecommendedProduct,setRecommendedProduct]=useState([])
+    const [R_categories,setR_categories]=useState([])
+    const uniqueCategories = new Set();
+    let allCategories;
    
     console.log('Products in state are: ', products);
-
+    const ref = useRef(null);
+    const func = () => {
+        ref.current?.scrollIntoView({ behavior: 'smooth' });
+      };
 
     const fetchProducts = async () => {
         try {
@@ -60,21 +66,28 @@ function HomePage({
 
             for(let i = 0; i< response.data.listProducts.items.length; i++){
 
-                console.log('fjdnjk'+JSON.stringify(response.data.listProducts.items[i]));
+                console.log('fjdnjk'+JSON.stringify(response.data.listProducts.items[i].isRecommended));
                 
                 if(response.data.listProducts.items[i].isRecommended == true){
-                    receomedproducts.push(response.data.listProducts.items)
+                    
+                    receomedproducts.push(response.data.listProducts.items[i])
                 }
             }
 
-            console.log('Rrcommend Products ', receomedproducts);
+   
+            const receomedproducts2 = receomedproducts.slice(1, -1);
+
+
+            console.log('Rrcommend Products ', JSON.stringify(receomedproducts2));
 
             console.log('Response Products:1 ', allProducts[7].isRecommended);
+           
 
             setRecommendedProduct(
                 allProducts2.filter(item => {
                   const isRecommended = item?.isRecommended || null;
                   if (isRecommended) {
+                    R_categories.push(item.category)
                     return item;
                   }
                 }),
@@ -94,7 +107,23 @@ function HomePage({
                     ]);
                 })
             );
+            
+            // for(let i =0; i<receomedproducts2.length ; i++){
+            //     console.log("jhbhjbkbv"+JSON.stringify(receomedproducts2[i]));
+                
+            //         if (R_categories.indexOf(receomedproducts.category) === -1) {
+            //             R_categories.push(receomedproducts.category);
+            //           }
+              
+            // }
 
+            const uniqueCategories = [...new Set(R_categories)];
+
+            // Now, update the state with the unique values
+            setR_categories(uniqueCategories);
+
+
+            console.log('hggjg'+JSON.stringify(R_categories))
 
 
         } catch (error) {
@@ -121,9 +150,6 @@ function HomePage({
       };
     useEffect(() => {
         console.log('UseEffect for fetching products');
-       
-
-         
         fetchProducts();
         getMenuList();
     }, []);
@@ -132,7 +158,7 @@ function HomePage({
     return (
         <>
             <TransparentHeader headerItems={headerItems} />
-            <HeroOne heroDefaultItems={heroDefaultItems} />
+            <HeroOne  func={func} heroDefaultItems={heroDefaultItems} />
 
 
 
@@ -143,7 +169,7 @@ function HomePage({
                 <h2 className="categories-list-title" style={{marginTop:'5%'}}>
                 Shop Categories 
                 </h2>
-                <div className="categories-list">
+                <div ref={ref} className="categories-list">
                     {MenuList.map((Menu, index) => (
                        <Link 
                        href={`/products/5-columns?id=${Menu.id}&name=${Menu.name}`} 
@@ -168,6 +194,8 @@ function HomePage({
                 sectionTitle="Mesob Best Selling"
                 productFilterPath="left-sidebar"
             /> */}
+
+
 
             {/* <div className="product-list-container" >
                 <h1 className="product-list-title">
@@ -194,6 +222,9 @@ function HomePage({
             </div> */}
             
             {/* <OfferColection offerColection={offerColection} /> */}
+
+         
+            
             <div style={{backgroundColor:'#ECF0F1', paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
 
             <h2
@@ -206,49 +237,80 @@ function HomePage({
 
                 <div className="product-list-container" >
                                
-                                <div className="product-list">
-                                    {RecommendedProduct.map((Rproduct, index) => {
+                                <div >
+                            
+{/*                             
+                                {uniqueCategories.map((category) => (
+                            <div key={category}>
+                                <h2>{category}</h2> */}
+       
+       
+                      {R_categories.map((cproduct, index) => {
+                        
+                                    console.log("mnbjhbn"+cproduct);
 
+                                    return(
+                                        <>
+                                    <div>
 
-                                        let img = '';
+                                    <h5 style={{alignSelf:'flex-start'}}>{cproduct}</h5>
+                                  
+                                    <div style={{display:'flex', flexDirection:'row'}}>
 
-                                        if (Rproduct.isRecommended === true) {
-                                            // Parse the JSON content to access the image property
-                                            const contentObj = JSON.parse(Rproduct.content);
+                                       
+                                        {RecommendedProduct.map((Rproduct, index) => {
 
-                                            // Set img to the image URL from the parsed content
-                                            img = contentObj.image;
+                                            console.log("Rproduct  nkjb"+cproduct);
+    
+    
+                                            let img = '';
+    
+                                            if (Rproduct.isRecommended === true) {
+                                                // Parse the JSON content to access the image property
+                                                const contentObj = JSON.parse(Rproduct.content);
+                                                // Set img to the image URL from the parsed content
+                                                img = contentObj.image;
+                                            }
+                                       
+                                            if (Rproduct.isRecommended == true && Rproduct.category == cproduct) {
+    
+                                            
+                                           return (
+                                           <div  className="product-item"  key={index}>
+
+                                                <h3 className="product-title">{Rproduct.title}</h3>
+                                                {/* <h3 className="product-title">  {Rproduct.isRecommended}</h3> */}
+    
+                                              
+                                                <img
+                                                    className="product-image"
+                                                    src={img}
+                                                    alt={Rproduct.title}
+                                                />
+                                                <p className="product-price">
+                                                    Price: {Rproduct.price}
+                                                </p>
+                                                <p className="product-country">
+                                                    Country: {Rproduct.country}
+                                                </p>
+                                            </div>
+                                            
+                                            )
+                                              
+                                        } else {
+                                          // Render nothing for non-recommended products
+                                          return null;
                                         }
-                                   
-
-                                        if (Rproduct.isRecommended === true) {
-                                       return (<div className="product-item" key={index}>
-                                            <h3 className="product-title">{Rproduct.title}</h3>
-                                            {/* <h3 className="product-title">  {Rproduct.isRecommended}</h3> */}
-
-                                          
-                                            <img
-                                                className="product-image"
-                                                src={img}
-                                                alt={Rproduct.title}
-                                            />
-                                            <p className="product-price">
-                                                Price: {Rproduct.price}
-                                            </p>
-                                            <p className="product-country">
-                                                Country: {Rproduct.country}
-                                            </p>
+                                      })}
                                         </div>
-                                        
-                                        )
-                                        
-                                        
-                                        ;
-                                    } else {
-                                      // Render nothing for non-recommended products
-                                      return null;
-                                    }
-                                  })}
+                                        </div>
+                                        </>);
+                                    
+
+
+                                })}
+                                {/* </div>
+                                    ))} */}
                                 </div>
                 </div> 
             
@@ -257,7 +319,8 @@ function HomePage({
 
            
             {/* <LatestBlog blogs={blogs} sectionTitle="Mesob Store Blog" /> */}
-            <NewsletterComps sectionTitle="Mesob Newsletter"  />
+            <NewsletterComps sectionTitle="Mesob Store subscription includes
+Subscribers receive discounts across the company's online retail platforms and shoppers receive their orders within two days"  />
             <FooterComps
                 footerContainer="container"
                 footerItems={footerItems}
