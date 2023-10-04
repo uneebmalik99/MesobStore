@@ -14,7 +14,7 @@ const awsmobile = {
     aws_cognito_identity_pool_id:
         'us-east-1:71e0f82b-2ea7-4ea3-8be3-d21b35e7fa4b',
     aws_cognito_region: 'us-east-1',
-    aws_user_pools_id: 'us-east-1_oyDOhnVf6',
+    aws_user_pools_id: 'us-east-1_nsEBlsjxg',
     aws_user_pools_web_client_id: '1noi46dbud0satg6boijf7o0tn',
     oauth: {
         domain: 'abrehet014c7ce4-014c7ce4-dev.auth.us-east-1.amazoncognito.com',
@@ -31,7 +31,7 @@ const awsmobile = {
     },
     federationTarget: 'COGNITO_USER_POOLS',
     aws_cognito_username_attributes: [],
-    aws_cognito_social_providers: ['GOOGLE'],
+    aws_cognito_social_providers: ['GOOGLE','FACEBOOK','APPLE'],
     aws_cognito_signup_attributes: ['EMAIL'],
     aws_cognito_mfa_configuration: 'OFF',
     aws_cognito_mfa_types: ['SMS'],
@@ -49,7 +49,7 @@ export default awsmobile;
 //     aws_cognito_identity_pool_id:
 //         'us-east-1:71e0f82b-2ea7-4ea3-8be3-d21b35e7fa4b',
 //     aws_cognito_region: 'us-east-1',
-//     aws_user_pools_id: 'us-east-1_oyDOhnVf6',
+//     aws_user_pools_id: 'us-east-1_nsEBlsjxg',
 //     aws_user_pools_web_client_id: '1noi46dbud0satg6boijf7o0tn',
 //     oauth: {
 //         domain: 'abrehet014c7ce4-014c7ce4-dev.auth.us-east-1.amazoncognito.com',

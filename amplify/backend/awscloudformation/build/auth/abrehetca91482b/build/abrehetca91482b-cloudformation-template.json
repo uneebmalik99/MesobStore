@@ -86,18 +86,6 @@
     "hostedUI": {
       "Type": "String"
     },
-    "hostedUIDomainName": {
-      "Type": "String"
-    },
-    "authProvidersUserPool": {
-      "Type": "CommaDelimitedList"
-    },
-    "hostedUIProviderMeta": {
-      "Type": "String"
-    },
-    "oAuthMetadata": {
-      "Type": "String"
-    },
     "userPoolGroupList": {
       "Type": "CommaDelimitedList"
     },
@@ -121,6 +109,30 @@
     },
     "dependsOn": {
       "Type": "CommaDelimitedList"
+    },
+    "hostedUIDomainName": {
+      "Type": "String"
+    },
+    "authProvidersUserPool": {
+      "Type": "CommaDelimitedList"
+    },
+    "hostedUIProviderMeta": {
+      "Type": "String"
+    },
+    "authProviders": {
+      "Type": "CommaDelimitedList"
+    },
+    "oAuthMetadata": {
+      "Type": "String"
+    },
+    "userPoolGroups": {
+      "Type": "String"
+    },
+    "adminQueries": {
+      "Type": "String"
+    },
+    "thirdPartyAuth": {
+      "Type": "String"
     },
     "hostedUIProviderCreds": {
       "Type": "String",
@@ -221,11 +233,15 @@
           "aws.cognito.signin.user.admin"
         ],
         "CallbackURLs": [
-          "abrehet://"
+          "abrehet://",
+          "http://localhost:3000/",
+          "https://mesobstore.com/"
         ],
-        "ClientName": "abrehe8149b7b9_app_clientWeb",
+        "ClientName": "abreheca91482b_app_clientWeb",
         "LogoutURLs": [
-          "abrehet://"
+          "abrehet://",
+          "http://localhost:3000/",
+          "https://mesobstore.com/"
         ],
         "RefreshTokenValidity": {
           "Ref": "userpoolClientRefreshTokenValidity"
@@ -263,14 +279,18 @@
           "aws.cognito.signin.user.admin"
         ],
         "CallbackURLs": [
-          "abrehet://"
+          "abrehet://",
+          "http://localhost:3000/",
+          "https://mesobstore.com/"
         ],
-        "ClientName": "abrehe8149b7b9_app_client",
+        "ClientName": "abreheca91482b_app_client",
         "GenerateSecret": {
           "Ref": "userpoolClientGenerateSecret"
         },
         "LogoutURLs": [
-          "abrehet://"
+          "abrehet://",
+          "http://localhost:3000/",
+          "https://mesobstore.com/"
         ],
         "RefreshTokenValidity": {
           "Ref": "userpoolClientRefreshTokenValidity"
@@ -315,7 +335,7 @@
               "Fn::Join": [
                 "",
                 [
-                  "upClientLambdaRole8149b7b9",
+                  "upClientLambdaRoleca91482b",
                   {
                     "Fn::Select": [
                       3,
@@ -701,12 +721,12 @@
         "IdentityPoolName": {
           "Fn::If": [
             "ShouldNotCreateEnvResources",
-            "abrehet8149b7b9_identitypool_8149b7b9",
+            "abrehetca91482b_identitypool_ca91482b",
             {
               "Fn::Join": [
                 "",
                 [
-                  "abrehet8149b7b9_identitypool_8149b7b9__",
+                  "abrehetca91482b_identitypool_ca91482b__",
                   {
                     "Ref": "env"
                   }

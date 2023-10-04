@@ -69,6 +69,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                 id,
                 title,
                 price,
+                country:product.country,
+                category:product.category,
                 quantity: quantityCount,
                 totalPrice:totalprice,
                 image: product.image,

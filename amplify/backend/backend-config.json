@@ -1,6 +1,6 @@
 {
   "auth": {
-    "abrehet8149b7b9": {
+    "abrehetca91482b": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -19,32 +19,6 @@
           "FACEBOOK",
           "GOOGLE",
           "APPLE"
-        ],
-        "usernameAttributes": [],
-        "verificationMechanisms": [
-          "EMAIL"
-        ]
-      },
-      "providerPlugin": "awscloudformation",
-      "service": "Cognito"
-    },
-    "abrehetca91482b": {
-      "customAuth": false,
-      "dependsOn": [],
-      "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
-        ],
-        "passwordProtectionSettings": {
-          "passwordPolicyCharacters": [],
-          "passwordPolicyMinLength": 8
-        },
-        "signupAttributes": [
-          "EMAIL"
-        ],
-        "socialProviders": [
-          "GOOGLE"
         ],
         "usernameAttributes": [],
         "verificationMechanisms": [
