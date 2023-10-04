@@ -124,7 +124,7 @@
     },
     "hostedUIProviderCreds": {
       "Type": "String",
-      "NoEcho": true
+      "Default": "[]"
     }
   },
   "Conditions": {

@@ -7,30 +7,29 @@ singleSupportInfo:
             id: 'info-01',
             infoIcon: 'IoBagHandleOutline',
             title: 'Shop online',
-            desc: 'We created a safe and easy way to shop online.',
+            desc: 'There are many variations pasbut the majority have suffered.',
         },
         {
             id: 'info-02',
             infoIcon: 'IoLogoPaypal',
             title: 'Payment methods',
-            desc: 'We provide different ways of payment options.',
+            desc: 'Letraset sheets containing Lorem Ipsum publishing software.',
         },
         {
             id: 'info-03',
             infoIcon: 'IoNavigateOutline',
             title: 'Free shipping',
-            desc: 'We provide free shipping across our platform.',
+            desc: 'when an unknown printer took a make a type book.',
         },
         {
             id: 'info-04',
             infoIcon: 'IoStopwatchOutline',
             title: 'Return policy',
-            desc: "We don't accept any returns.",
+            desc: 'Various versions have evolved over the years purpose.',
         },
     ]
-perfectionTitle: 'About Us'
-perfectionDesc: "I started building the Mesob store on October 5th, 2021 for a school project. At that time I didn’t have any plan to publish it. A good friend and family of mine by the name of Peter Tesfamichael advised me that it would be a good business model for our country Eritrea. In addition to the support, I got from my father, my wife, friends, family, and the Eritrean community thankfully by God`s grace I was able to publish this amazing app on March 20th, 2022.
-The brand vision is to create a two-way shopping experience not only for Eritrea but for the whole of Africa and beyond. I will take time to encourage all young adults to take their dreams one step further to accomplish their goals."
+perfectionTitle: 'Functionality meets perfection'
+perfectionDesc: 'But I must explain to you how all this mistaken idea of denouncing sure and praising pain was born and I will give you a complete at the system, expound the actual teachings of the great of the truth, the human happiness was born. teachings of the great of the truth.'
 aboutBannerAlt: 'About Banner'
 aboutBannerOne: '/images/about/banner/1-780x770.jpg'
 aboutBannerTwo: '/images/about/banner/2-380x380.jpg'
