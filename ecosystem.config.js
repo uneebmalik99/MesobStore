@@ -1,6 +1,6 @@
 module.exports = {
   apps : [{
-    script: 'npm install',
+    script: 'npm start',
 
   }],
 
