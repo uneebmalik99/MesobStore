@@ -18,8 +18,6 @@ function CartPageComps({ cartPageItems }) {
     const dispatch = useDispatch();
 
     const cartItems = useSelector((state) => state.cart.items);
-    const [countries,setcountries]=useState([])
-
     const [quantityCount, setQuantityCount] = useState({
         empty: true,
     });
@@ -28,18 +26,9 @@ function CartPageComps({ cartPageItems }) {
         if (quantityCount.empty && cartItems.length) {
             const tempObj = {};
             cartItems.forEach((item) => {
-                countries.push(item.country)
-
                 tempObj[item.id] = item.quantity;
             });
 
-            console.log(",mksks"+JSON.stringify(cartItems) );
-            const uniqueCategories = [...new Set(countries)];
-
-            // Now, update the state with the unique values
-            setcountries(uniqueCategories);
-
-            console.log("ghcdfzfrfgil  "+countries);
             setQuantityCount(tempObj);
         }
     }, [cartItems, quantityCount.empty]);
@@ -74,105 +63,22 @@ function CartPageComps({ cartPageItems }) {
                         <>
                             <div className="relative overflow-x-auto">
                                 <table className="cart-table w-full text-sm text-left">
-                                   
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                              
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    {countries.map((country, index) => {
-                        
-                        console.log("mnbjhbn"+country);
-
-                        return(
-                            
-                <>
-              
-
-                            <p style={{backgroundColor:'whitesmoke', }}>{country}</p>
-
-                            {cartItems.map((item) => {
-
-                      if (item.country == country) {
-                            return(
-<>
-                                <thead className="text-[18px] bg-[#f4f5f7]">
-                                <tr>
-                                    {cartPageItems[0]?.cartThList?.map(
-                                        (singleCartTh) => (
-                                            <th
-                                                key={singleCartTh.id}
-                                                scope="col"
-                                                className={`${singleCartTh.thCName} first:pl-[100px]`}
-                                            >
-                                                {singleCartTh.thName}
-                                            </th>
-                                        )
-                                    )}
-                                </tr>
-                            </thead>
+                                    <thead className="text-[18px] bg-[#f4f5f7]">
+                                        <tr>
+                                            {cartPageItems[0]?.cartThList?.map(
+                                                (singleCartTh) => (
+                                                    <th
+                                                        key={singleCartTh.id}
+                                                        scope="col"
+                                                        className={`${singleCartTh.thCName} first:pl-[100px]`}
+                                                    >
+                                                        {singleCartTh.thName}
+                                                    </th>
+                                                )
+                                            )}
+                                        </tr>
+                                    </thead>
+                                    {cartItems.map((item) => (
                                         <tbody key={item.id}>
                                             <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                 <td className="py-4 product-name pr-[25px] flex items-center font-medium text-gray-900 dark:text-white whitespace-nowrap">
@@ -308,25 +214,11 @@ function CartPageComps({ cartPageItems }) {
                                                 </td>
                                             </tr>
                                         </tbody>
-
-                                        </>
-                            );
-                        }else{
-                           
-                        }
-
-                                    })}
-
-                            </>
-
-                        )})}
-
-
-                                 
+                                    ))}
                                 </table>
                             </div>
                             <div className="group-btn flex justify-between pt-[50px]">
-                                <Link href="/">
+                                <Link href="/products/left-sidebar">
                                     <a className="inline-flex items-center bg-black text-white h-[46px] sm:px-[42px] px-[12px] transition-all hover:bg-[#222222]">
                                         <IoArrowBackSharp className="mr-[5px]" />
                                         {cartPageItems[0]?.shopPageBtnText}
@@ -345,7 +237,7 @@ function CartPageComps({ cartPageItems }) {
                             <div className="cart-info pt-[50px]">
                                 <div className="grid grid-cols-12 md:gap-x-[30px] max-lm:gap-y-[30px]">
                                     <div className="md:col-span-6 col-span-12">
-                                        {/* <div className="coupon flex flex-col lg:max-w-[400px]">
+                                        <div className="coupon flex flex-col lg:max-w-[400px]">
                                             <h2 className="title text-[18px] mb-[30px]">
                                                 {cartPageItems[0]?.couponTitle}
                                             </h2>
@@ -369,7 +261,7 @@ function CartPageComps({ cartPageItems }) {
                                                     }
                                                 </button>
                                             </div>
-                                        </div> */}
+                                        </div>
                                     </div>
                                     <div className="md:col-span-6 col-span-12">
                                         <div className="cart-subtotal lg:max-w-[400px] ml-auto">

@@ -1,5 +1,5 @@
 ---
 id: 03
-question: 'What does a Mesob Store subscription include?'
-answer: "Subscribers receive discounts across the company's online retail platforms and shoppers receive their orders within two days. For pricing please contact us"
+question: 'How working process is simplified?'
+answer: 'We reduce redundant complex calculations and lengthy erroneous code texts with simpler ones to ensure Mesobstore would run seamlessly and the design is reserved in its best form when viewed from a wide range of mobile devices & browsers.'
 ---

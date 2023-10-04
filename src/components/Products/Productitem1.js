@@ -65,8 +65,6 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                 title,
                 price,
                 quantity: quantityCount,
-                country,
-                category,
                 totalPrice: totalprice,
                 image: `/images/products/${product?.id}/${product?.image}`,
                 slug: `/products/${product?.slug}`,

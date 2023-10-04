@@ -26,9 +26,7 @@ function MyApp({ Component, pageProps }) {
         
 
     );
-
-
-
+    
 
     useEffect(() => {
         currentSession()

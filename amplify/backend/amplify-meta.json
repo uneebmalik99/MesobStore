@@ -14,32 +14,30 @@
   },
   "auth": {
     "abrehetca91482b": {
-      "customAuth": false,
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
       "dependsOn": [],
+      "customAuth": false,
       "frontendAuthConfig": {
-        "mfaConfiguration": "OFF",
-        "mfaTypes": [
-          "SMS"
+        "socialProviders": [
+          "GOOGLE"
+        ],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
         ],
         "passwordProtectionSettings": {
           "passwordPolicyMinLength": 8,
           "passwordPolicyCharacters": []
         },
-        "signupAttributes": [
-          "EMAIL"
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
         ],
-        "socialProviders": [
-          "FACEBOOK",
-          "GOOGLE",
-          "APPLE"
-        ],
-        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]
       },
-      "providerPlugin": "awscloudformation",
-      "service": "Cognito",
       "output": {
         "UserPoolId": "us-east-1_oyDOhnVf6",
         "AppClientIDWeb": "1noi46dbud0satg6boijf7o0tn",
@@ -48,15 +46,42 @@
         "IdentityPoolId": "us-east-1:71e0f82b-2ea7-4ea3-8be3-d21b35e7fa4b",
         "UserPoolArn": "arn:aws:cognito-idp:us-east-1:807954077262:userpool/us-east-1_oyDOhnVf6",
         "IdentityPoolName": "abrehetca91482b_identitypool_ca91482b__dev",
-        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"],\"LogoutURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"]}",
+        "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\"],\"LogoutURLs\":[\"abrehet://\"]}",
         "UserPoolName": "abrehetca91482b_userpool_ca91482b"
       },
-      "lastPushTimeStamp": "2023-10-03T08:35:40.204Z",
+      "lastPushTimeStamp": "2023-09-10T13:24:18.772Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-abrehet-dev-144722-deployment/amplify-cfn-templates/auth/abrehetca91482b-cloudformation-template.json",
         "logicalId": "authabrehetca91482b"
-      },
-      "lastPushDirHash": "oTR6LY3JvWjj0GAXFiehpB0jn5k="
+      }
+    },
+    "abrehet8149b7b9": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false,
+      "frontendAuthConfig": {
+        "socialProviders": [
+          "FACEBOOK",
+          "GOOGLE",
+          "APPLE"
+        ],
+        "usernameAttributes": [],
+        "signupAttributes": [
+          "EMAIL"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": []
+        },
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      }
     }
   }
 }

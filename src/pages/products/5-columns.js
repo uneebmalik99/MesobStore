@@ -32,7 +32,7 @@ function ProductFiveColumnsPage({
                 title="Product"
                 item="Home"
                 itemPath="/"
-                activeItem="Products"
+                activeItem="Product 5 columns"
             />
             <ProductFiveColumns
                 productFiveColumnsContainer="container-fluid xl:px-[100px] px-[15px]"

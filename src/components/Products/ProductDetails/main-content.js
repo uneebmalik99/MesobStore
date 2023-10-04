@@ -41,8 +41,6 @@ console.log("totalPrice: " + tprice*quantityCount);
             cartActions.addItemToCart({
                 id,
                 title,
-                country:product.country,
-                category:product.category,
                 price,
                 quantity: quantityCount,
                 totalPrice: totalprice,

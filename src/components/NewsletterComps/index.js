@@ -5,10 +5,8 @@ function NewsletterComps({ sectionTitle }) {
         <div className="newsletter-area" style={{paddingBottom:'5%' , paddingTop:'5%'}}>
             <div className="container">
                 <div className="grid md:grid-cols-2">
-                    <div  className="section-title pb-[10px] md:mb-0 mb-[30px] relative after:bg-primary after:absolute after:left-0 after:transform after:bottom-0 after:h-[4px] after:w-[70px]"
-                    style={{paddingRight:10}}
-                    >
-                        <p>{sectionTitle}</p>
+                    <div className="section-title pb-[10px] md:mb-0 mb-[30px] relative after:bg-primary after:absolute after:left-0 after:transform after:bottom-0 after:h-[4px] after:w-[70px]">
+                        <h2>{sectionTitle}</h2>
                     </div>
                     <form className="newsletter-form relative">
                         <input

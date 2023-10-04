@@ -119,24 +119,15 @@
     "hostedUIProviderMeta": {
       "Type": "String"
     },
-    "authProviders": {
-      "Type": "CommaDelimitedList"
-    },
     "oAuthMetadata": {
       "Type": "String"
     },
-    "userPoolGroups": {
-      "Type": "String"
-    },
-    "adminQueries": {
-      "Type": "String"
-    },
-    "thirdPartyAuth": {
-      "Type": "String"
+    "authProviders": {
+      "Type": "CommaDelimitedList"
     },
     "hostedUIProviderCreds": {
       "Type": "String",
-      "NoEcho": true
+      "Default": "[]"
     }
   },
   "Conditions": {
@@ -233,23 +224,17 @@
           "aws.cognito.signin.user.admin"
         ],
         "CallbackURLs": [
-          "abrehet://",
-          "http://localhost:3000/",
-          "https://mesobstore.com/"
+          "abrehet://"
         ],
         "ClientName": "abreheca91482b_app_clientWeb",
         "LogoutURLs": [
-          "abrehet://",
-          "http://localhost:3000/",
-          "https://mesobstore.com/"
+          "abrehet://"
         ],
         "RefreshTokenValidity": {
           "Ref": "userpoolClientRefreshTokenValidity"
         },
         "SupportedIdentityProviders": [
-          "Facebook",
           "Google",
-          "SignInWithApple",
           "COGNITO"
         ],
         "TokenValidityUnits": {
@@ -279,26 +264,20 @@
           "aws.cognito.signin.user.admin"
         ],
         "CallbackURLs": [
-          "abrehet://",
-          "http://localhost:3000/",
-          "https://mesobstore.com/"
+          "abrehet://"
         ],
         "ClientName": "abreheca91482b_app_client",
         "GenerateSecret": {
           "Ref": "userpoolClientGenerateSecret"
         },
         "LogoutURLs": [
-          "abrehet://",
-          "http://localhost:3000/",
-          "https://mesobstore.com/"
+          "abrehet://"
         ],
         "RefreshTokenValidity": {
           "Ref": "userpoolClientRefreshTokenValidity"
         },
         "SupportedIdentityProviders": [
-          "Facebook",
           "Google",
-          "SignInWithApple",
           "COGNITO"
         ],
         "TokenValidityUnits": {
