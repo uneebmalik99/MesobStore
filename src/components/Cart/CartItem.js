@@ -9,7 +9,7 @@ function CartItem({ item }) {
  
     const dispatch = useDispatch();
 
-    const { image, slug, country, category, title, quantity, price } = item;
+    const { image, slug, title, quantity, price } = item;
 
     const removeItemFromCartHandler = (id) => {
         dispatch(cartActions.removeItemFromCart(id));

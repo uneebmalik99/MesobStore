@@ -1,8 +1,8 @@
 {
-  "identityPoolName": "abrehetca91482b_identitypool_ca91482b",
+  "identityPoolName": "abrehet8149b7b9_identitypool_8149b7b9",
   "allowUnauthenticatedIdentities": false,
-  "resourceNameTruncated": "abreheca91482b",
-  "userPoolName": "abrehetca91482b_userpool_ca91482b",
+  "resourceNameTruncated": "abrehe8149b7b9",
+  "userPoolName": "abrehet8149b7b9_userpool_8149b7b9",
   "autoVerifiedAttributes": [
     "email"
   ],
@@ -29,13 +29,21 @@
   "userpoolClientReadAttributes": [
     "email"
   ],
-  "userpoolClientLambdaRole": "abreheca91482b_userpoolclient_lambda_role",
+  "userpoolClientLambdaRole": "abrehe8149b7b9_userpoolclient_lambda_role",
   "userpoolClientSetAttributes": false,
-  "sharedId": "ca91482b",
-  "resourceName": "abrehetca91482b",
+  "sharedId": "8149b7b9",
+  "resourceName": "abrehet8149b7b9",
   "authSelections": "identityPoolAndUserPool",
   "useDefault": "defaultSocial",
   "hostedUI": true,
+  "hostedUIDomainName": "abrehet014c7ce4-014c7ce4-dev",
+  "authProvidersUserPool": [
+    "Facebook",
+    "Google",
+    "SignInWithApple"
+  ],
+  "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}},{\"ProviderName\":\"SignInWithApple\",\"authorize_scopes\":\"email\",\"AttributeMapping\":{\"email\":\"email\"}}]",
+  "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\"],\"LogoutURLs\":[\"abrehet://\"]}",
   "userPoolGroupList": [],
   "serviceName": "Cognito",
   "usernameCaseSensitive": false,
@@ -53,12 +61,5 @@
     ]
   },
   "breakCircularDependency": true,
-  "dependsOn": [],
-  "hostedUIDomainName": "abrehet014c7ce4-014c7ce4",
-  "authProvidersUserPool": [
-    "Google"
-  ],
-  "hostedUIProviderMeta": "[{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}}]",
-  "authProviders": [],
-  "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\"],\"LogoutURLs\":[\"abrehet://\"]}"
+  "dependsOn": []
 }

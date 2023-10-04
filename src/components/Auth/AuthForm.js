@@ -3,58 +3,15 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 // import { Auth } from 'aws-amplify';
 import { withAuthenticator, Authenticator, Button } from '@aws-amplify/ui-react';
-import { Amplify,API, Hub,graphqlOperation, Auth } from 'aws-amplify';
+import { API, graphqlOperation, Auth } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import _ from 'lodash';
 import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth';
-import awsConfig from '../../aws-exports';
+
 
 const inputField = `border border-[#cccccc] focus-visible:outline-0 text-[#666666] py-[10px] px-[20px] w-full h-[50px]`;
 const secondaryButton =
     'flex items-center justify-center bg-primary text-white leading-[38px] text-[15px] h-[50px] w-full  transition-all hover:bg-[#212529] px-[40px]';
-
-
-const isLocalhost = true;
-
-
-
-
-
-    // const isLocalhost = Boolean(
-       
-    //     window.location.hostname === "localhost" ||
-    //       // [::1] is the IPv6 localhost address.
-    //       window.location.hostname === "[::1]" ||
-    //       // 127.0.0.1/8 is considered localhost for IPv4.
-    //       window.location.hostname.match(
-    //         /^127(?:\.(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)){3}$/
-    //       )
-    //   );
-      
-
-      const [
-        localRedirectSignIn,
-        productionRedirectSignIn,
-      ] = awsConfig.oauth.redirectSignIn.split(",");
-      
-      const [
-        localRedirectSignOut,
-        productionRedirectSignOut,
-      ] = awsConfig.oauth.redirectSignOut.split(",");
-      
-      const updatedAwsConfig = {
-        ...awsConfig,
-        oauth: {
-          ...awsConfig.oauth,
-          redirectSignIn: isLocalhost ? 'http://localhost:3000/' :"http://localhost:3000/" ,
-          redirectSignOut: isLocalhost ? "http://localhost:3000/" : "http://localhost:3000/",
-        }
-      }
-      
-      Amplify.configure(updatedAwsConfig);
-    //   Amplify.configure(awsConfig);
-
-      
 
 function AuthForm({ authItems }) {
     // Auth Tab
@@ -68,63 +25,8 @@ function AuthForm({ authItems }) {
     const [products, setProducts] = useState([]);
 
     console.log('Products in state are: ', products);
-    const [user, setUser] = useState(null);
-    const [customState, setCustomState] = useState(null);
 
-    // useEffect(() => {
-    //     Hub.listen('auth', ({ payload: { event, data } }) => {
-    //       switch (event) {
-    //         case 'signIn':
-    //         case 'cognitoHostedUI':
-    //         //   getUser().then(userData => setUser(userData));
-    //           break;
-    //         case 'signOut':
-    //           setUser(null);
-    //           break;
-    //         case 'signIn_failure':
-    //         case 'cognitoHostedUI_failure':
-    //           console.log('Sign in failure', data);
-    //           break;
-    //       }
-    //     });
-    
-    //     // getUser().then(userData => setUser(userData));
-    //   }, []);
-    // async function urlOpener(url, redirectUrl) {
-    //    console.log('jdbvdsbdvbdkjbd',redirectUrl, "       knmkm  ",url)
-    //     try {
-    //       // Check if the InAppBrowser is available for the web
-        
-    //         // Open the URL in the web-specific InAppBrowser
-    //         window.InAppBrowser.openAuth(url, redirectUrl)
-    //           .then(({ type, url: newUrl }) => {
-    //             console.log('type==', type);
-    //             if (type === 'success') {
-    //               // Redirect to the new URL on success
-    //               window.location.href = newUrl;
-    //             }
-    //             if (type === 'cancel') {
-    //               // Handle cancelation as needed
-    //               console.log('Authentication canceled');
-    //             }
-    //           })
-    //           .catch(error => {
-    //             console.error('Error:', error);
-    //           });
-          
-    //     } catch (error) {
-    //       console.error('error==', error);
-    //     }
-    //   }
-      
 
-    //   Amplify.configure({
-    //     ...awsConfig,
-    //     oauth: {
-    //       ...awsConfig.oauth,
-    //       urlOpener,
-    //     },
-    //   });
     // async function urlOpener(url, redirectUrl) {
     //     try {
     //       await InAppBrowser.isAvailable();
@@ -176,51 +78,6 @@ function AuthForm({ authItems }) {
     //       urlOpener,
     //     },
     //   });
-
-    // useEffect(() => {
-    //     const getUser = async () => {
-    //       try {
-    //         const authenticatedUser = await Auth.currentAuthenticatedUser();
-    
-    //         setUser(authenticatedUser);
-    //       } catch {
-    //             window.location.href = '/';
-    //       }
-    //     };
-    
-    //     getUser();
-    //   }, []);
-
-    // useEffect(() => {
-        
-    //     const unsubscribe = Hub.listen("auth", ({ payload: { event, data } }) => {
-    //       switch (event) {
-    //         case "signIn":
-    //           setUser(data);
-    //           break;
-    //         case "signOut":
-    //           setUser(null);
-    //           break;
-    //         case "customOAuthState":
-    //           setCustomState(data);
-    //       }
-    //     });
-
-    //     Hub.listen('auth', (data) => { 
-    //         if (data.payload.event === 'signIn_failure') {
-    //             // Do something here
-    //         }
-    //     })
-    
-    //     Auth.currentAuthenticatedUser()
-    //       .then(currentUser => setUser(currentUser))
-    //       .catch(() => console.log("Not signed in"));
-    
-    //     return unsubscribe;
-    //   }, []);
-
-      
-
 
     useEffect(() => {
         console.log('UseEffect for fetching products');
@@ -473,26 +330,6 @@ function AuthForm({ authItems }) {
                         </button>
                     </form>
                 </div> */}
-    
-                        <button onClick={()=> {
-                            Auth.federatedSignIn({provider:"Google"});
-                        }}>
-                            Google
-                        </button>
-
-                        <button onClick={()=> {
-                            Auth.federatedSignIn({provider:"Facebook"});
-                        }}>
-                            Facebook
-                        </button>
-
-                        <button onClick={()=> {
-                            Auth.federatedSignIn({provider:"SignInWithApple"});
-                        }}>
-                            Apple
-                        </button>
-
-
 
                 <Authenticator>
             {({ signOut, user }) => (
