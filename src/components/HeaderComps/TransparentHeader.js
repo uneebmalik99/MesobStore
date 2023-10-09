@@ -29,8 +29,8 @@ function TransparentHeader({ headerItems }) {
         >
             <div className="container">
                 <div className="grid grid-cols-12">
-                    <div className="md:col-span-4 max-lm:hidden">
-                        <SearchBarComps placeholdertext="Search Anything..." />
+                <div className="md:col-span-4 max-lm:hidden" >
+                                            <SearchBarComps placeholdertext="Search Anything..." />
                     </div>
                     <div className="md:col-span-4 sm:col-span-6 col-span-4">
                         <LogoComps
