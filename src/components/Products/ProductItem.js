@@ -70,6 +70,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                 title,
                 price,
                 quantity: quantityCount,
+                country:product.country,
+                category:product.category,
                 totalPrice:totalprice,
                 image: product.image,
             
