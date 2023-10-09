@@ -3,11 +3,11 @@ import Link from 'next/link';
 import { useState, useEffect } from 'react';
 // import { Auth } from 'aws-amplify';
 import { withAuthenticator, Authenticator, Button } from '@aws-amplify/ui-react';
-import { API, graphqlOperation, Auth } from 'aws-amplify';
+import { Amplify,API, Hub,graphqlOperation, Auth } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 import _ from 'lodash';
 import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth';
-
+import awsConfig from '../../aws-exports';
 
 const inputField = `border border-[#cccccc] focus-visible:outline-0 text-[#666666] py-[10px] px-[20px] w-full h-[50px]`;
 const secondaryButton =

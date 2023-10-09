@@ -19,13 +19,7 @@ const persistor = persistStore(store);
 Amplify.configure(awsExports);
 
 function MyApp({ Component, pageProps }) {
-    console.log('This is app.js');
-    console.log(
-        'Current Authenticated User: ',
-        Auth.currentAuthenticatedUser()
-        
-
-    );
+    
     
 
     useEffect(() => {
