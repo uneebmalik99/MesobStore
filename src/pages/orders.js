@@ -7,12 +7,21 @@ import Breadcrumb from '../components/Breadcrumb';
 import CartPageComps from '../components/CartPageComps';
 import FooterComps from '../components/FooterComps';
 import { getAllItems } from '../lib/ItemsUtil';
+import {BsFillArrowUpCircleFill, BsFillArrowDownCircleFill} from "react-icons/bs"
 
 
 function orders({ headerItems, products, cartPageItems, footerItems }) {
 
+    const [openText3, setOpenText3] = useState(Array(orders.length).fill(false));
+
+    const toggleText3 = (index) => {
+        const updatedOpenText3 = [...openText3];
+        updatedOpenText3[index] = !updatedOpenText3[index];
+        setOpenText3(updatedOpenText3);
+      };
     const [order,setOrderData] = useState([])
     const getMyOrders = async () => {
+
         const user = await Auth.currentAuthenticatedUser();
   if(user?.attributes?.sub){
       const userSUb = user?.attributes?.sub;
@@ -57,7 +66,7 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
         console.log(error);
       } 
   }else{
-    alert('vjk')
+    alert('')
       
   }
      
@@ -82,8 +91,14 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
 
 {order.map((order, index) => {
     let total1 = 0;
-    const products = JSON.parse(order.Products);
-    console.log("nvjdnvds"+JSON.stringify(products));
+    // const products = JSON.parse(order.Products);
+
+    let products = JSON.parse(order.Products);
+    let p = [];
+
+    p = JSON.parse(order.Products);
+    console.log('dskdsv   '   +JSON.stringify(p[0]));
+        console.log("nvjdnvds"+JSON.stringify(products));
     for(let i = 0; i< products.length ; i++){
         let price = products[i].price?.replace(/[\s,]/g, "")?.slice(1);
       price = Number(price) * products[i].qty;
@@ -92,11 +107,11 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
     console.log("kfsldn  -"+total1.toFixed(2));
     return(
         <>
-        <div style={{ paddingInline:'5%',paddingBottom:'3%', paddingTop:'3%', borderBottomWidth:0.5, borderColor:'grey'}}>
-
+        {/* <div style={{ paddingInline:'5%',paddingBottom:'3%', paddingTop:'3%', borderBottomWidth:0.5, borderColor:'grey'}}> */}
+        <div style={{ paddingInline:'5%',paddingBottom:'2%', paddingTop:'2%', borderBottomWidth:0.5, borderColor:'grey'}}>
      
-           <li className="item flex items-start justify-between border-b border-[#dddddd] pb-[25px] mb-[20px] last:mb-0 last:pb-0 last:border-b-0">
-            <div className="item-img">
+        <li className="item flex items-start justify-between  pb-[5px] mb-[5px] last:mb-0 last:pb-0 last:border-b-0">
+                        <div className="item-img">
                
                     {/* <a className="product-img">
                         <img src={} alt={} />

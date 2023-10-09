@@ -11,11 +11,10 @@ function AboutUs({ aboutItems }) {
             <div className="video-banner">
                 <div className="container">
 
-                    <div style={{display:'flex',flexDirection:'row',width:'100%',borderTopWidth:0.5,borderColor:'grey',borderRadius:20, justifyContent:"space-around", alignItems:'center', alignSelf:'center'}}>
-
+                <div style={{display:'flex',flexDirection:'row',width:'100%',paddingTop:20, borderTopWidth:0.5,borderColor:'grey',borderRadius:20, justifyContent:"space-around", alignItems:'center', alignSelf:'center'}}>
                     <button  onClick={()=> {seteng(true)}}>English</button>
                     <div  >|</div>
-                    <button onClick={()=> {seteng(false)}}>Eitrea</button>
+                    <button onClick={()=> {seteng(false)}}>Tigrinya</button>
 
                     </div>
                 
@@ -99,8 +98,7 @@ function AboutUs({ aboutItems }) {
                             </h2>
                             <p>{aboutItems[0]?.perfectionDesc}</p>
                         </div>
-                        <div className="lm:col-span-5 col-span-12">
-                            <ProgressBar
+      {/* <div className="lm:col-span-5 col-span-12">                            <ProgressBar
                                 title="Creativity"
                                 progressText="82%"
                             />
@@ -109,11 +107,11 @@ function AboutUs({ aboutItems }) {
                                 progressText="82%"
                             />
                             <ProgressBar title="Design" progressText="70%" />
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
-            <div className="about-banner xl:pt-[120px] lg:pt-[100px] md:pt-[80px] pt-[50px]">
+            {/* <div className="about-banner xl:pt-[120px] lg:pt-[100px] md:pt-[80px] pt-[50px]">
                 <div className="container">
                     <div className="grid grid-cols-12 gap-[10px]">
                         <div className="col-span-8">
@@ -161,8 +159,8 @@ function AboutUs({ aboutItems }) {
                         </div>
                     </div>
                 </div>
-            </div>
-            <div className="address pt-[60px]">
+            </div> */}
+            {/* <div className="address pt-[60px]">
                 <div className="container">
                     <div className="grid grid-cols-12 gap-x-[30px] max-sm:gap-y-[30px]">
                         <div className="lm:col-span-7 col-span-12">
@@ -187,7 +185,7 @@ function AboutUs({ aboutItems }) {
                         </div>
                     </div>
                 </div>
-            </div>
+            </div> */}
         </div>
     );
 }

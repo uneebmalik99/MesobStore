@@ -18,7 +18,7 @@ infoList:
     [
         { id: 01, title: 'Help & Contact Us', path: '/contact' },
         { id: 02, title: 'Returns & Refunds', path: '/contact' },
-        { id: 03, title: 'Online Stores', path: '/' },
+        # { id: 03, title: 'Online Stores', path: '/' },
         { id: 04, title: 'Terms & Conditions', path: '/contact' },
     ]
 aboutTitle: 'About Us'
