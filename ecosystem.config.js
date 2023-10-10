@@ -8,8 +8,8 @@ module.exports = {
     production : {
       key : 'mesob.pem' ,
       user : 'ubuntu',
-      host : '107.21.89.173',
-      ref  : 'origin/Uneeb',
+      host : '54.173.188.150',
+      ref  : 'origin/main',
       repo : 'git@github.com:uneebmalik99/MesobStore.git',
       path : '/home/ubuntu',
       'pre-deploy-local': '',
