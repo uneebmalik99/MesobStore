@@ -8,7 +8,7 @@ import { API, graphqlOperation, Auth } from 'aws-amplify';
 import {createOrder} from '../../graphql/mutations';
 import { CHECKOUT_API_URL} from'../../api_service';
 // import  from '@stripe/stripe-js';
-import { loadStripe } from '@stripe/react-stripe-js'
+import { loadStripe } from '@stripe/stripe-js'
 
 import {
   PaymentElement,
@@ -31,8 +31,8 @@ let productDetails;
   
 function Checkout({ checkoutItems }) {
 
-    // const stripePromise = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
-    const stripePromise = loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
+    const stripePromise = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+    // const stripePromise = loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
 
 
 
