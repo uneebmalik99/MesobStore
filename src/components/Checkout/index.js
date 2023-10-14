@@ -31,7 +31,11 @@ let productDetails;
   
 function Checkout({ checkoutItems }) {
 
-const stripePromise = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+    // const stripePromise = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+    const stripePromise = loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
+
+
+
 const [childFunctionCalled, setChildFunctionCalled] = useState(false);
 
 
