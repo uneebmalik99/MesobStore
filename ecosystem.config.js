@@ -9,7 +9,7 @@ module.exports = {
       key : 'mesob.pem' ,
       user : 'ubuntu',
       host : '3.216.230.161',
-      ref  : 'origin/main',
+      ref  : 'origin/Uneeb',
       repo : 'git@github.com:uneebmalik99/MesobStore.git',
       path : '/home/ubuntu',
       'pre-deploy-local': '',
