@@ -3,7 +3,7 @@
 const nextConfig = {
 
     output: "export",
-    swcMinify: false,
+
   
 }
 
