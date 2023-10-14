@@ -7,7 +7,6 @@ import Breadcrumb from '../components/Breadcrumb';
 import CartPageComps from '../components/CartPageComps';
 import FooterComps from '../components/FooterComps';
 import { getAllItems } from '../lib/ItemsUtil';
-import {BsFillArrowUpCircleFill, BsFillArrowDownCircleFill} from "react-icons/bs"
 
 
 function orders({ headerItems, products, cartPageItems, footerItems }) {

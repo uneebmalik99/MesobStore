@@ -1,19 +1,17 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-// import { Auth } from 'aws-amplify';
 import { withAuthenticator, Authenticator, Button } from '@aws-amplify/ui-react';
 import { Amplify,API, Hub,graphqlOperation, Auth } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
 import _ from 'lodash';
-import {CognitoHostedUIIdentityProvider} from '@aws-amplify/auth';
-import awsConfig from '../../aws-exports';
+import * as queries from '../../graphql/queries';
+
 
 const inputField = `border border-[#cccccc] focus-visible:outline-0 text-[#666666] py-[10px] px-[20px] w-full h-[50px]`;
 const secondaryButton =
     'flex items-center justify-center bg-primary text-white leading-[38px] text-[15px] h-[50px] w-full  transition-all hover:bg-[#212529] px-[40px]';
 
-function AuthForm({ authItems }) {
+function AuthForm({ authItems }){
     // Auth Tab
     const [authTabState, setAuthTabState] = useState(1);
     const [password, setPassword] = useState('');

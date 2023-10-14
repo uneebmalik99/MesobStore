@@ -2,18 +2,18 @@ import PropTypes from 'prop-types';
 import { IoCloseOutline } from 'react-icons/io5';
 import { useSelector } from 'react-redux';
 import Link from 'next/link';
-import CartItem from './CartItem';
 import { useEffect, useState } from 'react';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
+import CartItem from './CartItem';
 
 const minicartGroupBtn = `flex items-center justify-center border border-[#222222]  w-full h-[50px]`;
 function Cart({ minicart, showMiniCart }) {
     const [userauth ,setuserauth ] = useState(false)
     const cartItems = useSelector((state) => state.cart.items);
 
-    let initialValue = 0;
-    console.log("vdvds"+JSON.stringify(cartItems));
-    console.log('jbfjd'+cartItems.length)
+    const initialValue = 0;
+    // console.log("vdvds"+JSON.stringify(cartItems));
+    // console.log('jbfjd'+cartItems.length)
     // const totalfunc = () => {
     //     for(let i = 0; i<cartItems.length ; i++ ){
     //         let pt  = cartItems; // Remove the dollar sign
@@ -37,16 +37,16 @@ function Cart({ minicart, showMiniCart }) {
 
     try {
         const data = await Auth.currentSession();
-        console.log("dddd "+data);
+        // console.log("dddd "+data);
         if(data){
             setuserauth(true)
-            console.log("data user  "+JSON.stringify(data));
+            // console.log("data user  "+JSON.stringify(data));
         }
         
     } catch(err) {
         setuserauth(false)
 
-        console.log("data "+err);
+        // console.log("data "+err);
     }
     };
 
@@ -116,7 +116,7 @@ function Cart({ minicart, showMiniCart }) {
                                         <li>
                                             
 
-                                            {userauth == true?
+                                            {userauth === true?
                                                   <Link href="/checkout">
                                                   <div
                                                       className={`${minicartGroupBtn} bg-[#222222] text-white`}

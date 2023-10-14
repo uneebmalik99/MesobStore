@@ -14,7 +14,6 @@ function CartItem({ item }) {
     const removeItemFromCartHandler = (id) => {
         dispatch(cartActions.removeItemFromCart(id));
     };
-    console.log("fssdvvd"+JSON.stringify(item));
 
     return (
         <li className="item flex items-start justify-between border-b border-[#dddddd] pb-[25px] mb-[20px] last:mb-0 last:pb-0 last:border-b-0">

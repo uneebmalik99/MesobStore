@@ -1,8 +1,8 @@
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import * as IoIcon from 'react-icons/io5';
 import ProgressBar from '../ProgressBar';
 import VideoModal from '../VideoModal';
-import { useState } from 'react';
 
 function AboutUs({ aboutItems }) {
     const [eng, seteng]=useState(true)
@@ -12,13 +12,13 @@ function AboutUs({ aboutItems }) {
                 <div className="container">
 
                 <div style={{display:'flex',flexDirection:'row',width:'100%',paddingTop:20, borderTopWidth:0.5,borderColor:'grey',borderRadius:20, justifyContent:"space-around", alignItems:'center', alignSelf:'center'}}>
-                    <button  onClick={()=> {seteng(true)}}>English</button>
+                    <button type='button' onClick={()=> {seteng(true)}}>English</button>
                     <div  >|</div>
-                    <button onClick={()=> {seteng(false)}}>Tigrinya</button>
+                    <button type='button' onClick={()=> {seteng(false)}}>Tigrinya</button>
 
                     </div>
                 
-                {eng == true ?
+                {eng === true ?
 
              
                     <div  className="blog-img relative flex overflow-hidden after:transition-all after:duration-500 after:bg-[rgba(0,0,0,.4)] after:absolute after:top-0 after:left-0 after:w-full after:h-full after:opacity-0 hover:after:opacity-100 group">

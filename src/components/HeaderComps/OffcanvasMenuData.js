@@ -33,11 +33,11 @@ export const OffcanvasData = [
                     //     link: '/products/4-columns',
                     //     text: 'Product 4 Columns',
                     // },
-                    {
-                        id: '5-columns',
-                        link: '/products/5-columns',
-                        text: 'Product 5 Columns',
-                    },
+                    // {
+                    //     id: '5-columns',
+                    //     link: '/products/5-columns',
+                    //     text: 'Product 5 Columns',
+                    // },
                     // {
                     //     id: '6-columns',
                     //     link: '/products/6-columns',

@@ -5,7 +5,7 @@ export const SEND_MAIL_API_URL =
     'https://q0v1vrhy5g.execute-api.us-east-1.amazonaws.com/staging';
 global.Buffer = require('buffer').Buffer;
 
-export const api_send_mail = async (payload) => {
+export const ApiSendMail = async (payload) => {
     const uri = SEND_MAIL_API_URL;
     const response = await fetch(uri, {
         method: 'POST',
@@ -32,7 +32,7 @@ headers.append(
     `Basic${Buffer.from(`${username}:${password}`).toString('base64')}`
 );
 
-export const api_klarna_session = async (payload) => {
+export const ApiKlarnaSession = async (payload) => {
     const uri = `${KLARNA_ENDPOINT}/payments/v1/sessions`;
     const response = await fetch(uri, {
         method: 'POST',
@@ -42,7 +42,7 @@ export const api_klarna_session = async (payload) => {
     return response;
 };
 
-export const api_klarna_order = async (payload, orderToken) => {
+export const ApiKlarnaOrder = async (payload, orderToken) => {
     const uri = `${KLARNA_ENDPOINT}/v1/authorizations/${orderToken}/order`;
     const response = await fetch(uri, {
         method: 'POST',
