@@ -5,6 +5,7 @@ export const SEND_MAIL_API_URL =
     'https://q0v1vrhy5g.execute-api.us-east-1.amazonaws.com/staging';
 global.Buffer = require('buffer').Buffer;
 
+
 export const api_send_mail = async (payload) => {
     const uri = SEND_MAIL_API_URL;
     const response = await fetch(uri, {
