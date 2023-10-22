@@ -6,7 +6,7 @@ import { cartActions } from '../../store/cart/cart-slice';
 
 function CartItem({ item }) {
 
- 
+
     const dispatch = useDispatch();
 
     const { image, slug,  country, category, title, quantity, price } = item;
@@ -16,23 +16,16 @@ function CartItem({ item }) {
     };
 
     return (
-        <li className="item flex items-start justify-between border-b border-[#dddddd] pb-[25px] mb-[20px] last:mb-0 last:pb-0 last:border-b-0">
+        
+        <li  className= "item flex items-start justify-between border-b border-[#dddddd] pb-[25px] mb-[20px] last:mb-0 last:pb-0 last:border-b-0">
             <div className="item-img">
                
                     <a className="product-img">
-                        <img src={image} alt={title} />
+                        <img src={image} style={{height:60 , width:60}} alt={title} />
                     </a>
                 
             </div>
-            {/* <div className="item-content w-[calc(100%-88px)] pl-[20px]">
-                <h3 className="leading-[21px]">
-                    <Link href={slug}>
-                        <a className="text-[15px] transition-all hover:text-primary">
-                            {country}
-                        </a>
-                    </Link>
-                </h3>
-                </div> */}
+            
             <div className="item-content w-[calc(100%-88px)] pl-[20px]">
                 <h3 className="leading-[21px]">
                     {/* <Link href={slug}>

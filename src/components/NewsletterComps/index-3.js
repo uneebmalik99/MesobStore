@@ -21,12 +21,12 @@ function NewsletterCompsThree({
                     </div>
                     <div className="md:col-span-6 col-span-12 self-center">
                         <form className="newsletter-form relative">
-                            <input
+                            {/* <input
                                 className="w-full h-[40px] border-b border-[#dddddd] p-[10px_50px_10px_0] focus:outline-none focus:border-b-primary focus:text-primary"
                                 type="email"
                                 placeholder="Your email address"
                                 required
-                            />
+                            /> */}
                             <button
                                 type="submit"
                                 className="light-stroke text-[18px] absolute top-0 right-[15px] h-[40px]"

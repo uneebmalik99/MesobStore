@@ -28,7 +28,6 @@ query MyQuery {
     }
   }
   `;
-
   
 function HomePage({
     headerItems,
@@ -55,13 +54,19 @@ function HomePage({
         ref.current?.scrollIntoView({ behavior: 'smooth' });
       };
     const fetchProducts = async () => {
+
+       
+
+
+
+
         try {
             const response = await API.graphql(
                 graphqlOperation(queries.listProducts)
             );
             const allProducts = response.data.listProducts.items;
             const allProducts2 = response.data.listProducts.items;
-            console.log("djsvjdnsvj"+allProducts2);
+            console.log("djsvjdnsvj"+JSON.stringify(allProducts2));
 
             let receomedproducts= [];
 
@@ -102,6 +107,7 @@ function HomePage({
                         'oldPrice',
                         'country',
                         'isRecommended',
+
                         
                     ]);
                 })
@@ -181,39 +187,10 @@ function HomePage({
             </div>
 
 
-            {/* <BestSellingProduct
-                products={products}
-                productFilter={productFilter}
-                sectionTitle="Mesob Best Selling"
-                productFilterPath="left-sidebar"
-            /> */}
-
-            {/* <div className="product-list-container" >
-                <h1 className="product-list-title">
-                    Our Best Selling Products
-                </h1>
-                <div className="product-list">
-                    {products.map((product, index) => (
-                        <div className="product-item" key={index}>
-                            <h3 className="product-title">{product.title}</h3>
-                            <img
-                                className="product-image"
-                                src={product.image}
-                                alt={product.title}
-                            />
-                            <p className="product-price">
-                                Price: {product.price}
-                            </p>
-                            <p className="product-country">
-                                Country: {product.country}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </div> */}
             
-            {/* <OfferColection offerColection={offerColection} /> */}
             <div style={{backgroundColor:'#ECF0F1', paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
+
+               
 
             <h2
                    className="offer-colection-title relative pb-[10px] mb-[20px] after:absolute after:left-0 after:bottom-0 after:bg-primary after:h-[4px] after:w-[70px]"
@@ -249,40 +226,103 @@ function HomePage({
                                         {RecommendedProduct.map((Rproduct, index) => {
 
                                      
-                                        console.log("Rproduct  nkjb"+cproduct);
+                                        console.log("Rproduct  nkjb"+JSON.stringify(Rproduct.content.price));
                                             
                                             
                                         let img = '';
+                                        var price ;
+                                        let old_price = '';
 
                                         if (Rproduct.isRecommended === true) {
                                             // Parse the JSON content to access the image property
                                             const contentObj = JSON.parse(Rproduct.content);
                                             // Set img to the image URL from the parsed content
                                             img = contentObj.image;
+                                          
                                         }
+
 
                                         if (Rproduct.isRecommended == true && Rproduct.category == cproduct) {
 
+                                           
+                                            const contentObj = JSON.parse(Rproduct.content);
+                                            // Set img to the image URL from the parsed content
+                                            price = contentObj.price;
+                                            old_price = price;
+                                            price = price.slice(1)
+                                            const off  = Rproduct.off_percentage.slice(0, -1);
+
+                                            console.log("vfklns",price);
+                                             
+                                            console.log("fndudskkd", off)
+
+                                                // Calculate the discounted price
+                                                let discount = (off / 100) * price;
+                                                let priceAfterDiscount = price - discount;
+
+                                                console.log("cdsnsdfkdn",priceAfterDiscount); 
+
+                                            let tenPercentOfPrice =priceAfterDiscount;
+                                            
+                                            tenPercentOfPrice = tenPercentOfPrice.toFixed(2)
 
                                         return (
+
+
+                                            
+                <Link
+                            href={{
+                            pathname: "/products/slug",
+                            query:  {
+                                id: Rproduct.id,
+                                title: Rproduct.title,
+                                image: img,
+                                desc:Rproduct.desc,
+                                price:Rproduct.price,
+                                category:Rproduct.category,
+                              }  }}  >
+
+                                
+
+                                            {/* <Link href={`/products/${Rproduct?.slug}`}> */}
+
                                         <div  className="product-item"  key={index}>
 
-                                            <h3 className="product-title">{Rproduct.title}</h3>
+                                        <div style={{position:'absolute',height:30, width:30,display:'flex', justifyContent:'center',alignContent:'center'
+                                        ,alignItems:'center', backgroundColor:'green',marginTop:-25,marginLeft:-10, borderRadius:'50%'}}>
+                                                <p style={{color:'white',fontWeight:700, fontSize:10}}>{Rproduct.off_percentage}</p>
+                                            </div>
+
+                                            {/* <h2 className="product-title">{Rproduct.title}</h2> */}
+                                            <h2 className="product-title">
+                                            {Rproduct.title.length > 15
+                                                ? `${Rproduct.title.substring(0, 15)}...`
+                                                : Rproduct.title
+                                            }
+                                            </h2>
                                             {/* <h3 className="product-title">  {Rproduct.isRecommended}</h3> */}
 
                                         
                                             <img
                                                 className="product-image"
+                                                style={{borderRadius:10,height:180,  objectFit:'cover'}}
+
                                                 src={img}
+                                              
                                                 alt={Rproduct.title}
                                             />
-                                            <p className="product-price">
-                                                Price: {Rproduct.price}
+                                            <p className="product-price" style={{fontSize:12, textDecorationLine:'line-through',  textDecorationColor: "black" }} >
+
+                                                Was: {old_price}
+                                            </p>
+                                            <p className="product-price" style={{color:'green', fontWeight:700}}>
+                                                New Price: {tenPercentOfPrice}
                                             </p>
                                             <p className="product-country">
                                                 Country: {Rproduct.country}
                                             </p>
                                         </div>
+                                        </Link>
 
                                         )
                                         

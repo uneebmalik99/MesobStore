@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState ,forwardRef, useImperativeHandle, useRef } from "react";
 
 import {PaymentElement, useStripe, useElements} from "@stripe/react-stripe-js";
@@ -6,129 +5,140 @@ import { CHECKOUT_API_URL} from '../../api_service';
 import { cartActions } from "../../store/cart/cart-slice";
 import { useDispatch, useSelector } from 'react-redux';
 
-const CheckoutForm = forwardRef((props, ref) => {
-  const dispatch = useDispatch();
+const CheckoutForm = ((props) => {
 
-// function  CheckoutForm (props) { 
-const stripe = useStripe ();
-const elements = useElements () ;
+  const clientSecret2 = useSelector((state) => state.cart.clientSecret);
+  const dispatch = useDispatch();
+  const stripe = useStripe();
+  const elements = useElements();
 const [email, setEmail] = useState("");
 const [errorMessage, setErrorMessage] = useState(null);
 const [message, setMessage] = useState (null);
-const [isLoading, setIsLoading] = useState(true);
+const [isLoading, setIsLoading] = useState(false);
 const [client_secret, setclient_secret] =useState('')
-
-  async function childFunction(data) {
-    console.log("Child function called with data:", data);
-    await clearAllItemHandler();
-    // dispatch(cartActions.clearAllFromCart());
-    handleSubmit(data)
-    // Your code here
-  }
-
-  // Expose the childFunction to the parent component through the ref
-  useImperativeHandle(ref, () => ({
-    childFunction
-  }));
-
-useEffect ( () =>{
-if (!stripe) {
-    // alert('no sr=tripe')
-    return;
-}
-
-const clientSecret = new URLSearchParams(window.location.search).get(
-    "payment_intent_client_secret"
-)
-
-if(!clientSecret){
-    return;
-}
-
-stripe.retrievePaymentIntent(clientSecret).then(({paymentintent})=>{
-    switch(paymentintent.status){
-        case 'succeeded':
-            setMessage("succeeded");
-            break;
-        case "processing":
-            setMessage("processing");
-            break;
-        case "requires_payment_mehtod":
-            setMessage("not sucesfuly");
-            break;
-        default:
-        setMessage("say something");
-        break;
-    }
-});
-
-
-},[stripe]);
-
+const [value , setvalue] = useState('')
 const clearAllItemHandler = () => {
   console.log('cart clear');
   dispatch(cartActions.clearAllFromCart());
 };
 
+// useEffect(() => {
+//   if (!stripe ) {
+//     return;
+//   }
 
+//   const clientSecret = new URLSearchParams(window.location.search).get(
+//    "/"
+//   );
 
-const handleSubmit = async (data) => {
-    // event.preventDefault();
-   
-
-   
-    if (elements == null) {
-      return;
-    }
-
-    // Trigger form validation and wallet collection
-    const {error: submitError} = await elements.submit();
-    if (submitError) {
-      // Show error to your customer
-      setErrorMessage(submitError.message);
-      return;
-    }
+//   if (!clientSecret ) {
     
+//     return;
+//   }
+
+
+//     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+//       setMessage(paymentIntent.status === "succeeded" ? "Your payment succeeded" : "Unexpected error occurred");
+//     });
   
-          // setStripeData(data);
+ 
+// }, [stripe]);
+// useEffect(() => {
+//   if (!stripe) {
+//     return;
+//   }
 
-          // const confirmPayment = await stripe?.confirmCardPayment(
-          //   response.data.data.client_secret
-          // ).then
-        const {error} = await stripe.confirmPayment({
-            //`Elements` instance that was used to create the Payment Element
-            elements,
-            clientSecret:data.data.client_secret,
-            confirmParams: {
-              return_url: 'http://localhost:3000',
-            },
-          });
+//   const clientSecret = new URLSearchParams(window.location.search).get(
+//     "payment_intent_client_secret"
+//   );
 
-          if (error) {
-            // This point will only be reached if there is an immediate error when
-            // confirming the payment. Show error to your customer (for example, payment
-            // details incomplete)
-            setErrorMessage(error.message);
-          } else {
-       
-            // Your customer will be redirected to your `return_url`. For some payment
-            // methods like iDEAL, your customer will be redirected to an intermediate
-            // site first to authorize the payment, then redirected to the `return_url`.
-          }
+//   if (!clientSecret) {
+//     return;
+//   }
 
-      
+//   stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
+//     setMessage(paymentIntent.status === "succeeded" ? "Your payment succeeded" : "Unexpected error occurred");
+//   });
 
+// }, [stripe]);
+
+
+
+
+const handleSubmit = async (event) => {
+  setIsLoading(true);
+  event.preventDefault();
+  const {error: submitError} = await elements.submit();
+  if (submitError) {
+    // Show error to your customer
+    setIsLoading(false);
+
+    setMessage(submitError.message);
+    return;
+  }
+  if (!stripe || !elements) {
+    // Stripe.js hasn't yet loaded.
+    // Make sure to disable form submission until Stripe.js has loaded.
+    return;
+  }
+ 
+  try {
     
-  };
+    // Dispatch an action to clear the cart items
+    // dispatch(cartActions.clearAllFromCsart());
+
+    // Perform the Stripe payment confirmation
+    const result = await stripe.confirmPayment({
+      // `Elements` instance that was used to create the Payment Element
+      elements,
+      clientSecret:clientSecret2,
+
+      confirmParams: {
+        // return_url: "http://localhost:3000",
+        return_url: "https://www.mesobstore.com/",
+        
+
+    },
+        redirect: 'if_required' 
+    
+    });
+
+    if (result.error) {
+      // Show error to your customer (for example, payment details incomplete)
+      setMessage(result.error.message);
+      setIsLoading(false);
+
+      console.log(result.error.message);
+    } else {
+    dispatch(cartActions.clearAllFromCart());
+
+      // Your customer will be redirected to the completion page
+      // window.location.href = "http://localhost:3000";
+    }
+  } catch (error) {
+    setIsLoading(false);
+    setMessage(error);
+
+    // Handle any errors that occur during the process
+    console.error(' error =  ',error);
+  }
 
 
+
+
+};
 
 return (
-    <form onSubmit={childFunction}>
-    <PaymentElement />
-  <div>{message}</div>
-    {errorMessage && <div>{errorMessage}</div>}
-  </form>
+  <form onSubmit={handleSubmit}>
+  <p className="text-black mb-4">Complete your payment here!</p>
+  <PaymentElement />
+  <button  
+  
+  className='bg-black rounded-xl text-white p-2 mt-6 mb-2' style={{width:'100%'}}>
+    {isLoading ? "Loading ... " : "Place Order"}
+  </button>
+  {message && <div>{message}</div>}
+</form>
 )
 
 
@@ -136,3 +146,5 @@ return (
 
 
 export default CheckoutForm ;
+
+

@@ -10,7 +10,14 @@ import { getAllItems } from '../lib/ItemsUtil';
 
 
 function orders({ headerItems, products, cartPageItems, footerItems }) {
+    const [orderVisibility, setOrderVisibility] = useState({}); // Initialize an empty object for order visibility
 
+    const toggleOrderVisibility = (orderId) => {
+        setOrderVisibility((prevOrderVisibility) => ({
+          ...prevOrderVisibility,
+          [orderId]: !prevOrderVisibility[orderId] || false,
+        }));
+      };
     const [openText3, setOpenText3] = useState(Array(orders.length).fill(false));
 
     const toggleText3 = (index) => {
@@ -87,7 +94,6 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
                 activeItem="My Orders"
             />
 
-
 {order.map((order, index) => {
     let total1 = 0;
     // const products = JSON.parse(order.Products);
@@ -97,7 +103,11 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
 
     p = JSON.parse(order.Products);
     console.log('dskdsv   '   +JSON.stringify(p[0]));
-        console.log("nvjdnvds"+JSON.stringify(products));
+    console.log("nvjdnkjbvds"+JSON.stringify(products));
+
+    console.log("nvjdnvds"+JSON.stringify(order));
+    let priducttodisplay = []
+
     for(let i = 0; i< products.length ; i++){
         let price = products[i].price?.replace(/[\s,]/g, "")?.slice(1);
       price = Number(price) * products[i].qty;
@@ -106,64 +116,149 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
     console.log("kfsldn  -"+total1.toFixed(2));
     return(
         <>
-        {/* <div style={{ paddingInline:'5%',paddingBottom:'3%', paddingTop:'3%', borderBottomWidth:0.5, borderColor:'grey'}}> */}
-        <div style={{ paddingInline:'5%',paddingBottom:'2%', paddingTop:'2%', borderBottomWidth:0.5, borderColor:'grey'}}>
+        <div style={{borderBottomWidth:1,}}>
+
+      
+        <div  style={{ paddingInline:10,marginTop:'2%',paddingBlock:'2%', display:'flex', justifyContent:'space-evenly', }}>
+
+        
+
      
-        <li className="item flex items-start justify-between  pb-[5px] mb-[5px] last:mb-0 last:pb-0 last:border-b-0">
-                        <div className="item-img">
-               
-                    {/* <a className="product-img">
-                        <img src={} alt={} />
-                    </a> */}
-                
-            </div>
-            {/* <div className="item-content w-[calc(100%-88px)] pl-[20px]">
-                <h3 className="leading-[21px]">
-                    <Link href={slug}>
-                        <a className="text-[15px] transition-all hover:text-primary">
-                            {country}
-                        </a>
-                    </Link>
-                </h3>
-                </div> */}
+        <p className="text-[#666666]"> id : {order.id}</p>
+        {/* <span className="text-[#666666]"> status :{order.Status}</span> */}
 
-<div className="font-medium text-[15px] leading-[26px]">
-                    id : <span className="text-[#666666]">{order.id}</span>
-                </div>
+       <p>Status : </p>
 
-            <div className="item-content w-[calc(100%-88px)] pl-[20px]">
-                <h3 className="leading-[21px]">
-                    <Link href=''>
-                        <a className="text-[15px] transition-all hover:text-primary">
-                            {order.name}
-                        </a>
-                    </Link>
-                </h3>
-            
-                
-                <div className="font-medium text-[15px] leading-[26px]">
-                    status : <span className="text-[#666666]">{order.Status}</span>
-                </div>
-                <div className="font-medium text-[15px] leading-[26px]">
-                    Date : <span className="text-[#666666]">{order.createdAt}</span>
-                </div>
-                <div className="font-medium text-[13px] leading-[23px]">
-                    Total :{'$ '}  <span className="text-[#666666]">{total1}</span>{' '}
-                </div>
-            </div>
+       <div style={{display:'flex', flexDirection:'column'}}>
 
-            <div >
-            <button>v</button>
+      
 
-         
-            </div>
-           
-            
-        </li>
+        <div style={{  display:'flex', flexDirection:'row'}}>
+        <div style={{
+  position: 'relative',
+  width: '20px',
+  height: '20px',
+  borderRadius: '50%',
+  background: '#ffffff'
+}}>
+       <div style={{
+  backgroundImage:order.Status == 'Orderd' ? 'linear-gradient(to bottom, rgb(9, 112, 26) 0%, rgb(21, 255, 0) 100%)':'linear-gradient(to bottom, rgb(255, 225, 225) 0%, rgb(225, 255, 225) 0%)',
+  content: '',
+  position: 'absolute',
+  top: '-5px',
+  bottom: '-5px',
+  right: '-5px',
+  left: '-5px',
+  zIndex: '-1',
+  borderRadius: 'inherit'
+}}>
+    </div> 
+    </div> 
+      
+    <p style={{paddingInline:5,}}> Item Ordered </p> 
 
         </div>
+
+
+
+
+        <div style={{  display:'flex', flexDirection:'row'}}>
+        <div style={{
+  position: 'relative',
+  width: '20px',
+  height: '20px',
+  borderRadius: '50%',
+  background: '#ffffff'
+}}>
+       <div style={{
+  backgroundImage:order.Status == 'Shipped' ? 'linear-gradient(to bottom, rgb(9, 112, 26) 0%, rgb(21, 255, 0) 100%)':'linear-gradient(to bottom, rgb(255, 225, 225) 0%, rgb(225, 255, 225) 100%)',
+  content: '',
+  position: 'absolute',
+  top: '-5px',
+  bottom: '-5px',
+  right: '-5px',
+  left: '-5px',
+  zIndex: '-1',
+  borderRadius: 'inherit'
+}}>
+    </div> 
+    </div> 
+      
+    <p style={{paddingInline:5,}}> Item Shipped </p> 
+
+        </div>
+
+
+
+
+
+        <div style={{  display:'flex', flexDirection:'row'}}>
+        <div style={{
+  position: 'relative',
+  width: '20px',
+  height: '20px',
+  borderRadius: '50%',
+  background: '#ffffff'
+}}>
+       <div style={{
+  backgroundImage:order.Status == 'Delivered'? 'linear-gradient(to bottom, rgb(9, 112, 26) 0%, rgb(21, 255, 0) 100%)':'linear-gradient(to bottom, rgb(255, 225, 225) 0%, rgb(225, 255, 225) 100%)',
+  content: '',
+  position: 'absolute',
+  top: '-5px',
+  bottom: '-5px',
+  right: '-5px',
+  left: '-5px',
+  zIndex: '-1',
+  borderRadius: 'inherit'
+}}>
+    </div> 
+    </div> 
+      
+    <p style={{paddingInline:5,}}> Item Successfully Delivered </p> 
+
+        </div>
+
+        </div>
+
+        <span className="text-[#666666]">Date: {new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
+        <span className="text-[#666666]">Total :{'$ '}{total1}</span>{' '}
+
+
+       
+        </div>
+
+
+
+        <div>
+             
+        <div style={{ paddingInline: 10, paddingBlock: '2%', display: 'flex', justifyContent: 'space-evenly' }}>
+                    <button style={{backgroundColor:'orange',paddingBlock:10,paddingInline:10, borderRadius:10, color:'white'}} onClick={() => toggleOrderVisibility(order.id)}>
+                      {orderVisibility[order.id] ? 'Hide Products' : 'View Products'}
+                    </button>
+                  </div>
+                  {orderVisibility[order.id] && (
+                    <div>
+                      {products.map((product, index) => {
+                        return (
+                          <div style={{ borderBottomWidth: 1, paddingInline: 30, marginTop: '1%', paddingBlock: '1%', display: 'flex', justifyContent: 'space-evenly' }}>
+                            <img src={product.image} width={30} height={30} />
+                            <p>{product.title}</p>
+                            <p>{product.description && product.description.length > 50 ? `${product.description.slice(0, 50)}...` : product.description}</p>
+                            <p>${product.price}</p>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  )}
+                </div>
+            
+            </div>
+  
+
+
+
+    
           
-            <div style={{backgroundColor:'red'}}>dfmfdfd</div>
           
 </>
 )

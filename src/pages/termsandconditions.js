@@ -1,0 +1,48 @@
+import PropTypes from 'prop-types';
+import HeaderOne from '../components/HeaderComps';
+import Breadcrumb from '../components/Breadcrumb';
+import AboutUs from '../components/AboutUs';
+import FooterComps from '../components/FooterComps';
+import { getAllItems } from '../lib/ItemsUtil';
+
+function terms({ headerItems, aboutItems, footerItems }) {
+    return (
+        <>
+            <HeaderOne headerItems={headerItems} headerContainer="container" />
+            <Breadcrumb
+                breadcrumbContainer="container"
+                title="About Mesob Store"
+                item="Home"
+                itemPath="/"
+                activeItem="About Us"
+            />
+            <AboutUs aboutItems={aboutItems} />
+            <FooterComps
+                footerContainer="container"
+                footerItems={footerItems}
+            />
+        </>
+    );
+}
+
+export function getStaticProps() {
+    const headerItems = getAllItems('header');
+    const aboutItems = getAllItems('about');
+    const footerItems = getAllItems('footer');
+
+    return {
+        props: {
+            headerItems,
+            aboutItems,
+            footerItems,
+        },
+    };
+}
+
+terms.propTypes = {
+    headerItems: PropTypes.instanceOf(Array).isRequired,
+    aboutItems: PropTypes.instanceOf(Array).isRequired,
+    footerItems: PropTypes.instanceOf(Array).isRequired,
+};
+
+export default terms;

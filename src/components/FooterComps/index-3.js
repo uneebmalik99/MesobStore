@@ -122,13 +122,14 @@ function FooterCompsThree({ footerItems }) {
                                 </h2>
                                 <form>
                                     <div className="input-field relative ">
-                                        <input
+                                        {/* <input
                                             type="email"
                                             name="email"
                                             placeholder="Your email address"
                                             className="bg-transparent border-0 border-b border-[rgba(0,0,0,.25)] outline-none w-full p-[10px_35px_10px_0] focus-visible:border-primary focus-visible:text-primary"
-                                        />
+                                        /> */}
                                         <button
+                                   
                                             type="submit"
                                             className="absolute top-1/2 -translate-y-1/2 right-0 text-[20px] text-[#99999] opacity-70"
                                         >

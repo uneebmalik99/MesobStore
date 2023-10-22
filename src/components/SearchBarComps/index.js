@@ -1,7 +1,24 @@
 import PropTypes from 'prop-types';
+import { useState , useEffect } from 'react';
 import { IoSearchOutline } from 'react-icons/io5';
 
 function SearchBarComps({ placeholdertext }) {
+// const [searchString , setsearchString] = useState('')
+// const [filterProducts, setFilterProducts] = useState<any>([]);
+
+//     useEffect(() => {
+//         if (!searchString.length) {
+//           setFilterProducts([]);
+//           return;
+//         }
+    
+//         setFilterProducts(
+//           products.filter(item =>
+//             item.title.toLowerCase().includes(searchString.toLowerCase()),
+//           ),
+//         );
+//       }, [searchString]);
+
     return (
         <form>
             <div className="input-field relative max-w-[270px]">

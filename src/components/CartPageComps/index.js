@@ -82,16 +82,19 @@ function CartPageComps({ cartPageItems }) {
                         return(
                             
                 <>
-              
+                
+                    <p className='text-end'  style={{fontSize:20 , fontWeight:700 }}>{country}</p>
 
-                            <p style={{backgroundColor:'whitesmoke', }}>{country}</p>
+                   
+
+
 
                             {cartItems.map((item) => {
 
                       if (item.country == country) {
                             return(
 <>
-                                <thead className="text-[18px] bg-[#f4f5f7]">
+                                {/* <thead className="text-[18px] bg-[#f4f5f7]">
                                 <tr>
                                     {cartPageItems[0]?.cartThList?.map(
                                         (singleCartTh) => (
@@ -105,9 +108,9 @@ function CartPageComps({ cartPageItems }) {
                                         )
                                     )}
                                 </tr>
-                            </thead>
+                            </thead> */}
                                         <tbody key={item.id}>
-                                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <tr className="bg-white border-b dark:bg-white-800 dark:border-white-700">
                                                 <td className="py-4 product-name pr-[25px] flex items-center font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                                     {/* <Link href={item.slug}> */}
                                                         <a className="product-img w-[100px]">

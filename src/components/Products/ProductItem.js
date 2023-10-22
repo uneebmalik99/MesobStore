@@ -108,7 +108,6 @@ function ProductItem({ product, productFilter, productFilterPath }) {
 
 
                 <div className="product-img relative group after:bg-[rgba(0,0,0,.1)] after:absolute after:top-0 after:left-0 after:h-full after:w-full after:opacity-0 after:transition-all after:pointer-events-none hover:after:opacity-100">
-                {/* <Link href={`/products/slug?data=${title}`}> */}
 
                 <Link
                  href={{
@@ -123,52 +122,25 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                    
                     } 
                   }}
-                
-        //         href={{
-        //     pathname: "/products/slug",
-        //     query: title, // the data
-        //   }}
+        
           >
 
                 
-                        <a className="block" style={{borderRadius:10}}>
-                            {/* {soldOutSticker && (
-                                <span
-                                    className={`${
-                                        soldOutSticker ? `${soldOut}` : ''
-                                    }`}
-                                >
-                                    {soldOutSticker}
-                                </span>
-                            )}
-                            {bestSellerSticker && (
-                                <span
-                                    className={`${
-                                        bestSellerSticker ? `${bestSeller}` : ''
-                                    }`}
-                                >
-                                    {bestSellerSticker}
-                                </span>
-                            )}
-                            {offerSticker && (
-                                <span
-                                    className={`${
-                                        offerSticker ? `${productOffer}` : ''
-                                    }`}
-                                >
-                                    {offerSticker}
-                                </span>
-                            )} */}
+                        <a className="block" style={{borderRadius:10,}}>
+                           
                             <img
                                 className="w-full"
                                 src={product.image}
-                                style={{borderRadius:10}}
+                                style={{borderRadius:10,height:180,  objectFit:'cover'}}
                                 alt={product?.altImage}
-                                width={300}
-                                height={300}
+                                
+                             
                             />
                         </a>
                     </Link>
+
+
+         
                     <div className={addAction}>
                         <button
                             type="button"

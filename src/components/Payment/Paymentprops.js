@@ -1,5 +1,6 @@
 import React from 'react'
- 
+import {toast} from 'react-toastify';
+
 import { IoCloseOutline } from 'react-icons/io5';
  const Paymentprops = (  {setModel} ) => {
    return (
@@ -22,7 +23,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 
   <div  className="flex space-x-2 ">
     
-    <button onClick={()=> { localStorage.setItem('region', 'global'); }} className="flex items-center space-x-2">
+    <button onClick={()=> { localStorage.setItem('region', 'global'); toast.success('Payment Change to Global(USD)', {autoClose:2000}) } } className="flex items-center space-x-2">
       <img
         src= "https://jooinn.com/images/world-globe-logo-4.png"
         alt="Image 1"
@@ -33,7 +34,7 @@ import { IoCloseOutline } from 'react-icons/io5';
 
 
 
-    <button onClick={()=> { localStorage.setItem('region', 'eu');}} className="flex items-center space-x-2 ">
+    <button onClick={()=> { localStorage.setItem('region', 'eu');  toast.success('Payment Change to Europe', {autoClose:2000})}} className="flex items-center space-x-2 ">
       <img
         src="https://c8.alamy.com/comp/HEDMCJ/red-arrow-pointing-monaco-on-the-map-of-europe-continent-HEDMCJ.jpg"
         alt="Image 2" 

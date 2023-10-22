@@ -10,16 +10,15 @@ socialList:
             id: 01,
             socialIcon: 'FaFacebookF', path: 'https://www.facebook.com/mesobinternational',
         },
-        { id: 02, socialIcon: 'FaTwitter', path: 'https://www.instagram.com/mesob_international/' },
-        { id: 03, socialIcon: 'FaTumblr', path: 'https://www.tiktok.com/@mesob_store?lang=en' },
+        { id: 02, socialIcon: 'FaInstagram', path: 'https://www.instagram.com/mesob_international/' },
+        { id: 03, socialIcon: 'FaTiktok', path: 'https://www.tiktok.com/@mesob_store?lang=en' },
     ]
 infoTitle: 'Help & Information'
 infoList:
     [
         { id: 01, title: 'Help & Contact Us', path: '/contact' },
-        { id: 02, title: 'Returns & Refunds', path: '/contact' },
-        # { id: 03, title: 'Online Stores', path: '/' },
-        { id: 04, title: 'Terms & Conditions', path: '/contact' },
+        { id: 02, title: 'Returns & Refunds', path: '/refundandreturn' },
+        { id: 04, title: 'Policy', path: '/privacy' },
     ]
 aboutTitle: 'About Us'
 aboutList:
@@ -40,8 +39,8 @@ socialMediaList:
 newsletterTitle: 'Newsletter'
 menuList:
     [
-        { id: 01, title: 'Term & Condition', path: '/about' },
-        { id: 02, title: 'Policy', path: '/about' },
+        { id: 01, title: 'Term & Condition', path: '/privacy' },
+        { id: 02, title: 'Policy', path: '/privacy' },
     ]
 footerLogo: '/images/logo/mesoblogo.jpeg'
 footerLogoAlt: 'Footer Logo'

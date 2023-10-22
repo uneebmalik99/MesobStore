@@ -21,12 +21,12 @@ function NewsletterCompsTwo({
                     </div>
                     <div className="lg:col-span-6 md:col-span-7 col-span-12 self-center">
                         <form className="newsletter-form relative">
-                            <input
+                            {/* <input
                                 className="w-full bg-white h-[54px] p-[10px_80px_10px_20px] focus:outline-none"
                                 type="email"
                                 placeholder="Your email address"
                                 required
-                            />
+                            /> */}
                             <button
                                 type="submit"
                                 className="absolute top-0 right-[15px] h-[54px] px-[30px]"

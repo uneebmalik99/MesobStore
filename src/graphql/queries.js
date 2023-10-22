@@ -29,9 +29,11 @@ export const listProducts = /* GraphQL */ `
         content
         country
         isRecommended
+        off_percentage
         createdAt
         updatedAt
         __typename
+        
       }
       nextToken
       __typename

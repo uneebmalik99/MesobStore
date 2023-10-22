@@ -1,10 +1,11 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { withAuthenticator, Authenticator, Button } from '@aws-amplify/ui-react';
+import { withAuthenticator, Authenticator, Button, components } from '@aws-amplify/ui-react';
 import { Amplify,API, Hub,graphqlOperation, Auth } from 'aws-amplify';
 import _ from 'lodash';
 import * as queries from '../../graphql/queries';
+import CustomSignInButton from './CustomSignInButton';
 
 
 const inputField = `border border-[#cccccc] focus-visible:outline-0 text-[#666666] py-[10px] px-[20px] w-full h-[50px]`;
@@ -131,6 +132,17 @@ function AuthForm({ authItems }){
     const authTab = (index) => {
         setAuthTabState(index);
     };
+
+
+    const components = [
+        // Other components you may need
+        {
+          name: 'SignIn',
+          component: CustomSignInButton, // Use your custom sign-in button component
+        },
+        // Other components
+      ];
+
     return (
         <div className="border-b border-[#ededed] xl:py-[155px] lg:py-[100px] md:py-[80px] py-[50px]">
             <div className="container md:max-w-lg">
@@ -329,7 +341,7 @@ function AuthForm({ authItems }){
                     </form>
                 </div> */}
 
-                <Authenticator>
+                <Authenticator components={components}>
             {({ signOut, user }) => (
 
                 window.location.href = '/'

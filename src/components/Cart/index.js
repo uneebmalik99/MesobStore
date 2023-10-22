@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useEffect, useState } from 'react';
 import { API, graphqlOperation, Auth } from 'aws-amplify';
 import CartItem from './CartItem';
+import { ScrollView } from '@aws-amplify/ui-react';
 
 const minicartGroupBtn = `flex items-center justify-center border border-[#222222]  w-full h-[50px]`;
 function Cart({ minicart, showMiniCart }) {
@@ -80,7 +81,13 @@ function Cart({ minicart, showMiniCart }) {
                                 Your cart is currently empty.
                             </h2>
                         )}
-                        <ul className="overflow-auto max-h-[205px]">
+
+
+
+
+
+                        <ul className="overflow-auto max-h-[480px]" style={{ borderBottom: '2px solid #ccc' }}>
+                            
                             {cartItems.map((item) => (
                                 <CartItem
                                     key={item.id}
@@ -96,12 +103,17 @@ function Cart({ minicart, showMiniCart }) {
                                 />
                             ))}
                         </ul>
+                        
                         {cartItems.length <= 0 ||
                             (initialValue === 0 && (
                                 <>
+                                <div className='w-full'  style={{backgroundColor:'white', padding:'4%', position: 'absolute', bottom:0,left:0,}}>
+
+                               
                                     <div className="minicart-subtotal flex justify-between text-[24px] font-medium pt-[40px]">
                                         <span>Subtotal:</span>
-                                        <span>${SubTotal}</span>
+                                        <span>${SubTotal.toFixed(2)}</span>
+
                                     </div>
                                     <ul className="minicart-group-btn pt-[40px]">
                                         <li className="mb-[15px]">
@@ -114,9 +126,8 @@ function Cart({ minicart, showMiniCart }) {
                                             </Link>
                                         </li>
                                         <li>
-                                            
-
                                             {userauth === true?
+                                             <li >
                                                   <Link href="/checkout">
                                                   <div
                                                       className={`${minicartGroupBtn} bg-[#222222] text-white`}
@@ -124,6 +135,7 @@ function Cart({ minicart, showMiniCart }) {
                                                       Checkout
                                                   </div>
                                               </Link>
+                                              </li>
                                               :
                                               <Link href="/auth">
                                               <div
@@ -137,6 +149,8 @@ function Cart({ minicart, showMiniCart }) {
                                           
                                         </li>
                                     </ul>
+
+                                    </div>
                                 </>
                             ))}
                     </div>

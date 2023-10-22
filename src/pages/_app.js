@@ -72,20 +72,7 @@ async function currentSession() {
 
             <ToastContainer />
 
-            {/* <Button
-                onClick={() => {
-                    console.log('User is: ', user);
-                    try {
-                        localStorage.setItem('userData', JSON.stringify(user));
-                        console.log('User data stored in local storage');
-                    } catch (error) {
-                        console.log('Error saving user data in local storage');
-                    }
-                    signOut();
-                }}
-            >
-                Signout
-            </Button> */}
+           
         </Layout>
         //     )}
         // </Authenticator>

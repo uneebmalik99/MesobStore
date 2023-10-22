@@ -12,5 +12,5 @@ paymentTitle: 'What is PayPal?'
 paymentDesc: 'Pay via PayPal; you can pay with your credit card if you don’t have a PayPal account.'
 additionDesc: 'Your personal data will be used to process your order, support your experience throughout this website, and for other purposes described in our'
 privacyText: 'privacy policy.'
-orderBtnText: 'Place Order'
+orderBtnText: 'Next'
 ---

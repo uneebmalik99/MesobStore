@@ -50,7 +50,7 @@ function WishlistPageComps({ wishlistPageItems }) {
                                     </thead>
                                     {wishlistItems.map((item) => (
                                         <tbody key={item.id}>
-                                            <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
+                                            <tr style={{backgroundColor:'white'}} className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
                                                 <td className="py-[30px] pr-[25px] flex items-center font-medium text-gray-900 dark:text-white whitespace-nowrap">
                                                     {/* <Link href={item.slug}> */}
                                                         <a className="product-img w-[100px]">

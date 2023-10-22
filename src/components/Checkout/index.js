@@ -9,6 +9,7 @@ import {createOrder} from '../../graphql/mutations';
 import { CHECKOUT_API_URL} from'../../api_service';
 // import  from '@stripe/stripe-js';
 import { loadStripe } from '@stripe/stripe-js'
+import { cartActions } from '../../store/cart/cart-slice';
 
 import {
   PaymentElement,
@@ -31,42 +32,59 @@ let productDetails;
   
 function Checkout({ checkoutItems }) {
 
-    const stripePromise = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+//     const stripePromise_Global = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+   
+//     const STRIPE_SK_GLOBAL =loadStripe
+//     ('sk_test_51KZzWbAhBlpHU9kBq6SoffiI9NZAAaKW8xzhEaEGxKsfCjZRWhCbz1o8ac4oirHjk21aZ5KLp0fhlmuZK9XCohUv00JersS4js');
+//   const STRIPE_SK_EU =loadStripe
+//     ('sk_test_51Ma0UlHlGffSuHzfXqLxMCx4WwZPl2InuHG7TFmdFPczonVev6xnsrQzyJ0QkiCNP04yyUMiJGGnt8XXWiWEmAG700oh8MwmIz');
+    
+//   const STRIPE_PK_GLOBAL =loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+//   const STRIPE_PK_EU =loadStripe('pk_test_51Ma0UlHlGffSuHzfQ0MLtY2NxXXevZvjKNBMh1gLgrHedV5ZqbTvX8aLAFQC4YaFmdAlwUVmhjrcCevWbopcfHNQ00c9HutQd3');
+  
+  // // TEST -- PRODUCTION
+  const STRIPE_SK_GLOBAL =loadStripe(
+    ('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');
+  const STRIPE_SK_EU =loadStripe
+    ('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');
+  const STRIPE_PK_GLOBAL =loadStripe
+    ('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
+  const STRIPE_PK_EU =loadStripe
+    ('pk_live_51Ma0UlHlGffSuHzf9daYeWo65kFow4KjKrudWfMURvPxqgkTfDXQ58TF5BFejBI4tqS6EElWFafj1icjZK3O577C00nYkxgBmZ');
+   
     // const stripePromise = loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
+    
 
 
+   let region_1= localStorage.getItem('region');
 
+    
 const [childFunctionCalled, setChildFunctionCalled] = useState(false);
+const dispatch = useDispatch();
+const [isLoading, setIsLoading] = useState(false);
 
 
-const options = {
-  mode: 'payment',
-  amount: 1099,
-  currency: 'usd',
-  appearance: {
-    /*...*/
-  },
-};
+const [checkoutcomp,setcheckoutcomp]= useState(false)
 const [message, setMessage] = useState('');
 
 const [dataToChild, setDataToChild] = useState('');
   
 const childRef = useRef();
 
-  // Function to call the child component's function
-//   function callChildFunction() {
+
+//   function callChildFunctionWithData(e,data) {
+
 //     if (childRef.current) {
-//       childRef.current.childFunction();
+//     //   const dataToSend = "Hello from Parent!";
+//       childRef.current.childFunction(data);
 //     }
 //   }
 
 
-  function callChildFunctionWithData(data) {
-    if (childRef.current) {
-    //   const dataToSend = "Hello from Parent!";
-      childRef.current.childFunction(data);
-    }
-  }
+  const parentFunction = () => {
+    onCheckout()
+    childRef.current.childFunctionFromParent(data);
+  };
 
 //   const handleButtonClick = () => {
 //     console.log('Button in parent component clicked.');
@@ -74,7 +92,7 @@ const childRef = useRef();
 //     // Call any other logic or function you need here
 //   }
 
-    const [client_secret ,setclient_secret] = useState('')
+    const [clientSecret ,setclientSecret] = useState('')
     const [returningCustomer, setReturningCustomer] = useState(false);
     const openReturningCustomer = () => {
         setReturningCustomer(!returningCustomer);
@@ -98,6 +116,8 @@ const childRef = useRef();
 
 
     const onCheckout = () => {
+
+        setIsLoading(true)
 
 
         if(Receiver_name == '' || null ){
@@ -233,8 +253,8 @@ const childRef = useRef();
 
     const getStripeIntent = async (userid) => {
 
-        
-        const region = await localStorage.getItem('regoin');
+       
+        const region = await localStorage.getItem('region');
         const payload = {
             region:region,
           event: {
@@ -266,12 +286,24 @@ const childRef = useRef();
                 console.log("res  : "+res);
                 const data = JSON.parse(res.data);
                 console.log("hgfyc"+JSON.stringify(data));  
-            setclient_secret(data.client_secret)
+            setclientSecret(data.data.client_secret)
+
+            // alert(JSON.stringify(data.data.client_secret))
             // stripe=loadStripe(data?.publishableKey)
             // alert('hgjys')
 
+            dispatch(cartActions.addClientSecret({ clientSecret: data.data.client_secret }));
 
-            callChildFunctionWithData(data)
+            
+                setcheckoutcomp(true)
+
+                setIsLoading(false)
+
+
+        //   alert( clientSecret2)
+
+
+            // callChildFunctionWithData(e,data)
 
      
             // callChildFunction(data.data.client_secret)
@@ -283,6 +315,17 @@ const childRef = useRef();
     
         
     };
+
+
+    const options = {
+
+        mode: 'payment',
+        amount: 1099,
+        currency:region_1 == 'eu'?'gbp': 'usd',
+        appearance: {
+          /*...*/
+        },
+      };
 
     return (
 <>
@@ -666,7 +709,7 @@ const childRef = useRef();
                                                             </th>
                                                             <td className="py-[15px] text-right">
                                                                 
-                                                                {SubTotal}
+                                                                {parseFloat(SubTotal).toFixed(2)}
                                                             </td>
                                                         </tr>
                                                         <tr className="border-t border-[#cdcdcd]">
@@ -678,25 +721,46 @@ const childRef = useRef();
                                                             </th>
                                                             <td className="py-[15px] text-right">
                                                                 
-                                                                {SubTotal}
-                                                            </td>
+                                                            {parseFloat(SubTotal).toFixed(2)}                                                            </td>
                                                         </tr>
                                                     </tbody>
                                                 </table>
                                                 <div className="check pt-[30px] border-t border-[#cdcdcd]">
 
-                                                <Elements stripe={stripePromise} options={options}>
+                                                <p className="pt-[35px]">
+                                                {checkoutItems[0]?.additionDesc}
+                                                <Link href="/privacy">
+                                                    <a className="ml-[5px]">
+                                                        {
+                                                            checkoutItems[0]
+                                                                ?.privacyText
+                                                        }
+                                                    </a>
+                                                </Link>
+                                            </p>
+
+                        
+                        
+                        {checkoutcomp == true?
+
+
+
+                                                <Elements stripe={region_1 == 'eu' ? STRIPE_PK_EU:STRIPE_PK_GLOBAL} options={options}>
 
                                                                                           
                                                         <CheckoutForm 
-
-                                                        ref={childRef} 
+                                             
                                                       
                                                         />
 
                                              
                                                     </Elements>
+                                                    :
+                                                    null
 
+
+
+                                                                }
                                                 <form onSubmit={()=> {handlesubmit}}>
 
 
@@ -735,30 +799,32 @@ const childRef = useRef();
                                                     </div> */}
                                                 </div>
                                             </div>
-                                            <p className="pt-[35px]">
-                                                {checkoutItems[0]?.additionDesc}
-                                                <Link href="/privacy">
-                                                    <a className="ml-[5px]">
-                                                        {
-                                                            checkoutItems[0]
-                                                                ?.privacyText
-                                                        }
-                                                    </a>
-                                                </Link>
-                                            </p>
+                                          
                                             <div className="payment-btn-wrap pt-[35px]">                                               
                                 {/* <button onClick={()=> {onCheckout()}}>Place order TEst</button> */}
-                                                <button 
+                                               
+                                               
+                                               {checkoutcomp == false ?
+
+                                              
+                                                <button  
                                                     onClick={()=> { onCheckout()}}
                                                     //  onClick={() => {callChildFunction('vnslvss')}}
-                                                    className="bg-[#222222] text-white w-full px-[42px] h-[46px] leading-[44px]"
+                                                    className="bg-[#222222] rounded-xl  text-white w-full px-[42px] h-[46px] leading-[44px]"
                                                     type="submit"
                                                 >
-                                                    {
+                                                   
+                                                   {isLoading ? "Loading ... " :  checkoutItems[0]
+                                                            ?.orderBtnText}
+                                                    {/* {
                                                         checkoutItems[0]
                                                             ?.orderBtnText
-                                                    }
+                                                    } */}
                                                 </button>
+                                                :
+                                                null
+
+                                                    }
 
 
 

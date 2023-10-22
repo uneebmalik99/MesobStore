@@ -9,7 +9,7 @@ function EmptyCheckout() {
             </span>
             <p className="text-[20px]">No items found in cart to checkout</p>
             <div className="btn-wrap pt-[25px]">
-                <Link href="/products/left-sidebar">
+                <Link href="/">
                     <a className="inline-flex items-center bg-black text-white h-[46px] px-[42px] transition-all hover:bg-[#222222]">
                         <IoArrowBackSharp className="mr-[5px]" />
                         Continue Shopping

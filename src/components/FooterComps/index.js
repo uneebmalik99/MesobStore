@@ -147,7 +147,7 @@ function FooterComps({ footerContainer, footerItems }) {
                     <div className="grid grid-cols-12 md:gap-y-0 gap-y-[20px] items-center">
                         <div className="md:col-span-4 col-span-12">
                             <ul className="flex md:justify-start justify-center">
-                                {footerItems[0]?.menuList?.map((item) => (
+                                {/* {footerItems[0]?.menuList?.map((item) => (
                                     <li
                                         className="xl:mr-[30px] mr-[20px] last:mr-0"
                                         key={item.id}
@@ -158,7 +158,7 @@ function FooterComps({ footerContainer, footerItems }) {
                                             </a>
                                         </Link>
                                     </li>
-                                ))}
+                                ))} */}
                             </ul>
                         </div>
                         <div className="md:col-span-4 col-span-12">
@@ -168,8 +168,9 @@ function FooterComps({ footerContainer, footerItems }) {
                                         <img
                                             src={footerItems[0]?.footerLogo}
                                             alt={footerItems[0]?.footerLogoAlt}
-                                            width={90}
-                                            height={18}
+                                            width={75}
+                                            style={{borderRadius:5}}
+                                            height={15}
                                         />
                                     </a>
                                 </Link>

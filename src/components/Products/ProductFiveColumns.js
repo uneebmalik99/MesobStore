@@ -171,23 +171,7 @@ function ProductFiveColumns({
             <div className="col-span-12">
 
 
-                {/* <ProductActiveFilter /> */}
-                {/* <ProductToolBars
-                    totalProductNumber={filteredProduct.length}
-                    startItemNumber={
-                        (currentPage - 1) * itemPerPage + 1
-                    }
-                    endItemNumber={
-                        filteredProduct.length >
-                        currentPage * itemPerPage
-                            ? currentPage * itemPerPage
-                            : filteredProduct.length
-                    }
-                    productTab={productTab}
-                    tabState={tabState}
-                    setTabState={setTabState}
-                    gridTabItems={gridTabItems}
-                /> */}
+                
                 <div
                     className={
                         tabState === 1

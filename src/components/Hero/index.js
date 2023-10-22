@@ -271,7 +271,7 @@ console.log(JSON.stringify(heroDefaultItems))
                             <div
                                 className={`${BannerImages.image
                                     .split(' ')
-                                    .join(' ')} md:h-[800px] h-[540px]`}
+                                    .join(' ')} md:h-[620px] h-[500px]`}
                                     style={{backgroundImage:`url(${BannerImages.image})`,
                                     backgroundPosition: 'center',
                                     backgroundSize: 'cover',
@@ -281,10 +281,10 @@ console.log(JSON.stringify(heroDefaultItems))
                                     
                             >
                                 <div className="container"  >
-                                    <div className="hero-content" style={{position:"absolute",  marginTop:'15%', padding:'3%',borderRadius:10, backgroundColor: 'rgba(211, 211, 211 ,0.2)' }}>
+                                    <div className="hero-content" style={{position:"absolute",  marginTop:'12%', padding:'2%',borderRadius:10, backgroundColor: 'rgba(211, 211, 211 ,0.2)' }}>
                                        
                                         <motion.h2
-                                            className="text-primary  relative md:text-[60px] text-[34px] leading-[1.1] pb-[15px] mb-[30px] after:bg-primary after:absolute after:min-h-[4px] after:min-w-[70px] after:max-h-[4px] after:max-w-[70px] after:bottom-0 after:left-0"
+                                            className="text-primary  relative md:text-[60px] text-[34px] leading-[1.1] pb-[10px] mb-[30px] after:bg-primary after:absolute after:min-h-[4px] after:min-w-[70px] after:max-h-[4px] after:max-w-[70px] after:bottom-0 after:left-0"
                                             dangerouslySetInnerHTML={{
                                                 __html: "Welcome to  <br/>  &nbsp &nbsp  &nbsp   Mesob Store",
                                             }}
@@ -321,7 +321,7 @@ console.log(JSON.stringify(heroDefaultItems))
                                         />
                                         
                                         <motion.div
-                                            className="mt-[30px]"
+                                            className="mt-[20px]"
                                             initial="hidden"
                                             animate={
 
