@@ -43,7 +43,7 @@ function Checkout({ checkoutItems }) {
 //   const STRIPE_PK_EU =loadStripe('pk_test_51Ma0UlHlGffSuHzfQ0MLtY2NxXXevZvjKNBMh1gLgrHedV5ZqbTvX8aLAFQC4YaFmdAlwUVmhjrcCevWbopcfHNQ00c9HutQd3');
   
   // // TEST -- PRODUCTION
-  const STRIPE_SK_GLOBAL =loadStripe(
+  const STRIPE_SK_GLOBAL =loadStripe
     ('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');
   const STRIPE_SK_EU =loadStripe
     ('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');
