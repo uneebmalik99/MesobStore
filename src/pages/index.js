@@ -55,9 +55,25 @@ function HomePage({
       };
     const fetchProducts = async () => {
 
-       
-
-
+        // try {
+        //     const response = await API.graphql(
+        //       graphqlOperation(queries.listProducts, {
+        //         filter: {
+        //           title: {
+        //             contains: 'Wheat',
+        //           },
+        //         },
+        //         limit: 10, // Set your desired limit
+        //         nextToken: null, // Set the pagination token if needed
+        //       })
+        //     );
+            
+        //     const products = response.data.listProducts.items;
+        //     console.log('Products matching the search keyword:', products);
+        //   } catch (error) {
+        //     console.error('Error fetching products:', error);
+        //   }
+      
 
 
         try {
@@ -72,6 +88,7 @@ function HomePage({
 
             for(let i = 0; i< response.data.listProducts.items.length; i++){
                 console.log('fjdnjk'+JSON.stringify(response.data.listProducts.items[i].isRecommended));
+                
 
                 // console.log('fjdnjk'+JSON.stringify(response.data.listProducts.items[i]));
                 
@@ -168,7 +185,7 @@ function HomePage({
                 <h2 className="categories-list-title" style={{marginTop:'5%'}}>
                 Shop Categories 
                 </h2>
-                <div ref={ref} className="categories-list">
+                <div ref={ref} className="categories-list  col-12 col-xs-4 col-sm-6 col-md-4 col-lg-3">
                                         {MenuList.map((Menu, index) => (
                        <Link 
                        href={`/products/5-columns?id=${Menu.id}&name=${Menu.name}`} 
@@ -187,6 +204,7 @@ function HomePage({
             </div>
 
 
+
             
             <div style={{backgroundColor:'#ECF0F1', paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
 
@@ -200,7 +218,21 @@ function HomePage({
                     style={{marginLeft:'5%'}}
                     />
 
-                <div className="product-list-container" >
+                <div className="product-list-container"  
+                // style={{
+                //     display: 'flex',
+                //     overflowX: 'auto',
+                //     whiteSpace: 'nowrap',
+                //     padding: '10px',
+                  
+                //   }}
+                >
+
+
+                    
+       
+
+
                                
                                 {/* <div className="product-list">
                                     {RecommendedProduct.map((Rproduct, index) => { */}
@@ -217,7 +249,17 @@ function HomePage({
 
                                                             <h5 style={{alignSelf:'flex-start'}}>{cproduct}</h5>
                                   
-                                  <div style={{display:'flex', flexDirection:'row'}}>
+
+                                                            <div className="grid sm:grid-cols-2  md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-5 lm:gap-x-[25px] lm:grid-cols-2 grid-cols-1 gap-y-[5px] ">
+                                                            {/* <div className="grid col-xs-2 col-sm-2  col-md-2  col-lg-2  col-xl-2   lm:gap-x-[25px]  gap-y-[5px] "> */}
+
+   
+
+
+
+
+
+
 
                                         {/* if (Rproduct.isRecommended === true) {
                                             // Parse the JSON content to access the image property
@@ -278,7 +320,7 @@ function HomePage({
                                 title: Rproduct.title,
                                 image: img,
                                 desc:Rproduct.desc,
-                                price:Rproduct.price,
+                                price:price,
                                 category:Rproduct.category,
                               }  }}  >
 

@@ -28,16 +28,17 @@ function TransparentHeader({ headerItems }) {
             className="flex items-center px-[20px] h-[90px] w-full absolute top-0 z-30"
         >
             <div className="container">
-                <div className="grid grid-cols-12">
-                <div className="md:col-span-4 max-lm:hidden" >
-                                            <SearchBarComps placeholdertext="Search Anything..." />
-                    </div>
+                <div className="grid grid-cols-12" >
+                
                     <div className="md:col-span-4 sm:col-span-6 col-span-4">
                         <LogoComps
                             headerItems={headerItems}
                             headerLogoCName="flex md:justify-center"
                             logoPath="/"
                         />
+                    </div>
+                    <div className="md:col-span-4 max-lm:hidden" >
+                                            <SearchBarComps placeholdertext="Search Anything..." />
                     </div>
                     <div className="md:col-span-4 sm:col-span-6 col-span-8 self-center">
                         <HeaderRight headerItems={headerItems} />

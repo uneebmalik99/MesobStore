@@ -7,7 +7,7 @@ import ProductActiveFilter from './ProductActiveFilter';
 import { API, graphqlOperation } from 'aws-amplify';
 import * as queries from '../../graphql/queries';
 
-function ProductFiveColumns({
+function SearchProductFiveColumns({
     data,
     productFiveColumnsContainer,
     products,
@@ -97,8 +97,6 @@ function ProductFiveColumns({
                 createdAt
                 id
                 updatedAt
-                isRecommended
-                off_percentage
               }
             }
           }
@@ -120,7 +118,7 @@ function ProductFiveColumns({
             }),
           );
 
-          console.log('7777777ffyufyufyufy'+JSON.stringify(product))
+          console.log('7777777ffyufyufyufy'+product)
         } catch (error) {
           console.log(error);
         } finally {
@@ -445,7 +443,7 @@ function ProductFiveColumns({
     );
 }
 
-ProductFiveColumns.propTypes = {
+SearchProductFiveColumns.propTypes = {
     productFiveColumnsContainer: PropTypes.string,
     products: PropTypes.instanceOf(Object).isRequired,
     productFilter: PropTypes.instanceOf(Object).isRequired,
@@ -453,4 +451,4 @@ ProductFiveColumns.propTypes = {
     gridTabItems: PropTypes.instanceOf(Object).isRequired,
 };
 
-export default ProductFiveColumns;
+export default SearchProductFiveColumns;

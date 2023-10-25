@@ -21,18 +21,21 @@ function ProductDetailPage({
                 image : router.query.image,
                 category : router.query.category ,
                 desc : router.query.desc,
+                off_percentage:router.off_percentage,
+                isRecommended:router.isRecommended,
             }
     
+            console.log('dfeferfrefefre',JSON.stringify(products));
 
     return (
         <>
             {/* <HeaderOne headerItems={headerItems} headerContainer="container" /> */}
-            {/* <Breadcrumb
+            <Breadcrumb
                 breadcrumbContainer="container"
                 product={products}
                 item="Home"
-                itemPath="/Info"
-            /> */}
+                itemPath="/"
+            />
             <ProductDetails
                 product1={products}
                 productDetailTabItems={productDetailTabItems}

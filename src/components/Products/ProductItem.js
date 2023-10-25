@@ -41,12 +41,14 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         category,
         totalPrice,
         soldOutSticker,
+        isRecommended,
+        off_percentage,
         bestSellerSticker,
         offerSticker,
         desc,
     } = product;
 
-    console.log("product"+JSON.stringify(product));
+    console.log("produdwfwfrect"+JSON.stringify(product));
 
     const productImageSrc = `/images/products/${product?.slug}/${product?.smImage}`;
 
@@ -58,11 +60,23 @@ function ProductItem({ product, productFilter, productFilterPath }) {
 
     const dispatch = useDispatch();
     const addToCartHandler = () => {
+
         let tprice = price.replace('$', ''); // This removes the dollar sign
+        console.log("totalPricetofsfgtalPrice"+isRecommended);
+
+        if(isRecommended == true) {
+
+            const off  = off_percentage.slice(0, -1);
+ 
+            let discount = (off / 100) * tprice;
+
+// alert(discount)            
+        }
 
         console.log("totalPrice: " + tprice*quantityCount);
         console.log("totalPricetotalPrice"+totalPrice);
        let  totalprice =tprice*quantityCount;
+       alert('efwfwe',isRecommended)
 
         dispatch(
             cartActions.addItemToCart({
@@ -74,6 +88,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                 category:product.category,
                 totalPrice:totalprice,
                 image: product.image,
+
             
             })
         );
@@ -119,6 +134,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         desc:product.desc,
                         price:product.price,
                         category:product.category,
+                        off_percentage:product.off_percentage,
+                        isRecommended:product.isRecommended,
                    
                     } 
                   }}

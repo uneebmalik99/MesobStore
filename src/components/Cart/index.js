@@ -86,7 +86,7 @@ function Cart({ minicart, showMiniCart }) {
 
 
 
-                        <ul className="overflow-auto max-h-[480px]" style={{ borderBottom: '2px solid #ccc' }}>
+                        <ul className="overflow-auto max-h-[310px]" style={{ borderBottom: '2px solid #ccc' }}>
                             
                             {cartItems.map((item) => (
                                 <CartItem
