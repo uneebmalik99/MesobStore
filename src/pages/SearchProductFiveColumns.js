@@ -1,11 +1,9 @@
 import { useSelector } from 'react-redux';
 import PropTypes from 'prop-types';
 import { useState, useEffect } from 'react';
-import ProductItem from './ProductItem';
-import ProductToolBars from './ProductToolBars';
-import ProductActiveFilter from './ProductActiveFilter';
+import ProductItem from '../components/Products/ProductItem';
+
 import { API, graphqlOperation } from 'aws-amplify';
-import * as queries from '../../graphql/queries';
 
 function SearchProductFiveColumns({
     data,
