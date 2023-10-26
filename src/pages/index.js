@@ -15,6 +15,7 @@ import NewsletterComps from '../components/NewsletterComps';
 import FooterComps from '../components/FooterComps';
 import { useEffect, useState , useRef} from 'react';
 import * as queries from '../graphql/queries';
+import HeaderOne from '../components/HeaderComps';
 
 const getMenuItems = `
 query MyQuery {
@@ -174,7 +175,10 @@ function HomePage({
     let data ='msklmvlks';
     return (
         <>
-            <TransparentHeader headerItems={headerItems} />
+            {/* <TransparentHeader headerItems={headesrItems} /> */}
+            <HeaderOne headerItems={headerItems} headerContainer="container" />
+
+
             <HeroOne  func={func} heroDefaultItems={heroDefaultItems} />
 
 
@@ -182,10 +186,10 @@ function HomePage({
           
             <div className="categories-list-container" >
                 
-                <h2 className="categories-list-title" style={{marginTop:'5%'}}>
+                <h2 className="categories-list-title" style={{marginTop:'3%'}}>
                 Shop Categories 
                 </h2>
-                <div ref={ref} className="categories-list  col-12 col-xs-4 col-sm-6 col-md-4 col-lg-3">
+                <div ref={ref} className="categories-list  col-xs-4 col-sm-6 col-md-4 col-lg-3">
                                         {MenuList.map((Menu, index) => (
                        <Link 
                        href={`/products/5-columns?id=${Menu.id}&name=${Menu.name}`} 
@@ -206,7 +210,7 @@ function HomePage({
 
 
             
-            <div style={{backgroundColor:'#ECF0F1', paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
+            <div style={{ paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
 
                
 
@@ -250,8 +254,10 @@ function HomePage({
                                                             <h5 style={{alignSelf:'flex-start'}}>{cproduct}</h5>
                                   
 
-                                                            <div className="grid sm:grid-cols-2  md:grid-cols-3  lg:grid-cols-4 xl:grid-cols-5 lm:gap-x-[25px] lm:grid-cols-2 grid-cols-1 gap-y-[5px] ">
-                                                            {/* <div className="grid col-xs-2 col-sm-2  col-md-2  col-lg-2  col-xl-2   lm:gap-x-[25px]  gap-y-[5px] "> */}
+                               
+                                                                
+                                                            <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-1 gap-y-[5px]">
+                                                            {/* <div className="col-12 col-xs-4 col-sm-6 col-md-4 col-slg-3  lm:gap-x-[25px]  gap-y-[5px] "> */}
 
    
 
@@ -292,6 +298,9 @@ function HomePage({
                                             price = contentObj.price;
                                             old_price = price;
                                             price = price.slice(1)
+                                            price = price.replace(/,/g, '');
+
+
                                             const off  = Rproduct.off_percentage.slice(0, -1);
 
                                             console.log("vfklns",price);

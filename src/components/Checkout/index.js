@@ -245,11 +245,19 @@ const childRef = useRef();
     const cartItems = useSelector((state) => state.cart.items);
 
     const initialValue = 0;
-    const SubTotal = cartItems.reduce(
-        (accumulator, current) =>
-            accumulator + current.price * current.quantity,
-        initialValue
-    );
+    // const SubTotal = cartItems.reduce(
+    //     (accumulator, current) =>
+    //         accumulator + current.price * current.quantity,
+    //     initialValue
+    // );
+
+    const SubTotal = cartItems.reduce((accumulator, current) => {
+        // Remove commas from the current item's price and convert it to a number
+        const priceWithoutCommas = Number(current.price.replace(/,/g, ''));
+    
+        // Add the product's price * quantity to the accumulator
+        return accumulator + priceWithoutCommas * current.quantity;
+    }, initialValue);
 
     const getStripeIntent = async (userid) => {
 

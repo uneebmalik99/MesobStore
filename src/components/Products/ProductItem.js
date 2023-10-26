@@ -62,6 +62,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
     const addToCartHandler = () => {
 
         let tprice = price.replace('$', ''); // This removes the dollar sign
+        tprice = tprice.replace(/,/g, '');
+        
         console.log("totalPricetofsfgtalPrice"+isRecommended);
 
         if(isRecommended == true) {
@@ -76,7 +78,9 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         console.log("totalPrice: " + tprice*quantityCount);
         console.log("totalPricetotalPrice"+totalPrice);
        let  totalprice =tprice*quantityCount;
-       alert('efwfwe',isRecommended)
+
+       
+    //    alert('efwfwe',isRecommended)
 
         dispatch(
             cartActions.addItemToCart({

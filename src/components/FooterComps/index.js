@@ -10,7 +10,7 @@ import PropTypes from 'prop-types';
 function FooterComps({ footerContainer, footerItems }) {
     return (
         <footer style={{backgroundColor:'#ECF0F1'}}>
-            <div className="footer-top xl:py-[115px] lg:py-[95px] md:py-[75px] py-[45px]" >
+            <div className="footer-top xl:py-[30px] lg:py-[30px] md:py-[30px] py-[30px]" >
                 <div className={footerContainer}>
                     <div className="grid grid-cols-12 md:gap-y-0 gap-y-[30px]">
                     <div className="md:col-span-6 lm:col-span-6 col-span-12">
@@ -176,7 +176,7 @@ function FooterComps({ footerContainer, footerItems }) {
                                 </Link>
                             </div>
                         </div>
-                        <div className="md:col-span-4 col-span-12">
+                        {/* <div className="md:col-span-4 col-span-12">
                             <div className="social-link flex md:justify-end justify-center">
                                 <h2 className="text-[16px] lg:pr-[65px] pr-[15px]">
                                     {footerItems[0]?.socialTitle}
@@ -199,11 +199,11 @@ function FooterComps({ footerContainer, footerItems }) {
                                     })}
                                 </ul>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
             </div>
-            <div className="footer-copyright pt-[35px] pb-[25px]">
+            <div className="footer-copyright pt-[15px] pb-[15px]">
                 <div className="container">
                     <div className="grid grid-cols-1">
                         <span className="flex justify-center items-center">

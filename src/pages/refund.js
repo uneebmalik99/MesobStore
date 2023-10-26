@@ -4,16 +4,16 @@ import Breadcrumb from '../components/Breadcrumb';
 import FooterComps from '../components/FooterComps';
 import { getAllItems } from '../lib/ItemsUtil';
 
-function refundandreturn({ headerItems, faqItems, footerItems }) {
+function refund({ headerItems, faqItems, footerItems }) {
     return (
         <>
             <HeaderOne headerItems={headerItems} headerContainer="container" />
             <Breadcrumb
                 breadcrumbContainer="container"
-                title="Privacy Policy"
+                title="Refunds policy"
                 item="Home"
                 itemPath="/"
-                activeItem="Privacy Policy"
+                activeItem="Refunds policy"
             />
 
 <div className="faq border-b border-[#ededed] xl:py-[120px] lg:py-[100px] md:py-[80px] py-[50px]">
@@ -33,8 +33,8 @@ Contact Us
 If you have any questions about our Returns and Refunds Policy, please contact us by e-mail mesob@mesobstore.com</p>
 
 
-    <h2 className="mb-[10px]">{title}</h2>
-    <p className="mb-[45px]">{desc}</p>
+    {/* <h2 className="mb-[10px]">{title}</h2>
+    <p className="mb-[45px]">{desc}</p> */}
     <div className="accorddion p-[15px] -m-[15px]">
 
 </div>
@@ -63,10 +63,10 @@ export function getStaticProps() {
     };
 }
 
-refundandreturn.propTypes = {
+refund.propTypes = {
     headerItems: PropTypes.instanceOf(Array).isRequired,
     faqItems: PropTypes.instanceOf(Array).isRequired,
     footerItems: PropTypes.instanceOf(Array).isRequired,
 };
 
-export default refundandreturn;
+export default refund;

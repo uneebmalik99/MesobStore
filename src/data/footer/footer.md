@@ -17,7 +17,7 @@ infoTitle: 'Help & Information'
 infoList:
     [
         { id: 01, title: 'Help & Contact Us', path: '/contact' },
-        { id: 02, title: 'Returns & Refunds', path: '/refundandreturn' },
+        { id: 02, title: 'Returns & Refunds', path: '/refund' },
         { id: 04, title: 'Policy', path: '/privacy' },
     ]
 aboutTitle: 'About Us'

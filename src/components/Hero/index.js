@@ -261,7 +261,7 @@ console.log(JSON.stringify(heroDefaultItems))
                 </SwiperComps>
             </div> */}
 
-            <div className="container-fluid px-[0px] mt-[15px]">
+            <div className="container-fluid px-[0px] mt-[0px]">
                 <SwiperComps
                     sliderCName="pagination-bg-primary"
                     settings={settings}
@@ -271,7 +271,7 @@ console.log(JSON.stringify(heroDefaultItems))
                             <div
                                 className={`${BannerImages.image
                                     .split(' ')
-                                    .join(' ')} md:h-[620px] h-[500px]`}
+                                    .join(' ')} md:h-[440px] h-[440px]`}
                                     style={{backgroundImage:`url(${BannerImages.image})`,
                                     backgroundPosition: 'center',
                                     backgroundSize: 'cover',
@@ -281,9 +281,9 @@ console.log(JSON.stringify(heroDefaultItems))
                                     
                             >
                                 <div className="container"  >
-                                    <div className="hero-content" style={{position:"absolute",  marginTop:'12%', padding:'2%',borderRadius:10, backgroundColor: 'rgba(211, 211, 211 ,0.2)' }}>
+                                    <div className="hero-content" style={{position:"absolute",  marginTop:'12%', padding:'2%',borderRadius:10, }}>
                                        
-                                        <motion.h2
+                                        {/* <motion.h2
                                             className="text-primary  relative md:text-[60px] text-[34px] leading-[1.1] pb-[10px] mb-[30px] after:bg-primary after:absolute after:min-h-[4px] after:min-w-[70px] after:max-h-[4px] after:max-w-[70px] after:bottom-0 after:left-0"
                                             dangerouslySetInnerHTML={{
                                                 __html: "Welcome to  <br/>  &nbsp &nbsp  &nbsp   Mesob Store",
@@ -318,7 +318,7 @@ console.log(JSON.stringify(heroDefaultItems))
                                                     },
                                                 },
                                             }}
-                                        />
+                                        /> */}
                                         
                                         <motion.div
                                             className="mt-[20px]"
@@ -358,7 +358,7 @@ console.log(JSON.stringify(heroDefaultItems))
                                         func();
                                         }
                                         }  className={secondaryButton}>
-                                                    Shop Now
+                                                    Flash Sale
                                                     <IoArrowForwardOutline className="text-white ml-[5px]" />
                                                 </a>
                                             </Link>

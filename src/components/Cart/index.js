@@ -26,11 +26,23 @@ function Cart({ minicart, showMiniCart }) {
     //     setSubTotal(initialValue)
     //     // alert(initialValue)
     // }
-    const SubTotal = cartItems.reduce(
-        (accumulator, current) =>
-            accumulator +  current.price * current.quantity,
-        initialValue
-    );
+    // const SubTotal = cartItems.reduce(
+    //     (accumulator, current) =>
+    //         accumulator +  current.price * current.quantity,
+    //     initialValue
+    // );
+
+const SubTotal = cartItems.reduce((accumulator, current) => {
+    // Remove commas from the current item's price and convert it to a number
+    const priceWithoutCommas = Number(current.price.replace(/,/g, ''));
+
+    // Add the product's price * quantity to the accumulator
+    return accumulator + priceWithoutCommas * current.quantity;
+}, initialValue);
+
+
+
+
 
     
 
@@ -86,7 +98,7 @@ function Cart({ minicart, showMiniCart }) {
 
 
 
-                        <ul className="overflow-auto max-h-[310px]" style={{ borderBottom: '2px solid #ccc' }}>
+                        <ul className="overflow-auto max-h-[410px]" style={{ borderBottom: '2px solid #ccc' }}>
                             
                             {cartItems.map((item) => (
                                 <CartItem
@@ -107,11 +119,11 @@ function Cart({ minicart, showMiniCart }) {
                         {cartItems.length <= 0 ||
                             (initialValue === 0 && (
                                 <>
-                                <div className='w-full'  style={{backgroundColor:'white', padding:'4%', position: 'absolute', bottom:0,left:0,}}>
+                                <div className='w-full'  style={{backgroundColor:'white', paddingInline:'4%', position: 'absolute', bottom:0,left:0,}}>
 
                                
                                     <div className="minicart-subtotal flex justify-between text-[24px] font-medium pt-[40px]">
-                                        <span>Subtotal:</span>
+                                        <span>Total:</span>
                                         <span>${SubTotal.toFixed(2)}</span>
 
                                     </div>

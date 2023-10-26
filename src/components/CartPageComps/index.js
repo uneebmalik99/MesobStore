@@ -27,7 +27,7 @@ function CartPageComps({ cartPageItems }) {
         if (quantityCount.empty && cartItems.length) {
             const tempObj = {};
             cartItems.forEach((item) => {
-                countries.push(item.country)
+                countries.push(item.category)
 
                 tempObj[item.id] = item.quantity;
             });
@@ -59,11 +59,21 @@ function CartPageComps({ cartPageItems }) {
     };
 
     const initialValue = 0;
-    const SubTotal = cartItems.reduce(
-        (accumulator, current) =>
-            accumulator + current.price * current.quantity,
-        initialValue
-    );
+    // const SubTotal = cartItems.reduce(
+    //     (accumulator, current) =>
+    //         accumulator + current.price * current.quantity,
+    //     initialValue
+    // );
+
+
+    const SubTotal = cartItems.reduce((accumulator, current) => {
+        // Remove commas from the current item's price and convert it to a number
+        const priceWithoutCommas = Number(current.price.replace(/,/g, ''));
+    
+        // Add the product's price * quantity to the accumulator
+        return accumulator + priceWithoutCommas * current.quantity;
+    }, initialValue);
+
 
     return (
         <div className="cart border-b border-[#ededed] lg:py-[90px] md:py-[80px] py-[50px]">
@@ -91,7 +101,12 @@ function CartPageComps({ cartPageItems }) {
 
                             {cartItems.map((item) => {
 
-                      if (item.country == country) {
+
+                      if (item.category == country) {
+
+                        const formattedTotalPrice = item.totalPrice.toString().replace(/,/g, ''); // Remove commas
+                        const roundedTotalPrice = Number(formattedTotalPrice).toFixed(2); // Round to two decimal places
+
                             return(
 <>
                                 {/* <thead className="text-[18px] bg-[#f4f5f7]">
@@ -227,7 +242,8 @@ function CartPageComps({ cartPageItems }) {
                                                 </td>
                                                 <td className="py-4">
                                                     $
-                                                    {item.totalPrice}
+                                                    {/* {item.totalPrice.toFixed(2)} */}
+                                                    {roundedTotalPrice}
                                                 </td>
                                                 <td className="py-4 text-right">
                                                     <button
@@ -307,9 +323,9 @@ function CartPageComps({ cartPageItems }) {
                                         <div className="cart-subtotal lg:max-w-[400px] ml-auto">
                                             <div className="border border-[#bfbfbf] bg-[#f9f9f9] px-[30px]">
                                                 <ul className="content py-[30px]">
-                                                    <li className="item flex justify-between border-b border-[#cdcdcd] pb-[16px] mb-[17px]">
+                                                    {/* <li className="item flex justify-between border-b border-[#cdcdcd] pb-[16px] mb-[17px]">
                                                         <span className="font-bold">
-                                                            Subtotal:
+                                                            total:
                                                         </span>
                                                         <span>
                                                             $
@@ -317,7 +333,7 @@ function CartPageComps({ cartPageItems }) {
                                                                 2
                                                             )}
                                                         </span>
-                                                    </li>
+                                                    </li> */}
                                                     <li className="item flex justify-between">
                                                         <span className="font-bold">
                                                             Total:

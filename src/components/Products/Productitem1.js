@@ -55,6 +55,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
     const addToCartHandler = () => {
 
         let tprice = price.replace('$', ''); // This removes the dollar sign
+        tprice = tprice.replace(/,/g, '');
 
         console.log("totalPrice: " + tprice*quantityCount);
         let  totalprice =tprice*quantityCount;

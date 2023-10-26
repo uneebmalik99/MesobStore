@@ -25,10 +25,10 @@ function TransparentHeader({ headerItems }) {
     return (
         <header
             ref={header}
-            className="flex items-center px-[20px] h-[90px] w-full absolute top-0 z-30"
+            className="flex items-start px-[20px] h-[90px] w-full absolute top-0 z-30"
         >
-            <div className="container">
-                <div className="grid grid-cols-12" >
+            <div className="container" >
+                <div className="grid grid-cols-12 px-2" style={{borderBottomLeftRadius:5, borderBottomRightRadius:5, backgroundColor:'whitesmoke'}} >
                 
                     <div className="md:col-span-4 sm:col-span-6 col-span-4">
                         <LogoComps
