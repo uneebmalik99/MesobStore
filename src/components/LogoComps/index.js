@@ -13,7 +13,7 @@ function LogoComps({ headerItems, headerLogoCName, logoPath }) {
                         width={12}
                         height={12}
                     />
-                    <h3 style={{ color: 'black',marginLeft:5, textAlign:'center' }}>Mesob Store</h3>
+                    <h3 style={{ color: 'white',marginLeft:5, textAlign:'center' }}>Mesob Store</h3>
                 </a>
             </Link>
         </div>

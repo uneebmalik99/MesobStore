@@ -18,13 +18,13 @@ singleContactInfo:
             id: 04,
             infoIcon: 'IoLocationOutline',
             title: 'Our location',
-            desc: 'We are located at Columbus Ohio 43213',
+            desc: 'Columbus Ohio 43213',
         },
     ]
 formTitle: 'Get in touch'
 formDesc: 'Write us a letter !'
 infoTitle: 'Our address'
-infoDesc: 'We are located at Columbus Ohio 43213'
+infoDesc: 'Columbus Ohio 43213'
 contactAddress: '(614) 580-7521 <br/> mesob@mesobstore.com'
 socialTitle: 'Follow Us On Social'
 socialList:

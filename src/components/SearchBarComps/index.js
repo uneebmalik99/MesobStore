@@ -41,13 +41,13 @@ const searchproduct = async() => {
 
     return (
         <>
-            <div className=" input-field relative max-w-[270px]" style={{display:'flex',alignItems:'center', justifyContent:'center', backgroundColor:'white',paddingInline:5, borderRadius:10}}>
+            <div className=" input-field relative max-w-[100%]" style={{display:'flex',alignItems:'center', justifyContent:'center', backgroundColor:'white',paddingInline:5, borderRadius:10}}>
                 <input
                     type="search"
                     name="search"
                     placeholder={placeholdertext}
                     onChange={(e) => setsearchString(e.target.value)}
-                    className="bg-transparent border-0 border-b border-[rgba(0,0,0,.25)] outline-none w-full p-[4px_35px_4px_0] focus-visible:border-primary"
+                    className="bg-transparent border-0 border-b border-[rgba(0,0,0,.25)] outline-none w-full p-[4px_35px_4px_5px] focus-visible:border-primary"
                 />
                
                 <button

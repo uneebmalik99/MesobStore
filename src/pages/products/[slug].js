@@ -18,11 +18,12 @@ function ProductDetailPage({
                 id : router.query.id ,
                 title : router.query.title,
                 price : router.query.price ,
+                newprice : router.query.newprice,
                 image : router.query.image,
                 category : router.query.category ,
                 desc : router.query.desc,
-                off_percentage:router.off_percentage,
-                isRecommended:router.isRecommended,
+                off_percentage : router.query.off_percentage,
+                isRecommended : router.query.isRecommended
             }
     
             console.log('dfeferfrefefre',JSON.stringify(products));

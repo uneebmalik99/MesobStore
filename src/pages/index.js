@@ -50,10 +50,16 @@ function HomePage({
 
     console.log('Products in state are: ', products);
 
-    const ref = useRef(null);
-    const func = () => {
-        ref.current?.scrollIntoView({ behavior: 'smooth' });
+    const targetDivRef = useRef(null);
+
+    const scrollToTargetDiv = () => {
+        setTimeout(() => {
+          if (targetDivRef.current) {
+            targetDivRef.current.scrollIntoView({ behavior: 'smooth' });
+          }
+        }, 100); // Adjust the delay as needed
       };
+      
     const fetchProducts = async () => {
 
         // try {
@@ -172,6 +178,7 @@ function HomePage({
         getMenuList();
     }, []);
 
+    
     let data ='msklmvlks';
     return (
         <>
@@ -179,7 +186,7 @@ function HomePage({
             <HeaderOne headerItems={headerItems} headerContainer="container" />
 
 
-            <HeroOne  func={func} heroDefaultItems={heroDefaultItems} />
+            <HeroOne  func={scrollToTargetDiv} heroDefaultItems={heroDefaultItems} />
 
 
             {/* <FeaturedProduct featuredProduct={featuredProduct} /> */}
@@ -189,7 +196,7 @@ function HomePage({
                 <h2 className="categories-list-title" style={{marginTop:'3%'}}>
                 Shop Categories 
                 </h2>
-                <div ref={ref} className="categories-list  col-xs-4 col-sm-6 col-md-4 col-lg-3">
+                <div  className="categories-list  col-xs-4 col-sm-6 col-md-4 col-lg-3">
                                         {MenuList.map((Menu, index) => (
                        <Link 
                        href={`/products/5-columns?id=${Menu.id}&name=${Menu.name}`} 
@@ -210,7 +217,7 @@ function HomePage({
 
 
             
-            <div style={{ paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
+            <div ref={targetDivRef} style={{ paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
 
                
 

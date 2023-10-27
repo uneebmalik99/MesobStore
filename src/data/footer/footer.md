@@ -1,6 +1,6 @@
 ---
 addressTitle: 'Address'
-address: 'We are located at Columbus Ohio 43213'
+address: 'Columbus Ohio 43213'
 contactNumber: 'tel:(614) 580-7521'
 contactNumberText: ' (614) 580-7521'
 socialTitle: 'Follow Us On Social'

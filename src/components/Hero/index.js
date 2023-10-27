@@ -48,6 +48,14 @@ console.log(JSON.stringify(heroDefaultItems))
         onSlideChangeTransitionEnd,
     };
 
+    const handleButtonClick = () => {
+        // Call the passed function to scroll to the target div
+        if (func) {
+          func();
+        }
+      };
+
+
     // Tailwind Related Stuff
     const secondaryButton =
         'inline-flex items-center bg-secondary text-white leading-[38px] text-[15px] h-[38px] px-5';
@@ -271,7 +279,7 @@ console.log(JSON.stringify(heroDefaultItems))
                             <div
                                 className={`${BannerImages.image
                                     .split(' ')
-                                    .join(' ')} md:h-[440px] h-[440px]`}
+                                    .join(' ')} sm:h-[300px] md:h-[440px] h-[440px]`}
                                     style={{backgroundImage:`url(${BannerImages.image})`,
                                     backgroundPosition: 'center',
                                     backgroundSize: 'cover',
@@ -281,47 +289,11 @@ console.log(JSON.stringify(heroDefaultItems))
                                     
                             >
                                 <div className="container"  >
-                                    <div className="hero-content" style={{position:"absolute",  marginTop:'12%', padding:'2%',borderRadius:10, }}>
+                                    <div className="hero-content" style={{position:"absolute", top:'50%',padding:'2%',borderRadius:10, }}>
                                        
-                                        {/* <motion.h2
-                                            className="text-primary  relative md:text-[60px] text-[34px] leading-[1.1] pb-[10px] mb-[30px] after:bg-primary after:absolute after:min-h-[4px] after:min-w-[70px] after:max-h-[4px] after:max-w-[70px] after:bottom-0 after:left-0"
-                                            dangerouslySetInnerHTML={{
-                                                __html: "Welcome to  <br/>  &nbsp &nbsp  &nbsp   Mesob Store",
-                                            }}
-                                            initial="hidden"
-                                            animate={
-                                                idx === activeIdx
-                                                    ? 'visible'
-                                                    : 'exit'
-                                            }
-                                            exit="exit"
-                                            variants={{
-                                                hidden: {
-                                                    y: '100%',
-                                                    opacity: 0,
-                                                },
-                                                visible: {
-                                                    y: '0',
-                                                    opacity: 1,
-                                                    transition: {
-                                                        duration: 1,
-                                                        delay: 0.6,
-                                                    },
-                                                },
-                                                exit: {
-                                                    y: '100%',
-                                         
-                                                    opacity: 0,
-                                                    transition: {
-                                                        duration: 1,
-                                                        delay: 0.6,
-                                                    },
-                                                },
-                                            }}
-                                        /> */}
-                                        
+                                    
                                         <motion.div
-                                            className="mt-[20px]"
+                                            className="mt-[5px]"
                                             initial="hidden"
                                             animate={
 
@@ -354,10 +326,8 @@ console.log(JSON.stringify(heroDefaultItems))
                                             }}
                                         >
                                            <Link href="">
-                                                <a  onClick={()=> {
-                                        func();
-                                        }
-                                        }  className={secondaryButton}>
+                                                <a onClick={handleButtonClick}
+                                          className={secondaryButton}>
                                                     Flash Sale
                                                     <IoArrowForwardOutline className="text-white ml-[5px]" />
                                                 </a>

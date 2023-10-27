@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState,useEffect } from 'react';
 import Link from 'next/link';
 import {
     IoAddSharp,
@@ -56,7 +56,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
 
     const [quantityCount, setQuantityCount] = useState(1);
 
-
+    const [ priceAfterDiscount , setpriceAfterDiscount ] = useState('')
 
     const dispatch = useDispatch();
     const addToCartHandler = () => {
@@ -66,6 +66,21 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         
         console.log("totalPricetofsfgtalPrice"+isRecommended);
 
+
+        if(isRecommended == true && off_percentage != null ){
+            let tpricee = price.slice(1)
+       
+            tpricee = tpricee.replace(/,/g, '');
+            let off  = off_percentage.slice(0, -1);
+
+            let discount = (off / 100) * tpricee;
+            let priceAfterDiscountv = (tpricee - discount).toFixed(2);
+
+            setpriceAfterDiscount(priceAfterDiscountv)
+
+
+
+        }
         if(isRecommended == true) {
 
             const off  = off_percentage.slice(0, -1);
@@ -86,7 +101,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
             cartActions.addItemToCart({
                 id,
                 title,
-                price,
+                price:priceAfterDiscount,
                 quantity: quantityCount,
                 country:product.country,
                 category:product.category,
@@ -121,6 +136,23 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         );
     };
 
+    useEffect(() => {
+        if(isRecommended == true && off_percentage != null ){
+            let tpricee = price.slice(1)
+       
+            tpricee = tpricee.replace(/,/g, '');
+            let off  = off_percentage.slice(0, -1);
+
+            let discount = (off / 100) * tpricee;
+            let priceAfterDiscountv = (tpricee - discount).toFixed(2);
+
+            setpriceAfterDiscount(priceAfterDiscountv)
+
+
+
+        }
+    }, []);
+
     return (
         <>
             <div className="product-item">
@@ -148,6 +180,16 @@ function ProductItem({ product, productFilter, productFilterPath }) {
 
                 
                         <a className="block" style={{borderRadius:10,}}>
+
+       {product.off_percentage != null?
+
+                          
+<div style={{position:'absolute',height:30, width:30,display:'flex', justifyContent:'center',alignContent:'center'
+                                        ,alignItems:'center', backgroundColor:'green',marginTop:-25,marginLeft:-10, borderRadius:'50%'}}>
+                                                <p style={{color:'white',fontWeight:700, fontSize:10}}>{product.off_percentage}</p>
+                                            </div>
+
+                                            :null}
                            
                             <img
                                 className="w-full"
@@ -160,8 +202,6 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         </a>
                     </Link>
 
-
-         
                     <div className={addAction}>
                         <button
                             type="button"
@@ -170,45 +210,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         >
                             <IoAddSharp />
                         </button>
-                        {/* <div
-                            className={`${
-                                soldOutSticker ? `cursor-not-allowed` : ''
-                            }`}
-                        >
-                            {!bestSellerSticker && (
-                                <button
-                                    type="button"
-                                    onClick={addToCartHandler}
-                                    className={`${
-                                        soldOutSticker
-                                            ? `pointer-events-none brightness-75`
-                                            : ''
-                                    }  ${addActionButton} mr-[15px] group-hover:delay-[.15s]`}
-                                >
-                                    <IoBagHandleOutline />
-                                </button>
-                            )}
-                            {bestSellerSticker && (
-                                <Link href={`/products/${product?.slug}`}>
-                                    <a
-                                        className={`${
-                                            soldOutSticker
-                                                ? `pointer-events-none brightness-75`
-                                                : ''
-                                        }  ${addActionButton} mr-[15px] group-hover:delay-[.15s]`}
-                                    >
-                                        <IoPricetagOutline />
-                                    </a>
-                                </Link>
-                            )}
-                        </div> */}
-                        {/* <button
-                            onClick={addToWishlistHandler}
-                            type="button"
-                            className={`${addActionButton} group-hover:delay-[.3s]`}
-                        >
-                            <IoHeartOutline />
-                        </button> */}
+                       
                     </div>
                 </div>
                 <div className="product-content text-center" >
@@ -219,10 +221,14 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         query:  {
                             id: product.id,
                             title: product.title,
+                            price:product.price,
+                            newprice:priceAfterDiscount,
                             image: product.image,
                             desc:product.desc,
-                            price:product.price,
                             category:product.category,
+                            off_percentage:off_percentage,
+                            isRecommended:isRecommended
+                            
                        
                         } 
                       }}
@@ -234,16 +240,27 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                             </a>
                         </Link>
                     </h3>
+                      {product.off_percentage != null ?
+                       <>
+                       <p className="product-price" style={{fontSize:12, textDecorationLine:'line-through',  textDecorationColor: "black" }} >
 
-                     {price  && (
-                        <h3>
+                            Was: {price}
+                            </p>
+                             <p className="product-price" style={{color:'green', fontWeight:700}}>
+                             New Price: {priceAfterDiscount}
+                             </p>
+         
+                             </>
+                            :
+                            <h3>
 
-                  
-                        <span className="product-price text-[18px] leading-[31px] text-[#666666]">
-                            {price}
-                        </span>
-                        </h3>
-                    )}
+                            <span className="product-price text-[18px] leading-[31px] text-[#666666]">
+                               {price}
+                            </span>
+                            </h3>
+                      }
+                    
+                      
 
                      {product.category  && (
                         <h7 >
@@ -323,11 +340,32 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         </div>
                         <div className="product-content py-[40px] px-[30px]">
                             <h2 className="text-[24px] mb-[15px]">{title}</h2>
-                            {product.price  && (
+                            {/* {product.price  && (
                                 <span className="product-price text-[30px] leading-[42px] text-[#999999] block mb-[25px]">
                                     {product.price}
                                 </span>
-                            )}
+                            )} */}
+
+
+
+                    {product.off_percentage != null ?
+                       <>
+                       <p className="product-price" style={{fontSize:12, textDecorationLine:'line-through',  textDecorationColor: "black" }} >
+
+                            Was: {product.price}
+                            </p>
+                             <p className="product-price" style={{color:'green', fontWeight:700}}>
+                             New Price: {priceAfterDiscount}
+                             </p>
+         
+                             </>
+                            :
+                            <span className="product-price text-[30px] leading-[42px] text-[#999999] block mb-[25px]">
+                            {product.price}
+                        </span>
+                      }
+
+
                             {/* {price && !discountPrice && (
                                 <span className="product-price text-[30px] leading-[42px] text-[#999999] block mb-[25px]">
                                     ${price.toFixed(2)}

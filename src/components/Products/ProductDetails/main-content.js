@@ -23,29 +23,44 @@ function MainContent({ product }) {
         image, 
         desc,
         category,
+        newprice,
+        isRecommended,
+        off_percentage
     } = product;
     const [quantityCount, setQuantityCount] = useState(1);
 
-
-
-
-    
+    console.log('kjefsbbeubsu',product);
+    const [ priceAfterDiscount , setpriceAfterDiscount ] = useState('')
 
     const dispatch = useDispatch();
     const addToCartHandler = () => {
+      
+      let priceAfterDiscountv ;
        let tprice = price.replace('$', ''); // This removes the dollar sign
        tprice = tprice.replace(/,/g, '');
+    
+       if(isRecommended == 'true' && off_percentage != null ){
+       
+            let off  = off_percentage.slice(0, -1);
 
+            let discount = (off / 100) * tprice;
+          priceAfterDiscountv = (tprice - discount).toFixed(2);
+
+            console.log('njhg', priceAfterDiscountv);
+
+            setpriceAfterDiscount(priceAfterDiscountv)
+    }
+    
        let  totalprice =tprice*quantityCount;
-
-console.log("totalPrice: " + tprice*quantityCount);
-        dispatch(
+    //    console.log("totalPrice: " + tprice*quantityCount);
+    //    console.log("nvhfj: " + "jsvndjn"+tprice);
+       dispatch(
             cartActions.addItemToCart({
                 id,
                 title,
                 country:product.country,
                 category:product.category,
-                price,
+                price:priceAfterDiscountv,
                 quantity: quantityCount,
                 totalPrice: totalprice,
                 image: product.image,
@@ -80,33 +95,7 @@ console.log("totalPrice: " + tprice*quantityCount);
                 <div className="grid grid-cols-12 lg:gap-x-[25px] max-md:gap-y-[25px]">
                     <div className="lg:col-span-6 col-span-12">
                         <div className="product-detail-img relative">
-                            {/* {soldOutSticker && (
-                                <span
-                                    className={`${
-                                        soldOutSticker ? `${soldOut}` : ''
-                                    }`}
-                                >
-                                    {soldOutSticker}
-                                </span>
-                            )}
-                            {bestSellerSticker && (
-                                <span
-                                    className={`${
-                                        bestSellerSticker ? `${bestSeller}` : ''
-                                    }`}
-                                >
-                                    {bestSellerSticker}
-                                </span>
-                            )}
-                            {offerSticker && (
-                                <span
-                                    className={`${
-                                        offerSticker ? `${productOffer}` : ''
-                                    }`}
-                                >
-                                    {offerSticker}
-                                </span>
-                            )} */}
+                        
                             <img
                                 className="w-full"
                                 src={product.image}
@@ -121,24 +110,46 @@ console.log("totalPrice: " + tprice*quantityCount);
                     <div className="lg:col-span-6 col-span-12">
                         <div className="product-detail-content">
                             <h3 className="mb-[10px]">{title}</h3>
-                            {price && (
+
+
+
+                            {/* {off_percentage != null?
+
+                          
+                            <div style={{position:'absolute',height:30, width:30,display:'flex', justifyContent:'center',alignContent:'center'
+                                        ,alignItems:'center', backgroundColor:'green',marginTop:-25,marginLeft:-10, borderRadius:'50%'}}>
+                                                <p style={{color:'white',fontWeight:700, fontSize:10}}>{off_percentage}</p>
+                                            </div>
+
+                                            :null} */}
+                          
+                          
+                          {off_percentage != null ?
+                       <>
+                       <p className="product-price" style={{fontSize:12, textDecorationLine:'line-through',  textDecorationColor: "black" }} >
+
+                            Was: {product.price}
+                            </p>
+                             <p className="product-price" style={{color:'green', fontWeight:700}}>
+                             New Price: {newprice}
+                             </p>
+         
+                             </>
+                            :
+                            <span className="product-price text-[30px] leading-[42px] text-[#999999] mb-[25px]">
+                            {price}
+                        </span>
+                      }
+                          
+                            {/* {price && (
                                 <span className="product-price text-[30px] leading-[42px] text-[#999999] mb-[25px]">
                                     {price}
                                 </span>
-                            )}
-                            {/* {price && discountPrice && (
-                                <div className="product-price-wrap flex mb-[10px]">
-                                    <span className="product-price text-[30px] leading-[42px] text-[#999999] block">
-                                        ${price}
-                                    </span>
-                                    <span className="product-price text-[30px] leading-[42px] text-[#999999] block relative before:content-['-'] before:mx-[10px]">
-                                        ${discountPrice}
-                                    </span>
-                                </div>
                             )} */}
+                            
 
                             <p className="text-[14px] leading-[24px] lg:max-w-[450px]">
-                                {product?.desc}
+                                {desc}
                             </p>
                             <div className="group-btn flex py-[30px]">
                                 <div className={`${qtyButtonWrap} mr-[15px]`}>
@@ -189,11 +200,7 @@ console.log("totalPrice: " + tprice*quantityCount);
                                     </div>
                                 </div>
                                 <div
-                                    // className={`${
-                                    //     soldOutSticker
-                                    //         ? `cursor-not-allowed`
-                                    //         : ''
-                                    // }`}
+                                  
                                 >
                                     <button
                                         type="button"
@@ -205,13 +212,7 @@ console.log("totalPrice: " + tprice*quantityCount);
                                         Add to cart
                                     </button>
                                 </div>
-                                {/* <button
-                                    onClick={addToWishlistHandler}
-                                    type="button"
-                                    className={`${wishlistBtn}`}
-                                >
-                                    <IoHeartOutline />
-                                </button> */}
+                               
                             </div>
                             <div className="other-info">
                                 
@@ -227,17 +228,7 @@ console.log("totalPrice: " + tprice*quantityCount);
                                         {product?.desc}
                                     </span>
                                 </div>
-                                {/* <div className="category-wrap font-medium">
-                                    <span>Tags:</span>
-                                    <span className="text-[#666666] ml-[5px]">
-                                        {product?.tag}
-                                    </span>
-                                </div> */}
-                                {/* <div className="social-wrap flex pt-[65px]">
-                                    <span className="text-black font-medium">
-                                        Share this items :
-                                    </span>
-                                </div> */}
+                              
                             </div>
                         </div>
                     </div>

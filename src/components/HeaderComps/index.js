@@ -25,29 +25,34 @@ function HeaderOne({ headerItems, headerContainer }) {
     //   End Here
 
     return (
-        <header
+        <>
+       <header
             ref={header}
-            className="flex items-center w-full h-[90px] top-0 z-30"
+            className="flex items-center w-full h-[55px] top-0 z-30"
+            style={{backgroundColor:'black'}}
         >
-            <div className={headerContainer}>
+            <div className={'container-fluid'} >
                 <div className="grid grid-cols-12">
-                <div className="lm:col-span-4 col-span-6">
+                <div className="lm:col-span-2 col-span-2">
                         <LogoComps
                             headerItems={headerItems}
                             headerLogoCName="flex lm:justify-center"
                             logoPath="/"
                         />
                     </div>
-                    <div className="col-span-4 hidden lm:block">
+                    <div class="col-span-8  hidden lm:block">
                         <SearchBarComps placeholdertext="Search Anything..." />
                     </div>
                    
-                    <div className="lm:col-span-4 col-span-6 self-center">
+                    <div class="lm:col-span-2 col-span-2 self-center">
                         <HeaderRight headerItems={headerItems} />
                     </div>
                 </div>
+
+
             </div>
         </header>
+          </>
     );
 }
 

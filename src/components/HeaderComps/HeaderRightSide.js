@@ -30,7 +30,7 @@ function HeaderRight({ headerItems }) {
 
     return (
         <>
-            <div className="flex justify-end">
+            <div className="flex justify-center">
                 {/* <div className="user-item md:mr-[35px] sm:mr-[25px] mr-[15px]">
                     <Link href="/auth">
                         <a className="text-2xl hover:text-primary transition-all">
@@ -46,13 +46,13 @@ function HeaderRight({ headerItems }) {
                         </a>
                     </Link>
                 </div> */}
-                <div className="minicart-item md:mr-[35px] sm:mr-[25px] mr-[15px]">
+                <div className="minicart-item md:mr-[50px] sm:mr-[25px] mr-[15px]">
                     <button
                         type="button"
                         className="text-2xl relative group hover:text-primary transition-all"
                         onClick={showMiniCart}
                     >
-                        <IoBagHandleOutline />
+                        <IoBagHandleOutline color='white'/>
                         <span className={badge}>{cartQuantity}</span>
                     </button>
                 </div>
@@ -62,7 +62,7 @@ function HeaderRight({ headerItems }) {
                         className="text-2xl hover:text-primary transition-all"
                         onClick={showOffcanvas}
                     >
-                        <IoMenuOutline />
+                        <IoMenuOutline color='white'/>
                     </button>
                 </div>
             </div>

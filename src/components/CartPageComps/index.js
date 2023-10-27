@@ -52,6 +52,7 @@ function CartPageComps({ cartPageItems }) {
 
     const removeItemFromCartHandler = (id) => {
         dispatch(cartActions.removeItemFromCart(id));
+
     };
 
     const clearAllItemHandler = () => {
@@ -84,31 +85,23 @@ function CartPageComps({ cartPageItems }) {
                         <>
                             <div className="relative overflow-x-auto">
                                 <table className="cart-table w-full text-sm text-left">
-                                  
                                 {countries.map((country, index) => {
-                        
                         console.log("mnbjhbn"+country);
-
                         return(
-                            
                 <>
-                
+                    {/* {cartItems.some((item) => item.category === country) && (
+                            <p className='text-end' style={{ fontSize: 20, fontWeight: 700 }}>
+                                {country}
+                            </p>
+                        )} */}
                     <p className='text-end'  style={{fontSize:20 , fontWeight:700 }}>{country}</p>
-
-                   
-
-
-
                             {cartItems.map((item) => {
-
-
                       if (item.category == country) {
 
                         const formattedTotalPrice = item.totalPrice.toString().replace(/,/g, ''); // Remove commas
                         const roundedTotalPrice = Number(formattedTotalPrice).toFixed(2); // Round to two decimal places
-
                             return(
-<>
+                                <>
                                 {/* <thead className="text-[18px] bg-[#f4f5f7]">
                                 <tr>
                                     {cartPageItems[0]?.cartThList?.map(

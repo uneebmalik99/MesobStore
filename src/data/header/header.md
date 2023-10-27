@@ -22,7 +22,7 @@ currencyList:
         { id: currency-03, text: 'Pound', path: '/' },
     ]
 contactInfoTitle: 'Contact Us'
-contactInfo: 'We are located at Columbus Ohio 43213 <br/> mesob@mesobstore.com <br/> (614) 580-7521'
+contactInfo: 'Columbus Ohio 43213 <br/> mesob@mesobstore.com <br/> (614) 580-7521'
 socialTitle: 'Follow US On Socials'
 socialList:
     [
