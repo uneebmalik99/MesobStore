@@ -12,7 +12,7 @@ function NewsletterComps({ sectionTitle }) {
 
                 <button
                 onClick={()=> {window.location.href = '/contact'}}
-                style={{backgroundColor:'black',marginTop:'2%', alignSelf:'center',  paddingBlock:'2%', paddingInline:'10%', color:'white'}}
+                style={{backgroundColor:'black',marginTop:'2%', alignSelf:'center',  paddingBlock:'1.5%',borderRadius:10,  paddingInline:'10%', color:'white'}}
                             type="submit"
                         >
                             Subscribe

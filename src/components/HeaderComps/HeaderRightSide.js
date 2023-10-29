@@ -62,7 +62,7 @@ function HeaderRight({ headerItems }) {
                         className="text-2xl hover:text-primary transition-all"
                         onClick={showOffcanvas}
                     >
-                        <IoMenuOutline color='white'/>
+                        <IoMenuOutline color='white' />
                     </button>
                 </div>
             </div>

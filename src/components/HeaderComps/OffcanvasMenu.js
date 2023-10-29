@@ -119,14 +119,14 @@ function OffcanvasMenu() {
                                         </Link>
                     </li>
 
-                    <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
+                    {/* <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
                  <Link href=''>
                                             <a onClick={()=> {          toast.success('Coming Soon', {autoClose:1000})
 }} className="flex justify-between items-center transition-all hover:text-[#666666]">
                                                 Purchases
                                             </a>
                                         </Link>
-                    </li>
+                    </li> */}
 
                     <li style={{paddingBlock:'2%', borderBottomWidth:0.5, borderColor:'#D0D3D4'}}>
                  <Link href='/orders'>

@@ -4,6 +4,7 @@ import {PaymentElement, useStripe, useElements} from "@stripe/react-stripe-js";
 import { CHECKOUT_API_URL} from '../../api_service';
 import { cartActions } from "../../store/cart/cart-slice";
 import { useDispatch, useSelector } from 'react-redux';
+// import {api_send_mail, CHECKOUT_API_URL} from '../../api_service';
 
 const CheckoutForm = ((props) => {
 
@@ -111,6 +112,17 @@ const handleSubmit = async (event) => {
       console.log(result.error.message);
     } else {
     dispatch(cartActions.clearAllFromCart());
+
+  //   const res = await api_send_mail(payload);
+
+  //   console.log('Success Product: ', res.message);
+  //   setloading1(false);
+  //   setVisible(true);
+  // } catch (error: any) {
+  //   setloading1(false);
+  //   Alert.alert('Alert', error.message);
+  // }
+
 
       // Your customer will be redirected to the completion page
       // window.location.href = "http://localhost:3000";

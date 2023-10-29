@@ -17,6 +17,11 @@ import { useEffect, useState , useRef} from 'react';
 import * as queries from '../graphql/queries';
 import HeaderOne from '../components/HeaderComps';
 
+
+import { useDispatch } from 'react-redux';
+
+import { cartActions } from '../../src/store/cart/cart-slice';
+
 const getMenuItems = `
 query MyQuery {
     listMenus {
@@ -40,6 +45,7 @@ function HomePage({
     footerItems,
     
 }) {
+    const dispatch = useDispatch();
     const [products, setProducts] = useState([]);
     const [MenuList,setMenuList]= useState([]);
     const [RecommendedProduct,setRecommendedProduct]=useState([])
@@ -62,27 +68,7 @@ function HomePage({
       
     const fetchProducts = async () => {
 
-        // try {
-        //     const response = await API.graphql(
-        //       graphqlOperation(queries.listProducts, {
-        //         filter: {
-        //           title: {
-        //             contains: 'Wheat',
-        //           },
-        //         },
-        //         limit: 10, // Set your desired limit
-        //         nextToken: null, // Set the pagination token if needed
-        //       })
-        //     );
-            
-        //     const products = response.data.listProducts.items;
-        //     console.log('Products matching the search keyword:', products);
-        //   } catch (error) {
-        //     console.error('Error fetching products:', error);
-        //   }
-      
-
-
+       
         try {
             const response = await API.graphql(
                 graphqlOperation(queries.listProducts)
@@ -90,23 +76,24 @@ function HomePage({
             const allProducts = response.data.listProducts.items;
             const allProducts2 = response.data.listProducts.items;
             console.log("djsvjdnsvj"+JSON.stringify(allProducts2));
-
             let receomedproducts= [];
-
             for(let i = 0; i< response.data.listProducts.items.length; i++){
                 console.log('fjdnjk'+JSON.stringify(response.data.listProducts.items[i].isRecommended));
-                
-
-                // console.log('fjdnjk'+JSON.stringify(response.data.listProducts.items[i]));
-                
                 if(response.data.listProducts.items[i].isRecommended == true){
                     receomedproducts.push(response.data.listProducts.items[i])
-                    // receomedproducts.push(response.data.listProducts.items)
                 }
             }
+            const searchItems = response.data.listProducts.items.map((item) => ({
+                id: item.id,
+                title: item.title,
+              }));
 
+              console.log('    bgvghvgh   '+JSON.stringify(searchItems));
+              
+              // Dispatch the action to store the search items in Redux
+              dispatch(cartActions.seacrhItem(searchItems));
+              
             const receomedproducts2 = receomedproducts.slice(1, -1);
-
 
             console.log('Rrcommend Products ', JSON.stringify(receomedproducts2));
             console.log('Response Products:1 ', allProducts[7].isRecommended);
@@ -259,19 +246,8 @@ function HomePage({
 
 
                                                             <h5 style={{alignSelf:'flex-start'}}>{cproduct}</h5>
-                                  
-
-                               
-                                                                
-                                                            <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-1 gap-y-[5px]">
+                                                         <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-1 gap-y-[5px]">
                                                             {/* <div className="col-12 col-xs-4 col-sm-6 col-md-4 col-slg-3  lm:gap-x-[25px]  gap-y-[5px] "> */}
-
-   
-
-
-
-
-
 
 
                                         {/* if (Rproduct.isRecommended === true) {

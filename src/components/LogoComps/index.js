@@ -5,20 +5,25 @@ function LogoComps({ headerItems, headerLogoCName, logoPath }) {
     return (
         <div className={`${headerLogoCName}`}>
             <Link href={logoPath}>
-                <a className="block" style={{display:'flex', flexDirection:'row'}}>
+                <a className="block" style={{display:'flex', flexDirection:'row', justifyContent:'center', alignItems:'center'}}>
                     <img
                         src={headerItems[0]?.headerLogo[0]?.darkLogo}
                         alt={headerItems[0]?.headerLogo[0]?.darkLogoAlt}
-                        style={{borderRadius:10 ,width:40, height:40}}
-                        width={12}
-                        height={12}
+                        style={{borderRadius:10 , width:40, height:40}}
+                       
                     />
-                    <h3 style={{ color: 'white',marginLeft:5, textAlign:'center' }}>Mesob Store</h3>
+                    {/* <p className='pd' style={{ color: 'white',marginLeft:5, textAlign:'center' , fontSize:calc(100% + 1vw + 1vh) }}>Mesob Store</p> */}
+
+                    <p className='pd' style={{ color: 'white',  textAlign: 'center', fontSize: 'calc(20% + 0.5vw + 1vh)' }}>Mesob Store</p>
                 </a>
             </Link>
         </div>
     );
 }
+
+
+
+
 
 LogoComps.propTypes = {
     headerItems: PropTypes.instanceOf(Object).isRequired,

@@ -25,7 +25,7 @@ singleSupportInfo:
             id: 'info-04',
             infoIcon: 'IoStopwatchOutline',
             title: 'Return policy',
-             desc: "We don't accept any returns.",
+             desc: "You are entitled to cancel your order before its shipped. The deadline for canceling an order is 24hrs from the date you received the order receipt.",
         },
     ]
 perfectionTitle: 'About Us'

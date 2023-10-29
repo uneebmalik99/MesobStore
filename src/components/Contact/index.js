@@ -2,6 +2,9 @@ import PropTypes from 'prop-types';
 import * as IoIcon from 'react-icons/io5';
 import Link from 'next/link';
 import GoogleMap from '../GoogleMap';
+import {ApiSendMail} from '../../api_service';
+import { useState } from 'react';
+import {toast} from 'react-toastify';
 
 function ContactUs({ contactItems }) {
     const singleField = `flex w-full`;
@@ -9,6 +12,59 @@ function ContactUs({ contactItems }) {
     const textareaField = `border border-[#e8e8e8] focus-visible:outline-0 placeholder:text-[#7b7975] p-[15px] w-full h-[150px]`;
     const secondaryButton =
         'flex bg-secondary text-white leading-[38px] text-[15px] h-[40px] px-[32px]';
+
+        const [name , setname] = useState('')
+        const [subject , setsubject] = useState('')
+        const [msg , setmsg] = useState('')
+        const [email, seteamil] = useState('')
+
+   const  emailsend = async (e)=>{
+
+   
+
+    if(name == ''){
+        alert('Please Enter Name')
+
+    }else if(email == ''){
+
+        alert('Please Enter email')
+
+    }else if (subject == ''){
+        alert('Please Enter Subject')
+
+
+    }else if(message == ''){
+        alert('Please Enter message')
+
+
+    }else{
+        try{
+            const message = `
+            <h1> Contact </h1s> 
+            <h6>Name: ${name}</h6>
+            <h6>Email: ${email}</h6>
+            <p>Message:  ${msg}</p>
+            `
+            const payload = {
+                  email: 'mesob@mesobstore.com',
+                  message: message,
+                  subject: subject,
+                };
+      
+              const res = await ApiSendMail(payload);
+              console.log('Success Product: ', res.message);
+              toast.success('Please Enter Receiver Name', {autoClose:2000})
+
+            
+        } catch (error) {
+        //   alert('Alert', error);
+          toast.error('Error while sending Email : ',error, {autoClose:2000})
+
+        }
+    }
+    // mesob@mesobstore.com'
+  
+   }
     return (
         <>
             <div className="contact-info">
@@ -55,20 +111,27 @@ function ContactUs({ contactItems }) {
                                 <p className="mb-[30px]">
                                     {contactItems[0]?.formDesc}
                                 </p>
-                                <form>
+                           
                                     <div className="group-field flex mb-[20px]">
                                         <div
                                             className={`${singleField} mr-[20px]`}
                                         >
                                             <input
+                                            nameInput='nameinput'
                                                 className={`${inputField}`}
                                                 type="text"
+                                                onChange={(e)=>{ setname(e.target.value)}}
+                                                value={name}
+                                                handlenameTextareaChange
                                                 placeholder="Name *"
                                                 required
                                             />
                                         </div>
                                         <div className={`${singleField}`}>
                                             <input
+
+                                                onChange={(e)=> {seteamil(e.target.value)}}
+                                                value={email}
                                                 className={`${inputField}`}
                                                 type="email"
                                                 placeholder="Email *"
@@ -82,25 +145,31 @@ function ContactUs({ contactItems }) {
                                         <input
                                             className={`${inputField}`}
                                             type="text"
+                                            value={subject}
+                                            onChange={(e)=> {setsubject(e.target.value)}}
                                             placeholder="Subject *"
                                             required
                                         />
                                     </div>
                                     <div className={`${singleField} mb-[30px]`}>
                                         <textarea
+                                            value={msg}
+                                            onChange={(e)=> {setmsg(e.target.value)}}
                                             className={`${textareaField}`}
                                             type="text"
                                             placeholder="Please describe what you need."
                                         />
                                     </div>
                                     <button
-                                        type="submit"
+                                        onClick={()=> {emailsend()}}
                                         className={`${secondaryButton}`}
                                     >
                                         Submit
                                     </button>
-                                </form>
+                             
                             </div>
+
+
                         </div>
                         <div className="md:col-span-5 col-span-12 lg:pl-[120px] md:pl-[30px] max-lm:order-1">
                             <div className="contact-info">

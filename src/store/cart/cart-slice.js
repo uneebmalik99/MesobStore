@@ -4,6 +4,7 @@ const cartSlice = createSlice({
     name: 'cart',
     initialState: {
         items: [],
+        searchitems: [],
         totalQuantity: 0,
         changed: false,
         clientSecret:'',
@@ -45,6 +46,15 @@ const cartSlice = createSlice({
                 existingItem.quantity++;
                 existingItem.totalPrice += p;
             }
+        },
+
+        seacrhItem(state, action) {
+            
+            const newItem = action.payload;
+            state.changed = true;
+            state.searchitems= newItem
+            console.log("bhgyg");
+               
         },
         increaseItemFromCart(state, action) {
             const id = action.payload;
