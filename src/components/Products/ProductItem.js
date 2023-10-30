@@ -146,6 +146,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
             let discount = (off / 100) * tpricee;
             let priceAfterDiscountv = (tpricee - discount).toFixed(2);
 
+            console.log("ghvjhvjh",priceAfterDiscountv );
+
             setpriceAfterDiscount(priceAfterDiscountv)
 
 
@@ -169,6 +171,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         image: product.image,
                         desc:product.desc,
                         price:product.price,
+                        newprice:priceAfterDiscount,
                         category:product.category,
                         off_percentage:product.off_percentage,
                         isRecommended:product.isRecommended,
@@ -194,7 +197,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                             <img
                                 className="w-full"
                                 src={product.image}
-                                style={{borderRadius:10,height:180,  objectFit:'cover'}}
+                                style={{borderRadius:10,height:180, width:190, objectFit:'cover'}}
                                 alt={product?.altImage}
                                 
                              

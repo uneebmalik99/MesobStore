@@ -181,7 +181,8 @@ function ProductFiveColumns({
                             : 'grid-content-03 tab-style-common'
                     }
                 >
-                    <div className="grid lg:grid-cols-3 lm:grid-cols-2 grid-cols-1 lm:gap-x-[25px] gap-y-[40px] ">
+                    {/* <div className="grid sm:grid-cols-2 lg:grid-cols-3 lm:grid-cols-2 grid-cols-2 lm:gap-x-[25px] gap-y-[40px] "> */}
+                    <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-2 gap-y-[5px]">
                         {currentItems &&
                             currentItems.map((product) => (
                                 <ProductItem
@@ -202,7 +203,8 @@ function ProductFiveColumns({
                             : 'grid-content-04 tab-style-common'
                     }
                 >
-                    <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
+                    {/* <div className="grid  lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-2 "> */}
+                    <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-2 gap-y-[5px]">
                         {currentItems &&
                             currentItems.map((product) => (
                                 <ProductItem

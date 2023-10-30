@@ -49,7 +49,7 @@ function HomePage({
     const [products, setProducts] = useState([]);
     const [MenuList,setMenuList]= useState([]);
     const [RecommendedProduct,setRecommendedProduct]=useState([])
-   
+   const [priceAfterDiscount , setpriceAfterDiscount] = useState('')
     const [R_categories,setR_categories]=useState([])
     const uniqueCategories = new Set();
     let allCategories;
@@ -204,7 +204,7 @@ function HomePage({
 
 
             
-            <div ref={targetDivRef} style={{ paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
+            <div  ref={targetDivRef} style={{ paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
 
                
 
@@ -216,7 +216,7 @@ function HomePage({
                     style={{marginLeft:'5%'}}
                     />
 
-                <div className="product-list-container"  
+                <div  className="product-list-container"  
                 // style={{
                 //     display: 'flex',
                 //     overflowX: 'auto',
@@ -246,7 +246,7 @@ function HomePage({
 
 
                                                             <h5 style={{alignSelf:'flex-start'}}>{cproduct}</h5>
-                                                         <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-1 gap-y-[5px]">
+                                                         <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-2 gap-y-[5px]">
                                                             {/* <div className="col-12 col-xs-4 col-sm-6 col-md-4 col-slg-3  lm:gap-x-[25px]  gap-y-[5px] "> */}
 
 
@@ -272,7 +272,7 @@ function HomePage({
                                           
                                         }
 
-
+                                        let tenPercentOfPrice;
                                         if (Rproduct.isRecommended == true && Rproduct.category == cproduct) {
 
                                            
@@ -296,9 +296,11 @@ function HomePage({
 
                                                 console.log("cdsnsdfkdn",priceAfterDiscount); 
 
-                                            let tenPercentOfPrice =priceAfterDiscount;
+                                             tenPercentOfPrice =priceAfterDiscount;
                                             
                                             tenPercentOfPrice = tenPercentOfPrice.toFixed(2)
+
+
 
                                         return (
 
@@ -313,7 +315,10 @@ function HomePage({
                                 image: img,
                                 desc:Rproduct.desc,
                                 price:price,
+                                newprice:tenPercentOfPrice,
                                 category:Rproduct.category,
+                                off_percentage:Rproduct.off_percentage,
+                                isRecommended:Rproduct.isRecommended
                               }  }}  >
 
                                 
@@ -383,7 +388,6 @@ function HomePage({
                               </div>
 
                               
-
            
             {/* <LatestBlog blogs={blogs} sectionTitle="Mesob Store Blog" /> */}
             <NewsletterComps sectionTitle="Mesob Store subscription includes Subscribers receive discounts across the company's online retail platforms and shoppers receive their orders within two days"  />

@@ -12,6 +12,8 @@ export const getProducts = /* GraphQL */ `
       createdAt
       updatedAt
       __typename
+      off_percentage
+      isRecommended
     }
   }
 `;

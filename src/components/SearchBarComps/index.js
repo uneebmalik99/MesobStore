@@ -64,7 +64,27 @@ const manyItems = [...new Array(10000)].map((_, i) => ({
         console.log('search product ',allProducts);
         const contentObj = JSON.parse(allProducts.content);
 
-window.location.href = '/products/slug?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&des='+ contentObj.description + '&price='+ contentObj.price +'&category='+ allProducts.category;
+        if(allProducts.isRecommended == true && allProducts.off_percentage != null){
+     
+          let tprice = contentObj.price.replace('$', ''); // This removes the dollar sign
+       tprice = tprice.replace(/,/g, '');
+
+       let off  = allProducts.off_percentage.slice(0, -1);
+
+       let discount = (off / 100) * tprice;
+
+
+     let priceAfterDiscountv = (tprice - discount).toFixed(2);
+     console.log("gcchc",priceAfterDiscountv );
+
+
+     window.location.href = '/products/slug?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&des='+ contentObj.description + '&price='+ contentObj.price + '&newprice='+ priceAfterDiscountv+ '&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
+
+        }else{
+          window.location.href = '/products/slug?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&des='+ contentObj.description + '&price='+ contentObj.price +'&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
+
+        }
+
 
 
 

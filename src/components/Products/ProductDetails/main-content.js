@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { IoAddSharp, IoHeartOutline, IoRemoveSharp } from 'react-icons/io5';
 import { useDispatch } from 'react-redux';
 import { cartActions } from '../../../store/cart/cart-slice';
@@ -29,7 +29,9 @@ function MainContent({ product }) {
     } = product;
     const [quantityCount, setQuantityCount] = useState(1);
 
-    console.log('kjefsbbeubsu',product);
+    console.log('kjefsbbeubsu',newprice);
+    console.log('kjefsbbeubsu',off_percentage);
+    console.log('kjefsbbeubsu',isRecommended);
     const [ priceAfterDiscount , setpriceAfterDiscount ] = useState('')
 
     const dispatch = useDispatch();
@@ -73,6 +75,7 @@ function MainContent({ product }) {
 
 
     };
+  
 
     const addToWishlistHandler = () => {
         dispatch(
@@ -124,7 +127,7 @@ function MainContent({ product }) {
                                             :null} */}
                           
                           
-                          {off_percentage != null ?
+                          {isRecommended == 'true' && off_percentage != null ?
                        <>
                        <p className="product-price" style={{fontSize:12, textDecorationLine:'line-through',  textDecorationColor: "black" }} >
 
