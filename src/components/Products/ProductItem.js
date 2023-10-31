@@ -157,7 +157,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
 
     return (
         <>
-            <div className="product-item">
+            <div className="product-item" >
 
 
                 <div className="product-img relative group after:bg-[rgba(0,0,0,.1)] after:absolute after:top-0 after:left-0 after:h-full after:w-full after:opacity-0 after:transition-all after:pointer-events-none hover:after:opacity-100">
@@ -197,7 +197,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                             <img
                                 className="w-full"
                                 src={product.image}
-                                style={{borderRadius:10,height:180, width:190, objectFit:'cover'}}
+                                style={{borderRadius:10,height:180,  objectFit:'cover'}}
                                 alt={product?.altImage}
                                 
                              

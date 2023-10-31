@@ -167,13 +167,11 @@ function ProductFiveColumns({
         setTabState(index);
     };
 
-    return (<div className="product border-b border-[#ededed] xl:py-[120px] lg:py-[100px] md:py-[80px] py-[50px]">
+    return (
+    <div className="product border-b border-[#ededed] xl:py-[80px] lg:py-[50px] md:py-[30px] py-[20px]" >
     <div className={productFiveColumnsContainer}>
         <div className="grid grid-cols-12 lg:gap-x-[25px]">
             <div className="col-span-12">
-
-
-                
                 <div
                     className={
                         tabState === 1
@@ -182,7 +180,7 @@ function ProductFiveColumns({
                     }
                 >
                     {/* <div className="grid sm:grid-cols-2 lg:grid-cols-3 lm:grid-cols-2 grid-cols-2 lm:gap-x-[25px] gap-y-[40px] "> */}
-                    <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-2 gap-y-[5px]">
+                    <div className="grid  sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-2 gap-y-[5px]">
                         {currentItems &&
                             currentItems.map((product) => (
                                 <ProductItem
@@ -219,65 +217,14 @@ function ProductFiveColumns({
                     </div>
                 </div>
 
-                {/* <div
-                    className={
-                        tabState === 3
-                            ? 'grid-content-05 tab-style-common active'
-                            : 'grid-content-05 tab-style-common'
-                    }
-                >
-                    <div className="grid lg:grid-cols-5 md:grid-cols-4 lm:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
-                        {currentItems &&
-                            currentItems.map((product) => (
-                                <ProductItem
-                                    product={product}
-                                    productFilter={productFilter}
-                                    productFilterPath={
-                                        productFilterPath
-                                    }
-                                    key={product.id}
-                                />
-                            ))}
-                    </div>
-                </div> */}
-                {/* <ul className="pagination flex justify-center pt-[40px]">
-                    <li className="px-[5px]">
-                        <button
-                            className={`${
-                                currentPage === pages[0] ? 'hidden' : ''
-                            } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
-                            type="button"
-                            onClick={handlePrevbtn}
-                            disabled={currentPage === pages[0]}
-                        >
-                            Prev
-                        </button>
-                    </li>
-                    {pageDecrementBtn}
-                    {renderPageNumbers}
-                    {pageIncrementBtn}
-                    <li className="px-[5px]">
-                        <button
-                            className={`${
-                                currentPage === pages[pages.length - 1]
-                                    ? 'hidden'
-                                    : ''
-                            } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
-                            type="button"
-                            onClick={handleNextbtn}
-                            disabled={
-                                currentPage === pages[pages.length - 1]
-                            }
-                        >
-                            Next
-                        </button>
-                    </li>
-                </ul> */}
+               
 
 <div className="product-list-container"  >
                 <h1>{productcategoryid.name}</h1>
-                <p style={{color:'grey', marginTop:5}}>{productcategoryid.id == '1' ? "We deliver to Europe, Australia, and North America.":productcategoryid.id == '5'?" This is groceris for Eritrea. Delivery will take upto three business days.":''}</p>
-                <div className="product-list">
+                <p style={{color:'green', marginTop:5}}>{productcategoryid.id == '1' ? "We deliver to Europe, Australia, and North America.":productcategoryid.id == '5'?" This is groceris for Eritrea. Delivery will take upto three business days.":''}</p>
+               
+               
+                <div className=" grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-2 gap-y-[5px]" >
                     {product.map((product, index) => (
                             <ProductItem
                             product={product}
@@ -291,159 +238,14 @@ function ProductFiveColumns({
                 </div>
             </div>
 
-                 {/* <div className="product-list-container"  >
-                <h1>{productcategoryid.name}</h1>
-                <p style={{color:'grey', marginTop:5}}>{productcategoryid.id == '1' ? "We deliver to Europe, Australia, and North America.":productcategoryid.id == '5'?" This is groceris for Eritrea. Delivery will take upto three business days.":''}</p>
-                <div className="product-list">
-                    {product.map((product, index) => (
-
-
-
-                        <div className="product-item" key={index}>
-                            <h3 className="product-title">{product.title}</h3>
-                            <img
-                                className="product-image"
-                                src={product.image}
-                                alt={product.title}
-                            />
-                            <p className="product-price">
-                                 {product.price}
-                            </p>
-                            <p className="product-country">
-                             {product.country}
-                            </p>
-                        </div>
-                    ))}
-                </div>
-            </div> */}
-
+              
 
             </div>
         </div>
     </div>
 </div>
 
-        // <div className="product border-b border-[#ededed] xl:py-[120px] lg:py-[100px] md:py-[80px] py-[50px]">
-        //     <div className={productFiveColumnsContainer}>
-        //         <div className="grid grid-cols-12 lg:gap-x-[25px]">
-        //             <div className="col-span-12">
-        //                 <ProductActiveFilter />
-        //                 <ProductToolBars
-        //                     totalProductNumber={filteredProduct.length}
-        //                     startItemNumber={
-        //                         (currentPage - 1) * itemPerPage + 1
-        //                     }
-        //                     endItemNumber={
-        //                         filteredProduct.length >
-        //                         currentPage * itemPerPage
-        //                             ? currentPage * itemPerPage
-        //                             : filteredProduct.length
-        //                     }
-        //                     productTab={productTab}
-        //                     tabState={tabState}
-        //                     setTabState={setTabState}
-        //                     gridTabItems={gridTabItems}
-        //                 />
-        //                 <div
-        //                     className={
-        //                         tabState === 1
-        //                             ? 'grid-content-03 tab-style-common active'
-        //                             : 'grid-content-03 tab-style-common'
-        //                     }
-        //                 >
-        //                     <div className="grid lg:grid-cols-3 lm:grid-cols-2 grid-cols-1 lm:gap-x-[25px] gap-y-[40px] ">
-        //                         {currentItems &&
-        //                             currentItems.map((product) => (
-        //                                 <ProductItem
-        //                                     product={product}
-        //                                     productFilter={productFilter}
-        //                                     productFilterPath={
-        //                                         productFilterPath
-        //                                     }
-        //                                     key={product.id}
-        //                                 />
-        //                             ))}
-        //                     </div>
-        //                 </div>
-        //                 <div
-        //                     className={
-        //                         tabState === 2
-        //                             ? 'grid-content-04 tab-style-common active'
-        //                             : 'grid-content-04 tab-style-common'
-        //                     }
-        //                 >
-        //                     <div className="grid lg:grid-cols-4 md:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
-        //                         {currentItems &&
-        //                             currentItems.map((product) => (
-        //                                 <ProductItem
-        //                                     product={product}
-        //                                     productFilter={productFilter}
-        //                                     productFilterPath={
-        //                                         productFilterPath
-        //                                     }
-        //                                     key={product.id}
-        //                                 />
-        //                             ))}
-        //                     </div>
-        //                 </div>
-        //                 <div
-        //                     className={
-        //                         tabState === 3
-        //                             ? 'grid-content-05 tab-style-common active'
-        //                             : 'grid-content-05 tab-style-common'
-        //                     }
-        //                 >
-        //                     <div className="grid lg:grid-cols-5 md:grid-cols-4 lm:grid-cols-3 sm:grid-cols-2 grid-cols-1 sm:gap-x-[25px] gap-y-[40px]">
-        //                         {currentItems &&
-        //                             currentItems.map((product) => (
-        //                                 <ProductItem
-        //                                     product={product}
-        //                                     productFilter={productFilter}
-        //                                     productFilterPath={
-        //                                         productFilterPath
-        //                                     }
-        //                                     key={product.id}
-        //                                 />
-        //                             ))}
-        //                     </div>
-        //                 </div>
-        //                 <ul className="pagination flex justify-center pt-[40px]">
-        //                     <li className="px-[5px]">
-        //                         <button
-        //                             className={`${
-        //                                 currentPage === pages[0] ? 'hidden' : ''
-        //                             } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
-        //                             type="button"
-        //                             onClick={handlePrevbtn}
-        //                             disabled={currentPage === pages[0]}
-        //                         >
-        //                             Prev
-        //                         </button>
-        //                     </li>
-        //                     {pageDecrementBtn}
-        //                     {renderPageNumbers}
-        //                     {pageIncrementBtn}
-        //                     <li className="px-[5px]">
-        //                         <button
-        //                             className={`${
-        //                                 currentPage === pages[pages.length - 1]
-        //                                     ? 'hidden'
-        //                                     : ''
-        //                             } bg-[#f5f5f5] cursor-pointer flex items-center text-[14px] px-[13px] h-[34px]`}
-        //                             type="button"
-        //                             onClick={handleNextbtn}
-        //                             disabled={
-        //                                 currentPage === pages[pages.length - 1]
-        //                             }
-        //                         >
-        //                             Next
-        //                         </button>
-        //                     </li>
-        //                 </ul>
-        //             </div>
-        //         </div>
-        //     </div>
-        // </div>
+       
     );
 }
 

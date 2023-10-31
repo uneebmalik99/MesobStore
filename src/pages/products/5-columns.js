@@ -35,7 +35,7 @@ function ProductFiveColumnsPage({
                 activeItem="Products"
             />
             <ProductFiveColumns
-                productFiveColumnsContainer="container-fluid xl:px-[100px] px-[15px]"
+                productFiveColumnsContainer="container-fluid xl:px-[60px] px-[5px]"
                 products={products}
                 productcategoryid={data}
                 productFilter={productFilter}
