@@ -4,13 +4,13 @@
 const awsmobile = {
     "aws_project_region": "us-east-1",
     "aws_cognito_identity_pool_id": "us-east-1:71e0f82b-2ea7-4ea3-8be3-d21b35e7fa4b",
-    aws_appsync_graphqlEndpoint:
-    'https://sla2nph3orgjbccyqrv6bfhmfa.appsync-api.us-east-1.amazonaws.com/graphql',
     "aws_cognito_region": "us-east-1",
     "aws_user_pools_id": "us-east-1_oyDOhnVf6",
+    "aws_user_pools_web_client_id": "1noi46dbud0satg6boijf7o0tn",
+    aws_appsync_graphqlEndpoint:
+    'https://sla2nph3orgjbccyqrv6bfhmfa.appsync-api.us-east-1.amazonaws.com/graphql',
     aws_appsync_authenticationType: 'API_KEY',
     aws_appsync_apiKey: 'da2-ln6qec5rqramrlpfpm7uiuz64i',
-    "aws_user_pools_web_client_id": "1noi46dbud0satg6boijf7o0tn",
     "oauth": {
         "domain": "abrehet014c7ce4-014c7ce4-dev.auth.us-east-1.amazoncognito.com",
         "scope": [
@@ -26,11 +26,11 @@ const awsmobile = {
     },
     "federationTarget": "COGNITO_USER_POOLS",
     "aws_cognito_username_attributes": [],
-    // "aws_cognito_social_providers": [
-    //     "FACEBOOK",
-    //     "GOOGLE",
-    //     "APPLE"
-    // ],
+    "aws_cognito_social_providers": [
+        "FACEBOOK",
+        "GOOGLE",
+        "APPLE"
+    ],
     "aws_cognito_signup_attributes": [
         "EMAIL"
     ],

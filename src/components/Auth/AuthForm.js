@@ -1,17 +1,21 @@
 import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { useState, useEffect } from 'react';
-import { withAuthenticator, Authenticator, Button, components } from '@aws-amplify/ui-react';
+import { withAuthenticator, Authenticator, Button, components } from '@aws-amplify/ui-react'; 
 import { Amplify,API, Hub,graphqlOperation, Auth } from 'aws-amplify';
 import _ from 'lodash';
 import * as queries from '../../graphql/queries';
 import CustomSignInButton from './CustomSignInButton';
+import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
+import awsconfig from "../../aws-exports";
 
 
 const inputField = `border border-[#cccccc] focus-visible:outline-0 text-[#666666] py-[10px] px-[20px] w-full h-[50px]`;
 const secondaryButton =
     'flex items-center justify-center bg-primary text-white leading-[38px] text-[15px] h-[50px] w-full  transition-all hover:bg-[#212529] px-[40px]';
 
+
+    // Amplify.configure(awsconfig.oauth.redirectSignIn="http://localhost:3000/");
 function AuthForm({ authItems }){
     // Auth Tab
     const [authTabState, setAuthTabState] = useState(1);
@@ -78,36 +82,6 @@ function AuthForm({ authItems }){
     //     },
     //   });
 
-    useEffect(() => {
-        console.log('UseEffect for fetching products');
-        const fetchProducts = async () => {
-            try {
-                console.log('fetching products');
-                const response = await API.graphql(
-                    graphqlOperation(queries.listProducts)
-                );
-                const allProducts = response.data.listProducts.items;
-                console.log('Response Products: ', allProducts);
-                setProducts(
-                    allProducts.map((item) => {
-                        return _.pick(JSON.parse(item.content), [
-                            'id',
-                            'title',
-                            'image',
-                            'price',
-                            'oldPrice',
-                            'country',
-                        ]);
-                    })
-                );
-            } catch (error) {
-                console.error('Error fetching products:', error);
-            }
-        };
-
-        fetchProducts();
-    }, []);
-
     const handleSignUp = async () => {
         console.log('Email. Pass: ', email + password);
         try {
@@ -119,11 +93,16 @@ function AuthForm({ authItems }){
         }
     };
     const handleSignIn = async () => {
+        // const response = await Auth.signIn('uneebmalik99@hotmail.com', 'PCmalik99');
 
-        console.log('Signin: ', signInEmail, ' ', signInPassword);
+        // console.log('response = : ', response);
         try {
             const response = await Auth.signIn(signInEmail, signInPassword);
-            console.log(`Login Response: ${JSON.stringify(response)}`);
+            console.log(`Login Response: ${JSON.stringify(response.username)}`);
+            if(response.username == signInEmail){
+                window.location.href = '/'
+
+            }
         } catch (e) {
             console.log('Error: ', JSON.stringify(e));
             alert(`Error: ${e.message}`);
@@ -146,7 +125,9 @@ function AuthForm({ authItems }){
     return (
         <div className="border-b border-[#ededed] xl:py-[155px] lg:py-[100px] md:py-[80px] py-[50px]">
             <div className="container md:max-w-lg">
-                {/* <ul className="auth-menu flex justify-center pb-[50px]">
+
+                
+                <ul className="auth-menu flex justify-center pb-[50px]">
                     {authItems[0]?.authTabMenu?.map((singleTabMenu) => (
                         <li
                             key={singleTabMenu.id}
@@ -170,7 +151,7 @@ function AuthForm({ authItems }){
                             : 'login-content tab-style-common'
                     }
                 >
-                    <form className="login-form">
+                    <div >
                         <h3 className="title text-[18px] mb-[25px]">
                             Login your account
                         </h3>
@@ -216,6 +197,8 @@ function AuthForm({ authItems }){
                                 className={secondaryButton}
                                 onClick={handleSignIn}
                             >
+                         
+
                                 Login
                             </button>
                         </div>
@@ -227,6 +210,10 @@ function AuthForm({ authItems }){
                         <button
                             className="button-wrap"
                             type="submit"
+                            onClick={()=> {
+                                console.log('hjgjgjugugu')
+                                Auth.federatedSignIn({provider:'Google'}) 
+                            }}
                             style={{
                                 borderWidth: 1,
                                 borderRadius: 5,
@@ -260,16 +247,16 @@ function AuthForm({ authItems }){
                                 </p>
                             </div>
                         </button>
-                        <button onClick={()=> {
+                        {/* <button onClick={()=> {
                             Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google});
                         }}>
                             jfvv
-                        </button>
+                        </button> */}
                         <button
                             className="button-wrap"
                             onClick={()=> {
                                 console.log('hjgjgjugugu')
-                                Auth.federatedSignIn({provider:'Facebook'}) 
+                                Auth.federatedSignIn({provider:'Google'}) 
                             }}
                             type="submit"
                             style={{
@@ -305,6 +292,10 @@ function AuthForm({ authItems }){
                         </button>
 
                         <button
+                          onClick={()=> {
+                            console.log('hjgjgjugugu')
+                            Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Apple}) 
+                        }}
                             className="button-wrap"
                             type="submit"
                             style={{
@@ -338,15 +329,15 @@ function AuthForm({ authItems }){
                                 </p>
                             </div>
                         </button>
-                    </form>
-                </div> */}
+                    </div>
+                </div>
 
-                <Authenticator components={components}>
+                {/* <Authenticator components={components}>
             {({ signOut, user }) => (
 
                 window.location.href = '/'
             )}
-        </Authenticator>
+        </Authenticator> */}
                 <div
                     className={
                         authTabState === 2

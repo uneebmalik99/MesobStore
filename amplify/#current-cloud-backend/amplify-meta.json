@@ -51,7 +51,7 @@
         "OAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"],\"LogoutURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"]}",
         "UserPoolName": "abrehetca91482b_userpool_ca91482b"
       },
-      "lastPushTimeStamp": "2023-10-03T08:23:44.711Z",
+      "lastPushTimeStamp": "2023-10-31T16:11:48.778Z",
       "providerMetadata": {
         "s3TemplateURL": "https://s3.amazonaws.com/amplify-abrehet-dev-144722-deployment/amplify-cfn-templates/auth/abrehetca91482b-cloudformation-template.json",
         "logicalId": "authabrehetca91482b"

@@ -12,11 +12,36 @@ import { ToastContainer, toast } from 'react-toastify';
 import { ScrollToTop } from '../components/ScrollComps';
 import Layout from '../components/Layout';
 import store from '../store/index';
-import awsExports from '../aws-exports';
+import awsConfig from '../aws-exports';
 import 'react-toastify/dist/ReactToastify.css';
 
 const persistor = persistStore(store);
-Amplify.configure(awsExports);
+// Amplify.configure(awsExports);
+// Amplify.configure(awsExports.oauth.redirectSignIn="http://localhost:3000/");
+
+
+// const updatedAwsConfig = {
+//     ...awsConfig,
+//     oauth: {
+//       ...awsConfig.oauth,
+//       redirectSignIn: 'http://localhost:3000/',
+//       redirectSignOut: 'http://localhost:3000/',
+//     },
+//   };
+
+  const updatedAwsConfig = {
+    ...awsConfig,
+    oauth: {
+      ...awsConfig.oauth,
+      redirectSignIn:  'https://mesobstore.com/',
+      redirectSignOut:  'https://mesobstore.com/',
+    },
+  };
+
+  
+
+ Amplify.configure(updatedAwsConfig);
+
 
 function MyApp({ Component, pageProps }) {
     
@@ -28,8 +53,10 @@ function MyApp({ Component, pageProps }) {
 async function currentSession() {
   try {
     const data = await Auth.currentSession();
+    console.log("current user : ", data);
     
   } catch(err) {
+    console.log("current user session error ",err);
 
   }
 };
