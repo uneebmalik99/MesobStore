@@ -294,12 +294,12 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                     </span>
                                 </div>
                             )}
-                            <h3 className="stock font-semibold text-[14px] mb-[20px]">
+                            {/* <h3 className="stock font-semibold text-[14px] mb-[20px]">
                                 Available:
                                 <span className="text-[#3bc604] ml-[5px]">
                                     {product?.availability}
                                 </span>
-                            </h3>
+                            </h3> */}
                             <p>{desc}</p>
                             <div className="group-btn flex max-xs:flex-wrap py-[30px]">
                                 <div

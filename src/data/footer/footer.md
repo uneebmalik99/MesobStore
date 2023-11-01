@@ -39,8 +39,8 @@ socialMediaList:
 newsletterTitle: 'Newsletter'
 menuList:
     [
-        { id: 01, title: 'Term & Condition', path: '/privacy' },
-        { id: 02, title: 'Policy', path: '/privacy' },
+        { id: 01, link: 'https://apps.apple.com/us/app/mesob-store/id1617565954', path: '/images/footerappstore/appstore.webp' },
+        { id: 02, link: 'https://play.google.com/store/apps/details?id=com.mesob.store.app&pli=1', path: '/images/footerappstore/googleplay.webp'  },
     ]
 footerLogo: '/images/logo/mesoblogo.jpeg'
 footerLogoAlt: 'Footer Logo'

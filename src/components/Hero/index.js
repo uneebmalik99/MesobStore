@@ -279,7 +279,7 @@ console.log(JSON.stringify(heroDefaultItems))
                             <div
                                 className={`${BannerImages.image
                                     .split(' ')
-                                    .join(' ')} sm:h-[300px] md:h-[440px] h-[440px]`}
+                                    .join(' ')} sm:h-[350px] md:h-[440px] h-[350px]`}
                                     style={{backgroundImage:`url(${BannerImages.image})`,
                                     backgroundPosition: 'center',
                                     backgroundSize: 'cover',
@@ -326,7 +326,9 @@ console.log(JSON.stringify(heroDefaultItems))
                                             }}
                                         >
                                            <Link href="">
-                                                <a onClick={handleButtonClick}
+                                                <a
+                                                style={{borderWidth:1, borderColor:'white', borderRadius:10}}
+                                                onClick={handleButtonClick}
                                           className={secondaryButton}>
                                                     Flash Sale
                                                     <IoArrowForwardOutline className="text-white ml-[5px]" />

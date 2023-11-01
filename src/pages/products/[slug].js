@@ -13,6 +13,9 @@ function ProductDetailPage({
     productDetailTabItems,
     footerItems,
 }) {
+
+
+    let url = window.location.href;
     const router = useRouter();
     const products ={
                 id : router.query.id ,
@@ -31,6 +34,8 @@ function ProductDetailPage({
     return (
         <>
             {/* <HeaderOne headerItems={headerItems} headerContainer="container" /> */}
+            
+
             <Breadcrumb
                 breadcrumbContainer="container"
                 product={products}

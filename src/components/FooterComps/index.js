@@ -147,18 +147,18 @@ function FooterComps({ footerContainer, footerItems }) {
                     <div className="grid grid-cols-12 md:gap-y-0 gap-y-[20px] items-center">
                         <div className="md:col-span-4 col-span-12">
                             <ul className="flex md:justify-start justify-center">
-                                {/* {footerItems[0]?.menuList?.map((item) => (
+                                {footerItems[0]?.menuList?.map((item) => (
                                     <li
                                         className="xl:mr-[30px] mr-[20px] last:mr-0"
                                         key={item.id}
                                     >
-                                        <Link href={item?.path}>
+                                        <Link href={item?.link}>
                                             <a className="font-normal transition-all hover:text-primary">
-                                                {item?.title}
+                                                <img src={item?.path} ></img>
                                             </a>
                                         </Link>
                                     </li>
-                                ))} */}
+                                ))}
                             </ul>
                         </div>
                         <div className="md:col-span-4 col-span-12">

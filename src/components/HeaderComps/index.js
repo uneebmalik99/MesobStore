@@ -61,10 +61,10 @@ function HeaderOne({ headerItems, headerContainer }) {
                             logoPath="/"
                         />
                     </div>
-                    <div className="col-span-7 xs:col-span-7 sm:col-span-7 md:col-span-9 lg:col-span-9 xl:col-span-9">
+                    <div className="col-span-7 xs:col-span-7 sm:col-span-7 md:col-span-8 lg:col-span-8 xl:col-span-8">
                         <SearchBarComps placeholdertext="Search Anything..." />
                     </div>
-                    <div className="col-span-2 xs:col-span-2 sm:col-span-2 md:col-span-1 lg:col-span-1 xl:col-span-1 self-center">
+                    <div className="col-span-2 xs:col-span-2 sm:col-span-2 md:col-span-2 lg:col-span-2 xl:col-span-2 self-center">
                         <HeaderRight headerItems={headerItems} />
                     </div>
                 </div>

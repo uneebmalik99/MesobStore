@@ -126,6 +126,9 @@ function AuthForm({ authItems }){
         <div className="border-b border-[#ededed] xl:py-[155px] lg:py-[100px] md:py-[80px] py-[50px]">
             <div className="container md:max-w-lg">
 
+
+                
+
                 
                 <ul className="auth-menu flex justify-center pb-[50px]">
                     {authItems[0]?.authTabMenu?.map((singleTabMenu) => (
@@ -144,6 +147,8 @@ function AuthForm({ authItems }){
                         </li>
                     ))}
                 </ul>
+
+
                 <div
                     className={
                         authTabState === 1
@@ -151,68 +156,15 @@ function AuthForm({ authItems }){
                             : 'login-content tab-style-common'
                     }
                 >
-                    <div >
-                        <h3 className="title text-[18px] mb-[25px]">
-                            Login your account
-                        </h3>
-                        <div className="single-field mb-[30px]">
-                            <input
-                                className={inputField}
-                                type="text"
-                                value={signInEmail}
-                                onChange={(event) => {
-                                    setSign(event.target.value);
-                                }}
-                                placeholder="Username"
-                            />
-                        </div>
-                        <div className="single-field mb-[30px]">
-                            <input
-                                className={inputField}
-                                type="password"
-                                value={signInPassword}
-                                onChange={(event) => {
-                                    setsignPass(event.target.value);
-                                }}
-                                placeholder="Password"
-                            />
-                        </div>
-                        <div className="single-field flex justify-between items-center mb-[30px]">
-                            <label className="flex" htmlFor="rememberme">
-                                <input type="checkbox" id="rememberme" />
-                                <span className="text-[14px] ml-[15px]">
-                                    Remember me
-                                </span>
-                            </label>
-                            <Link href="/lost-password">
-                                <a className="text-[14px] font-normal transition-all hover:text-primary">
-                                    Lost your password?
-                                </a>
-                            </Link>
-                        </div>
-                        <div className="button-wrap">
-                            <button
-                                type="submit"
-                                id="signin"
-                                className={secondaryButton}
-                                onClick={handleSignIn}
-                            >
-                         
 
-                                Login
-                            </button>
-                        </div>
 
-                        <div className="button-wrap " style={{ marginTop: 30 }}>
-                            <p style={{ alignSelf: 'center' }} />
-                        </div>
 
-                        <button
+                <button
                             className="button-wrap"
                             type="submit"
                             onClick={()=> {
                                 console.log('hjgjgjugugu')
-                                Auth.federatedSignIn({provider:'Google'}) 
+                                Auth.federatedSignIn({provider:CognitoHostedUIIdentityProvider.Facebook}) 
                             }}
                             style={{
                                 borderWidth: 1,
@@ -247,16 +199,12 @@ function AuthForm({ authItems }){
                                 </p>
                             </div>
                         </button>
-                        {/* <button onClick={()=> {
-                            Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google});
-                        }}>
-                            jfvv
-                        </button> */}
+                     
                         <button
                             className="button-wrap"
                             onClick={()=> {
                                 console.log('hjgjgjugugu')
-                                Auth.federatedSignIn({provider:'Google'}) 
+                                Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google}) 
                             }}
                             type="submit"
                             style={{
@@ -329,6 +277,64 @@ function AuthForm({ authItems }){
                                 </p>
                             </div>
                         </button>
+                    <div >
+                    <h3 className="title text-center text-[18px] mt-[25px] mb-[25px]">
+                           OR 
+                        </h3>
+                        
+                        <div className="single-field mb-[30px]">
+                            <input
+                                className={inputField}
+                                type="text"
+                                value={signInEmail}
+                                onChange={(event) => {
+                                    setSign(event.target.value);
+                                }}
+                                placeholder="Username"
+                            />
+                        </div>
+                        <div className="single-field mb-[30px]">
+                            <input
+                                className={inputField}
+                                type="password"
+                                value={signInPassword}
+                                onChange={(event) => {
+                                    setsignPass(event.target.value);
+                                }}
+                                placeholder="Password"
+                            />
+                        </div>
+                        <div className="single-field flex justify-between items-center mb-[30px]">
+                            <label className="flex" htmlFor="rememberme">
+                                <input type="checkbox" id="rememberme" />
+                                <span className="text-[14px] ml-[15px]">
+                                    Remember me
+                                </span>
+                            </label>
+                            <Link href="/lost-password">
+                                <a className="text-[14px] font-normal transition-all hover:text-primary">
+                                    Lost your password?
+                                </a>
+                            </Link>
+                        </div>
+                        <div className="button-wrap">
+                            <button
+                                type="submit"
+                                id="signin"
+                                className={secondaryButton}
+                                onClick={handleSignIn}
+                            >
+                         
+
+                                Login
+                            </button>
+                        </div>
+
+                        <div className="button-wrap " style={{ marginTop: 30 }}>
+                            <p style={{ alignSelf: 'center' }} />
+                        </div>
+
+                    
                     </div>
                 </div>
 

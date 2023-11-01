@@ -127,11 +127,12 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
         <p className="text-[#666666]"> id : {order.id}</p>
         {/* <span className="text-[#666666]"> status :{order.Status}</span> */}
 
+<div style={{display:'flex', flexDirection:'row'}}>
+
+
        <p>Status : </p>
 
-       <div style={{display:'flex', flexDirection:'column'}}>
-
-      
+       <div style={{display:'flex', marginLeft:10, flexDirection:'column'}}>
 
         <div style={{  display:'flex', flexDirection:'row'}}>
         <div style={{
@@ -142,7 +143,7 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
   background: '#ffffff'
 }}>
        <div style={{
-  backgroundImage:order.Status == 'Orderd' ? 'linear-gradient(to bottom, rgb(9, 112, 26) 0%, rgb(21, 255, 0) 100%)':'linear-gradient(to bottom, rgb(255, 225, 225) 0%, rgb(225, 255, 225) 0%)',
+  backgroundImage:'linear-gradient(to bottom, rgb(9, 112, 26) 0%, rgb(21, 255, 0) 100%)',
   content: '',
   position: 'absolute',
   top: '-5px',
@@ -155,14 +156,14 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
     </div> 
     </div> 
       
-    <p style={{paddingInline:5,}}> Item Ordered </p> 
+    <p style={{paddingInline:5,}}> {order.Status == 'Orderd' ? 'Item Ordered' : order.Status == 'Shipped' ?'Item Shipped':'Item Successfully Delivered' }  </p> 
 
         </div>
 
 
 
 
-        <div style={{  display:'flex', flexDirection:'row'}}>
+        {/* <div style={{  display:'flex', flexDirection:'row'}}>
         <div style={{
   position: 'relative',
   width: '20px',
@@ -216,9 +217,12 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
       
     <p style={{paddingInline:5,}}> Item Successfully Delivered </p> 
 
+        </div> */}
+
         </div>
 
         </div>
+
 
         <span className="text-[#666666]">Date: {new Date(order.createdAt).toLocaleDateString('en-US', { year: 'numeric', month: '2-digit', day: '2-digit' })}</span>
         <span className="text-[#666666]">Total :{'$ '}{total1}</span>{' '}

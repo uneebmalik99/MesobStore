@@ -56,6 +56,8 @@ function HomePage({
 
     console.log('Products in state are: ', products);
 
+
+
     const targetDivRef = useRef(null);
 
     const scrollToTargetDiv = () => {
@@ -77,6 +79,7 @@ function HomePage({
             const allProducts2 = response.data.listProducts.items;
             console.log("djsvjdnsvj"+JSON.stringify(allProducts2));
             let receomedproducts= [];
+            // alert(allProducts.length)
             for(let i = 0; i< response.data.listProducts.items.length; i++){
                 console.log('fjdnjk'+JSON.stringify(response.data.listProducts.items[i].isRecommended));
                 if(response.data.listProducts.items[i].isRecommended == true){
