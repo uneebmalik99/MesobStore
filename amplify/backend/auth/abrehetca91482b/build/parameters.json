@@ -58,8 +58,8 @@
   ],
   "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}},{\"ProviderName\":\"SignInWithApple\",\"authorize_scopes\":\"email\",\"AttributeMapping\":{\"email\":\"email\"}}]",
   "authProviders": [],
-  "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"],\"LogoutURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"]}",
   "userPoolGroups": false,
   "adminQueries": false,
-  "thirdPartyAuth": false
+  "thirdPartyAuth": false,
+  "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"],\"LogoutURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"]}"
 }

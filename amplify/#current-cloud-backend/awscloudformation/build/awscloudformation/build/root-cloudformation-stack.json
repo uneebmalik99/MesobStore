@@ -206,11 +206,11 @@
           "authProvidersUserPool": "Facebook,Google,SignInWithApple",
           "hostedUIProviderMeta": "[{\"ProviderName\":\"Facebook\",\"authorize_scopes\":\"email,public_profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"id\"}},{\"ProviderName\":\"Google\",\"authorize_scopes\":\"openid email profile\",\"AttributeMapping\":{\"email\":\"email\",\"username\":\"sub\"}},{\"ProviderName\":\"SignInWithApple\",\"authorize_scopes\":\"email\",\"AttributeMapping\":{\"email\":\"email\"}}]",
           "authProviders": "",
-          "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"],\"LogoutURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"]}",
           "userPoolGroups": false,
           "adminQueries": false,
           "thirdPartyAuth": false,
-          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"549692863859097\",\"client_secret\":\"7184938f16c6af382e23b31b2cf587d6\"},{\"ProviderName\":\"Google\",\"client_id\":\"263314305713-hp7l8kquol4e16vi6nhp1mghjgc92u1i.apps.googleusercontent.com\",\"client_secret\":\"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\"},{\"ProviderName\":\"SignInWithApple\",\"client_id\":\"com.amazonaws.mesobstoreonline\",\"team_id\":\"T7F65ZFA5T\",\"key_id\":\"3Q85N2W242\"}]",
+          "oAuthMetadata": "{\"AllowedOAuthFlows\":[\"code\"],\"AllowedOAuthScopes\":[\"phone\",\"email\",\"openid\",\"profile\",\"aws.cognito.signin.user.admin\"],\"CallbackURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"],\"LogoutURLs\":[\"abrehet://\",\"http://localhost:3000/\",\"https://mesobstore.com/\"]}",
+          "hostedUIProviderCreds": "[{\"ProviderName\":\"Facebook\",\"client_id\":\"1111931876436648\",\"client_secret\":\"6717d4e5599c9219508f3828f21f0c3a\"},{\"ProviderName\":\"Google\",\"client_id\":\"468810172724-gr0p4h3hj81bhieh7mgdmufdviu88326.apps.googleusercontent.com\",\"client_secret\":\"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\"},{\"ProviderName\":\"SignInWithApple\",\"client_id\":\"com.Abrehet.org\",\"team_id\":\"T7F65ZFA5T\",\"key_id\":\"7Q528C4Q26\",\"private_key\":\"-----BEGIN PRIVATE KEY-----\\nMIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQg6O86DCL6RDegZpJj\\nH6zBwV+c3HPk2TNARCIfZQb32X6gCgYIKoZIzj0DAQehRANCAAREpQPoDtK5gDYm\\nbMpZhsaySGsLmRHBe7a1xcrar+gXVInw3iHeriP4jODKM/wWjoLg0P1Opda/qdqy\\nFNIZuO/t\\n-----END PRIVATE KEY-----\"}]",
           "env": "dev"
         }
       }

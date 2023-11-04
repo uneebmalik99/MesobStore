@@ -20,7 +20,7 @@ export const getProducts = /* GraphQL */ `
 export const listProducts = /* GraphQL */ `
   query ListProducts(
     $filter: ModelProductsFilterInput
-    $limit: Int
+    $limit : Int
     $nextToken: String
   ) {
     listProducts(filter: $filter, limit: $limit, nextToken: $nextToken) {

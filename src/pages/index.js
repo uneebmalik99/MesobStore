@@ -73,11 +73,15 @@ function HomePage({
        
         try {
             const response = await API.graphql(
-                graphqlOperation(queries.listProducts)
+                graphqlOperation(queries.listProducts, {
+                  limit: 250, // Pass the limit as a variable
+                })
             );
             const allProducts = response.data.listProducts.items;
             const allProducts2 = response.data.listProducts.items;
             console.log("djsvjdnsvj"+JSON.stringify(allProducts2));
+        // alert( allProducts.length )
+
             let receomedproducts= [];
             // alert(allProducts.length)
             for(let i = 0; i< response.data.listProducts.items.length; i++){
@@ -91,6 +95,7 @@ function HomePage({
                 title: item.title,
               }));
 
+              // alert(receomedproducts.length)
               console.log('    bgvghvgh   '+JSON.stringify(searchItems));
               
               // Dispatch the action to store the search items in Redux
@@ -101,15 +106,23 @@ function HomePage({
             console.log('Rrcommend Products ', JSON.stringify(receomedproducts2));
             console.log('Response Products:1 ', allProducts[7].isRecommended);
 
+            let cpunt = 0;
             setRecommendedProduct(
                 allProducts2.filter(item => {
                   const isRecommended = item?.isRecommended || null;
-                  if (isRecommended) {
+                  const offPercentage = item?.off_percentage || null;
+
+                  if (isRecommended == true && offPercentage !== null) {
+                    console.log('guugukgku'+cpunt++ + '  '+ isRecommended + '     '+ offPercentage + '   '+ item.title    );
+                 
                     R_categories.push(item.category)
                     return item;
                   }
                 }),
               );
+
+
+        
             setProducts(
                 allProducts.map((item) => {
                     console.log('gkenrgkjer'+item.isRecommended)
@@ -126,6 +139,7 @@ function HomePage({
                     ]);
                 })
             );
+            // alert(RecommendedProduct)
 
             const uniqueCategories = [...new Set(R_categories)];
 
@@ -205,190 +219,175 @@ function HomePage({
             </div>
 
 
-
-            
             <div  ref={targetDivRef} style={{ paddingInline:'2%', paddingTop:'2%', paddingBottom:'2%'}}>
 
                
 
-            <h2
-                   className="offer-colection-title relative pb-[10px] mb-[20px] after:absolute after:left-0 after:bottom-0 after:bg-primary after:h-[4px] after:w-[70px]"
-                    dangerouslySetInnerHTML={{
-                    __html: offerColection[0].title,
-                    }}
-                    style={{marginLeft:'5%'}}
-                    />
+<h2
+       className="offer-colection-title relative pb-[10px] mb-[20px] after:absolute after:left-0 after:bottom-0 after:bg-primary after:h-[4px] after:w-[70px]"
+        dangerouslySetInnerHTML={{
+        __html: offerColection[0].title,
+        }}
+        style={{marginLeft:'5%'}}
+        />
 
-                <div  className="product-list-container"  
-                // style={{
-                //     display: 'flex',
-                //     overflowX: 'auto',
-                //     whiteSpace: 'nowrap',
-                //     padding: '10px',
-                  
-                //   }}
-                >
+    <div  className="product-list-container"  
+ 
+    >
+                       <div >
+
+                        {R_categories.map((cproduct, index) => {
+                                                
+                                                console.log("mnbjhbn"+cproduct);
+
+                                                return(
+                                                    <>
+                                                <div>
 
 
-                    
-       
+                                                <h5 style={{alignSelf:'flex-start'}}>{cproduct}</h5>
+                                             <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-2 gap-y-[5px]">
+                                                {/* <div className="col-12 col-xs-4 col-sm-6 col-md-4 col-slg-3  lm:gap-x-[25px]  gap-y-[5px] "> */}
 
+
+                            {/* if (Rproduct.isRecommended === true) {
+                                // Parse the JSON content to access the image property
+                                const contentObj = JSON.parse(Rproduct.content); */}
+
+                            {RecommendedProduct.map((Rproduct, index) => {
+
+                         
+                            console.log("Rproduct  nkjb"+JSON.stringify(Rproduct.content.price));
+                                
+                                
+                            let img = '';
+                            var price ;
+                            let old_price = '';
+
+                            if (Rproduct.isRecommended === true) {
+                                // Parse the JSON content to access the image property
+                                const contentObj = JSON.parse(Rproduct.content);
+                                // Set img to the image URL from the parsed content
+                                img = contentObj.image;
+                              
+                            }
+
+                            let tenPercentOfPrice;
+                            if (Rproduct.isRecommended == true && Rproduct.category == cproduct) {
 
                                
-                                {/* <div className="product-list">
-                                    {RecommendedProduct.map((Rproduct, index) => { */}
-                                   <div >
-
-                                    {R_categories.map((cproduct, index) => {
-                                                            
-                                                            console.log("mnbjhbn"+cproduct);
-
-                                                            return(
-                                                                <>
-                                                            <div>
+                                const contentObj = JSON.parse(Rproduct.content);
+                                // Set img to the image URL from the parsed content
+                                price = contentObj.price;
+                                old_price = price;
+                                price = price.slice(1)
+                                price = price.replace(/,/g, '');
 
 
-                                                            <h5 style={{alignSelf:'flex-start'}}>{cproduct}</h5>
-                                                         <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-2 gap-y-[5px]">
-                                                            {/* <div className="col-12 col-xs-4 col-sm-6 col-md-4 col-slg-3  lm:gap-x-[25px]  gap-y-[5px] "> */}
+                                const off  = Rproduct.off_percentage.slice(0, -1);
 
+                                console.log("vfklns",price);
+                                 
+                                console.log("fndudskkd", off)
 
-                                        {/* if (Rproduct.isRecommended === true) {
-                                            // Parse the JSON content to access the image property
-                                            const contentObj = JSON.parse(Rproduct.content); */}
+                                    // Calculate the discounted price
+                                    let discount = (off / 100) * price;
+                                    let priceAfterDiscount = price - discount;
 
-                                        {RecommendedProduct.map((Rproduct, index) => {
+                                    console.log("cdsnsdfkdn",priceAfterDiscount); 
 
-                                     
-                                        console.log("Rproduct  nkjb"+JSON.stringify(Rproduct.content.price));
-                                            
-                                            
-                                        let img = '';
-                                        var price ;
-                                        let old_price = '';
-
-                                        if (Rproduct.isRecommended === true) {
-                                            // Parse the JSON content to access the image property
-                                            const contentObj = JSON.parse(Rproduct.content);
-                                            // Set img to the image URL from the parsed content
-                                            img = contentObj.image;
-                                          
-                                        }
-
-                                        let tenPercentOfPrice;
-                                        if (Rproduct.isRecommended == true && Rproduct.category == cproduct) {
-
-                                           
-                                            const contentObj = JSON.parse(Rproduct.content);
-                                            // Set img to the image URL from the parsed content
-                                            price = contentObj.price;
-                                            old_price = price;
-                                            price = price.slice(1)
-                                            price = price.replace(/,/g, '');
-
-
-                                            const off  = Rproduct.off_percentage.slice(0, -1);
-
-                                            console.log("vfklns",price);
-                                             
-                                            console.log("fndudskkd", off)
-
-                                                // Calculate the discounted price
-                                                let discount = (off / 100) * price;
-                                                let priceAfterDiscount = price - discount;
-
-                                                console.log("cdsnsdfkdn",priceAfterDiscount); 
-
-                                             tenPercentOfPrice =priceAfterDiscount;
-                                            
-                                            tenPercentOfPrice = tenPercentOfPrice.toFixed(2)
+                                 tenPercentOfPrice =priceAfterDiscount;
+                                
+                                tenPercentOfPrice = tenPercentOfPrice.toFixed(2)
 
 
 
-                                        return (
+                            return (
 
-
-                                            
-                <Link
-                            href={{
-                            pathname: "/products/slug",
-                            query:  {
-                                id: Rproduct.id,
-                                title: Rproduct.title,
-                                image: img,
-                                desc:Rproduct.desc,
-                                price:price,
-                                newprice:tenPercentOfPrice,
-                                category:Rproduct.category,
-                                off_percentage:Rproduct.off_percentage,
-                                isRecommended:Rproduct.isRecommended
-                              }  }}  >
 
                                 
+    <Link
+                href={{
+                pathname: "/products/slug",
+                query:  {
+                    id: Rproduct.id,
+                    title: Rproduct.title,
+                    image: img,
+                    desc:Rproduct.desc,
+                    price:price,
+                    newprice:tenPercentOfPrice,
+                    category:Rproduct.category,
+                    off_percentage:Rproduct.off_percentage,
+                    isRecommended:Rproduct.isRecommended
+                  }  }}  >
 
-                                            {/* <Link href={`/products/${Rproduct?.slug}`}> */}
+                    
 
-                                        <div  className="product-item"  key={index}>
+                                {/* <Link href={`/products/${Rproduct?.slug}`}> */}
 
-                                        <div style={{position:'absolute',height:30, width:30,display:'flex', justifyContent:'center',alignContent:'center'
-                                        ,alignItems:'center', backgroundColor:'green',marginTop:-25,marginLeft:-10, borderRadius:'50%'}}>
-                                                <p style={{color:'white',fontWeight:700, fontSize:10}}>{Rproduct.off_percentage}</p>
-                                            </div>
+                            <div  className="product-item"  key={index}>
 
-                                            {/* <h2 className="product-title">{Rproduct.title}</h2> */}
-                                            <h2 className="product-title">
-                                            {Rproduct.title.length > 15
-                                                ? `${Rproduct.title.substring(0, 15)}...`
-                                                : Rproduct.title
-                                            }
-                                            </h2>
-                                            {/* <h3 className="product-title">  {Rproduct.isRecommended}</h3> */}
-
-                                        
-                                            <img
-                                                className="product-image"
-                                                style={{borderRadius:10,height:180,  objectFit:'cover'}}
-
-                                                src={img}
-                                              
-                                                alt={Rproduct.title}
-                                            />
-                                            <p className="product-price" style={{fontSize:12, textDecorationLine:'line-through',  textDecorationColor: "black" }} >
-
-                                                Was: {old_price}
-                                            </p>
-                                            <p className="product-price" style={{color:'green', fontWeight:700}}>
-                                                New Price: {tenPercentOfPrice}
-                                            </p>
-                                            <p className="product-country">
-                                                Country: {Rproduct.country}
-                                            </p>
-                                        </div>
-                                        </Link>
-
-                                        )
-                                        
-                                        } else {
-                                        // Render nothing for non-recommended products
-                                        return null;
-
-
-                                        
-                                        }
-                                     })}
-                                   
-                                        </div>
-                                        </div>
-                                        </>);
-                                    
-
-
-                                })}
+                            <div style={{position:'absolute',height:30, width:30,display:'flex', justifyContent:'center',alignContent:'center'
+                            ,alignItems:'center', backgroundColor:'green',marginTop:-25,marginLeft:-10, borderRadius:'50%'}}>
+                                    <p style={{color:'white',fontWeight:700, fontSize:10}}>{Rproduct.off_percentage}</p>
                                 </div>
-                                  
-                              </div>
 
-                              </div>
+                                {/* <h2 className="product-title">{Rproduct.title}</h2> */}
+                                <h2 className="product-title">
+                                {Rproduct.title.length > 15
+                                    ? `${Rproduct.title.substring(0, 15)}...`
+                                    : Rproduct.title
+                                }
+                                </h2>
+                                {/* <h3 className="product-title">  {Rproduct.isRecommended}</h3> */}
+
+                            
+                                <img
+                                    className="product-image"
+                                    style={{borderRadius:10,height:180,  objectFit:'cover'}}
+
+                                    src={img}
+                                  
+                                    alt={Rproduct.title}
+                                />
+                                <p className="product-price" style={{fontSize:12, textDecorationLine:'line-through',  textDecorationColor: "black" }} >
+
+                                    Was: {old_price}
+                                </p>
+                                <p className="product-price" style={{color:'green', fontWeight:700}}>
+                                    New Price: {tenPercentOfPrice}
+                                </p>
+                                <p className="product-country">
+                                    Country: {Rproduct.country}
+                                </p>
+                            </div>
+                            </Link>
+
+                            )
+                            
+                            } else {
+                            // Render nothing for non-recommended products
+                            return null;
+
+
+                            
+                            }
+                         })}
+                       
+                            </div>
+                            </div>
+                            </>);
+                        
+
+
+                    })}
+                    </div>
+                      
+                  </div>
+
+                  </div>
+            
+          
 
                               
            

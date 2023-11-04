@@ -122,9 +122,6 @@
     "authProviders": {
       "Type": "CommaDelimitedList"
     },
-    "oAuthMetadata": {
-      "Type": "String"
-    },
     "userPoolGroups": {
       "Type": "String"
     },
@@ -132,6 +129,9 @@
       "Type": "String"
     },
     "thirdPartyAuth": {
+      "Type": "String"
+    },
+    "oAuthMetadata": {
       "Type": "String"
     },
     "hostedUIProviderCreds": {
