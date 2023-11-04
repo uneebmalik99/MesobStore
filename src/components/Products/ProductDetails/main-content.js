@@ -22,6 +22,7 @@ function MainContent({ product }) {
         price,
         image, 
         desc,
+
         category,
         newprice,
         isRecommended,
@@ -63,6 +64,7 @@ function MainContent({ product }) {
                 country:product.country,
                 category:product.category,
                 price:priceAfterDiscountv,
+  
                 quantity: quantityCount,
                 totalPrice: totalprice,
                 image: product.image,

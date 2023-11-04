@@ -6,8 +6,10 @@ import { cartActions } from "../../store/cart/cart-slice";
 import { useDispatch, useSelector } from 'react-redux';
 // import {api_send_mail, CHECKOUT_API_URL} from '../../api_service';
 
-const CheckoutForm = ((props) => {
+const CheckoutForm = ({sennd, receiver_obj8}) => {
 
+  console.log('hhfjyfyjfy ', sennd );
+  console.log('hhfjyfyjfy ', receiver_obj8);
   const clientSecret2 = useSelector((state) => state.cart.clientSecret);
   const dispatch = useDispatch();
   const stripe = useStripe();
@@ -23,54 +25,13 @@ const clearAllItemHandler = () => {
   dispatch(cartActions.clearAllFromCart());
 };
 
-// useEffect(() => {
-//   if (!stripe ) {
-//     return;
-//   }
-
-//   const clientSecret = new URLSearchParams(window.location.search).get(
-//    "/"
-//   );
-
-//   if (!clientSecret ) {
-    
-//     return;
-//   }
-
-
-//     stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-//       setMessage(paymentIntent.status === "succeeded" ? "Your payment succeeded" : "Unexpected error occurred");
-//     });
-  
- 
-// }, [stripe]);
-// useEffect(() => {
-//   if (!stripe) {
-//     return;
-//   }
-
-//   const clientSecret = new URLSearchParams(window.location.search).get(
-//     "payment_intent_client_secret"
-//   );
-
-//   if (!clientSecret) {
-//     return;
-//   }
-
-//   stripe.retrievePaymentIntent(clientSecret).then(({ paymentIntent }) => {
-//     setMessage(paymentIntent.status === "succeeded" ? "Your payment succeeded" : "Unexpected error occurred");
-//   });
-
-// }, [stripe]);
-
-
 
 const sendOrderMail = async () => {
 
   try {
     const payload = {
-      email: 'uneebmalik99@gmail.com',
-      message: `${'uneebmalik99@gmail.com'} , Your order is placed successfully!`,
+      email: sennd.email,
+      message: `${sennd.email} , Your order is placed successfully!`,
       subject: 'Order Placed Successfully!',
     };
     const res = await ApiSendMail(payload);
@@ -80,138 +41,120 @@ const sendOrderMail = async () => {
    
   } catch (error) {
   
-     alert('Alert', error);
+     alert('Alert sendOrderMail', error);
      console.log('djkvndjvkjd',error);
 
   }
 };
 
 
-
-// const sendToMesob = async () => {
-//   if (!email) return;
-//   try {
-//     const productRows = productDetails.map((product, index) => {
-//     let price =  product.price;
-      
-//       if(price.includes(',')){
-//           price = price.replace(',', '');
-//       }
-//       const priceWithoutDollarSign = parseFloat(
-//        price.replace('$', ''),
-//       );
-
-//       let cost =  product.cost;
-//       if(cost.includes(',')){
-//         cost = cost.replace(',', '');
-//       }
-
-//       const costWithoutDollarSign = parseFloat(cost.replace('$', ''));
-//       const quantity = parseFloat(product.qty);
-//       console.log(
-//         'Product Price IS:',
-//         priceWithoutDollarSign,
-//         'Product Quantity: ',
-//         quantity,
-//       );
-        
+const sendToMesob = async () => {
+  try {
+    let productRows = []; // Initialize an empty array to hold the rows
+    let totalSellingPrice = 0;
+    let totalCost = 0;
     
-//       let sellingPrice = priceWithoutDollarSign * quantity;
+      const product = receiver_obj8;
+      console.log("vghhtftfytftfu", product.Products);
+      const contentObj = JSON.parse(product.Products);
+    let price = contentObj[0].price;
+    console.log('gchcprice = ',contentObj[0]);
      
-//       console.log('Selling Price: ', sellingPrice);
+        price = price.replace(',', '');
+     
+      const priceWithoutDollarSign = parseFloat(price.replace('$', ''));
+      const contentObjsemd = JSON.parse(product.Products);
 
-//       let costPrice = costWithoutDollarSign * quantity;
-//       console.log(' costPrice: ', costPrice);
-
-//       totalSellingPrice += sellingPrice;
-//       totalCost += costPrice;
-
-//       console.log('Total Selling Price: ', totalSellingPrice);
-//       console.log('Total Cost Price: ', totalCost);
-
-//       return `
-//   <tr key=${index}>
-//     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${
-//       index + 1
-//     }</td>
-//     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${
-//       product.title
-//     }</td>
-//     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${
-//       product.country
-//     }</td>
-//     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${
-//       product.qty
-//     }</td>
-//     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${
-//       product.cost
-//     }</td>
-//     <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${
-//       product.price
-//     }</td>
-//   </tr>`;
-//     });
-
-//     const tableHTML = productRows.join('');
-
-//     const message = `
-//     <h3>1. Sender Info: </h3>
-//     <ul>
-//       <li>Name: ${senderDetails?.name}</li>
-//       <li>Email: ${senderDetails?.email}</li>
-//       <li>Address: ${senderDetails?.address}</li>
-//       <li>Phone: ${senderDetails?.phone}</li>
-//       <li>City: ${senderDetails?.city}</li>
-//       <li>State: ${senderDetails?.state}</li>
-//       <li>Zip Code: ${senderDetails?.pincode}</li>
-//     </ul>
-//     <h3>2. Receiver Info: </h3>
-//     <ul>
-//       <li>Name: ${orderDetails?.data.createOrder.name}</li>
-//       <li>Street Address: ${orderDetails?.data.createOrder.address}</li>
-//       <li>Phone: ${orderDetails?.data.createOrder.phone}</li>
-//       <li>City: ${orderDetails?.data.createOrder.city}</li>
-//     </ul>
-//     <h2>Product Details:</h2>
-//     <table style="border-collapse: collapse; width: 100%;">
-//       <thead>
-//         <tr>
-//           <th style="border: 1px solid #ccc; padding: 8px;">Sr No.</th>
-//           <th style="border: 1px solid #ccc; padding: 8px;">Name</th>
-//           <th style="border: 1px solid #ccc; padding: 8px;">Country</th>
-//           <th style="border: 1px solid #ccc; padding: 8px;">Quantity</th>
-//           <th style="border: 1px solid #ccc; padding: 8px;">Cost</th>
-//           <th style="border: 1px solid #ccc; padding: 8px;">Selling Price</th>
-//         </tr>
-//       </thead>
-//       <tbody>
-//         ${tableHTML}
-//       </tbody>
-//     </table>
-//     <p>Total Selling Price: ${totalSellingPrice}</p>
-//     <p>Total Cost Price: ${totalCost}</p>
-//     <p>Thank you for your order!</p>
-//   `;
-
-//     const subject = 'Order Placed Successfully!';
-
-//     const payload = {
-//       email: 'mesob@mesobstore.com',
-//       message: message,
-//       subject: subject,
-//     };
-
-//     // Call the api_send_mail function to send the email using the API
-//     const res = await api_send_mail(payload);
-
+      // let cost = 10;
+      // if (cost.includes(',')) {
+      //   cost = cost.replace(',', '');
+      // }
+      // const costWithoutDollarSign = parseFloat(cost.replace('$', ''));
+      const costWithoutDollarSign = 10;
+      const quantity = parseFloat(contentObj[0].quantity);
     
-//   } catch (error) {
-//     Alert.alert('Alert', error.message);
-//   }
-// };
+      let sellingPrice = priceWithoutDollarSign * quantity;
+      let costPrice = costWithoutDollarSign * quantity;
+    
+      totalSellingPrice += sellingPrice;
+      totalCost += costPrice;
+    
+      // Create the row and push it to the productRows array
+      let index = 1;
+      const row = `
+        <tr key=${index}>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${index + 1}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[0].name}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${product.country}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[0].quantity}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[0].cost}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[0].price}</td>
+        </tr>`;
+    
+      productRows.push(row); // Push the row to the productRows array
+    
 
+    const tableHTML = productRows.join('');
+
+    const message = `
+    <h3>1. Sender Info: </h3>
+    <ul>
+      <li>Name: ${sennd?.name}</li>
+      <li>Email: ${sennd?.email}</li>
+      <li>Address: ${sennd?.address}</li>
+      <li>Phone: ${sennd?.phone}</li>
+      <li>City: ${sennd?.city}</li>
+      <li>State: ${sennd?.state}</li>
+      <li>Zip Code: ${sennd?.pincode}</li>
+    </ul>
+    <h3>2. Receiver Info: </h3>
+    <ul>
+      <li>Name: ${receiver_obj8?.name}</li>
+      <li>Street Address: ${receiver_obj8?.address}</li>
+      <li>Phone: ${receiver_obj8?.phone}</li>
+      <li>City: ${receiver_obj8?.city}</li>
+    </ul>
+    <h2>Product Details:</h2>
+    <table style="border-collapse: collapse; width: 100%;">
+      <thead>
+        <tr>
+          <th style="border: 1px solid #ccc; padding: 8px;">Sr No.</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Name</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Country</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Quantity</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Cost</th>
+          <th style="border: 1px solid #ccc; padding: 8px;">Selling Price</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${tableHTML}
+      </tbody>
+    </table>
+    <p>Total Selling Price: ${totalSellingPrice}</p>
+    <p>Total Cost Price: ${totalCost}</p>
+    <p>Thank you for your order!</p>
+  `;
+
+    const subject = 'Order Placed Successfully!';
+      // email: 'mesob@mesobstore.com',
+
+    const payload = {
+      email: 'mesob@mesobstore.com',
+      message: message,
+      subject: subject,
+    };
+
+    // Call the api_send_mail function to send the email using the API
+    const res = await ApiSendMail(payload);
+
+  } catch (error) {
+    // alert('Alert sendToMesob ', error);
+    console.log('Alert sendToMesob ', error);
+  }
+};
 
 const handleSubmit = async (event) => {
+
   setIsLoading(true);
   event.preventDefault();
   const {error: submitError} = await elements.submit();
@@ -254,23 +197,8 @@ const handleSubmit = async (event) => {
       console.log(result.error.message);
     } else {
     dispatch(cartActions.clearAllFromCart());
-
     sendOrderMail();
-    // sendToMesob();
-
-  //   const res = await api_send_mail(payload);
-
-  //   console.log('Success Product: ', res.message);
-  //   setloading1(false);
-  //   setVisible(true);
-  // } catch (error: any) {
-  //   setloading1(false);
-  //   Alert.alert('Alert', error.message);
-  // }
-
-
-      // Your customer will be redirected to the completion page
-      // window.location.href = "http://localhost:3000";
+    sendToMesob();
     }
   } catch (error) {
     setIsLoading(false);
@@ -299,7 +227,7 @@ return (
 )
 
 
-})
+}
 
 
 export default CheckoutForm ;

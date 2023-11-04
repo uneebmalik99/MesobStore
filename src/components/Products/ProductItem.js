@@ -66,7 +66,6 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         
         console.log("totalPricetofsfgtalPrice"+isRecommended);
 
-
         if(isRecommended == true && off_percentage != null ){
             let tpricee = price.slice(1)
        
@@ -77,6 +76,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
             let priceAfterDiscountv = (tpricee - discount).toFixed(2);
 
             setpriceAfterDiscount(priceAfterDiscountv)
+
 
 
 

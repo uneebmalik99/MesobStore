@@ -36,7 +36,6 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         title,
         category,
         price,
-        cost,
         country,  
         desc,
         discountPrice,

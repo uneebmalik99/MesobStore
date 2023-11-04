@@ -269,10 +269,15 @@ function HomePage({
                                 const contentObj = JSON.parse(Rproduct.content);
                                 // Set img to the image URL from the parsed content
                                 img = contentObj.image;
+                                // cost = contentObj.cost
+
                               
                             }
 
                             let tenPercentOfPrice;
+
+
+                           
                             if (Rproduct.isRecommended == true && Rproduct.category == cproduct) {
 
                                

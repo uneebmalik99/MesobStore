@@ -64,6 +64,7 @@ const dispatch = useDispatch();
 const [isLoading, setIsLoading] = useState(false);
 
 
+
 const [checkoutcomp,setcheckoutcomp]= useState(false)
 const [message, setMessage] = useState('');
 
@@ -71,58 +72,11 @@ const [dataToChild, setDataToChild] = useState('');
   
 const childRef = useRef();
 
-
-
-// const sendOrderMail = async () => {
-
-//     try {
-//       const payload = {
-//         email: 'uneebmalik99@gmail.com',
-//         message: `${'uneebmalik99@gmail.com'} , Your order is placed successfully!`,
-//         subject: 'Order Placed Successfully!',
-//       };
-//       const res = await ApiSendMail(payload);
-  
-//      console.log('email respomsedtfhtjkb'+res);
-      
-     
-//     } catch (error) {
-    
-//        alert('Alert', error);
-//        console.log('djkvndjvkjd',error);
-
-//     }
-//   };
-
-
-  
-
-//   function callChildFunctionWithData(e,data) {
-
-//     if (childRef.current) {
-//     //   const dataToSend = "Hello from Parent!";
-//       childRef.current.childFunction(data);
-//     }
-//   }
-
-
-  const parentFunction = () => {
-    onCheckout()
-    childRef.current.childFunctionFromParent(data);
-  };
-
-//   const handleButtonClick = () => {
-//     console.log('Button in parent component clicked.');
-//     childFunction();
-//     // Call any other logic or function you need here
-//   }
-
     const [clientSecret ,setclientSecret] = useState('')
     const [returningCustomer, setReturningCustomer] = useState(false);
     const openReturningCustomer = () => {
         setReturningCustomer(!returningCustomer);
     };
-    const [senderObj, setSenderObj] = useState({});
 
     const [Receiver_name,setReceiver_name]=useState('')
     const [Receiver_phone,setReceiver_phone]=useState('')
@@ -138,6 +92,9 @@ const childRef = useRef();
     const [sender_state,setsender_state]=useState('')
     const [sender_city,setsender_city]=useState('')
     const [sender_zip,setsender_zip]=useState('')
+
+    const[receiver_obj , setreceiver_obj] = useState('')
+    const [senderObj, setSenderObj] = useState('');
 
 
     const onCheckout = () => {
@@ -208,6 +165,8 @@ const childRef = useRef();
       }
 
       const buildOrderObject = async () => {
+
+        console.log('Start-buildOrderObject', '    b gjhj');
        
 
         const obj = {
@@ -221,8 +180,7 @@ const childRef = useRef();
             userid: "68356b65-998a-4a29-aa1e-5b6ec4319537",
           };
 
-   
-        const order = {
+   const order = {
           userID: '123',
           phone: Receiver_phone,
           name: Receiver_name,
@@ -235,6 +193,11 @@ const childRef = useRef();
           Products:JSON.stringify(cartItems),
           Status: 'Orderd',
         };
+
+        setSenderObj(obj)
+        setreceiver_obj(order)
+
+
         console.log("mkvf"+JSON.stringify(order));
         try {
           const authUser = await Auth.currentAuthenticatedUser();
@@ -286,7 +249,7 @@ const childRef = useRef();
 
     const getStripeIntent = async (userid) => {
 
-       
+
         const region = await localStorage.getItem('region');
         const payload = {
             region:region,
@@ -781,12 +744,10 @@ const childRef = useRef();
                                                 <Elements stripe={region_1 == 'eu' ? STRIPE_PK_EU:STRIPE_PK_GLOBAL} options={options}>
 
                                                                                           
-                                                        <CheckoutForm 
-                                             
-                                                      
-                                                        />
-
-                                             
+                                                    <CheckoutForm 
+                                                    sennd={senderObj}
+                                                    receiver_obj8={receiver_obj}
+                                                    />
                                                     </Elements>
                                                     :
                                                     null
