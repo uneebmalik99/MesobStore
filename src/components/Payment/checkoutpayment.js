@@ -20,7 +20,7 @@ for(let i =0; i<contentObj2.length; i++){
   emails.push(...emailValues);
   }else{
     const emailValues = contentObj2[i].selleremail;
-  emails.push(...emailValues);
+  emails.push(emailValues);
   }
   
 }
