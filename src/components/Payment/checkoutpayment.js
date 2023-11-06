@@ -15,7 +15,7 @@ let emails = [];
 const contentObj2 = JSON.parse(receiver_obj8.Products);
 for(let i =0; i<contentObj2.length; i++){
   console.log('gvhthtthhf', contentObj2[i].selleremail);
-  if (contentObj2[i] && contentObj2[i].selleremail.includes(',')) {
+  if (contentObj2[i].selleremail && contentObj2[i].selleremail.includes(',')) {
     const emailValues = contentObj2[i].selleremail.split(',');
   emails.push(...emailValues);
   }else{
