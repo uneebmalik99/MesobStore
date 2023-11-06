@@ -172,6 +172,14 @@ const sendToMesob = async () => {
 
 
       }
+      const payload2= {
+        email: 'mesob@mesobstore.com',
+        message: message,
+        subject: subject,
+      };
+      const res = await ApiSendMail(payload2);
+
+      
   
 
     // Call the api_send_mail function to send the email using the API
