@@ -39,18 +39,18 @@ function Checkout({ checkoutItems }) {
 //   const STRIPE_SK_EU =loadStripe
 //     ('sk_test_51Ma0UlHlGffSuHzfXqLxMCx4WwZPl2InuHG7TFmdFPczonVev6xnsrQzyJ0QkiCNP04yyUMiJGGnt8XXWiWEmAG700oh8MwmIz');
     
-//   const STRIPE_PK_GLOBAL =loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
-//   const STRIPE_PK_EU =loadStripe('pk_test_51Ma0UlHlGffSuHzfQ0MLtY2NxXXevZvjKNBMh1gLgrHedV5ZqbTvX8aLAFQC4YaFmdAlwUVmhjrcCevWbopcfHNQ00c9HutQd3');
+  const STRIPE_PK_GLOBAL =loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+  const STRIPE_PK_EU =loadStripe('pk_test_51Ma0UlHlGffSuHzfQ0MLtY2NxXXevZvjKNBMh1gLgrHedV5ZqbTvX8aLAFQC4YaFmdAlwUVmhjrcCevWbopcfHNQ00c9HutQd3');
   
   // // TEST -- PRODUCTION
-  const STRIPE_SK_GLOBAL =loadStripe
-    ('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');
-  const STRIPE_SK_EU =loadStripe
-    ('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');
-  const STRIPE_PK_GLOBAL =loadStripe
-    ('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
-  const STRIPE_PK_EU =loadStripe
-    ('pk_live_51Ma0UlHlGffSuHzf9daYeWo65kFow4KjKrudWfMURvPxqgkTfDXQ58TF5BFejBI4tqS6EElWFafj1icjZK3O577C00nYkxgBmZ');
+//   let STRIPE_SK_GLOBAL =loadStripe
+//     ('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');
+//   let STRIPE_SK_EU =loadStripe
+//     ('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');
+//   let STRIPE_PK_GLOBAL =loadStripe
+//     ('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
+//   let STRIPE_PK_EU =loadStripe
+//     ('pk_live_51Ma0UlHlGffSuHzf9daYeWo65kFow4KjKrudWfMURvPxqgkTfDXQ58TF5BFejBI4tqS6EElWFafj1icjZK3O577C00nYkxgBmZ');
    
 const stripePromise = loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
     
