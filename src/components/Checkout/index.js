@@ -32,7 +32,7 @@ let productDetails;
   
 function Checkout({ checkoutItems }) {
 
-//     const stripePromise_Global = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+    const stripePromise_Global = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
    
 //     const STRIPE_SK_GLOBAL =loadStripe
 //     ('sk_test_51KZzWbAhBlpHU9kBq6SoffiI9NZAAaKW8xzhEaEGxKsfCjZRWhCbz1o8ac4oirHjk21aZ5KLp0fhlmuZK9XCohUv00JersS4js');
@@ -52,11 +52,11 @@ function Checkout({ checkoutItems }) {
   const STRIPE_PK_EU =loadStripe
     ('pk_live_51Ma0UlHlGffSuHzf9daYeWo65kFow4KjKrudWfMURvPxqgkTfDXQ58TF5BFejBI4tqS6EElWFafj1icjZK3O577C00nYkxgBmZ');
    
-    const stripePromise = loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
+const stripePromise = loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
     
 
 
-   let region_1= localStorage.getItem('region');
+let region_1= localStorage.getItem('region');
 
     
 const [childFunctionCalled, setChildFunctionCalled] = useState(false);
@@ -180,6 +180,7 @@ const childRef = useRef();
             userid: "68356b65-998a-4a29-aa1e-5b6ec4319537",
           };
 
+
    const order = {
           userID: '123',
           phone: Receiver_phone,
@@ -194,6 +195,8 @@ const childRef = useRef();
           Status: 'Orderd',
         };
 
+
+        
         setSenderObj(obj)
         setreceiver_obj(order)
 
@@ -231,6 +234,8 @@ const childRef = useRef();
     };
 
     const cartItems = useSelector((state) => state.cart.items);
+
+    console.log("jdncjkdk", JSON.stringify(cartItems));
 
     const initialValue = 0;
     // const SubTotal = cartItems.reduce(
@@ -325,8 +330,6 @@ const childRef = useRef();
 
     return (
 <>
-
-
         <div className="checkout border-b border-[#ededed] lg:py-[90px] md:py-[80px] py-[50px]">
             {cartItems.length <= 0 && <EmptyCheckout />}
             {cartItems.length <= 0 ||

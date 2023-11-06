@@ -19,6 +19,7 @@ function CartPageComps({ cartPageItems }) {
     const [countries,setcountries]=useState([])
 
     const cartItems = useSelector((state) => state.cart.items);
+    console.log("dsjvnjkdsnvjds", cartItems);
     const [quantityCount, setQuantityCount] = useState({
         empty: true,
     });

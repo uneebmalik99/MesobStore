@@ -279,7 +279,7 @@ console.log(JSON.stringify(heroDefaultItems))
                             <div
                                 className={`${BannerImages.image
                                     .split(' ')
-                                    .join(' ')} sm:h-[350px] md:h-[440px] h-[350px]`}
+                                    .join(' ')} sm:h-[170px] md:h-[440px] h-[350px]`}
                                     style={{backgroundImage:`url(${BannerImages.image})`,
                                     backgroundPosition: 'center',
                                     backgroundSize: 'cover',

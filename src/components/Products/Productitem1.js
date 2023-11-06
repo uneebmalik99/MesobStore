@@ -59,7 +59,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         console.log("totalPrice: " + tprice*quantityCount);
         let  totalprice =tprice*quantityCount;
 
-        alert('j')
+     
 
         dispatch(
             cartActions.addItemToCart({

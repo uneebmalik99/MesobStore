@@ -8,12 +8,29 @@ import { useDispatch, useSelector } from 'react-redux';
 
 const CheckoutForm = ({sennd, receiver_obj8}) => {
 
-  console.log('hhfjyfyjfy ', sennd );
-  console.log('hhfjyfyjfy ', receiver_obj8);
-  const clientSecret2 = useSelector((state) => state.cart.clientSecret);
-  const dispatch = useDispatch();
-  const stripe = useStripe();
-  const elements = useElements();
+console.log('hhfjyfyjfy ', sennd );
+console.log('hhfjyfyjfy ', receiver_obj8.Products);
+let emails = [];
+
+const contentObj2 = JSON.parse(receiver_obj8.Products);
+for(let i =0; i<contentObj2.length; i++){
+  console.log('gvhthtthhf', contentObj2[i].selleremail);
+  const emailValues = contentObj2[i].selleremail.split(',');
+  emails.push(...emailValues);
+}
+
+
+console.log("jvbhjvsd", emails);
+const uniqueEmails = [...new Set(emails)];
+
+console.log('uniqueEmails  ', uniqueEmails);
+
+
+
+const clientSecret2 = useSelector((state) => state.cart.clientSecret);
+const dispatch = useDispatch();
+const stripe = useStripe();
+const elements = useElements();
 const [email, setEmail] = useState("");
 const [errorMessage, setErrorMessage] = useState(null);
 const [message, setMessage] = useState (null);
@@ -47,7 +64,6 @@ const sendOrderMail = async () => {
   }
 };
 
-
 const sendToMesob = async () => {
   try {
     let productRows = []; // Initialize an empty array to hold the rows
@@ -60,17 +76,19 @@ const sendToMesob = async () => {
     let price = contentObj[0].price;
     console.log('gchcprice = ',contentObj[0]);
      
-        price = price.replace(',', '');
+      price = price.replace(',', '');
      
       const priceWithoutDollarSign = parseFloat(price.replace('$', ''));
       const contentObjsemd = JSON.parse(product.Products);
+
+      console.log("hgfyfyfyj", contentObjsemd.selleremails);
 
       // let cost = 10;
       // if (cost.includes(',')) {
       //   cost = cost.replace(',', '');
       // }
-      // const costWithoutDollarSign = parseFloat(cost.replace('$', ''));
-      const costWithoutDollarSign = 10;
+      const costWithoutDollarSign = parseFloat(contentObj[0].cost.replace('$', ''));
+      // const costWithoutDollarSign = contentObj[0].cost;
       const quantity = parseFloat(contentObj[0].quantity);
     
       let sellingPrice = priceWithoutDollarSign * quantity;
@@ -137,15 +155,23 @@ const sendToMesob = async () => {
 
     const subject = 'Order Placed Successfully!';
       // email: 'mesob@mesobstore.com',
+     
+      for(let i =0 ; i<uniqueEmails.length; i++){
+        const payload = {
+          email: uniqueEmails[i],
+          message: message,
+          subject: subject,
+        };
+        const res = await ApiSendMail(payload);
 
-    const payload = {
-      email: 'mesob@mesobstore.com',
-      message: message,
-      subject: subject,
-    };
+
+      }
+  
 
     // Call the api_send_mail function to send the email using the API
-    const res = await ApiSendMail(payload);
+   
+
+      
 
   } catch (error) {
     // alert('Alert sendToMesob ', error);
@@ -215,6 +241,7 @@ const handleSubmit = async (event) => {
 
 return (
   <form onSubmit={handleSubmit}>
+
   <p className="text-black mb-4">Complete your payment here!</p>
   <PaymentElement />
   <button  
@@ -224,6 +251,7 @@ return (
   </button>
   {message && <div>{message}</div>}
 </form>
+
 )
 
 

@@ -22,7 +22,8 @@ function MainContent({ product }) {
         price,
         image, 
         desc,
-
+        cost,
+        selleremail,
         category,
         newprice,
         isRecommended,
@@ -30,7 +31,7 @@ function MainContent({ product }) {
     } = product;
     const [quantityCount, setQuantityCount] = useState(1);
 
-    console.log('kjefsbbeubsu',newprice);
+    console.log('kjefsbbeubsu',selleremail);
     console.log('kjefsbbeubsu',off_percentage);
     console.log('kjefsbbeubsu',isRecommended);
     const [ priceAfterDiscount , setpriceAfterDiscount ] = useState('')
@@ -42,7 +43,7 @@ function MainContent({ product }) {
        let tprice = price.replace('$', ''); // This removes the dollar sign
        tprice = tprice.replace(/,/g, '');
     
-       if(isRecommended == 'true' && off_percentage != null ){
+       if(isRecommended == true && off_percentage != null ){
        
             let off  = off_percentage.slice(0, -1);
 
@@ -52,6 +53,9 @@ function MainContent({ product }) {
             console.log('njhg', priceAfterDiscountv);
 
             setpriceAfterDiscount(priceAfterDiscountv)
+    }else{
+        priceAfterDiscountv = tprice
+
     }
     
        let  totalprice =tprice*quantityCount;
@@ -64,7 +68,8 @@ function MainContent({ product }) {
                 country:product.country,
                 category:product.category,
                 price:priceAfterDiscountv,
-  
+                selleremail:selleremail,
+                cost:cost,
                 quantity: quantityCount,
                 totalPrice: totalprice,
                 image: product.image,

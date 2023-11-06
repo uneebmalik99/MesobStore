@@ -84,6 +84,17 @@ export const listUsers = /* GraphQL */ `
     }
   }
 `;
+export const getmenu = /* GraphQL */ `
+  query GetMenu($id: ID!) {
+    getOrder(id: $id) {
+      icon
+      id
+      name
+      des
+      Seller_email
+    }
+  }
+`;
 export const getOrder = /* GraphQL */ `
   query GetOrder($id: ID!) {
     getOrder(id: $id) {

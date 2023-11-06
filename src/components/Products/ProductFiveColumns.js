@@ -18,7 +18,7 @@ function ProductFiveColumns({
 
 }) {
     const { filterData } = useSelector((state) => state.filter);
-
+console.log("bjbjgguk", productcategoryid);
     const [currentPage, setCurrentPage] = useState(1);
     const [itemPerPage, setitemPerPage] = useState(9);
 
@@ -189,6 +189,7 @@ function ProductFiveColumns({
                                     productFilterPath={
                                         productFilterPath
                                     }
+                                    selleremail={productcategoryid.selleremail}
                                     key={product.id}
                                 />
                             ))}
@@ -208,6 +209,8 @@ function ProductFiveColumns({
                                 <ProductItem
                                     product={product}
                                     productFilter={productFilter}
+                                    selleremail={productcategoryid.selleremail}
+
                                     productFilterPath={
                                         productFilterPath
                                     }
@@ -229,6 +232,8 @@ function ProductFiveColumns({
                             <ProductItem
                             product={product}
                             productFilter={productFilter}
+                            selleremail={productcategoryid.selleremail}
+
                             productFilterPath={
                                 productFilterPath
                             }

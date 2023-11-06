@@ -31,13 +31,14 @@ const addtoCartBtn = `bg-black text-white px-[42px] h-[46px] leading-[44px]`;
 const wishlistBtn = `border border-[#dddddd] text-[20px] w-[46px] h-[46px] leading-[46px] inline-flex justify-center items-center transition-all hover:text-primary`;
 const textHover = `transition-all hover:text-primary`;
 
-function ProductItem({ product, productFilter, productFilterPath }) {
+function ProductItem({ product, productFilter, productFilterPath , selleremail}) {
     const {
         id,
         title,
         price,
         discountPrice,
         image,
+        content,
         category,
         totalPrice,
         soldOutSticker,
@@ -47,6 +48,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         offerSticker,
         desc,
     } = product;
+
+    console.log("produdwfwfsfdvsrect"+JSON.stringify(content));
 
     console.log("produdwfwfrect"+JSON.stringify(product));
 
@@ -64,31 +67,27 @@ function ProductItem({ product, productFilter, productFilterPath }) {
         let tprice = price.replace('$', ''); // This removes the dollar sign
         tprice = tprice.replace(/,/g, '');
         
-        console.log("totalPricetofsfgtalPrice"+isRecommended);
-
+        console.log("totalPricetofsfgtalPrice "+tprice );
+        let final_price ;
         if(isRecommended == true && off_percentage != null ){
             let tpricee = price.slice(1)
-       
+            
             tpricee = tpricee.replace(/,/g, '');
             let off  = off_percentage.slice(0, -1);
 
             let discount = (off / 100) * tpricee;
             let priceAfterDiscountv = (tpricee - discount).toFixed(2);
 
+            final_price  = priceAfterDiscountv
+
             setpriceAfterDiscount(priceAfterDiscountv)
 
-
-
+        }else{
+            final_price  = tprice
 
         }
-        if(isRecommended == true) {
-
-            const off  = off_percentage.slice(0, -1);
- 
-            let discount = (off / 100) * tprice;
-
-// alert(discount)            
-        }
+    
+       let cost = content.cost
 
         console.log("totalPrice: " + tprice*quantityCount);
         console.log("totalPricetotalPrice"+totalPrice);
@@ -101,8 +100,10 @@ function ProductItem({ product, productFilter, productFilterPath }) {
             cartActions.addItemToCart({
                 id,
                 title,
-                price:priceAfterDiscount,
+                price:final_price,
                 quantity: quantityCount,
+                cost:cost,
+                selleremail:selleremail,
                 country:product.country,
                 category:product.category,
                 totalPrice:totalprice,
@@ -137,8 +138,9 @@ function ProductItem({ product, productFilter, productFilterPath }) {
     };
 
     useEffect(() => {
+        let tpricee;
         if(isRecommended == true && off_percentage != null ){
-            let tpricee = price.slice(1)
+            tpricee = price.slice(1)
        
             tpricee = tpricee.replace(/,/g, '');
             let off  = off_percentage.slice(0, -1);
@@ -151,6 +153,9 @@ function ProductItem({ product, productFilter, productFilterPath }) {
             setpriceAfterDiscount(priceAfterDiscountv)
 
 
+
+        }else{
+            setpriceAfterDiscount(tpricee)
 
         }
     }, []);
@@ -175,6 +180,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         category:product.category,
                         off_percentage:product.off_percentage,
                         isRecommended:product.isRecommended,
+                        selleremail:selleremail
+
                    
                     } 
                   }}
@@ -228,14 +235,16 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                             newprice:priceAfterDiscount,
                             image: product.image,
                             desc:product.desc,
+                            cost:content.cost,
                             category:product.category,
                             off_percentage:off_percentage,
-                            isRecommended:isRecommended
+                            isRecommended:isRecommended,
+                            selleremail:selleremail
+
                             
                        
                         } 
                       }}
-                    // href={`/products/slug?data=${product}`}
                     
                     >
                             <a className="transition-all hover:text-primary text-[16px]">
@@ -274,23 +283,13 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         </span>
                         </h7>
                     )}
-                    {/* {price && !discountPrice && (
-                        <span className="product-price text-[18px] leading-[31px] text-[#666666]">
-                            ${price.toFixed(2)}
-                        </span>
-                    )}
-                    {price && discountPrice && (
-                        <div className="product-price-wrap flex justify-center mb-[10px]">
-                            <span className="product-price text-[18px] leading-[31px] text-[#666666] block">
-                                ${price.toFixed(2)}
-                            </span>
-                            <span className="product-price text-[18px] leading-[31px] text-[#666666] block relative before:content-['-'] before:mx-[10px]">
-                                ${discountPrice.toFixed(2)}
-                            </span>
-                        </div>
-                    )} */}
+                    
                 </div>
             </div>
+
+
+
+
             <QuickView open={isOpen} onClose={() => setIsOpen(false)}>
                 <div className="quickview-body w-full md:h-full h-[700px] overflow-y-auto">
                     <div className="grid md:grid-cols-2 grid-cols-1">
@@ -343,15 +342,8 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                         </div>
                         <div className="product-content py-[40px] px-[30px]">
                             <h2 className="text-[24px] mb-[15px]">{title}</h2>
-                            {/* {product.price  && (
-                                <span className="product-price text-[30px] leading-[42px] text-[#999999] block mb-[25px]">
-                                    {product.price}
-                                </span>
-                            )} */}
-
-
-
-                    {product.off_percentage != null ?
+                           
+                    {product.isRecommended == true  && product.off_percentage != null ?
                        <>
                        <p className="product-price" style={{fontSize:12, textDecorationLine:'line-through',  textDecorationColor: "black" }} >
 
@@ -367,30 +359,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                             {product.price}
                         </span>
                       }
-
-
-                            {/* {price && !discountPrice && (
-                                <span className="product-price text-[30px] leading-[42px] text-[#999999] block mb-[25px]">
-                                    ${price.toFixed(2)}
-                                </span>
-                            )}
-                            {price && discountPrice && (
-                                <div className="product-price-wrap flex mb-[10px]">
-                                    <span className="product-price text-[30px] leading-[42px] text-[#999999] block">
-                                        ${price.toFixed(2)}
-                                    </span>
-                                    <span className="product-price text-[30px] leading-[42px] text-[#999999] block relative before:content-['-'] before:mx-[10px]">
-                                        ${discountPrice.toFixed(2)}
-                                    </span>
-                                </div>
-                            )} */}
-                            {/* <h3 className="stock font-semibold text-[14px] mb-[20px]">
-                                Available:
-                                <span className="text-[#3bc604] ml-[5px]">
-                                    Yes
-                                </span>
-                            </h3> */}
-                        
+                     
                             <p>{desc}</p>
                             <div className="group-btn flex max-xs:flex-wrap py-[30px]">
                                 <div
@@ -461,13 +430,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                         Add to cart
                                     </button>
                                 </div>
-                                {/* <button
-                                    onClick={addToWishlistHandler}
-                                    type="button"
-                                    className={`${wishlistBtn}`}
-                                >
-                                    <IoHeartOutline />
-                                </button> */}
+                               
                             </div>
                          
                             <div className="sku-wrap font-medium">
@@ -489,71 +452,7 @@ function ProductItem({ product, productFilter, productFilterPath }) {
                                     {product?.desc}
                                 </span>
                             </div>
-                            {/* <div className="category-wrap flex max-xs:flex-wrap">
-                                <span className="text-black font-medium">
-                                    Categories:
-                                </span>
-                                {productFilter[0]?.categoryList?.map(
-                                    (singleCategoryList) => (
-                                        <Link
-                                            href={`/products/${productFilterPath}`}
-                                            key={singleCategoryList.id}
-                                        >
-                                            <button
-                                                type="button"
-                                                className={`${textHover} capitalize text-[#666666] font-medium after:content-[","] last:after:content-none ml-[10px]`}
-                                                onClick={() =>
-                                                    filterChangeHandler(true, {
-                                                        title: singleCategoryList.categoryListTitle,
-                                                        key: singleCategoryList.categoryListTitle,
-                                                        group: 'category',
-                                                    })
-                                                }
-                                            >
-                                                {
-                                                    singleCategoryList.categoryListTitle
-                                                }
-                                            </button>
-                                        </Link>
-                                    )
-                                )}
-                            </div> */}
-                            {/* <div className="tag-wrap flex max-xs:flex-wrap">
-                                <span className="text-black font-medium">
-                                    Tags:
-                                </span>
-                                {productFilter[0]?.tagList?.map(
-                                    (singleTagList) => (
-                                        <Link
-                                            href={`/products/${productFilterPath}`}
-                                            key={singleTagList.id}
-                                        >
-                                            <button
-                                                type="button"
-                                                className={`${textHover} capitalize text-[#666666] font-medium after:content-[","] last:after:content-none ml-[10px]`}
-                                                onClick={() =>
-                                                    filterChangeHandler(true, {
-                                                        title: singleTagList.tagTitle,
-                                                        key: singleTagList.tagTitle,
-                                                        group: 'tag',
-                                                    })
-                                                }
-                                            >
-                                                <span
-                                                    className={`${singleTagList.tagTitle}`}
-                                                >
-                                                    {singleTagList.tagTitle}
-                                                </span>
-                                            </button>
-                                        </Link>
-                                    )
-                                )}
-                            </div> */}
-                            {/* <div className="social-wrap flex pt-[65px]">
-                                <span className="text-black font-medium">
-                                    Share this items :
-                                </span>
-                            </div> */}
+                           
                         </div>
                     </div>
                 </div>

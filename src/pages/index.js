@@ -30,6 +30,7 @@ query MyQuery {
         id
         name
         des
+        Seller_email
       }
     }
   }
@@ -162,6 +163,10 @@ function HomePage({
           const res = await API.graphql(
             graphqlOperation(getMenuItems)
           ) ;
+
+         
+
+
           console.log("menu  i s "+JSON.stringify(res.data.listMenus.items));
 
 
@@ -203,7 +208,7 @@ function HomePage({
                 <div  className="categories-list  col-xs-4 col-sm-6 col-md-4 col-lg-3">
                                         {MenuList.map((Menu, index) => (
                        <Link 
-                       href={`/products/5-columns?id=${Menu.id}&name=${Menu.name}`} 
+                       href={`/products/5-columns?id=${Menu.id}&name=${Menu.name}&selleremail=${Menu.Seller_email}`} 
                           >
                         <div  className="categories-item" key={index}>
                             <img

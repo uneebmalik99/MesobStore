@@ -22,6 +22,7 @@ function ProductDetailPage({
                 title : router.query.title,
                 price : router.query.price ,
                 newprice : router.query.newprice,
+                selleremail: router.query.selleremail,
                 image : router.query.image,
                 category : router.query.category ,
                 desc : router.query.desc,
