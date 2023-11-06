@@ -95,7 +95,11 @@ const childRef = useRef();
 
     const[receiver_obj , setreceiver_obj] = useState('')
     const [senderObj, setSenderObj] = useState('');
-
+    function isValidEmail(email) {
+        // You can use a regular expression to validate email format
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        return emailPattern.test(email);
+      }
 
     const onCheckout = () => {
 
@@ -104,54 +108,85 @@ const childRef = useRef();
 
         if(Receiver_name == '' || null ){
             toast.error('Please Enter Receiver Name', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(Receiver_phone == '' || null){
             toast.error('Please Enter Receiver Phone', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(Receiver_address == '' || null){
             toast.error('Please Enter Receiver Address', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(Receiver_city == '' || null){
             toast.error('Please Enter Receiver City', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(Receiver_state == '' || null){
             toast.error('Please Enter Receiver State', {autoClose:2000})
 
+            setIsLoading(false)
+
         }
         else if(Receiver_country == '' || null){
             toast.error('Please Enter Receiver Country', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(sender_name == '' || null){
             toast.error('Please Enter Sender Name', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(sender_email == '' || null){
             toast.error('Please Enter Sender Email', {autoClose:2000})
+            setIsLoading(false)
 
         }
-        else if(sender_address == '' || null){
+
+        else if (!isValidEmail(sender_email)) {
+            toast.error('Invalid Email Format', { autoClose: 2000 });
+            setIsLoading(false)
+
+          }
+                else if(sender_address == '' || null){
             toast.error('Please Enter Sender Address', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(sender_phone == '' || null){
             toast.error('Please Enter Sender Phone', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(sender_city == '' || null){
             toast.error('Please Enter Sender City', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(sender_state == '' || null){
             toast.error('Please Enter Sender State', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else if(sender_zip == '' || null){
             toast.error('Please Enter Sender Zip', {autoClose:2000})
+            setIsLoading(false)
+
 
         }
         else{
