@@ -39,8 +39,8 @@ function Checkout({ checkoutItems }) {
 //   const STRIPE_SK_EU =loadStripe
 //     ('sk_test_51Ma0UlHlGffSuHzfXqLxMCx4WwZPl2InuHG7TFmdFPczonVev6xnsrQzyJ0QkiCNP04yyUMiJGGnt8XXWiWEmAG700oh8MwmIz');
     
-  const STRIPE_PK_GLOBAL =loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
-  const STRIPE_PK_EU =loadStripe('pk_test_51Ma0UlHlGffSuHzfQ0MLtY2NxXXevZvjKNBMh1gLgrHedV5ZqbTvX8aLAFQC4YaFmdAlwUVmhjrcCevWbopcfHNQ00c9HutQd3');
+  let STRIPE_PK_GLOBAL =loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+  let STRIPE_PK_EU =loadStripe('pk_test_51Ma0UlHlGffSuHzfQ0MLtY2NxXXevZvjKNBMh1gLgrHedV5ZqbTvX8aLAFQC4YaFmdAlwUVmhjrcCevWbopcfHNQ00c9HutQd3');
   
   // // TEST -- PRODUCTION
 //   let STRIPE_SK_GLOBAL =loadStripe
@@ -321,7 +321,15 @@ const childRef = useRef();
             .then(res => {
                 console.log("res  : "+res);
                 const data = JSON.parse(res.data);
-                console.log("hgfyc"+JSON.stringify(data));  
+                console.log("hgfyc"+JSON.stringify(data)); 
+                // if(region_1 == 'eu'){
+                //     STRIPE_PK_EU = loadStripe(data.publishableKey);
+                // }else{
+                //     STRIPE_PK_GLOBAL = loadStripe(data.publishableKey);
+
+                // }
+              
+
             setclientSecret(data.data.client_secret)
 
             // alert(JSON.stringify(data.data.client_secret))
