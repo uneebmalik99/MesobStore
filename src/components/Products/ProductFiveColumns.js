@@ -15,6 +15,7 @@ function ProductFiveColumns({
     productcategoryid,
     productFilterPath,
     gridTabItems,
+    headerItems,
 
 }) {
     const { filterData } = useSelector((state) => state.filter);
@@ -210,7 +211,7 @@ console.log("bjbjgguk", productcategoryid);
                                     product={product}
                                     productFilter={productFilter}
                                     selleremail={productcategoryid.selleremail}
-
+                                    headerItems={headerItems}
                                     productFilterPath={
                                         productFilterPath
                                     }
@@ -233,7 +234,7 @@ console.log("bjbjgguk", productcategoryid);
                             product={product}
                             productFilter={productFilter}
                             selleremail={productcategoryid.selleremail}
-
+                            headerItems={headerItems}
                             productFilterPath={
                                 productFilterPath
                             }

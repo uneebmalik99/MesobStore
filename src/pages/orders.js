@@ -61,6 +61,7 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
         )) ;
         console.log(JSON.stringify(res?.data?.listOrders?.items), 'res');
         const resData = res?.data?.listOrders?.items;
+        console.log("dvsksdhhsiesvd", resData);
         setOrderData(resData);
         console.log(
           'sort',
@@ -109,11 +110,19 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
     let priducttodisplay = []
 
     for(let i = 0; i< products.length ; i++){
-        let price = products[i].price?.replace(/[\s,]/g, "")?.slice(1);
-      price = Number(price) * products[i].qty;
+        let price = products[i].price;
+        console.log('dsvuhuidsyivhdsiuvhi', price);
+        console.log('dsvuhuidsyivhdsiuvhi', products[i].quantity);
+
+      price = Number(price) * products[i].quantity;
+      console.log('dsvuhuidsyivhdsiuvhi', price);
+
+      
+
       total1 = total1 + price;
+      total1 = parseFloat(total1);
+      total1 = total1.toFixed(2);
     }
-    console.log("kfsldn  -"+total1.toFixed(2));
     return(
         <>
         <div style={{borderBottomWidth:1,}}>

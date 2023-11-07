@@ -41,44 +41,34 @@ function Checkout({ checkoutItems }) {
     
 // let STRIPE_PK_GLOBAL =loadStripe('');
 // let STRIPE_PK_EU =loadStripe('');
-// let STRIPE_PK_GLOBAL =loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
-// let STRIPE_PK_EU =loadStripe('pk_test_51Ma0UlHlGffSuHzfQ0MLtY2NxXXevZvjKNBMh1gLgrHedV5ZqbTvX8aLAFQC4YaFmdAlwUVmhjrcCevWbopcfHNQ00c9HutQd3');
+let STRIPE_PK_GLOBAL =loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+let STRIPE_PK_EU =loadStripe('pk_test_51Ma0UlHlGffSuHzfQ0MLtY2NxXXevZvjKNBMh1gLgrHedV5ZqbTvX8aLAFQC4YaFmdAlwUVmhjrcCevWbopcfHNQ00c9HutQd3');
 
-  // // TEST -- PRODUCTION
+  // TEST -- PRODUCTION
 //   let STRIPE_SK_GLOBAL =loadStripe
 //     ('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');
 //   let STRIPE_SK_EU =loadStripe
 //     ('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');
-  let STRIPE_PK_GLOBAL =loadStripe
-    ('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
-  let STRIPE_PK_EU =loadStripe
-    ('pk_live_51Ma0UlHlGffSuHzf9daYeWo65kFow4KjKrudWfMURvPxqgkTfDXQ58TF5BFejBI4tqS6EElWFafj1icjZK3O577C00nYkxgBmZ');
+ 
+// let STRIPE_PK_GLOBAL =loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
+//   let STRIPE_PK_EU =loadStripe('pk_live_51Ma0UlHlGffSuHzf9daYeWo65kFow4KjKrudWfMURvPxqgkTfDXQ58TF5BFejBI4tqS6EElWFafj1icjZK3O577C00nYkxgBmZ');
    
 const stripePromise = loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
     
-
-
 let region_1= localStorage.getItem('region');
-
     
 const [childFunctionCalled, setChildFunctionCalled] = useState(false);
 const dispatch = useDispatch();
 const [isLoading, setIsLoading] = useState(false);
-
-
-
 const [checkoutcomp,setcheckoutcomp]= useState(false)
 const [message, setMessage] = useState('');
-
 const [dataToChild, setDataToChild] = useState('');
-  
 const childRef = useRef();
-
-    const [clientSecret ,setclientSecret] = useState('')
-    const [returningCustomer, setReturningCustomer] = useState(false);
-    const openReturningCustomer = () => {
+const [clientSecret ,setclientSecret] = useState('')
+const [returningCustomer, setReturningCustomer] = useState(false);
+const openReturningCustomer = () => {
         setReturningCustomer(!returningCustomer);
-    };
+};
 
     const [Receiver_name,setReceiver_name]=useState('')
     const [Receiver_phone,setReceiver_phone]=useState('')
@@ -97,6 +87,7 @@ const childRef = useRef();
 
     const[receiver_obj , setreceiver_obj] = useState('')
     const [senderObj, setSenderObj] = useState('');
+    
     function isValidEmail(email) {
         // You can use a regular expression to validate email format
         const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
@@ -325,12 +316,13 @@ const childRef = useRef();
                 const data = JSON.parse(res.data);
                 console.log("hgfyc"+JSON.stringify(data)); 
                 // if(region_1 == 'eu'){
+                //     alert('eu',data.publishableKey)
                 //     STRIPE_PK_EU = 'loadStripe('+data.publishableKey+')';
                 // }else{
-                //     STRIPE_PK_GLOBAL = 'loadStripe('+data.publishableKey+')';
-
-                // }
-              
+                //     // STRIPE_PK_GLOBAL = 'loadStripe('+data.publishableKey+')';
+                //     // alert('usa'+data.publishableKey)
+                //     STRIPE_PK_GLOBAL = loadStripe(data.publishableKey)
+                // }              
 
             setclientSecret(data.data.client_secret)
 
@@ -786,12 +778,7 @@ const childRef = useRef();
                         
                         
                         {checkoutcomp == true?
-
-
-
-                                                <Elements stripe={region_1 == 'eu' ? STRIPE_PK_EU:STRIPE_PK_GLOBAL} options={options}>
-
-                                                                                          
+                                             <Elements stripe={region_1 == 'eu' ? STRIPE_PK_EU:STRIPE_PK_GLOBAL} options={options}>
                                                     <CheckoutForm 
                                                     sennd={senderObj}
                                                     receiver_obj8={receiver_obj}
@@ -799,10 +786,7 @@ const childRef = useRef();
                                                     </Elements>
                                                     :
                                                     null
-
-
-
-                                                                }
+                                                     }
                                                 <form onSubmit={()=> {handlesubmit}}>
 
 

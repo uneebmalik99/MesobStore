@@ -7,9 +7,24 @@ import { ReactSearchAutocomplete } from "react-search-autocomplete";
 import { useSelector } from 'react-redux';
 
 function SearchBarComps({ placeholdertext }) {
+
+  const getMenuItems = `
+query MyQuery {
+    listMenus {
+      items {
+        icon
+        id
+        name
+        des
+        Seller_email
+      }
+    }
+  }
+  `;
 const cartItems = useSelector((state) => state.cart.searchitems);
 
 const [searchString , setsearchString] = useState('')
+const [MenuList,setMenuList]= useState([]);
 
 console.log("sdnjknsdknvds", cartItems);
 
@@ -59,6 +74,30 @@ const manyItems = [...new Array(10000)].map((_, i) => ({
         const response = await API.graphql(
             graphqlOperation(queries.getProducts, { id: item.id })
         );
+
+        const res2 = await API.graphql(
+          graphqlOperation(getMenuItems)
+        )
+        setMenuList(res2.data.listMenus.items)
+        let gg= res2.data.listMenus.items
+
+        console.log("Rproducsdfdsst  nkjb"+JSON.stringify(res2.data.listMenus.items));
+        let selleremail ='';
+
+
+        let g = JSON.parse(response.data.getProducts.categories)
+        console.log('djsknkcjdfsvksddc',g[1]);
+        let cat= g[1]
+        console.log("gfddtdtdhdt", gg);
+
+        for(let i =0; i<gg.length; i++){
+          console.log("gfddtdtdhdt", gg[i].Seller_email);
+         if(gg[i].id == cat){
+          selleremail = gg[i].Seller_email
+         }
+          
+      }
+
         const allProducts = response.data.getProducts;
 
         console.log('search product ',allProducts);
@@ -78,10 +117,10 @@ const manyItems = [...new Array(10000)].map((_, i) => ({
      console.log("gcchc",priceAfterDiscountv );
 
 
-     window.location.href = '/products/slug?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&des='+ contentObj.description + '&price='+ contentObj.price + '&newprice='+ priceAfterDiscountv+ '&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
+     window.location.href = '/productdetails?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&des='+ contentObj.description +'&selleremail='+selleremail+ '&price='+ contentObj.price + '&cost='+contentObj.cost+   '&newprice='+ priceAfterDiscountv+ '&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
 
         }else{
-          window.location.href = '/products/slug?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&des='+ contentObj.description + '&price='+ contentObj.price +'&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
+          window.location.href = '/productdetails?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&des='+ contentObj.description + '&selleremail='+selleremail+ '&price='+ contentObj.price + '&cost='+contentObj.cost+ '&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
 
         }
 

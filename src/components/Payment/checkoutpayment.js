@@ -73,51 +73,39 @@ const sendOrderMail = async () => {
 const sendToMesob = async () => {
   try {
     let productRows = []; // Initialize an empty array to hold the rows
+    const product = receiver_obj8;
     let totalSellingPrice = 0;
     let totalCost = 0;
-    
+    const contentObj = JSON.parse(product.Products);
+
+    // const productRows = productDetails.map((product, index) => {
+      for(let i =0; i<contentObj.length; i++){
+
+
       const product = receiver_obj8;
-      console.log("vghhtftfytftfu", product.Products);
       const contentObj = JSON.parse(product.Products);
-    let price = contentObj[0].price;
-    console.log('gchcprice = ',contentObj[0]);
-     
+      let price = contentObj[i].price;
       price = price.replace(',', '');
-     
       const priceWithoutDollarSign = parseFloat(price.replace('$', ''));
-      const contentObjsemd = JSON.parse(product.Products);
-
-      console.log("hgfyfyfyj", contentObjsemd.selleremails);
-
-      // let cost = 10;
-      // if (cost.includes(',')) {
-      //   cost = cost.replace(',', '');
-      // }
-      const costWithoutDollarSign = parseFloat(contentObj[0].cost.replace('$', ''));
-      // const costWithoutDollarSign = contentObj[0].cost;
-      const quantity = parseFloat(contentObj[0].quantity);
-    
+      const costWithoutDollarSign = parseFloat(contentObj[i].cost.replace('$', ''));
+      const quantity = parseFloat(contentObj[i].quantity);
       let sellingPrice = priceWithoutDollarSign * quantity;
       let costPrice = costWithoutDollarSign * quantity;
-    
       totalSellingPrice += sellingPrice;
       totalCost += costPrice;
-    
       // Create the row and push it to the productRows array
-      let index = 1;
-      const row = `
-        <tr key=${index}>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${index + 1}</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[0].name}</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${product.country}</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[0].quantity}</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[0].cost}</td>
-          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[0].price}</td>
+      let row = `
+        <tr key=${i+1}>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${i+1}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[i].name}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[i].country}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[i].quantity}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[i].cost}</td>
+          <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[i].price}</td>
         </tr>`;
-    
       productRows.push(row); // Push the row to the productRows array
     
-
+  }
     const tableHTML = productRows.join('');
 
     const message = `

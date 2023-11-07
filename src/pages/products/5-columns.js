@@ -38,6 +38,7 @@ function ProductFiveColumnsPage({
                 productFiveColumnsContainer="container-fluid xl:px-[60px] px-[5px]"
                 products={products}
                 productcategoryid={data}
+                headerItems={headerItems}
                 productFilter={productFilter}
                 productFilterPath="5-columns"
                 gridTabItems={gridTabItems}

@@ -133,6 +133,7 @@ function HomePage({
                         'image',
                         'price',
                         'oldPrice',
+                        'cost',
                         'country',
                         'isRecommended',
 
@@ -248,8 +249,6 @@ function HomePage({
                                                 return(
                                                     <>
                                                 <div>
-
-
                                                 <h5 style={{alignSelf:'flex-start'}}>{cproduct}</h5>
                                              <div className="grid xs:grid-cols-2 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6   grid-cols-2 gap-y-[5px]">
                                                 {/* <div className="col-12 col-xs-4 col-sm-6 col-md-4 col-slg-3  lm:gap-x-[25px]  gap-y-[5px] "> */}
@@ -262,7 +261,12 @@ function HomePage({
                             {RecommendedProduct.map((Rproduct, index) => {
 
                          
-                            console.log("Rproduct  nkjb"+JSON.stringify(Rproduct.content.price));
+                            console.log("Rproduct  nkjb"+JSON.stringify(Rproduct.content));
+
+                            let g = JSON.parse(Rproduct.categories)
+                            console.log('djsknkcjksddc',Rproduct.categories);
+                            console.log('djsknkcjksddc',g[1]);
+                            let cat= g[1]
                                 
                                 
                             let img = '';
@@ -274,12 +278,15 @@ function HomePage({
                                 const contentObj = JSON.parse(Rproduct.content);
                                 // Set img to the image URL from the parsed content
                                 img = contentObj.image;
+                                console.log('hdgsjygjygvdsjyds',contentObj);
                                 // cost = contentObj.cost
 
                               
                             }
 
                             let tenPercentOfPrice;
+                            let cost;
+                            let selleremail ='';
 
 
                            
@@ -287,11 +294,25 @@ function HomePage({
 
                                
                                 const contentObj = JSON.parse(Rproduct.content);
+
                                 // Set img to the image URL from the parsed content
                                 price = contentObj.price;
+                                cost  = contentObj.cost;
                                 old_price = price;
                                 price = price.slice(1)
                                 price = price.replace(/,/g, '');
+
+
+                                console.log("vsmdnvd", MenuList);
+                                for(let i =0; i<MenuList.length; i++){
+                                    console.log("dbjdbsvds", MenuList[i].Seller_email);
+                                   if(MenuList[i].id == cat){
+                                    selleremail = MenuList[i].Seller_email
+                                   }
+                                    
+                                }
+
+                                console.log('gvgghhhghv',selleremail);
 
 
                                 const off  = Rproduct.off_percentage.slice(0, -1);
@@ -318,17 +339,20 @@ function HomePage({
                                 
     <Link
                 href={{
-                pathname: "/products/slug",
+                pathname: "/productdetails",
                 query:  {
                     id: Rproduct.id,
                     title: Rproduct.title,
                     image: img,
                     desc:Rproduct.desc,
                     price:price,
+                    selleremail:selleremail,
+                    cost:cost,
                     newprice:tenPercentOfPrice,
                     category:Rproduct.category,
                     off_percentage:Rproduct.off_percentage,
-                    isRecommended:Rproduct.isRecommended
+                    isRecommended:Rproduct.isRecommended,
+
                   }  }}  >
 
                     

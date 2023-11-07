@@ -7,6 +7,7 @@ export const getProducts = /* GraphQL */ `
       id
       title
       category
+      categories
       content
       country
       createdAt
@@ -29,6 +30,7 @@ export const listProducts = /* GraphQL */ `
         title
         category
         content
+        categories
         country
         isRecommended
         off_percentage

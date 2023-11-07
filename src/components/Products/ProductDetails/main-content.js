@@ -31,7 +31,7 @@ function MainContent({ product }) {
     } = product;
     const [quantityCount, setQuantityCount] = useState(1);
 
-    console.log('kjefsbbeubsu',selleremail);
+    console.log('kjefsbbeubsu',cost);
     console.log('kjefsbbeubsu',off_percentage);
     console.log('kjefsbbeubsu',isRecommended);
     const [ priceAfterDiscount , setpriceAfterDiscount ] = useState('')

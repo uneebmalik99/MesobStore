@@ -31,7 +31,7 @@ const addtoCartBtn = `bg-black text-white px-[42px] h-[46px] leading-[44px]`;
 const wishlistBtn = `border border-[#dddddd] text-[20px] w-[46px] h-[46px] leading-[46px] inline-flex justify-center items-center transition-all hover:text-primary`;
 const textHover = `transition-all hover:text-primary`;
 
-function ProductItem({ product, productFilter, productFilterPath , selleremail}) {
+function ProductItem({ product, productFilter, productFilterPath ,headerItems, selleremail}) {
     const {
         id,
         title,
@@ -49,7 +49,8 @@ function ProductItem({ product, productFilter, productFilterPath , selleremail})
         desc,
     } = product;
 
-    console.log("produdwfwfsfdvsrect"+JSON.stringify(content));
+
+    console.log("produdwfwfsfdvsrect"+ JSON.stringify(headerItems));
 
     console.log("produdwfwfrect"+JSON.stringify(product));
 
@@ -63,39 +64,26 @@ function ProductItem({ product, productFilter, productFilterPath , selleremail})
 
     const dispatch = useDispatch();
     const addToCartHandler = () => {
-
         let tprice = price.replace('$', ''); // This removes the dollar sign
         tprice = tprice.replace(/,/g, '');
-        
         console.log("totalPricetofsfgtalPrice "+tprice );
         let final_price ;
         if(isRecommended == true && off_percentage != null ){
             let tpricee = price.slice(1)
-            
             tpricee = tpricee.replace(/,/g, '');
             let off  = off_percentage.slice(0, -1);
-
             let discount = (off / 100) * tpricee;
             let priceAfterDiscountv = (tpricee - discount).toFixed(2);
-
             final_price  = priceAfterDiscountv
-
             setpriceAfterDiscount(priceAfterDiscountv)
-
         }else{
             final_price  = tprice
-
         }
-    
        let cost = content.cost
-
         console.log("totalPrice: " + tprice*quantityCount);
         console.log("totalPricetotalPrice"+totalPrice);
        let  totalprice =tprice*quantityCount;
-
-       
     //    alert('efwfwe',isRecommended)
-
         dispatch(
             cartActions.addItemToCart({
                 id,
@@ -169,14 +157,16 @@ function ProductItem({ product, productFilter, productFilterPath , selleremail})
 
                 <Link
                  href={{
-                    pathname: "/products/slug",
+                    pathname: "/productdetails",
                     query:  {
                         id: product.id,
                         title: product.title,
                         image: product.image,
                         desc:product.desc,
+                        headerItems:headerItems,
                         price:product.price,
                         newprice:priceAfterDiscount,
+                        cost:content.cost,
                         category:product.category,
                         off_percentage:product.off_percentage,
                         isRecommended:product.isRecommended,
@@ -227,7 +217,7 @@ function ProductItem({ product, productFilter, productFilterPath , selleremail})
                     <h3 className="mb-[5px]">
                     <Link
                     href={{
-                        pathname: "/products/slug",
+                        pathname: "/productdetails",
                         query:  {
                             id: product.id,
                             title: product.title,

@@ -9,13 +9,12 @@ import FooterComps from '../../components/FooterComps';
 
 function ProductDetailPage({
     product,
-    headerItems,
     productDetailTabItems,
     footerItems,
+    
 }) {
 
 
-    let url = window.location.href;
     const router = useRouter();
     const products ={
                 id : router.query.id ,
@@ -89,6 +88,24 @@ function ProductDetailPage({
 //         fallback: false,
 //     };
 // }
+
+// export function getStaticProps() {
+//     const headerItems = getAllItems('header');
+//     const products = getAllItems('products');
+//     const productFilter = getAllItems('product-filter');
+//     const footerItems = getAllItems('footer');
+    
+
+//     return {
+//         props: {
+//             headerItems,
+//             products,
+//             productFilter,
+//             footerItems,
+//         },
+//     };
+// }
+
 
 ProductDetailPage.propTypes = {
     headerItems: PropTypes.instanceOf(Object).isRequired,

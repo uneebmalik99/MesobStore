@@ -83,19 +83,24 @@ function AuthForm({ authItems }){
     //   });
 
     const handleSignUp = async () => {
-        console.log('Email. Pass: ', email + password);
+        console.log('Email. Pass: ', signInEmail + signInPassword);
         try {
-            const response = await Auth.signUp(email, password, email);
-            console.log(response);
+            const response = await Auth.signUp(signInEmail, signInPassword, signInEmail);
+            console.log('jfashkuhfhksduhfs',response);
+            if(response.username == signInEmail){
+
+            // window.location.href = '/'
+            }else{
+
+            }
+
             console.log('SignUp Done');
         } catch (e) {
-            console.log('Error', e.message);
+            alert(e)
+            console.log('jfashkuhfhksduhfs Error', e);
         }
     };
     const handleSignIn = async () => {
-        // const response = await Auth.signIn('uneebmalik99@hotmail.com', 'PCmalik99');
-
-        // console.log('response = : ', response);
         try {
             const response = await Auth.signIn(signInEmail, signInPassword);
             console.log(`Login Response: ${JSON.stringify(response.username)}`);
@@ -351,7 +356,6 @@ function AuthForm({ authItems }){
                             : 'Register-content tab-style-common'
                     }
                 >
-                    <form className="register-form">
                         <h3 className="title text-[18px] mb-[25px]">
                             Register An Account
                         </h3>
@@ -360,9 +364,9 @@ function AuthForm({ authItems }){
                             <input
                                 className={inputField}
                                 type="email"
-                                value={email}
+                                value={signInEmail}
                                 onChange={(event) => {
-                                    setEmail(event.target.value);
+                                    setSign(event.target.value);
                                 }}
                                 placeholder="Email address"
                             />
@@ -371,9 +375,9 @@ function AuthForm({ authItems }){
                             <input
                                 className={inputField}
                                 type="password"
-                                value={password}
+                                value={signInPassword}
                                 onChange={(event) => {
-                                    setPassword(event.target.value);
+                                    setsignPass(event.target.value);
                                 }}
                                 placeholder="Password"
                             />
@@ -407,7 +411,6 @@ function AuthForm({ authItems }){
                                 Register
                             </button>
                         </div>
-                    </form>
                 </div>
             </div>
         </div>
