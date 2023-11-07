@@ -8,6 +8,7 @@ import * as queries from '../../graphql/queries';
 import CustomSignInButton from './CustomSignInButton';
 import { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth';
 import awsconfig from "../../aws-exports";
+import {toast} from 'react-toastify';
 
 
 const inputField = `border border-[#cccccc] focus-visible:outline-0 text-[#666666] py-[10px] px-[20px] w-full h-[50px]`;
@@ -88,10 +89,11 @@ function AuthForm({ authItems }){
             const response = await Auth.signUp(signInEmail, signInPassword, signInEmail);
             console.log('jfashkuhfhksduhfs',response);
             if(response.username == signInEmail){
+                toast.success('Sign Up Successfully', {autoClose:2000})
 
-            // window.location.href = '/'
+            window.location.href = '/'
             }else{
-
+                alert(response)
             }
 
             console.log('SignUp Done');
@@ -104,7 +106,8 @@ function AuthForm({ authItems }){
         try {
             const response = await Auth.signIn(signInEmail, signInPassword);
             console.log(`Login Response: ${JSON.stringify(response.username)}`);
-            if(response.username == signInEmail){
+            if(response.userSub){
+
                 window.location.href = '/'
 
             }
