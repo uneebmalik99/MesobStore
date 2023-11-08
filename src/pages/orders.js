@@ -11,7 +11,7 @@ import { getAllItems } from '../lib/ItemsUtil';
 
 function orders({ headerItems, products, cartPageItems, footerItems }) {
     const [orderVisibility, setOrderVisibility] = useState({}); // Initialize an empty object for order visibility
-
+const [check ,setcheck] = useState(true)
     const toggleOrderVisibility = (orderId) => {
         setOrderVisibility((prevOrderVisibility) => ({
           ...prevOrderVisibility,
@@ -27,6 +27,7 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
       };
     const [order,setOrderData] = useState([])
     const getMyOrders = async () => {
+      setcheck(true)
 
         const user = await Auth.currentAuthenticatedUser();
   if(user?.attributes?.sub){
@@ -62,6 +63,7 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
         console.log(JSON.stringify(res?.data?.listOrders?.items), 'res');
         const resData = res?.data?.listOrders?.items;
         console.log("dvsksdhhsiesvd", resData);
+        setcheck(true)
         setOrderData(resData);
         console.log(
           'sort',
@@ -70,9 +72,13 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
           }),
         );
       } catch (error) {
+        setcheck(false)
+
         console.log(error);
       } 
   }else{
+    setcheck(true)
+
     alert('')
       
   }
@@ -94,6 +100,11 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
                 itemPath="/"
                 activeItem="My Orders"
             />
+
+{
+  check == true?
+
+            <div>
 
 {order.map((order, index) => {
     let total1 = 0;
@@ -170,64 +181,6 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
         </div>
 
 
-
-
-        {/* <div style={{  display:'flex', flexDirection:'row'}}>
-        <div style={{
-  position: 'relative',
-  width: '20px',
-  height: '20px',
-  borderRadius: '50%',
-  background: '#ffffff'
-}}>
-       <div style={{
-  backgroundImage:order.Status == 'Shipped' ? 'linear-gradient(to bottom, rgb(9, 112, 26) 0%, rgb(21, 255, 0) 100%)':'linear-gradient(to bottom, rgb(255, 225, 225) 0%, rgb(225, 255, 225) 100%)',
-  content: '',
-  position: 'absolute',
-  top: '-5px',
-  bottom: '-5px',
-  right: '-5px',
-  left: '-5px',
-  zIndex: '-1',
-  borderRadius: 'inherit'
-}}>
-    </div> 
-    </div> 
-      
-    <p style={{paddingInline:5,}}> Item Shipped </p> 
-
-        </div>
-
-
-
-
-
-        <div style={{  display:'flex', flexDirection:'row'}}>
-        <div style={{
-  position: 'relative',
-  width: '20px',
-  height: '20px',
-  borderRadius: '50%',
-  background: '#ffffff'
-}}>
-       <div style={{
-  backgroundImage:order.Status == 'Delivered'? 'linear-gradient(to bottom, rgb(9, 112, 26) 0%, rgb(21, 255, 0) 100%)':'linear-gradient(to bottom, rgb(255, 225, 225) 0%, rgb(225, 255, 225) 100%)',
-  content: '',
-  position: 'absolute',
-  top: '-5px',
-  bottom: '-5px',
-  right: '-5px',
-  left: '-5px',
-  zIndex: '-1',
-  borderRadius: 'inherit'
-}}>
-    </div> 
-    </div> 
-      
-    <p style={{paddingInline:5,}}> Item Successfully Delivered </p> 
-
-        </div> */}
-
         </div>
 
         </div>
@@ -252,11 +205,13 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
                   {orderVisibility[order.id] && (
                     <div>
                       {products.map((product, index) => {
+                        let Products = product;
+                        console.log("nfhvv", Products);
                         return (
-                          <div style={{ borderBottomWidth: 1, paddingInline: 30, marginTop: '1%', paddingBlock: '1%', display: 'flex', justifyContent: 'space-evenly' }}>
+                          <div style={{ borderWidth: 1, paddingInline: 30, marginTop: '1%', paddingBlock: '1%', display: 'flex', justifyContent: 'space-evenly' }}>
                             <img src={product.image} width={30} height={30} />
-                            <p>{product.title}</p>
-                            <p>{product.description && product.description.length > 50 ? `${product.description.slice(0, 50)}...` : product.description}</p>
+                            <p>{product.name}</p>
+                            <p> quantity : {product.quantity}</p>
                             <p>${product.price}</p>
                           </div>
                         );
@@ -276,7 +231,15 @@ function orders({ headerItems, products, cartPageItems, footerItems }) {
 </>
 )
 
-                })};
+                })}
+
+                </div>
+                :
+                <div className='container text-center'>
+                  <p>No Order Found</p>
+
+                </div>
+}
             <FooterComps
                 footerContainer="container"
                 footerItems={footerItems}

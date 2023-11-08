@@ -36,6 +36,7 @@ const cartSlice = createSlice({
                     category:newItem.category,
                     selleremail:newItem.selleremail,
                     cost:newItem.cost,
+                    desc:newItem.desc,
                     totalPrice: p*itemQuantity,
                     name: newItem.title,
                     image: newItem.image,

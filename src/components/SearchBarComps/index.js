@@ -117,10 +117,10 @@ const manyItems = [...new Array(10000)].map((_, i) => ({
      console.log("gcchc",priceAfterDiscountv );
 
 
-     window.location.href = '/productdetails?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&des='+ contentObj.description +'&selleremail='+selleremail+ '&price='+ contentObj.price + '&cost='+contentObj.cost+   '&newprice='+ priceAfterDiscountv+ '&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
+     window.location.href = '/productdetails?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&desc='+ contentObj.description +'&selleremail='+selleremail+ '&price='+ contentObj.price + '&cost='+contentObj.cost+   '&newprice='+ priceAfterDiscountv+ '&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
 
         }else{
-          window.location.href = '/productdetails?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&des='+ contentObj.description + '&selleremail='+selleremail+ '&price='+ contentObj.price + '&cost='+contentObj.cost+ '&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
+          window.location.href = '/productdetails?id='+ allProducts.id+'&title='+ allProducts.title +'&image='+ contentObj.image +'&desc='+ contentObj.description + '&selleremail='+selleremail+ '&price='+ contentObj.price + '&cost='+contentObj.cost+ '&category='+ allProducts.category +'&isRecommended='+allProducts.isRecommended+'&off_percentage='+allProducts.off_percentage ;
 
         }
 

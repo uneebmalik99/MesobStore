@@ -105,8 +105,8 @@ function AuthForm({ authItems }){
     const handleSignIn = async () => {
         try {
             const response = await Auth.signIn(signInEmail, signInPassword);
-            console.log(`Login Response: ${JSON.stringify(response.username)}`);
-            if(response.userSub){
+            console.log(`Login Response: ${JSON.stringify(response)}`);
+            if(response.username){
 
                 window.location.href = '/'
 

@@ -70,8 +70,6 @@ function HomePage({
       };
       
     const fetchProducts = async () => {
-
-       
         try {
             const response = await API.graphql(
                 graphqlOperation(queries.listProducts, {
@@ -82,7 +80,6 @@ function HomePage({
             const allProducts2 = response.data.listProducts.items;
             console.log("djsvjdnsvj"+JSON.stringify(allProducts2));
         // alert( allProducts.length )
-
             let receomedproducts= [];
             // alert(allProducts.length)
             for(let i = 0; i< response.data.listProducts.items.length; i++){
@@ -95,18 +92,13 @@ function HomePage({
                 id: item.id,
                 title: item.title,
               }));
-
               // alert(receomedproducts.length)
               console.log('    bgvghvgh   '+JSON.stringify(searchItems));
-              
               // Dispatch the action to store the search items in Redux
               dispatch(cartActions.seacrhItem(searchItems));
-              
             const receomedproducts2 = receomedproducts.slice(1, -1);
-
             console.log('Rrcommend Products ', JSON.stringify(receomedproducts2));
             console.log('Response Products:1 ', allProducts[7].isRecommended);
-
             let cpunt = 0;
             setRecommendedProduct(
                 allProducts2.filter(item => {
@@ -133,6 +125,7 @@ function HomePage({
                         'image',
                         'price',
                         'oldPrice',
+                        'description',
                         'cost',
                         'country',
                         'isRecommended',
@@ -158,15 +151,11 @@ function HomePage({
         }
     };
 
-    
     const getMenuList = async () => {
         try {
           const res = await API.graphql(
             graphqlOperation(getMenuItems)
           ) ;
-
-         
-
 
           console.log("menu  i s "+JSON.stringify(res.data.listMenus.items));
 
@@ -272,6 +261,7 @@ function HomePage({
                             let img = '';
                             var price ;
                             let old_price = '';
+                            let desc= '';
 
                             if (Rproduct.isRecommended === true) {
                                 // Parse the JSON content to access the image property
@@ -279,42 +269,30 @@ function HomePage({
                                 // Set img to the image URL from the parsed content
                                 img = contentObj.image;
                                 console.log('hdgsjygjygvdsjyds',contentObj);
+                                desc = contentObj.description;
                                 // cost = contentObj.cost
-
-                              
                             }
-
                             let tenPercentOfPrice;
                             let cost;
                             let selleremail ='';
 
-
-                           
                             if (Rproduct.isRecommended == true && Rproduct.category == cproduct) {
-
-                               
+                            
                                 const contentObj = JSON.parse(Rproduct.content);
-
                                 // Set img to the image URL from the parsed content
                                 price = contentObj.price;
                                 cost  = contentObj.cost;
                                 old_price = price;
                                 price = price.slice(1)
                                 price = price.replace(/,/g, '');
-
-
                                 console.log("vsmdnvd", MenuList);
                                 for(let i =0; i<MenuList.length; i++){
                                     console.log("dbjdbsvds", MenuList[i].Seller_email);
                                    if(MenuList[i].id == cat){
                                     selleremail = MenuList[i].Seller_email
-                                   }
-                                    
+                                   }                                   
                                 }
-
                                 console.log('gvgghhhghv',selleremail);
-
-
                                 const off  = Rproduct.off_percentage.slice(0, -1);
 
                                 console.log("vfklns",price);
@@ -344,7 +322,7 @@ function HomePage({
                     id: Rproduct.id,
                     title: Rproduct.title,
                     image: img,
-                    desc:Rproduct.desc,
+                    desc:desc,
                     price:price,
                     selleremail:selleremail,
                     cost:cost,

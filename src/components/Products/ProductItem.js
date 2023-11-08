@@ -79,7 +79,9 @@ function ProductItem({ product, productFilter, productFilterPath ,headerItems, s
         }else{
             final_price  = tprice
         }
-       let cost = content.cost
+        let cost = content.cost;
+        let desc = content.desc;
+       
         console.log("totalPrice: " + tprice*quantityCount);
         console.log("totalPricetotalPrice"+totalPrice);
        let  totalprice =tprice*quantityCount;
@@ -162,7 +164,7 @@ function ProductItem({ product, productFilter, productFilterPath ,headerItems, s
                         id: product.id,
                         title: product.title,
                         image: product.image,
-                        desc:product.desc,
+                        desc:content.description,
                         headerItems:headerItems,
                         price:product.price,
                         newprice:priceAfterDiscount,
@@ -224,7 +226,7 @@ function ProductItem({ product, productFilter, productFilterPath ,headerItems, s
                             price:product.price,
                             newprice:priceAfterDiscount,
                             image: product.image,
-                            desc:product.desc,
+                            desc:content.description,
                             cost:content.cost,
                             category:product.category,
                             off_percentage:off_percentage,
@@ -426,7 +428,7 @@ function ProductItem({ product, productFilter, productFilterPath ,headerItems, s
                             <div className="sku-wrap font-medium">
                                 <span>Country:</span>
                                 <span className="text-[#666666] ml-[5px]">
-                                    {product?.Country}
+                                    {content?.country}
                                 </span>
                             </div>
 
@@ -439,7 +441,7 @@ function ProductItem({ product, productFilter, productFilterPath ,headerItems, s
                             <div className="sku-wrap font-medium">
                                 <span>Description:</span>
                                 <span className="text-[#666666] ml-[5px]">
-                                    {product?.desc}
+                                    {content?.description}
                                 </span>
                             </div>
                            

@@ -31,7 +31,7 @@ function MainContent({ product }) {
     } = product;
     const [quantityCount, setQuantityCount] = useState(1);
 
-    console.log('kjefsbbeubsu',cost);
+    console.log('kjefsbbeubsu',desc);
     console.log('kjefsbbeubsu',off_percentage);
     console.log('kjefsbbeubsu',isRecommended);
     const [ priceAfterDiscount , setpriceAfterDiscount ] = useState('')
@@ -160,9 +160,7 @@ function MainContent({ product }) {
                             )} */}
                             
 
-                            <p className="text-[14px] leading-[24px] lg:max-w-[450px]">
-                                {desc}
-                            </p>
+                         
                             <div className="group-btn flex py-[30px]">
                                 <div className={`${qtyButtonWrap} mr-[15px]`}>
                                     <div className="flex justify-center w-[120px]">
