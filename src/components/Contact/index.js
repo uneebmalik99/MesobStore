@@ -33,7 +33,7 @@ function ContactUs({ contactItems }) {
         alert('Please Enter Subject')
 
 
-    }else if(message == ''){
+    }else if(msg == '' ){
         alert('Please Enter message')
             // mesob@mesobstore.com
 
