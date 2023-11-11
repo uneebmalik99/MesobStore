@@ -268,7 +268,7 @@ function CartPageComps({ cartPageItems }) {
                                 </table>
                             </div>
                             <div className="group-btn flex justify-between pt-[50px]">
-                                <Link href="">
+                                <Link href="/">
                                     <a className="inline-flex items-center bg-black text-white h-[46px] sm:px-[42px] px-[12px] transition-all hover:bg-[#222222]">
                                         <IoArrowBackSharp className="mr-[5px]" />
                                         {cartPageItems[0]?.shopPageBtnText}
