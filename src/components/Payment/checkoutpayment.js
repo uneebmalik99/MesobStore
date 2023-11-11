@@ -92,7 +92,10 @@ const sendToMesob = async () => {
       let sellingPrice = priceWithoutDollarSign * quantity;
       let costPrice = costWithoutDollarSign * quantity;
       totalSellingPrice += sellingPrice;
+      totalSellingPrice = totalSellingPrice.toFixed(2)
       totalCost += costPrice;
+      totalCost = totalCost.toFixed(2)
+
       // Create the row and push it to the productRows array
       let row = `
         <tr key=${i+1}>
