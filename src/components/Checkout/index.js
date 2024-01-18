@@ -10,6 +10,7 @@ import { ApiSendMail, CHECKOUT_API_URL} from'../../api_service';
 // import  from '@stripe/stripe-js';
 import { loadStripe } from '@stripe/stripe-js'
 import { cartActions } from '../../store/cart/cart-slice';
+import Select from "react-dropdown-select";
 
 import {
   PaymentElement,
@@ -30,8 +31,18 @@ const secondaryButton =
 const isInitial = true;
 let productDetails;
   
+
+  
 function Checkout({ checkoutItems }) {
 
+
+    const options3 = [
+        {label: 'Global (usd)', value: 'global'},
+        {label: 'Europe (eu)', value: 'eu'},
+        {label: 'Sweden (sek)', value: 'sek'},
+        {label: 'Norway (nok)', value: 'nok'},
+        {label: 'Canada (cad)', value: 'cad'}
+      ];
     const stripePromise_Global = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
    
 //     const STRIPE_SK_GLOBAL =loadStripe
@@ -84,6 +95,8 @@ const openReturningCustomer = () => {
     const [sender_state,setsender_state]=useState('')
     const [sender_city,setsender_city]=useState('')
     const [sender_zip,setsender_zip]=useState('')
+    const [paymentzone,setpaymentzone]=useState('')
+
 
     const[receiver_obj , setreceiver_obj] = useState('')
     const [senderObj, setSenderObj] = useState('');
@@ -182,6 +195,13 @@ const openReturningCustomer = () => {
 
 
         }
+
+        else if(paymentzone == '' || null){
+            toast.error('Please Enter Payment Zone ', {autoClose:2000})
+            setIsLoading(false)
+
+
+        }
         else{
             buildOrderObject();
         }
@@ -222,12 +242,9 @@ const openReturningCustomer = () => {
           Products:JSON.stringify(cartItems),
           Status: 'Orderd',
         };
-
-
         
         setSenderObj(obj)
         setreceiver_obj(order)
-
 
         console.log("mkvf"+JSON.stringify(order));
         try {
@@ -281,11 +298,11 @@ const openReturningCustomer = () => {
     }, initialValue);
 
     const getStripeIntent = async (userid) => {
+// alert(JSON.stringify(paymentzone))
 
-
-        const region = await localStorage.getItem('region');
+        // const region = await localStorage.getItem('region');
         const payload = {
-            region:region,
+            region:paymentzone,
           event: {
             name: Receiver_name,
             address: Receiver_address,
@@ -323,43 +340,21 @@ const openReturningCustomer = () => {
                 //     // alert('usa'+data.publishableKey)
                 //     STRIPE_PK_GLOBAL = loadStripe(data.publishableKey)
                 // }              
-
             setclientSecret(data.data.client_secret)
-
-            // alert(JSON.stringify(data.data.client_secret))
-            // stripe=loadStripe(data?.publishableKey)
-            // alert('hgjys')
-
             dispatch(cartActions.addClientSecret({ clientSecret: data.data.client_secret }));
-
-            
                 setcheckoutcomp(true)
-
                 setIsLoading(false)
 
-
-        //   alert( clientSecret2)
-
-
-            // callChildFunctionWithData(e,data)
-
-     
-            // callChildFunction(data.data.client_secret)
             })
             .catch(error => {
                console.log("err : "+error);
-              })
-
-    
-        
+              })  
     };
-
-
+    
     const options = {
-
         mode: 'payment',
         amount: 1099,
-        currency:region_1 == 'eu'?'gbp': 'usd',
+        currency:paymentzone == 'eu'? 'eur': paymentzone == 'sek'? 'sek':paymentzone == 'nok'? 'nok':paymentzone == 'cad'? 'cad':'usd',
         appearance: {
           /*...*/
         },
@@ -637,6 +632,19 @@ const openReturningCustomer = () => {
                                                             onChange={(event)=>{setsender_zip(event.target.value)}}
                                                             />
                                                     </div>
+
+                                                    <div
+                                                        className={`${singleField}`}
+                                                    >
+                                                        <label
+                                                            htmlFor="billing-lastname"
+                                                            className="mb-[5px]"
+                                                        >
+                                                           Payment Zone
+                                                        </label>
+                                                        <Select  className={`${singleField}`} style={{marginLeft:8, height:10}} options={options3} onChange={(values) => setpaymentzone(values[0].value)} />
+
+                                                    </div>
                                                 </div>
 
 
@@ -778,7 +786,12 @@ const openReturningCustomer = () => {
                         
                         
                         {checkoutcomp == true?
-                                             <Elements stripe={region_1 == 'eu' ? STRIPE_PK_EU:STRIPE_PK_GLOBAL} options={options}>
+                                            //  <Elements stripe={paymentzone == 'eu' ? STRIPE_PK_EU :paymentzone == 'sek' ? STRIPE_PK_EU:
+                                            //  paymentzone == 'nok' ? STRIPE_PK_EU :paymentzone == 'cad' ? STRIPE_PK_EU :STRIPE_PK_GLOBAL} options={options}>
+                                                <Elements stripe={paymentzone == 'eu' ? STRIPE_PK_EU :paymentzone == 'sek' ? STRIPE_PK_EU:
+                                             paymentzone == 'nok' ? STRIPE_PK_EU :paymentzone == 'cad' ? STRIPE_PK_EU :STRIPE_PK_GLOBAL} options={options}>
+
+                                    
                                                     <CheckoutForm 
                                                     sennd={senderObj}
                                                     receiver_obj8={receiver_obj}
