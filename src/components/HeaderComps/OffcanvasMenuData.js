@@ -12,7 +12,6 @@ export const OffcanvasData = [
                 text: 'Home V1 - Default',
                 cName: '',
             },
-           
         ],
     },
     {
@@ -22,49 +21,46 @@ export const OffcanvasData = [
         link: '/products/5-columns',
         text: 'Product 5 Columns',
         submenu: [
-            
-                    // {
-                    //     id: '3-columns',
-                    //     link: '/products/3-columns',
-                    //     text: 'Product 3 Columns',
-                    // },
-                    // {
-                    //     id: '4-columns',
-                    //     link: '/products/4-columns',
-                    //     text: 'Product 4 Columns',
-                    // },
-                    // {
-                    //     id: '5-columns',
-                    //     link: '/products/5-columns',
-                    //     text: 'Product 5 Columns',
-                    // },
-                    // {
-                    //     id: '6-columns',
-                    //     link: '/products/6-columns',
-                    //     text: 'Product 6 Columns',
-                    // },
-                    // {
-                    //     id: 'categories',
-                    //     link: '/products/categories',
-                    //     text: 'Product Categories',
-                    // },
-                    // {
-                    //     id: 'carousel',
-                    //     link: '/products/carousel',
-                    //     text: 'Product Carousel',
-                    // },
-                    // {
-                    //     id: 'left-sidebar',
-                    //     link: '/products/left-sidebar',
-                    //     text: 'Product Left Sidebar',
-                    // },
-                    // {
-                    //     id: 'right-sidebar',
-                    //     link: '/products/right-sidebar',
-                    //     text: 'Product Right Sidebar',
-                    // },
-                
-            
+            // {
+            //     id: '3-columns',
+            //     link: '/products/3-columns',
+            //     text: 'Product 3 Columns',
+            // },
+            // {
+            //     id: '4-columns',
+            //     link: '/products/4-columns',
+            //     text: 'Product 4 Columns',
+            // },
+            // {
+            //     id: '5-columns',
+            //     link: '/products/5-columns',
+            //     text: 'Product 5 Columns',
+            // },
+            // {
+            //     id: '6-columns',
+            //     link: '/products/6-columns',
+            //     text: 'Product 6 Columns',
+            // },
+            // {
+            //     id: 'categories',
+            //     link: '/products/categories',
+            //     text: 'Product Categories',
+            // },
+            // {
+            //     id: 'carousel',
+            //     link: '/products/carousel',
+            //     text: 'Product Carousel',
+            // },
+            // {
+            //     id: 'left-sidebar',
+            //     link: '/products/left-sidebar',
+            //     text: 'Product Left Sidebar',
+            // },
+            // {
+            //     id: 'right-sidebar',
+            //     link: '/products/right-sidebar',
+            //     text: 'Product Right Sidebar',
+            // },
             // {
             //     id: 'product-related',
             //     link: '#',
@@ -105,9 +101,7 @@ export const OffcanvasData = [
                 id: '4',
                 link: '/Order/MyOrders',
                 text: 'nn',
-               
             },
-           
         ],
     },
     {
@@ -152,7 +146,6 @@ export const OffcanvasData = [
                 text: 'Blog Default',
                 cName: '',
             },
-            
         ],
     },
     {
@@ -191,18 +184,18 @@ export const OffcanvasData = [
         title: 'Delete Account',
         cName: 'has-children',
     },
-    {
-        id: 8,
-        title: 'Change Payment Zone',
-        cName: 'has-children',
-        submenu: [
-            {
-                id: 'blog-default',
-                link: '/blogs/default',
-                text: 'Blog Default',
-                cName: '',
-            },
-           
-        ],
-    },
+    // {
+    //     id: 8,
+    //     title: 'Change Payment Zone',
+    //     cName: 'has-children',
+    //     submenu: [
+    //         {
+    //             id: 'blog-default',
+    //             link: '/blogs/default',
+    //             text: 'Blog Default',
+    //             cName: '',
+    //         },
+
+    //     ],
+    // },
 ];
