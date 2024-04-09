@@ -11,6 +11,24 @@ import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 // import {api_send_mail, CHECKOUT_API_URL} from '../../api_service';
 
 const CheckoutForm = ({sennd,SubTotal, receiver_obj8}) => {
+  let clientId = '';
+
+  const isLocalhost = () => {
+    // Check if hostname contains 'localhost' or resolves to loopback IP address
+    return window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+};
+
+if (isLocalhost()) {
+    console.log('Running in local development environment');
+    // Use sandbox or local settings
+     clientId = 'AUI_SWyj_kfkuONQ_fe6KD-70qHAp2vRom3nAivzP2KaajvHst_nthZNw4d5hTCVndUctofi2_6Nl8bu';
+    // Other local configurations
+} else {
+    console.log('Running in live production environment');
+    // Use live settings
+     clientId = 'AVpz-RlQ2NQtOH27s9jabSWT8Sx2NmUns-NfbxeYUVx1pAMe2w4mQCHBAq-xNkpOqcXlo0kVHw-bBpoB';
+    // Other live configurations
+}
 
 // console.log('total price => ', sennd );
 console.log('total price => ', receiver_obj8);
@@ -293,7 +311,7 @@ return (
 <p className="text-black mt-2 mb-4" style={{ color:'grey'}}>Pay with Paypal</p>
 </div>
 
-  <PayPalScriptProvider options={{ "client-id": 'AUI_SWyj_kfkuONQ_fe6KD-70qHAp2vRom3nAivzP2KaajvHst_nthZNw4d5hTCVndUctofi2_6Nl8bu' }}>
+  <PayPalScriptProvider options={{ "client-id": clientId }}>
         <PayPalButtons
           style={{ layout: "vertical" }}
           createOrder={createOrder}
