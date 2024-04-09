@@ -6,13 +6,19 @@ import { cartActions } from "../../store/cart/cart-slice";
 import { useDispatch, useSelector } from 'react-redux';
 // import {api_send_mail, CHECKOUT_API_URL} from '../../api_service';
 
-const CheckoutForm = ({sennd, receiver_obj8}) => {
+import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
-console.log('hhfjyfyjfy ', sennd );
-console.log('hhfjyfyjfy ', receiver_obj8.Products);
+// import {api_send_mail, CHECKOUT_API_URL} from '../../api_service';
+
+const CheckoutForm = ({sennd,SubTotal, receiver_obj8}) => {
+
+// console.log('total price => ', sennd );
+console.log('total price => ', receiver_obj8);
+
 let emails = [];
 
 const contentObj2 = JSON.parse(receiver_obj8.Products);
+
 for(let i =0; i<contentObj2.length; i++){
   console.log('gvhthtthhf', contentObj2[i].selleremail);
   if (contentObj2[i].selleremail && contentObj2[i].selleremail.includes(',')) {
@@ -24,14 +30,9 @@ for(let i =0; i<contentObj2.length; i++){
   }
   
 }
-
-
 console.log("jvbhjvsd", emails);
 const uniqueEmails = [...new Set(emails)];
-
 console.log('uniqueEmails  ', uniqueEmails);
-
-
 
 const clientSecret2 = useSelector((state) => state.cart.clientSecret);
 const dispatch = useDispatch();
@@ -40,6 +41,9 @@ const elements = useElements();
 const [email, setEmail] = useState("");
 const [errorMessage, setErrorMessage] = useState(null);
 const [message, setMessage] = useState (null);
+const [show, setShow] = useState(false);
+const [success, setSuccess] = useState(false);
+const [orderID, setOrderID] = useState(false);
 const [isLoading, setIsLoading] = useState(false);
 const [client_secret, setclient_secret] =useState('')
 const [value , setvalue] = useState('')
@@ -48,6 +52,7 @@ const clearAllItemHandler = () => {
   dispatch(cartActions.clearAllFromCart());
 };
 
+console.log('SubTotal=>',SubTotal);
 
 const sendOrderMail = async () => {
 
@@ -170,14 +175,8 @@ const sendToMesob = async () => {
       };
       const res = await ApiSendMail(payload2);
 
-      
-  
-
     // Call the api_send_mail function to send the email using the API
    
-
-      
-
   } catch (error) {
     // alert('Alert sendToMesob ', error);
     console.log('Alert sendToMesob ', error);
@@ -243,11 +242,72 @@ const handleSubmit = async (event) => {
 
 
 };
+ // creates a paypal order
+ const createOrder = (data, actions) => {
+  return actions.order.create({
+      purchase_units: [
+          {
+              description: "Paypal from Website",
+              amount: {
+                  currency_code: "USD",
+                  value: SubTotal,
+              },
+          },
+      ],
+  }).then((orderID) => {
+          setOrderID(orderID);
+          return orderID;
+      });
+};
+
+// check Approval
+const onApprove = (data, actions) => {
+  console.log('paypal approved',data);
+  // dispatch(cartActions.clearAllFromCart());
+  // sendOrderMail();
+  // sendToMesob();
+  return actions.order.capture().then(function (details) {
+      const { payer } = details;
+      console.log(details);
+      dispatch(cartActions.clearAllFromCart());
+      sendOrderMail();
+      sendToMesob();
+      setSuccess(true);
+  });
+ 
+};
+
+//capture likely error
+const onError = (data, actions) => {
+  setErrorMessage("An Error occured with your payment ");
+};
+
+
+
 
 return (
   <form onSubmit={handleSubmit}>
 
-  <p className="text-black mb-4">Complete your payment here!</p>
+<p className="text-black mb-2">Complete your payment here!</p>
+<div style={{ display: 'flex', alignItems: 'center', justifyContent:'center' }}>
+<p className="text-black mt-2 mb-4" style={{ color:'grey'}}>Pay with Paypal</p>
+</div>
+
+  <PayPalScriptProvider options={{ "client-id": 'AUI_SWyj_kfkuONQ_fe6KD-70qHAp2vRom3nAivzP2KaajvHst_nthZNw4d5hTCVndUctofi2_6Nl8bu' }}>
+        <PayPalButtons
+          style={{ layout: "vertical" }}
+          createOrder={createOrder}
+          onApprove={onApprove}
+        />
+  </PayPalScriptProvider>
+
+  <div style={{ display: 'flex',marginBlock :10,alignItems: 'center',}}>
+  <p style={{ flex: 1, textAlign: 'center', color:'grey' }}>--------------------</p>
+  <p style={{ margin: '0 10px', color:'grey'  }}>Or pay with Card</p>
+  <p style={{ flex: 1, textAlign: 'center', color:'grey'  }}>--------------------</p>
+</div>
+
+
   <PaymentElement />
   <button  
   
@@ -259,10 +319,7 @@ return (
 
 )
 
-
-}
-
-
+};
 export default CheckoutForm ;
 
 

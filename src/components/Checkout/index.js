@@ -214,9 +214,9 @@ const openReturningCustomer = () => {
 
       const buildOrderObject = async () => {
 
+
         console.log('Start-buildOrderObject', '    b gjhj');
        
-
         const obj = {
             email: sender_email,
             phone: sender_phone,
@@ -227,7 +227,6 @@ const openReturningCustomer = () => {
             city: sender_city,
             userid: "68356b65-998a-4a29-aa1e-5b6ec4319537",
           };
-
 
    const order = {
           userID: '123',
@@ -769,9 +768,9 @@ const openReturningCustomer = () => {
                                                         </tr>
                                                     </tbody>
                                                 </table>
-                                                <div className="check pt-[30px] border-t border-[#cdcdcd]">
+                                                <div className="check pt-[10px] border-t border-[#cdcdcd]">
 
-                                                <p className="pt-[35px]">
+                                                <p className="pt-[5px]">
                                                 {checkoutItems[0]?.additionDesc}
                                                 <Link href="/privacy">
                                                     <a className="ml-[5px]">
@@ -794,6 +793,7 @@ const openReturningCustomer = () => {
                                     
                                                     <CheckoutForm 
                                                     sennd={senderObj}
+                                                    SubTotal={SubTotal}
                                                     receiver_obj8={receiver_obj}
                                                     />
                                                     </Elements>
