@@ -268,7 +268,7 @@ const handleSubmit = async (event) => {
               description: "Paypal from Website",
               amount: {
                   currency_code: "USD",
-                  value: SubTotal,
+                  value: SubTotal.toFixed(2),
               },
           },
       ],
