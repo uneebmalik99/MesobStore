@@ -4,7 +4,6 @@ import {PaymentElement, useStripe, useElements} from "@stripe/react-stripe-js";
 import { ApiSendMail, CHECKOUT_API_URL} from '../../api_service';
 import { cartActions } from "../../store/cart/cart-slice";
 import { useDispatch, useSelector } from 'react-redux';
-// import {api_send_mail, CHECKOUT_API_URL} from '../../api_service';
 
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
 
@@ -70,14 +69,13 @@ const clearAllItemHandler = () => {
   dispatch(cartActions.clearAllFromCart());
 };
 
-console.log('SubTotal=>',SubTotal);
 
 const sendOrderMail = async () => {
 
   try {
     const payload = {
       email: sennd.email,
-      message: `${sennd.email} , Your order is placed successfully!`,
+      message: `Dear Customer, Your order has been placed.`,
       subject: 'Order Placed Successfully!',
     };
     const res = await ApiSendMail(payload);
@@ -91,6 +89,8 @@ const sendOrderMail = async () => {
      console.log('djkvndjvkjd',error);
 
   }
+
+
 };
 
 const sendToMesob = async () => {
@@ -299,8 +299,6 @@ const onApprove = (data, actions) => {
 const onError = (data, actions) => {
   setErrorMessage("An Error occured with your payment ");
 };
-
-
 
 
 return (

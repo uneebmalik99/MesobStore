@@ -2,7 +2,6 @@
 import React, { useEffect, useState ,forwardRef, useImperativeHandle, useRef } from "react";
 
 import {PaymentElement, useStripe, useElements} from "@stripe/react-stripe-js";
-import { CHECKOUT_API_URL} from '../../api_service';
 import { cartActions } from "../../store/cart/cart-slice";
 import { useDispatch, useSelector } from 'react-redux';
 

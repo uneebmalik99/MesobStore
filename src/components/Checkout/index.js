@@ -39,11 +39,35 @@ function Checkout({ checkoutItems }) {
     const options3 = [
         {label: 'Global (usd)', value: 'global'},
         {label: 'Europe (eu)', value: 'eu'},
+        {label: 'United Kingdom (gbp)', value: 'uk'},
         {label: 'Sweden (sek)', value: 'sek'},
         {label: 'Norway (nok)', value: 'nok'},
         {label: 'Canada (cad)', value: 'cad'}
       ];
- 
+   
+      const stripePromise_Global = loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+   
+      //     const STRIPE_SK_GLOBAL =loadStripe
+      //     ('sk_test_51KZzWbAhBlpHU9kBq6SoffiI9NZAAaKW8xzhEaEGxKsfCjZRWhCbz1o8ac4oirHjk21aZ5KLp0fhlmuZK9XCohUv00JersS4js');
+      //   const STRIPE_SK_EU =loadStripe
+      //     ('sk_test_51Ma0UlHlGffSuHzfXqLxMCx4WwZPl2InuHG7TFmdFPczonVev6xnsrQzyJ0QkiCNP04yyUMiJGGnt8XXWiWEmAG700oh8MwmIz');
+          
+      // let STRIPE_PK_GLOBAL =loadStripe('');
+      // let STRIPE_PK_EU =loadStripe('');
+      // let STRIPE_PK_GLOBAL =loadStripe('pk_test_51KZzWbAhBlpHU9kBF7mHsYqqk6Ma8MGqjS9PB2pfwRcSW9npj1fv3YCqsFOESqTYvzoGIdBuZ9y3qKpTkhwpc9TO00kMQrezA4');
+      // let STRIPE_PK_EU =loadStripe('pk_test_51Ma0UlHlGffSuHzfQ0MLtY2NxXXevZvjKNBMh1gLgrHedV5ZqbTvX8aLAFQC4YaFmdAlwUVmhjrcCevWbopcfHNQ00c9HutQd3');
+      
+        // TEST -- PRODUCTION
+      //   let STRIPE_SK_GLOBAL =loadStripe
+      //     ('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');
+      //   let STRIPE_SK_EU =loadStripe
+      //     ('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');
+       
+      let STRIPE_PK_GLOBAL =loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
+        let STRIPE_PK_EU =loadStripe('pk_live_51Ma0UlHlGffSuHzf9daYeWo65kFow4KjKrudWfMURvPxqgkTfDXQ58TF5BFejBI4tqS6EElWFafj1icjZK3O577C00nYkxgBmZ');
+         
+      const stripePromise = loadStripe('pk_live_51KZzWbAhBlpHU9kBse8oJkUCAmcEM4nEpqgjzNSvNYbENCVvoF6zdtjyOF0Cpi1khjpJpdprIB2Nl5yR6OJzRisj008GIhJUMu');
+          
 let region_1= localStorage.getItem('region');
     
 const [childFunctionCalled, setChildFunctionCalled] = useState(false);
@@ -238,8 +262,6 @@ const openReturningCustomer = () => {
 
       getStripeIntent(order.userID)
 
-
-
         } catch (error) {
 
             alert(error)
@@ -260,11 +282,6 @@ const openReturningCustomer = () => {
     console.log("jdncjkdk", JSON.stringify(cartItems));
 
     const initialValue = 0;
-    // const SubTotal = cartItems.reduce(
-    //     (accumulator, current) =>
-    //         accumulator + current.price * current.quantity,
-    //     initialValue
-    // );
 
     const SubTotal = cartItems.reduce((accumulator, current) => {
         // Remove commas from the current item's price and convert it to a number
@@ -311,27 +328,44 @@ const openReturningCustomer = () => {
                 console.log("hgfyc"+JSON.stringify(data)); 
                 // if(region_1 == 'eu'){
                 //     alert('eu',data.publishableKey)
-                //     STRIPE_PK_EU = 'loadStripe('+data.publishableKey+')';
+                //     STRIPE_PK_EU = loadStripe(data.publishableKey);
                 // }else{
                 //     // STRIPE_PK_GLOBAL = 'loadStripe('+data.publishableKey+')';
                 //     // alert('usa'+data.publishableKey)
                 //     STRIPE_PK_GLOBAL = loadStripe(data.publishableKey)
-                // }              
+
+                //     console.log("STRIPE_PK_GLOBAL=>",STRIPE_PK_GLOBAL.loadStripe);
+                // }       
+                console.log('setclientSecret',data.data.client_secret);       
             setclientSecret(data.data.client_secret)
             dispatch(cartActions.addClientSecret({ clientSecret: data.data.client_secret }));
                 setcheckoutcomp(true)
                 setIsLoading(false)
-
             })
             .catch(error => {
                console.log("err : "+error);
               })  
     };
+
+    // automatic_payment_methods: {
+    //     enabled: true,
+    //   },
+    let payment_method_types_us =  ['card', 'klarna', 'cashapp','afterpay_clearpay',]
+    let payment_method_types_eu =  [ 'card', 'klarna','p24','ideal', 'giropay' , 'eps' ,'bancontact', 'link']
+    let payment_method_types_uk =  ['card', 'klarna']
+    let payment_method_types_sek =  ['card', 'klarna']
+    let payment_method_types_nor =  ['card', 'klarna']
+
+
     
     const options = {
         mode: 'payment',
         amount: 1099,
-        currency:paymentzone == 'eu'? 'eur': paymentzone == 'sek'? 'sek':paymentzone == 'nok'? 'nok':paymentzone == 'cad'? 'cad':'usd',
+        currency:paymentzone == 'eu'? 'eur': paymentzone == 'uk'? 'gbp': paymentzone == 'sek'? 'sek':paymentzone == 'nok'? 'nok':paymentzone == 'cad'? 'cad':'usd',
+        payment_method_types: paymentzone == 'eu'? payment_method_types_eu: paymentzone == 'uk'? payment_method_types_uk: paymentzone == 'sek'? payment_method_types_sek:paymentzone == 'nok'? payment_method_types_nor:payment_method_types_us,
+        automatic_payment_methods: {
+        enabled: true,
+        },
         appearance: {
           /*...*/
         },
@@ -622,50 +656,7 @@ const openReturningCustomer = () => {
                                                         <Select  className={`${singleField}`} style={{marginLeft:8, height:10}} options={options3} onChange={(values) => setpaymentzone(values[0].value)} />
 
                                                     </div>
-                                                </div>
-
-
-
-                                                {/* <div className="group-field flex mb-[20px]">
-                                                <div
-                                                    className={`${singleField} mb-[20px]`}
-                                                >
-                                                    <label
-                                                        htmlFor="billing-companyname"
-                                                        className="mb-[5px]"
-                                                    >
-                                                     State
-                                                    </label>
-                                                    <input
-                                                        className={`${inputField}`}
-                                                        type="text"
-                                                        id="billing-companyname"
-                                                        value={sender_state}
-                                                        onChange={(event)=>{ setsender_state(event.target.value)}}
-                                                        />
-                                                </div>
-                                                    <div
-                                                        className={`${singleField}`}
-                                                    >
-                                                        <label
-                                                            htmlFor="billing-lastname"
-                                                            className="mb-[5px]"
-                                                        >
-                                                        Zip code
-                                                        </label>
-                                                        <input
-                                                            className={`${inputField}`}
-                                                            type="text"
-                                                            id="billing-lastname"
-                                                            value={sender_zip}
-                                                            onChange={(event)=>{setsender_zip(event.target.value)}}
-                                                            />
-                                                    </div>
-                                                </div> */}
-
-                                               
-
-                                              
+                                                </div>                                              
                                             </form>
 
                                         </div>
@@ -765,10 +756,8 @@ const openReturningCustomer = () => {
                         {checkoutcomp == true?
                                             //  <Elements stripe={paymentzone == 'eu' ? STRIPE_PK_EU :paymentzone == 'sek' ? STRIPE_PK_EU:
                                             //  paymentzone == 'nok' ? STRIPE_PK_EU :paymentzone == 'cad' ? STRIPE_PK_EU :STRIPE_PK_GLOBAL} options={options}>
-                                                <Elements stripe={paymentzone == 'eu' ? STRIPE_PK_EU :paymentzone == 'sek' ? STRIPE_PK_EU:
+                                                <Elements stripe={paymentzone == 'eu' ? STRIPE_PK_EU :paymentzone == 'uk' ? STRIPE_PK_EU: paymentzone == 'sek' ? STRIPE_PK_EU:
                                              paymentzone == 'nok' ? STRIPE_PK_EU :paymentzone == 'cad' ? STRIPE_PK_EU :STRIPE_PK_GLOBAL} options={options}>
-
-                                    
                                                     <CheckoutForm 
                                                     sennd={senderObj}
                                                     SubTotal={SubTotal}

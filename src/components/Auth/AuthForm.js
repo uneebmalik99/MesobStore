@@ -167,7 +167,7 @@ function AuthForm({ authItems }){
 
 
 
-                <button
+                {/* <button
                             className="button-wrap"
                             type="submit"
                             onClick={()=> {
@@ -206,7 +206,7 @@ function AuthForm({ authItems }){
                                     Login with Facebook
                                 </p>
                             </div>
-                        </button>
+                        </button> */}
                      
                         <button
                             className="button-wrap"
