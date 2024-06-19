@@ -6,6 +6,7 @@ import { cartActions } from "../../store/cart/cart-slice";
 import { useDispatch, useSelector } from 'react-redux';
 
 import { PayPalScriptProvider, PayPalButtons } from "@paypal/react-paypal-js";
+import { Auth } from "aws-amplify";
 
 // import {api_send_mail, CHECKOUT_API_URL} from '../../api_service';
 
@@ -59,6 +60,7 @@ const [email, setEmail] = useState("");
 const [errorMessage, setErrorMessage] = useState(null);
 const [message, setMessage] = useState (null);
 const [show, setShow] = useState(false);
+const [user_email, setuser_email] = useState("")
 const [success, setSuccess] = useState(false);
 const [orderID, setOrderID] = useState(false);
 const [isLoading, setIsLoading] = useState(false);
@@ -71,11 +73,114 @@ const clearAllItemHandler = () => {
 
 
 const sendOrderMail = async () => {
+  const authUser = await Auth.currentAuthenticatedUser();
+  // alert(JSON.stringify(authUser))
+  console.log('authUser=>> ',authUser.attributes.email)
+  setuser_email(authUser.attributes.email)
+
+  let productRows = []; // Initialize an empty array to hold the rows
+  const product = receiver_obj8;
+  let totalSellingPrice = 0;
+  let totalCost = 0;
+  const contentObj = JSON.parse(product.Products);
+
+  // const productRows = productDetails.map((product, index) => {
+    for(let i =0; i<contentObj.length; i++){
+    const product = receiver_obj8;
+    const contentObj = JSON.parse(product.Products);
+    let price = contentObj[i].price;
+    price = price.replace(',', '');
+    const priceWithoutDollarSign = parseFloat(price.replace('$', ''));
+    const costWithoutDollarSign = parseFloat(contentObj[i].cost.replace('$', ''));
+    const quantity = parseFloat(contentObj[i].quantity);
+    let sellingPrice = priceWithoutDollarSign * quantity;
+    let costPrice = costWithoutDollarSign * quantity;
+    totalSellingPrice += sellingPrice;
+    totalSellingPrice = totalSellingPrice.toFixed(2)
+    totalCost += costPrice;
+    totalCost = totalCost.toFixed(2)
+
+    // Create the row and push it to the productRows array
+    let row = `
+      <tr key=${i+1}>
+        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${i+1}</td>
+        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[i].name}</td>
+        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[i].country}</td>
+        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[i].quantity}</td>
+        <td style="border: 1px solid #ccc; padding: 8px; text-align: center;">${contentObj[i].price}</td>
+      </tr>`;
+    productRows.push(row); // Push the row to the productRows array
+  
+}
+  const tableHTML = productRows.join('');
+
+  const message = `
+<div style="display: flex; align-items: center;">
+    <h2 style="font-style: italic; color: black; margin-right: 10px;">
+        <span style="color: red;">M</span>esob 
+        <span style="color: red;">S</span>tore
+    </h2>
+    <div style=" display: flex; justify-content: center; align-items: center;">
+    <img style="max-width: 30px; height: 30px;vertical-align: middle;" src="http://admin.mesobstore.com/app-icon.png" alt="Your Logo">
+    </div>
+    </div>
+     <p>Really appreciate that you choose the Mesob Store .</p>
+      <p>This email is really important for customer orders and please hold it until your order is fulfilled.</p>
+      <p>Please note!</p>
+      <p>If you have any questions, please contact us via email at <a href="mailto:mesob@mesobstore.com">mesob@mesobstore.com</a></p>
+      <br/>
+      <p>Thanks for your order. Below are the details of your orders. We are looking forward to our future collaboration.</p>
+   
+      <h2>Product Details</h2>
+      <table style="border-collapse: collapse; width: 100%;">
+        <thead>
+          <tr>
+            <th style="border: 1px solid #ccc; padding: 8px;">Sr No.</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Name</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Country</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Quantity</th>
+            <th style="border: 1px solid #ccc; padding: 8px;">Selling Price</th>
+          </tr>
+        </thead>
+        <tbody>
+
+
+      ${tableHTML}
+
+        </tbody>
+      </table>
+      <p>Total Selling Price: ${totalSellingPrice}</p>
+
+         <h3>Receiver</h3>
+      <ul>
+        <li>Contact Name:${receiver_obj8.name}</li>
+        <li>Phone number: ${receiver_obj8.phone}</li>
+        <li>City: ${receiver_obj8.city}</li>
+        <li>Address: ${receiver_obj8.address}</li>
+      </ul>
+       <h3>Sender</h3>
+      <ul>
+        <li>Contact Name: ${sennd.name }</li>
+        <li>Email: ${sennd.email}</li>
+        <li>Phone number: ${sennd.phone}</li>
+        <li>City: ${sennd.city}</li>
+        <li>Address: ${sennd.address}</li>
+        <li>State: ${sennd.state}</li>
+        <li>Zip Code: ${sennd.pincode}</li>
+      </ul>
+      
+      <p>Very grateful for your purchasing our products.</p>
+      <br />
+      <p>Thank You </p>
+      <span>
+          <p style="color:black;"><span style="color:red; ">M</span>esob <span style="color:red ">S</span>tore Team</p>
+      </span> 
+`;
 
   try {
     const payload = {
-      email: sennd.email,
-      message: `Dear Customer, Your order has been placed.`,
+      email: authUser?.attributes?.email,
+      message: message,
       subject: 'Order Placed Successfully!',
     };
     const res = await ApiSendMail(payload);
